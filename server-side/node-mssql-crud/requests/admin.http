@@ -1,0 +1,22 @@
+@api = http://localhost:3000/gatepass/v2/admin
+
+###Getting pending_requests_count
+GET {{api}}/pending_request
+
+###Getting student_in_campus count
+GET {{api}}/student_in_campus
+
+###Getting student_out_campus count
+GET {{api}}/student_out_campus
+
+###Getting blacklist_student count
+GET {{api}}/blacklist_student
+
+###Getting profile_request count
+GET {{api}}/profile_request
+
+###Getting
+GET {{api}}/today_gatepass
+
+###Getting
+GET {{api}}/total_pending_request

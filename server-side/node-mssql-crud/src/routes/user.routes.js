@@ -8,6 +8,9 @@ import {
     updateUserById,
 } from "../controllers/user.controller";
 
+
+
+
 const router = Router();
 
 router.get('/user', getUser );
@@ -21,6 +24,8 @@ router.get('/user/:id', getUserById);
 router.delete('/user/:id', deleteUserById);
 
 router.put('/user/:id', updateUserById);
+
+
 
 
 export default router;
