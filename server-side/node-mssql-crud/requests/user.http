@@ -1,0 +1,61 @@
+@api = http://localhost:3000/gatepass/v2/user
+
+###Getting all the users
+GET {{api}}
+
+###Adding new user
+POST {{api}}
+Content-Type: application/json
+
+{
+  "user_id": "123456",
+  "ad_user_name": "User Test",
+  "email_id": "UserTest1@gmail.com",
+  "contact_number": "0",
+  "group_id": 0,
+  "role_id": 0,
+  "subgroup_id": 0,
+  "name": "USER",
+  "room_no": "0",
+  "address": "abcdef",
+  "p_number": "1234567890",
+  "punch_id": 0,
+  "change_flag": "0",
+  "hostel": "0",
+  "hostel_tower": "0",
+  "status": "P",
+  "photo": "uploads/"
+}
+
+###Getting a user
+GET {{api}}/123456
+
+###Delete User
+DELETE {{api}}/123456
+
+###Get total count
+GET {{api}}/count
+
+###Update a user
+
+PUT {{api}}/123456
+Content-Type: application/json
+
+{
+  "ad_user_name": "User Test",
+  "email_id": "UserTest123@gmail.com",
+  "contact_number": "0",
+  "group_id": 0,
+  "role_id": 0,
+  "subgroup_id": 0,
+  "name": "USER",
+  "room_no": "0",
+  "address": "abcdef",
+  "p_number": "1234567890",
+  "punch_id": 0,
+  "change_flag": "0",
+  "hostel": "0",
+  "hostel_tower": "0",
+  "status": "P",
+  "photo": "uploads/"
+}
