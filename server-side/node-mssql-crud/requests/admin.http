@@ -1,5 +1,8 @@
 @api = http://localhost:3000/gatepass/v2/admin
 
+
+###Dashboard
+
 ###Getting pending_requests_count
 GET {{api}}/pending_request
 
@@ -15,8 +18,29 @@ GET {{api}}/blacklist_student
 ###Getting profile_request count
 GET {{api}}/profile_request
 
-###Getting
+###Getting today_gatepass table
 GET {{api}}/today_gatepass
 
-###Getting
-GET {{api}}/total_pending_request
+###Getting all_pending_request table
+GET {{api}}/all_pending_request
+
+
+###Settings
+
+###Getting groups
+GET {{api}}/group
+
+###Getting subgroups
+GET {{api}}/subgroup
+
+###Getting roles
+GET {{api}}/all_role
+
+###Getting User Roles
+GET {{api}}/user_role
+
+###Getting roles
+GET {{api}}/all_status
+
+###Getting parameter_config
+GET {{api}}/parameter_config

@@ -84,12 +84,106 @@ export const getTodayGatepass = async (req, res) => {
     }
 };
 
-export const getTotalPendingRequest = async (req, res) => {
+export const getAllPendingRequest = async (req, res) => {
     try {
     const pool = await getConnection();
     const result = await pool
         .request()
-        .query(queries.dashboardTotalPendingRequest);
+        .query(queries.dashboardAllPendingRequest);
+    res.json(result.recordset);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
+
+
+
+/* __________________________________________________SETTINGS API__________________________________________________ */
+
+
+/* ##################Groups/Subgroup API##################  */
+export const getGroup = async (req, res) => {
+    try {
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .query(queries.settingsGroup);
+    res.json(result.recordset);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
+
+export const getSubgroup = async (req, res) => {
+    try {
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .query(queries.settingsSubgroup);
+    res.json(result.recordset);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
+
+
+/* ##################Chnage Role API##################  */
+export const getAllRole = async (req, res) => {
+    try {
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .query(queries.settingsAllRole);
+    res.json(result.recordset);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
+
+export const getUserRole = async (req, res) => {
+    try {
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .query(queries.settingsUserRole);
+    res.json(result.recordset);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
+
+export const getAllStatus = async (req, res) => {
+    try {
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .query(queries.settingsAllStatus);
+    res.json(result.recordset);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
+
+
+
+
+
+/* ##################Parameter Config API##################  */
+
+
+
+export const getParameterConfig = async (req, res) => {
+    try {
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .query(queries.settingsParameterConfig);
     res.json(result.recordset);
     } catch (error) {
         res.status(500);

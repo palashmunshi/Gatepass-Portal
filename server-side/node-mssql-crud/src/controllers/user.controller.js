@@ -27,7 +27,8 @@ export const createUser = async (req, res) => {
         p_number,
         change_flag,
         status,
-        photo, } = req.body;
+        photo, 
+    } = req.body;
 
 
     let {
