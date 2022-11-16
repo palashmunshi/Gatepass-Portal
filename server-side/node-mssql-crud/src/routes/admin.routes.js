@@ -10,6 +10,9 @@ import {
 } from "../controllers/admin.controller"
 
 const router = Router();
+
+/* __________________________________________________DASHBOARD ROUTES__________________________________________________ */
+
 router.get('/admin/pending_request', getPendingRequest);
 router.get('/admin/student_in_campus', getStudentInCampus);
 router.get('/admin/student_out_campus', getStudentOutCampus);
