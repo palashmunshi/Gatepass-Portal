@@ -15,6 +15,18 @@ import {
     getAllStatus,
     getParameterConfig,
 
+    createUser,
+    updateUserById,
+
+    getStudentTenureWise,
+    getStudentStatusWise,
+    getStudentStatusTenureWise,
+    getGatepassTypeWise,
+    getBlacklistedStudentDateWise,
+    getBlacklistedGroupDateWise,
+    getDefaulterDateWise,
+    getEOD,
+    getWarden,
 
 } from "../controllers/admin.controller"
 
@@ -33,6 +45,7 @@ router.get('/admin/all_pending_request', getAllPendingRequest);
 
 
 
+
 /* __________________________________________________SETTINGS ROUTES__________________________________________________ */
 
 
@@ -45,6 +58,22 @@ router.get('/admin/user_role', getUserRole);
 router.get('/admin/all_status', getAllStatus);
 router.get('/admin/parameter_config', getParameterConfig);
 
+
+
+router.post('/admin/create_user', createUser);
+router.put('/admin/update_user/:id', updateUserById);
+
+
+
+router.get('/admin/tenure_wise_student_report/:id/:sd/:ed', getStudentTenureWise);
+router.get('/admin/status_wise_student_report/:statuslist/:sd/:ed', getStudentStatusWise);
+router.get('/admin/status_wise_student_report/:statuslist/:id/:sd/:ed', getStudentStatusTenureWise);
+router.get('/admin/gatepass_type_report/:gpt/:sd/:ed', getGatepassTypeWise);
+router.get('/admin/blacklisted_student_date_wise_report/:sd/:ed',getBlacklistedStudentDateWise);
+router.get('/admin/blacklisted_group_date_wise_report/:sd/:ed',getBlacklistedGroupDateWise);
+router.get('/admin/defaulter_date_wise_report/:sd/:ed',getDefaulterDateWise);
+router.get('/admin/eod_report/:date',getEOD);
+router.get('/admin/warden_report/:id/:sd/:ed', getWarden);
 
 
 export default router;

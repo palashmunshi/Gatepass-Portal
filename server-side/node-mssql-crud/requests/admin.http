@@ -44,3 +44,74 @@ GET {{api}}/all_status
 
 ###Getting parameter_config
 GET {{api}}/parameter_config
+
+###
+POST {{api}}/create_user
+Content-Type: application/json
+
+{
+  "user_id": "123456789",
+  "email_id": "User211@gmail.com",
+  "contact_number": "0",
+  "group_id": 0,
+  "role_id": 0,
+  "subgroup_id": 0,
+  "name": "USER",
+  "room_no": "0",
+  "address": "abcdef",
+  "p_number": "1234567890",
+  "punch_id": 0,
+  "hostel": "0",
+  "hostel_tower": "0",
+  "status": "P"
+}
+
+###
+PUT {{api}}/update_user/123456789
+Content-Type: application/json
+
+{
+  "ad_user_name": "abc",
+  "email_id":"abbadabba@gmail.com",
+  "contact_number": "0",
+  "group_id": 0,
+  "role_id": 0,
+  "subgroup_id": 0,
+  "name": "USER",
+  "room_no": "0",
+  "address": "abcdef",
+  "p_number": "1234567890",
+  "punch_id": 0,
+  "change_flag": "",
+  "hostel": "0",
+  "hostel_tower": "0",
+  "status": "P",
+  "photo": ""
+}
+
+###
+GET {{api}}/tenure_wise_student_report/U101114FCS056/2016-10-23/2016-10-25
+
+###
+GET {{api}}/status_wise_student_report/Expire/2016-10-23/2016-10-25
+
+###
+GET {{api}}/status_wise_student_report/Expire/U101114FCS056/2016-10-23/2016-10-25
+
+###
+GET {{api}}/gatepass_type_report/2/2016-10-23/2016-10-25
+
+###
+GET {{api}}/blacklisted_student_date_wise_report/2016-11-30/2016-12-05
+
+###
+GET {{api}}/blacklisted_group_date_wise_report/2017-02-05/2017-02-15
+
+###
+GET {{api}}/defaulter_date_wise_report/2016-11-06/2016-11-10
+
+###
+GET {{api}}/eod_report/2016-10-27
+
+###
+GET {{api}}/warden_report/U101114FCS056/2016-10-23/2016-10-25

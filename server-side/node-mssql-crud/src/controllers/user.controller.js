@@ -13,7 +13,7 @@ export const getUser = async (req, res) => {
     }
 };
 
-export const createUser = async (req, res) => {
+/* export const createUser = async (req, res) => {
 
     const { 
         user_id,
@@ -79,7 +79,7 @@ export const createUser = async (req, res) => {
         res.status(500);
         res.send(error.message);
     }
-};
+}; */
 
 export const getUserById = async (req, res) => {
     try {
@@ -132,7 +132,7 @@ export const getTotalUser = async (req, res) => {
     }
 };
 
-export const updateUserById = async (req, res) => {
+/* export const updateUserById = async (req, res) => {
 
     const { user_id } = req.params.id;
     const { 
@@ -187,4 +187,4 @@ export const updateUserById = async (req, res) => {
         res.status(500);
         res.send(error.message);
     }
-};
+}; */
