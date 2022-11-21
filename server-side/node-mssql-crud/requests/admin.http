@@ -38,11 +38,18 @@ POST {{api}}/create_group
 Content-Type: application/json
 
 {
-  "gps_groupid": 1234 ,
-  "gps_groupname": "P.Jn",
-  "gps_group_mastergroup_id": 4321
+  "gps_groupname": "P.Jn1245567",
+  "gps_group_mastergroup_id": 2
 }
 
+###
+POST {{api}}/create_subgroup
+Content-Type: application/json
+
+{
+  "subgroup_name": "P.Jn123",
+  "subgroup_mastergroup_id": 2
+}
 ###Getting roles
 GET {{api}}/all_role
 

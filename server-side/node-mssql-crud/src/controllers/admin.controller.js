@@ -1,5 +1,4 @@
 import { getConnection, sql,queries } from '../database';
-
 const date = require('date-and-time');
 
 
@@ -177,18 +176,24 @@ export const getAllStatus = async (req, res) => {
 export const createGroup = async (req, res) => {
 
     const { 
-        gps_groupid,
         gps_groupname,
         gps_group_mastergroup_id,
     } = req.body;
+    
 
     // validating
-    if (gps_groupid === null || gps_groupname == null || gps_group_mastergroup_id === null) {
+    if (gps_groupname == null || gps_group_mastergroup_id === null) {
         return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
     };
 
     try {
     const pool =  await getConnection();
+    let count = await pool
+        .request()
+        .query(queries.getGroupCount);
+
+    const gps_groupid = count.recordset[0]['TOTAL']
+    
     const result = await pool
         .request()
         .input("gps_groupid",sql.Int, gps_groupid)
@@ -196,7 +201,7 @@ export const createGroup = async (req, res) => {
         .input("gps_group_mastergroup_id",sql.Int, gps_group_mastergroup_id)
         .query(queries.addGroup);
 
-    res.json({gps_groupid,gps_groupname,gps_group_mastergroup_id})
+    res.json({count,gps_groupname,gps_group_mastergroup_id})
 
     } catch (error) {
         res.status(500);
@@ -204,6 +209,42 @@ export const createGroup = async (req, res) => {
     }
 };
 
+
+export const createSubgroup = async (req, res) => {
+
+    const { 
+        subgroup_name,
+        subgroup_mastergroup_id,
+    } = req.body;
+
+
+    // validating
+    if (subgroup_name == null || subgroup_mastergroup_id === null) {
+        return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
+    };
+
+    try {
+    const pool =  await getConnection();
+    let count = await pool
+        .request()
+        .query(queries.getSubgroupCount);
+    
+    const subgroup_id = count.recordset[0]['TOTAL']
+
+    const result = await pool
+        .request()
+        .input("subgroup_id",sql.Int, subgroup_id)
+        .input("subgroup_name",sql.VarChar, subgroup_name)
+        .input("subgroup_mastergroup_id",sql.Int, subgroup_mastergroup_id)
+        .query(queries.addSubgroup);
+
+    res.json({subgroup_id,subgroup_name,subgroup_mastergroup_id})
+
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
 
 
 
