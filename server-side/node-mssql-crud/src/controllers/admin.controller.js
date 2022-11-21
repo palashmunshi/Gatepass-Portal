@@ -132,6 +132,8 @@ export const getSubgroup = async (req, res) => {
 };
 
 
+
+
 /* ##################Chnage Role API##################  */
 export const getAllRole = async (req, res) => {
     try {
@@ -172,7 +174,35 @@ export const getAllStatus = async (req, res) => {
     }
 };
 
+export const createGroup = async (req, res) => {
 
+    const { 
+        gps_groupid,
+        gps_groupname,
+        gps_group_mastergroup_id,
+    } = req.body;
+
+    // validating
+    if (gps_groupid === null || gps_groupname == null || gps_group_mastergroup_id === null) {
+        return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
+    };
+
+    try {
+    const pool =  await getConnection();
+    const result = await pool
+        .request()
+        .input("gps_groupid",sql.Int, gps_groupid)
+        .input("gps_groupname",sql.VarChar, gps_groupname)
+        .input("gps_group_mastergroup_id",sql.Int, gps_group_mastergroup_id)
+        .query(queries.addGroup);
+
+    res.json({gps_groupid,gps_groupname,gps_group_mastergroup_id})
+
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
 
 
 

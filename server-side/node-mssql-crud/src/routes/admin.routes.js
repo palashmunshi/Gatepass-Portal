@@ -10,6 +10,7 @@ import {
 
     getGroup,
     getSubgroup,
+    createGroup,
     getAllRole,
     getUserRole,
     getAllStatus,
@@ -52,6 +53,7 @@ router.get('/admin/all_pending_request', getAllPendingRequest);
 
 
 router.get('/admin/group', getGroup);
+router.post('/admin/create_group', createGroup);
 router.get('/admin/subgroup', getSubgroup);
 router.get('/admin/all_role', getAllRole);
 router.get('/admin/user_role', getUserRole);
