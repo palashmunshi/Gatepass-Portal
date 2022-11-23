@@ -4,7 +4,7 @@ export const queries = {
     getUserById: 'SELECT * FROM [gps_db].[gps_db].[gps_usersmaster] WHERE user_id=@user_id', 
     deleteUser:'DELETE FROM [gps_db].[gps_db].[gps_usersmaster] WHERE user_id=@user_id',
     getTotalUser: 'SELECT COUNT(*) FROM [gps_db].[gps_db].[gps_usersmaster]',
-    updateUserById: 'UPDATE [gps_db].[gps_db].[gps_usersmaster] SET ad_user_name=@ad_user_name,email_id=@email_id,contact_number=@contact_number,group_id=@group_id,role_id=@role_id,subgroup_id=@subgroup_id,name=@name,room_no=@room_no,address=@address,p_number=@p_number,punch_id=@punch_id,change_flag=@change_flag,hostel=@hostel,hostel_tower=@hostel_tower,status=@status,photo=@photo WHERE user_id=@user_id',
+    updateUserById: "UPDATE [gps_db].[gps_db].[gps_usersmaster] SET ad_user_name=@ad_user_name,email_id=@email_id,contact_number=@contact_number,group_id=@group_id,role_id=@role_id,subgroup_id=@subgroup_id,name=@name,room_no=@room_no,address=@address,p_number=@p_number,punch_id=@punch_id,change_flag=@change_flag,hostel=@hostel,hostel_tower=@hostel_tower,status=@status,photo=@photo WHERE user_id=@user_id",
 
 
         
@@ -23,19 +23,25 @@ export const queries = {
 
     /* __________________________________________________ADMIN SETTINGS QUERIES__________________________________________________ */
 
-
-
+    /////////////////////////////Group/Subgroup//////////////////////////////
     settingsGroup: "SELECT * FROM [gps_db].[gps_db].[gps_groups] WHERE gps_groupname NOT like '%alms%';",
     settingsSubgroup: "SELECT * FROM [gps_db].[gps_db].[gps_subgroup] WHERE subgroup_name NOT like '%NA%';",
-    settingsAllRole: "SELECT * FROM [gps_db].[gps_db].[gps_roles];",
-    settingsUserRole:"SELECT [gps_db].[gps_db].[gps_usersmaster].user_id AS employeecode, [gps_db].[gps_db].[gps_usersmaster].name AS employeename, [gps_db].[gps_db].[gps_usersmaster].status AS employeestatus,[gps_db].[gps_db].[gps_roles].role_name AS employeerole, [gps_db].[gps_db].[gps_roles].role_id AS roleid FROM [gps_db].[gps_db].[gps_usersmaster],[gps_db].[gps_db].[gps_roles] WHERE gps_usersmaster.role_id != 1 and [gps_db].[gps_db].[gps_usersmaster].role_id = [gps_db].[gps_db].[gps_roles].role_id;",
-    settingsAllStatus:"select DISTINCT [gps_db].[gps_db].[gps_usersmaster].status from [gps_db].[gps_db].[gps_usersmaster];",
-    settingsParameterConfig:"SELECT * FROM [gps_db].[gps_db].[gps_configmaster]",
     getGroupCount:"SELECT COUNT(*) AS TOTAL FROM [gps_db].[gps_db].[gps_groups]",
     getSubgroupCount:"SELECT COUNT(*) AS TOTAL FROM [gps_db].[gps_db].[gps_subgroup]",
     addGroup: "INSERT INTO [gps_db].[gps_db].[gps_groups] (gps_groupid,gps_groupname,gps_group_mastergroup_id) VALUES (@gps_groupid,@gps_groupname,@gps_group_mastergroup_id)",
     addSubgroup: "INSERT INTO [gps_db].[gps_db].[gps_subgroup] (subgroup_id,subgroup_name,subgroup_mastergroup_id) VALUES (@subgroup_id,@subgroup_name,@subgroup_mastergroup_id)",
-
+    deleteGroup: "DELETE FROM [gps_db].[gps_db].[gps_groups] WHERE gps_groupid=@id;",
+    deleteSubgroup: "DELETE FROM [gps_db].[gps_db].[gps_subgroup] WHERE subgroup_id=@id;",  
+    /////////////////////////////Roles//////////////////////////////
+    settingsAllRole: "SELECT * FROM [gps_db].[gps_db].[gps_roles];",
+    settingsUserRole:"SELECT [gps_db].[gps_db].[gps_usersmaster].user_id AS employeecode, [gps_db].[gps_db].[gps_usersmaster].name AS employeename, [gps_db].[gps_db].[gps_usersmaster].status AS employeestatus,[gps_db].[gps_db].[gps_roles].role_name AS employeerole, [gps_db].[gps_db].[gps_roles].role_id AS roleid FROM [gps_db].[gps_db].[gps_usersmaster],[gps_db].[gps_db].[gps_roles] WHERE gps_usersmaster.role_id != 1 and [gps_db].[gps_db].[gps_usersmaster].role_id = [gps_db].[gps_db].[gps_roles].role_id;",
+    settingsAllStatus:"select DISTINCT [gps_db].[gps_db].[gps_usersmaster].status from [gps_db].[gps_db].[gps_usersmaster];",
+    /////////////////////////////Param Config//////////////////////////////
+    settingsParameterConfig:"SELECT * FROM [gps_db].[gps_db].[gps_configmaster]",
+    updateParameterConfig:"UPDATE [gps_db].[gps_db].[gps_configmaster] SET value=@value WHERE param_id=@param_id;",
+    addUser: "INSERT INTO [gps_db].[gps_db].[gps_usersmaster] (user_id,ad_user_name,email_id,contact_number,group_id,role_id,subgroup_id,name,room_no,address,p_number,punch_id,change_flag,hostel,hostel_tower,status,photo) VALUES (@user_id,@ad_user_name,@email_id,@contact_number,@group_id,@role_id,@subgroup_id,@name,@room_no,@address,@p_number,@punch_id,@change_flag,@hostel,@hostel_tower,@status,@photo);",
+    updateUser: "UPDATE [gps_db].[gps_db].[gps_usersmaster] SET ad_user_name=@ad_user_name,email_id=@email_id,contact_number=@contact_number,group_id=@group_id,role_id=@role_id,subgroup_id=@subgroup_id,name=@name,room_no=@room_no,address=@address,p_number=@p_number,punch_id=@punch_id,change_flag=@change_flag,hostel=@hostel,hostel_tower=@hostel_tower,status=@status,photo=@photo WHERE user_id=@user_id;",
+   
     /* __________________________________________________ADMIN REPORT QUERIES__________________________________________________ */
 
 
@@ -49,5 +55,10 @@ export const queries = {
     reportDefaulterDateWise:"SELECT * FROM [gps_db].[gps_db].[gps_defaulter_students], [gps_db].[gps_db].[gps_gatepassmaster] WHERE [gps_db].[gps_db].[gps_defaulter_students].request_id = [gps_db].[gps_db].[gps_gatepassmaster].request_id AND [gps_db].[gps_db].[gps_gatepassmaster].from_date BETWEEN @date_start AND @date_end;",
     reportEOD: "SELECT * FROM [gps_db].[gps_db].[gps_gatepassmaster] WHERE [gps_db].[gps_db].[gps_gatepassmaster].applied_date = @date;",
     reportWarden: "SELECT * FROM [gps_db].[gps_db].[gps_gatepassmaster] WHERE (send_approval_to = @user_id OR approved_or_rejected_by = @user_id) AND applied_date BETWEEN @date_start AND @date_end;",
+
+    /* __________________________________________________Blacklist Student QUERIES__________________________________________________ */
+
+    addBlacklistedStudent: "INSERT INTO [gps_db].[gps_db].[gps_blacklist_students] (user_id,from_date,from_time,to_date,to_time,blacklisted_by,remark,visibility) VALUES (@user_id,@from_date,@from_time,@to_date,@to_time,@blacklisted_by,@remark,@visibility) UPDATE [gps_db].[gps_db].[gps_usersmaster] SET status = 'PB' where user_id=@user_id;",
+
 
 };

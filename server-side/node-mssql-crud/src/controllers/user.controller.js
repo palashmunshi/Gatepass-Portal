@@ -13,7 +13,7 @@ export const getUser = async (req, res) => {
     }
 };
 
-/* export const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
 
     const { 
         user_id,
@@ -79,7 +79,7 @@ export const getUser = async (req, res) => {
         res.status(500);
         res.send(error.message);
     }
-}; */
+};
 
 export const getUserById = async (req, res) => {
     try {
@@ -132,9 +132,9 @@ export const getTotalUser = async (req, res) => {
     }
 };
 
-/* export const updateUserById = async (req, res) => {
+export const updateUserById = async (req, res) => {
 
-    const { user_id } = req.params.id;
+    const { id } = req.params;
     const { 
         ad_user_name,
         email_id,
@@ -179,12 +179,12 @@ export const getTotalUser = async (req, res) => {
         .input("hostel_tower",sql.VarChar, hostel_tower)
         .input("status",sql.VarChar, status)
         .input("photo",sql.VarChar, photo)
-        .input("user_id",sql.VarChar, user_id)
+        .input("user_id",sql.VarChar, id)
         .query(queries.updateUserById);
 
-        res.json({user_id,ad_user_name,email_id,contact_number,group_id,role_id,subgroup_id,name,room_no,address,p_number,punch_id,change_flag,hostel,hostel_tower,status,photo})
+        res.json({id,ad_user_name,email_id,contact_number,group_id,role_id,subgroup_id,name,room_no,address,p_number,punch_id,change_flag,hostel,hostel_tower,status,photo})
     } catch (error) {
         res.status(500);
         res.send(error.message);
     }
-}; */
+};

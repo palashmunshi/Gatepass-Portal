@@ -8,9 +8,9 @@ POST {{api}}
 Content-Type: application/json
 
 {
-  "user_id": "123456",
+  "user_id": "123456123",
   "ad_user_name": "User Test",
-  "email_id": "UserTest1@gmail.com",
+  "email_id": "UserTest1212@gmail.com",
   "contact_number": "0",
   "group_id": 0,
   "role_id": 0,
@@ -28,7 +28,7 @@ Content-Type: application/json
 }
 
 ###Getting a user
-GET {{api}}/1478533
+GET {{api}}/123456789
 
 ###Delete User
 DELETE {{api}}/123456
@@ -38,12 +38,12 @@ GET {{api}}/count
 
 ###Update a user
 
-PUT {{api}}/123456
+PUT {{api}}/123456123
 Content-Type: application/json
 
 {
-  "ad_user_name": "User Test",
-  "email_id": "UserTest123@gmail.com",
+  "ad_user_name": "User Test12",
+  "email_id": "UserTest123123@gmail.com",
   "contact_number": "0",
   "group_id": 0,
   "role_id": 0,

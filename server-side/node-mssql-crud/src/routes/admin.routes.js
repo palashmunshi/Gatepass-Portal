@@ -12,15 +12,24 @@ import {
     getSubgroup,
     createGroup,
     createSubgroup,
+    deleteGroup,
+    deleteSubgroup,
     getAllRole,
     getUserRole,
     getAllStatus,
     getParameterConfig,
+    updateWeekLimit,
+    updateOutTime,
+    updateInTime,
+    updateArrivalRestrictUB,
+    updateArrivalRestrictLB,
+    updateFlexibleEntry,
 
     createUser,
-    updateUserById,
+    updateUser,
 
     getStudentTenureWise,
+    getStudentTenureWiseDownload,
     getStudentStatusWise,
     getStudentStatusTenureWise,
     getGatepassTypeWise,
@@ -29,6 +38,8 @@ import {
     getDefaulterDateWise,
     getEOD,
     getWarden,
+
+    createBlacklistedStudent,
 
 } from "../controllers/admin.controller"
 
@@ -52,24 +63,36 @@ router.get('/admin/all_pending_request', getAllPendingRequest);
 
 
 
-
+/////////////Group/Subgroup//////////////////
 router.get('/admin/group', getGroup);
-router.post('/admin/create_group', createGroup);
+router.post('/admin/group', createGroup);
+router.delete('/admin/group/:id', deleteGroup);
 router.get('/admin/subgroup', getSubgroup);
-router.post('/admin/create_subgroup', createSubgroup);
+router.post('/admin/subgroup', createSubgroup);
+router.delete('/admin/subgroup/:id', deleteSubgroup);
+//////////////Roles///////////////////////////
 router.get('/admin/all_role', getAllRole);
 router.get('/admin/user_role', getUserRole);
 router.get('/admin/all_status', getAllStatus);
+router.put('/admin/user/:id', updateUser);
+/////////////Param Config/////////////////////
 router.get('/admin/parameter_config', getParameterConfig);
+router.put('/admin/parameter_config/week_limit/:id', updateWeekLimit);
+router.put('/admin/parameter_config/out_time/:id', updateOutTime);
+router.put('/admin/parameter_config/in_time/:id', updateInTime);
+router.put('/admin/parameter_config/arrival_restrict_ub/:id', updateArrivalRestrictUB);
+router.put('/admin/parameter_config/arrival_restrict_lb/:id', updateArrivalRestrictLB);
+router.put('/admin/parameter_config/flexible_entry/:id', updateFlexibleEntry);
 
 
 
-router.post('/admin/create_user', createUser);
-router.put('/admin/update_user/:id', updateUserById);
+router.post('/admin/user', createUser);
+
 
 
 
 router.get('/admin/tenure_wise_student_report/:id/:sd/:ed', getStudentTenureWise);
+router.get('/admin/tenure_wise_student_report/download/:id/:sd/:ed', getStudentTenureWiseDownload);
 router.get('/admin/status_wise_student_report/:statuslist/:sd/:ed', getStudentStatusWise);
 router.get('/admin/status_wise_student_report/:statuslist/:id/:sd/:ed', getStudentStatusTenureWise);
 router.get('/admin/gatepass_type_report/:gpt/:sd/:ed', getGatepassTypeWise);
@@ -78,6 +101,10 @@ router.get('/admin/blacklisted_group_date_wise_report/:sd/:ed',getBlacklistedGro
 router.get('/admin/defaulter_date_wise_report/:sd/:ed',getDefaulterDateWise);
 router.get('/admin/eod_report/:date',getEOD);
 router.get('/admin/warden_report/:id/:sd/:ed', getWarden);
+
+
+
+router.post('/admin/blacklist_student', createBlacklistedStudent);
 
 
 export default router;
