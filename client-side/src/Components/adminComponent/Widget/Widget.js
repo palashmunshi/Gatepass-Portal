@@ -9,12 +9,20 @@ import React, { useEffect, useState } from "react";
 
 const Widget = ({ type }) => {
   const [Oncampus, setOncampus] = useState(0);
-  // const [Oncampus, setOncampus] = useState(0);
+  const [Outcampus, setOutcampus] = useState(0);
   // const [Oncampus, setOncampus] = useState(0);
   // const [Oncampus, setOncampus] = useState(0);
 
   useEffect(() => {
-    fetch("/admin/pending_request")
+    // fetch("/admin/pending_request")
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((text) => {
+    //     setOncampus(text);
+    //   });
+
+    fetch("http://192.168.9.230:4000/gatepass/v2/admin/student_in_campus")
       .then((response) => {
         return response.json();
       })
@@ -22,29 +30,21 @@ const Widget = ({ type }) => {
         setOncampus(text);
       });
 
-    fetch("/admin/student_in_campus")
+    fetch("http://192.168.9.230:4000/gatepass/v2/admin/student_out_campus")
       .then((response) => {
         return response.json();
       })
       .then((text) => {
-        setOncampus(text);
+        setOutcampus(text);
       });
 
-    fetch("/admin/student_out_campus")
-      .then((response) => {
-        return response.json();
-      })
-      .then((text) => {
-        setOncampus(text);
-      });
-
-      fetch("/admin/blacklist_student")
-      .then((response) => {
-        return response.json();
-      })
-      .then((text) => {
-        setOncampus(text);
-      });
+      // fetch("/admin/blacklist_student")
+      // .then((response) => {
+      //   return response.json();
+      // })
+      // .then((text) => {
+      //   setOncampus(text);
+      // });
   });
 
   let data;
@@ -52,7 +52,7 @@ const Widget = ({ type }) => {
   switch (type) {
     case "user":
       data = {
-        title: "USERS",
+        title: "PENDING REQUESTS",
         amount: "500",
         link: "All users",
         icon: (
@@ -85,7 +85,7 @@ const Widget = ({ type }) => {
     case "outstation":
       data = {
         title: "OUTSTATION",
-        amount: "120",
+        amount: `${Outcampus}`,
         link: "Student out of campus",
         icon: (
           <CommuteSharpIcon
