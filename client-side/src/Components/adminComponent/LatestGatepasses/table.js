@@ -9,65 +9,19 @@ import Paper from "@mui/material/Paper";
 import React, { useEffect, useState } from "react";
 
 const List = () => {
-  const rows = [
-    {
-      id: 1143155,
-      type: "Local flexible",
-      img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "John Smith",
-      date: "1 March",
-      warden: "Kamla Rawat",
-      status: "Approved",
-    },
-    {
-      id: 2235235,
-      type: "Local flexible",
-      img: "https://m.media-amazon.com/images/I/31JaiPXYI8L._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "Michael Doe",
-      date: "1 March",
-      warden: "Kamla Rawat",
-      status: "Pending",
-    },
-    {
-      id: 2342353,
-      type: "Local fixed",
-      img: "https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "John Smith",
-      date: "1 March",
-      warden: "Kamla Rawat",
-      status: "Pending",
-    },
-    {
-      id: 2357741,
-      type: "Outstation",
-      img: "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "Jane Smith",
-      date: "1 March",
-      warden: "Kamla Rawat",
-      status: "Approved",
-    },
-    {
-      id: 2342355,
-      type: "Emergency",
-      img: "https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg",
-      customer: "Harold Carol",
-      date: "1 March",
-      warden: "Kamla Rawat",
-      status: "Pending",
-    },
-  ];
-
-  const [Oncampus, setOncampus] = useState(['hi']);
+  const [LatestGP, setLatestGP] = useState([]);
 
   useEffect(() => {
-    fetch("/admin/today_gatepass")
+    fetch("http://172.19.23.69:4000/gatepass/v2/admin/today_gatepass")
       .then((response) => {
         return response.json();
       })
       .then((text) => {
-        setOncampus(text);
+        setLatestGP(text);
       });
+      console.log(LatestGP)
     })
+    
 
   return (
     <TableContainer component={Paper} className="table">
@@ -83,18 +37,18 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
+          {LatestGP.map((row) => (
+            <TableRow key={row.user_id}>
+              <TableCell className="tableCell">{row.punch_id}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
                   {/* <img src={row.img} alt="" className="image" /> */}
-                  {row.type}
+                  {row.gatepass_type}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">{Oncampus}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.warden}</TableCell>
+              <TableCell className="tableCell">{row.visit_to}</TableCell>
+              <TableCell className="tableCell">{row.from_date}</TableCell>
+              <TableCell className="tableCell">{row.destination}</TableCell>
               <TableCell className="tableCell">
                 <span className={`status ${row.status}`}>{row.status}</span>
               </TableCell>
