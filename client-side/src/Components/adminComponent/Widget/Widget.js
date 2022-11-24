@@ -10,17 +10,17 @@ import React, { useEffect, useState } from "react";
 const Widget = ({ type }) => {
   const [Oncampus, setOncampus] = useState(0);
   const [Outcampus, setOutcampus] = useState(0);
-  // const [Oncampus, setOncampus] = useState(0);
-  // const [Oncampus, setOncampus] = useState(0);
+  const [PendingRequests, setPendingRequests] = useState(0);
+  const [Defaulter, setDefaulter] = useState(0);
 
   useEffect(() => {
-    // fetch("/admin/pending_request")
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((text) => {
-    //     setOncampus(text);
-    //   });
+    fetch("http://192.168.9.230:4000/gatepass/v2/admin/pending_request")
+      .then((response) => {
+        return response.json();
+      })
+      .then((text) => {
+        setPendingRequests(text);
+      });
 
     fetch("http://192.168.9.230:4000/gatepass/v2/admin/student_in_campus")
       .then((response) => {
@@ -38,13 +38,13 @@ const Widget = ({ type }) => {
         setOutcampus(text);
       });
 
-      // fetch("/admin/blacklist_student")
-      // .then((response) => {
-      //   return response.json();
-      // })
-      // .then((text) => {
-      //   setOncampus(text);
-      // });
+      fetch("http://192.168.9.230:4000/gatepass/v2/admin/blacklist_student")
+      .then((response) => {
+        return response.json();
+      })
+      .then((text) => {
+        setDefaulter(text);
+      });
   });
 
   let data;
@@ -53,7 +53,7 @@ const Widget = ({ type }) => {
     case "user":
       data = {
         title: "PENDING REQUESTS",
-        amount: "500",
+        amount: `${PendingRequests}`,
         link: "All users",
         icon: (
           <PersonOutlinedIcon
@@ -97,9 +97,9 @@ const Widget = ({ type }) => {
       break;
     case "defaulter":
       data = {
-        title: "DEFAULTER",
-        amount: "2",
-        link: "Defaulter students",
+        title: "Restricted",
+        amount: `${Defaulter}`,
+        link: "Blocked students",
         icon: (
           <NotInterestedSharpIcon
             className="icon"
