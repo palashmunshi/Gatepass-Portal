@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 // import { useContext } from "react";
 import { NotificationAdd } from "@mui/icons-material";
 import "./sidebar.scss";
+import logo from "../../assets/logo.png";
 
 const Sidebar = () => {
   //const { dispatch } = useContext(DarkModeContext);
@@ -22,8 +23,8 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/admin" style={{ textDecoration: "none" }}>
-          <span className="logo"> NU GATEPASS PORTAL</span>
-          <img src="logo.png" alt="logo.png" />
+        <span className="logo"><img src={logo} height="35" weight="35" alt="logo.png" />
+           NU GATEPASS PORTAL</span>
         </Link>
       </div>
       <hr />
@@ -43,33 +44,41 @@ const Sidebar = () => {
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/settings/changerole" style={{ textDecoration: "none" }}>
+          <Link to="/changerole" style={{ textDecoration: "none" }}>
             <li>
               <ManageAccountsSharpIcon className="icon" />
               <span>Change Role</span>
             </li>
           </Link>
+          <Link to="/group" style={{ textDecoration: "none" }}>
           <li>
             <CreditCardIcon className="icon" />
             <span>Group/Subgroup</span>
           </li>
+          </Link>
+          <Link to="/parameter" style={{ textDecoration: "none" }}></Link>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Parameter Config</span>
           </li>
+          <Link to="/profile" style={{ textDecoration: "none" }}></Link>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
           <p className="title">REPORT</p>
+          <Link to="/sreport" style={{ textDecoration: "none" }}>
           <li>
             <InsertChartIcon className="icon" />
             <span>Student</span>
           </li>
+          </Link>
+          <Link to="/gtreport" style={{ textDecoration: "none" }}>
           <li>
             <NotificationsNoneIcon className="icon" />
             <span>Gatepass Type</span>
           </li>
+          </Link>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
             <span>Defaulter</span>
