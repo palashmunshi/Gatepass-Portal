@@ -4,6 +4,8 @@ import { Report } from "./Components/adminComponent/Report/report";
 import { User } from "./Components/adminComponent/Settings/User/User";
 import Login from './Screens/Login/login';
 import {GatepassReport} from "./Components/adminComponent/Report/gatepassreport"
+import {DefaulterReport} from "./Components/adminComponent/Report/defaulterreport"
+import { WardenReport } from "./Components/adminComponent/Report/wardenreport";
 
 function App() {
   return (
@@ -20,8 +22,8 @@ function App() {
 
             <Route exact path="/sreport" element={<Report />} />
             <Route exact path="/gtreport" element={<GatepassReport />} />
-            <Route exact path="/rreport" element={<User />} />
-            <Route exact path="/wreport" element={<User />} />
+            <Route exact path="/dreport" element={<DefaulterReport />} />
+            <Route exact path="/wreport" element={<WardenReport />} />
             <Route exact path="/bchreport" element={<User />} />
 
           </Routes>

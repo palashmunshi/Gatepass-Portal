@@ -79,14 +79,18 @@ const Sidebar = () => {
             <span>Gatepass Type</span>
           </li>
           </Link>
-          <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>Defaulter</span>
-          </li>
+          <Link to="/dreport" style={{ textDecoration: "none" }}>
+            <li>
+              <SettingsSystemDaydreamOutlinedIcon className="icon" />
+              <span>Defaulter</span>
+            </li>
+          </Link>
+          <Link to="/wreport" style={{ textDecoration: "none" }}>
           <li>
             <PsychologyOutlinedIcon className="icon" />
             <span>Warden</span>
           </li>
+          </Link>
           <li>
             <SettingsApplicationsIcon className="icon" />
             <span>BCH</span>

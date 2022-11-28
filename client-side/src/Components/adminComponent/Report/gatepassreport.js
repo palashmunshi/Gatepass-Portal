@@ -10,6 +10,7 @@ export const GatepassReport = () => {
       <Sidebar />
       <div className="adminContainer">
         <Navbar /> 
+        <div className="heading">Gatepass Type Reports</div>
         <div className="widgets">
           <ReportWidget type="gatepass" />
         </div>

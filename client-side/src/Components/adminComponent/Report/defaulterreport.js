@@ -4,17 +4,17 @@ import Sidebar from "../../../Shared/Sidebar/adminSidebar";
 import '../admin.scss'
 import ReportWidget from "./ReportWidget/ReportWidget";
 
-export const Report = () => {
+export const DefaulterReport = () => {
   return (
     <div className="admin">
       <Sidebar />
       <div className="adminContainer">
         <Navbar /> 
-        <div className="heading">Student Reports</div>
+        <div className="heading">Defaulter Reports</div>
         <div className="widgets">
-          <ReportWidget type="student" />
-          <ReportWidget type="sw" />
-          <ReportWidget type="stw" />
+          <ReportWidget type="defaulter" />
+          <ReportWidget type="bs" />
+          <ReportWidget type="bgr" />
         </div>
       </div>
     </div>

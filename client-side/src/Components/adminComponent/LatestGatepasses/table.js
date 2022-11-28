@@ -12,7 +12,7 @@ const List = () => {
   const [LatestGP, setLatestGP] = useState([]);
 
   useEffect(() => {
-    fetch("http://192.168.9.230:4000/gatepass/v2/admin/today_gatepass")
+    fetch("http:/172.19.23.69:4000/gatepass/v2/admin/today_gatepass")
       .then((response) => {
         return response.json();
       })
