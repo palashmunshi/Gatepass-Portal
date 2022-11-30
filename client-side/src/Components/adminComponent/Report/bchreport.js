@@ -11,15 +11,17 @@ export const BCHReport = () => {
       <Sidebar />
       <div className="adminContainer">
         <Navbar />
-        <div className="heading">BCH Reports</div> 
-        <div className="widgets">
-          <Widget type="oncampus" />
-          <Widget type="outstation" />
-        </div>
-        <div className="widgets">
-          <ReportWidget type="defaulter" />
-          <ReportWidget type="bs" />
-          <ReportWidget type="bgr" />
+        <div className="listContainer">
+          <div className="listTitle">BCH Reports</div>
+          <div className="widgets">
+            <Widget type="oncampus" />
+            <Widget type="outstation" />
+          </div>
+          <div className="widgets">
+            <ReportWidget type="defaulter" />
+            <ReportWidget type="bs" />
+            <ReportWidget type="bgr" />
+          </div>
         </div>
       </div>
     </div>

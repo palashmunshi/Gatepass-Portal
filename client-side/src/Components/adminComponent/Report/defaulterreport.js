@@ -10,11 +10,13 @@ export const DefaulterReport = () => {
       <Sidebar />
       <div className="adminContainer">
         <Navbar /> 
-        <div className="heading">Defaulter Reports</div>
-        <div className="widgets">
-          <ReportWidget type="defaulter" />
-          <ReportWidget type="bs" />
-          <ReportWidget type="bgr" />
+        <div className="listContainer">
+          <div className="listTitle">Restricted Students Reports</div>
+          <div className="widgets">
+            <ReportWidget type="defaulter" />
+            <ReportWidget type="bs" />
+            <ReportWidget type="bgr" />
+          </div>
         </div>
       </div>
     </div>

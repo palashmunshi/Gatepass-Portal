@@ -10,9 +10,11 @@ export const GatepassReport = () => {
       <Sidebar />
       <div className="adminContainer">
         <Navbar /> 
-        <div className="heading">Gatepass Type Reports</div>
-        <div className="widgets">
-          <ReportWidget type="gatepass" />
+        <div className="listContainer">
+          <div className="listTitle">Gatepass Reports</div>
+          <div className="widgets">
+            <ReportWidget type="gatepass" />
+          </div>
         </div>
       </div>
     </div>

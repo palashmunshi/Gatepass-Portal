@@ -44,11 +44,13 @@ const SidebarStudent = () => {
             </li>
           </Link>          
           <p className="title">Gatepass</p>
+          <Link to="/localfixed" style={{ textDecoration: "none" }}>
           <li>
             <InsertChartIcon className="icon" />
             <span>Local Fixed</span>
           </li>
-          <Link to="/student/flexible" style={{ textDecoration: "none" }}>
+          </Link>
+          <Link to="/flexible" style={{ textDecoration: "none" }}>
             <li>
               <NotificationsNoneIcon className="icon" />
               <span>Local Flexible</span>

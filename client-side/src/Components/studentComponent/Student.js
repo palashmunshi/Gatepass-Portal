@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../../Shared/Navbar/navbar';
 import SidebarStudent from '../../Shared/Sidebar/studentSidebar';
+import StudentDashboard from './StudentDashboard/LatestTable/table';
 
 export const Student = () => {
     return (
@@ -10,7 +11,7 @@ export const Student = () => {
             <Navbar /> 
             <div className="listContainer">
               <div className="listTitle">Latest Gatepasses</div>
-              {/* <LatestGatepasses />           */}
+              <StudentDashboard />          
             </div>
           </div>
         </div>

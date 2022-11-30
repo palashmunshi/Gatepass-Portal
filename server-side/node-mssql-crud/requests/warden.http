@@ -1,0 +1,4 @@
+@api = http://localhost:4000/gatepass/v2/warden
+
+###
+GET {{api}}/gatepass_approve_or_reject/129707/1
