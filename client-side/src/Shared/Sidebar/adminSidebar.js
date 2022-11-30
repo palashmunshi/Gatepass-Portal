@@ -56,11 +56,12 @@ const Sidebar = () => {
             <span>Group/Subgroup</span>
           </li>
           </Link>
-          <Link to="/parameter" style={{ textDecoration: "none" }}></Link>
+          <Link to="/parameter" style={{ textDecoration: "none" }}>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Parameter Config</span>
           </li>
+          </Link>
           <Link to="/profile" style={{ textDecoration: "none" }}></Link>
           <li>
             <AccountCircleOutlinedIcon className="icon" />

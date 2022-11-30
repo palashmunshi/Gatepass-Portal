@@ -7,6 +7,8 @@ import {GatepassReport} from "./Components/adminComponent/Report/gatepassreport"
 import {DefaulterReport} from "./Components/adminComponent/Report/defaulterreport"
 import { WardenReport } from "./Components/adminComponent/Report/wardenreport";
 import { BCHReport } from "./Components/adminComponent/Report/bchreport";
+import { ChangeRole } from "./Components/adminComponent/Settings/changerole";
+import { Parameter } from "./Components/adminComponent/Settings/parameter";
 
 
 function App() {
@@ -18,9 +20,9 @@ function App() {
             <Route exact path="/admin" element={<Admin />} />
             
             <Route exact path="/users" element={<User />} />
-            <Route exact path="/changerole" element={<User />} />
+            <Route exact path="/changerole" element={<ChangeRole />} />
             <Route exact path="/group" element={<User />} />
-            <Route exact path="/parameter" element={<User />} />
+            <Route exact path="/parameter" element={<Parameter />} />
 
             <Route exact path="/sreport" element={<Report />} />
             <Route exact path="/gtreport" element={<GatepassReport />} />
