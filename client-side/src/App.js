@@ -9,12 +9,9 @@ import { LocalFixed } from "./Components/studentComponent/Gatepasses/LocalFixed/
 import {DefaulterReport} from "./Components/adminComponent/Report/defaulterreport"
 import { WardenReport } from "./Components/adminComponent/Report/wardenreport";
 import { BCHReport } from "./Components/adminComponent/Report/bchreport";
-<<<<<<< HEAD
 import { ChangeRole } from "./Components/adminComponent/Settings/changerole";
 import { Parameter } from "./Components/adminComponent/Settings/parameter";
-=======
 import OpenReport from "./Components/adminComponent/Report/OpenTable/OpenReport";
->>>>>>> 8a4456b564e0712b05bad7c28d1056e83fd07049
 
 
 function App() {
