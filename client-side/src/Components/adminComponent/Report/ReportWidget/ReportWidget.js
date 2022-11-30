@@ -118,7 +118,19 @@ const ReportWidget = ({ type }) => {
       break;
     case "warden":
       data = {
-        title: "GATEPASS TYPE-BASED",
+        title: "WARDEN REPORT",
+        textinput: "Student Name",
+      };
+      break;
+    case "bch1":
+      data = {
+        title: "STUDENT REPORT FOR SPECIFIC STATUS",
+        textinput: "Student Name",
+      };
+      break;
+    case "bch2":
+      data = {
+        title: "STUDENTS OUT OF CAMPUS FOR 3 OR ABOVE",
         textinput: "Student Name",
       };
       break;
@@ -142,7 +154,7 @@ const ReportWidget = ({ type }) => {
           <></>
         )}
 
-        {type === "sw" ? (
+        {type === "sw" || type === "bch1" ? (
           <span>
             <Dropdown
               options={status}
@@ -192,7 +204,7 @@ const ReportWidget = ({ type }) => {
           <></>
         )}
 
-        {type === "defaulter" || type === "bs" || type === "bgr" ? (
+        {type === "defaulter" || type === "bs" || type === "bgr" || type === "bch2" ? (
           <></>
         ) : (
           <></>
