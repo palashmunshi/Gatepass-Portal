@@ -94,7 +94,7 @@ router.post('/admin/user', createUser);
 router.get('/admin/tenure_wise_student_report/:id/:sd/:ed', getStudentTenureWise);
 router.get('/admin/tenure_wise_student_report/download/:id/:sd/:ed', getStudentTenureWiseDownload);
 router.get('/admin/status_wise_student_report/:statuslist/:sd/:ed', getStudentStatusWise);
-router.get('/admin/status_wise_student_report/:statuslist/:id/:sd/:ed', getStudentStatusTenureWise);
+router.get('/admin/status_and_tenure_wise_student_report/:statuslist/:id/:sd/:ed', getStudentStatusTenureWise);
 router.get('/admin/gatepass_type_report/:gpt/:sd/:ed', getGatepassTypeWise);
 router.get('/admin/blacklisted_student_date_wise_report/:sd/:ed',getBlacklistedStudentDateWise);
 router.get('/admin/blacklisted_group_date_wise_report/:sd/:ed',getBlacklistedGroupDateWise);

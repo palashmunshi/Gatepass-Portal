@@ -14,7 +14,7 @@ export const getPendingRequest = async (req, res) => {
     const result = await pool
         .request()
         .query(queries.dashboardPendingRequest);
-    res.json(result.recordset[0]['TOTAL']);
+    return res.json(result.recordset[0]['TOTAL']);
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -27,7 +27,7 @@ export const getStudentInCampus = async (req, res) => {
     const result = await pool
         .request()
         .query(queries.dashboardStudentInCampus);
-    res.json(result.recordset[0]['TOTAL']);
+    return res.json(result.recordset[0]['TOTAL']);
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -40,7 +40,7 @@ export const getStudentOutCampus = async (req, res) => {
     const result = await pool
         .request()
         .query(queries.dashboardStudentOutCampus);
-    res.json(result.recordset[0]['TOTAL']);
+    return res.json(result.recordset[0]['TOTAL']);
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -53,7 +53,7 @@ export const getBlacklistedStudent = async (req, res) => {
     const result = await pool
         .request()
         .query(queries.dashboardBlacklistStudent);
-    res.json(result.recordset[0]['TOTAL']);
+    return res.json(result.recordset[0]['TOTAL']);
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -66,7 +66,7 @@ export const getProfileRequest = async (req, res) => {
     const result = await pool
         .request()
         .query(queries.dashboardProfileRequest);
-    res.json(result.recordset[0]['TOTAL']);
+    return res.json(result.recordset[0]['TOTAL']);
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -79,7 +79,7 @@ export const getTodayGatepass = async (req, res) => {
     const result = await pool
         .request()
         .query(queries.dashboardTodayGatepass);
-    res.json(result.recordset);
+    return res.json(result.recordset);
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -92,7 +92,7 @@ export const getAllPendingRequest = async (req, res) => {
     const result = await pool
         .request()
         .query(queries.dashboardAllPendingRequest);
-    res.json(result.recordset);
+    return res.json(result.recordset);
     } catch (error) {
         res.status(500);
         res.send(error.message);
@@ -761,8 +761,6 @@ export const getStudentTenureWiseDownload = async (req, res) => {
             }
   const d = new Date()
   wb.write('Datewise-'+d.getDate()+'-' + d.getMonth()+'-'+d.getFullYear()+'-'+d.getHours()+'-'+d.getMinutes()+'.xlsx', res);
-
-            console.log(records[x].from_date); 
         
     } catch (error) {
         res.status(500);

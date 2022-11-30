@@ -38,7 +38,7 @@ POST {{api}}/group
 Content-Type: application/json
 
 {
-  "gps_groupname": "P.Jn1245567",
+  "gps_groupname": "P.Jn12456985",
   "gps_group_mastergroup_id": 2
 }
 
@@ -119,8 +119,8 @@ POST {{api}}/create_user
 Content-Type: application/json
 
 {
-  "user_id": "123456789",
-  "email_id": "User211@gmail.com",
+  "user_id": "4529756",
+  "email_id": "User28561@gmail.com",
   "contact_number": "0",
   "group_id": 0,
   "role_id": 0,
@@ -136,12 +136,12 @@ Content-Type: application/json
 }
 
 ###
-PUT {{api}}/update_user/123456789
+PUT {{api}}/user/00000087
 Content-Type: application/json
 
 {
   "ad_user_name": "abc",
-  "email_id":"agamgoel@gmail.com",
+  "email_id":"agamgoel4526@gmail.com",
   "contact_number": "0",
   "group_id": 0,
   "role_id": 0,
@@ -170,7 +170,7 @@ GET {{api}}/tenure_wise_student_report/download/BT19GCS157/2019-09-01/2022-11-22
 GET {{api}}/status_wise_student_report/Expire/2016-10-23/2016-10-25
 
 ###
-GET {{api}}/status_wise_student_report/Expire/U101114FCS056/2016-10-23/2016-10-25
+GET {{api}}/status_and_tenure_wise_student_report/Expire/U101114FCS056/2016-10-23/2016-10-25
 
 ###
 GET {{api}}/gatepass_type_report/2/2016-10-23/2016-10-25
