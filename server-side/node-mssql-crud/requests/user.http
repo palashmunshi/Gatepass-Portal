@@ -1,4 +1,4 @@
-@api = http://localhost:3000/gatepass/v2/user
+@api = http://localhost:4000/gatepass/v2/user
 
 ###Getting all the users
 GET {{api}}
