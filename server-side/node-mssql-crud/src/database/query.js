@@ -17,7 +17,7 @@ export const queries = {
     dashboardStudentOutCampus: "SELECT COUNT(*) AS TOTAL FROM [gps_db].[gps_db].[gps_usersmaster] WHERE role_id = 1 AND status = 'A';",
     dashboardBlacklistStudent: "SELECT COUNT(*) AS TOTAL FROM [gps_db].[gps_db].[gps_blacklist_students] WHERE visibility = 1 AND CONVERT(date, GETDATE()) BETWEEN from_date AND to_date;",
     dashboardProfileRequest: "SELECT COUNT(*) AS TOTAL FROM [gps_db].[gps_db].[gps_profileupdate] WHERE status = 0;",
-    dashboardTodayGatepass: "SELECT * FROM [gps_db].[gps_db].[gps_gatepassmaster] WHERE from_date = '2016-10-28';",
+    dashboardTodayGatepass: "SELECT * FROM [gps_db].[gps_db].[gps_gatepassmaster] WHERE from_date = CONVERT(date, GETDATE());",
     dashboardAllPendingRequest: "SELECT [gps_db].[gps_db].[gps_usersmaster].user_id AS employee_id,[gps_db].[gps_db].[gps_usersmaster].name AS employee_name,COUNT(*) AS TOTAL FROM [gps_db].[gps_db].[gps_gatepassmaster], [gps_db].[gps_db].[gps_usersmaster] WHERE [gps_db].[gps_db].[gps_gatepassmaster].status = 'Pending' and [gps_db].[gps_db].[gps_usersmaster].user_id = [gps_db].[gps_db].[gps_gatepassmaster].send_approval_to GROUP BY [gps_db].[gps_db].[gps_usersmaster].user_id,[gps_db].[gps_db].[gps_usersmaster].name;",
 
 
@@ -62,7 +62,17 @@ export const queries = {
 
 
 
-    /* __________________________________________________Blacklist Student QUERIES__________________________________________________ */
+    /* __________________________________________________Student QUERIES__________________________________________________ */
 
-    applyLocalFixedGatepass: "INSERT INTO [gps_db].[gps_db].[gps_gatepassmaster] (user_id,gatepass_type,from_date,from_time,to_date,to_time,purpose,destination,destination_contact,visit_to,send_approval_to,applied_date,applied_time,status) VALUES (@user_id,1,@from_date,@from_time,@to_date,@to_time,@purpose,@destination,@destination_contact,@visit_to,@send_approval_to,@applied_date,@applied_time,'AutoApproved')"
+    applyLocalFixedGatepass: "INSERT INTO [gps_db].[gps_db].[gps_gatepassmaster] (user_id,gatepass_type,from_date,from_time,to_date,to_time,purpose,destination,destination_contact,visit_to,send_approval_to,applied_date,applied_time,status) VALUES (@user_id,1,@from_date,@from_time,@to_date,@to_time,@purpose,@destination,@destination_contact,@visit_to,@send_approval_to,@applied_date,@applied_time,'AutoApproved')",
+    applyLocalFlexibleGatepass: "INSERT INTO [gps_db].[gps_db].[gps_gatepassmaster] (user_id,gatepass_type,from_date,from_time,to_date,to_time,purpose,destination,destination_contact,visit_to,send_approval_to,applied_date,applied_time,status) VALUES (@user_id,2,@from_date,@from_time,@to_date,@to_time,@purpose,@destination,@destination_contact,@visit_to,@send_approval_to,@applied_date,@applied_time,'Pending')",
+    cancelGatepass:"UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Cancelled' WHERE request_id=@id;",
+    expireGatepass:"UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Expire' WHERE request_id=@id;",
+    recentGatepass:"SELECT TOP 3 status , comments , applied_date , applied_time , gatepass_type , from_date , from_time FROM [gps_db].[gps_db].[gps_gatepassmaster] WHERE user_id=@id ORDER BY applied_date DESC , applied_time DESC;",
+    getDashboardDetails:"SELECT * FROM [gps_db].[gps_db].[gps_usersmaster] WHERE email_id = @email",
+
+    /* __________________________________________________Warden QUERIES__________________________________________________ */
+
+    acceptGatepass:"UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Approved' WHERE request_id=@id;",
+    rejectGatepass:"UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Rejected' WHERE request_id=@id;",
 };

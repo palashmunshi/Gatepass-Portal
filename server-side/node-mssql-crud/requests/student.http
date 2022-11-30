@@ -1,12 +1,12 @@
 @api = http://localhost:4000/gatepass/v2/student
 
 ###
-POST {{api}}/fixed_gatepass
+POST {{api}}/local_fixed_gatepass
 Content-Type: application/json
 
 {
   "user_id": "00000087",
-  "from_date":"2022-12-01",
+  "from_date":"2022-11-30",
   "from_time":"1970-01-01T00:00:00.000Z",
   "to_date":"2022-12-01",
   "to_time":"1970-01-01T00:00:00.000Z",
@@ -16,3 +16,32 @@ Content-Type: application/json
   "visit_to":"ynr",
   "send_approval_to":"00000087"
 }
+
+###
+POST {{api}}/local_flexible_gatepass
+Content-Type: application/json
+
+{
+  "user_id": "00000087",
+  "from_date":"2022-11-30",
+  "from_time":"1970-01-01T00:00:00.000Z",
+  "to_date":"2022-12-01",
+  "to_time":"1970-01-01T00:00:00.000Z",
+  "purpose":"home visit",
+  "destination":"ynr",
+  "destination_contact":"8935241978",
+  "visit_to":"ynr",
+  "send_approval_to":"00000087"
+}
+
+###
+GET {{api}}/gatepass_cancel/129705
+
+###
+GET {{api}}/gatepass_expire/129705
+
+###
+GET {{api}}/recent_gatepass/BT19GCS157
+
+###
+GET {{api}}/dashboard_details/agam.goel19@st.niituniversity.in
