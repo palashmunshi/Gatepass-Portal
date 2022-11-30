@@ -6,6 +6,8 @@ import Login from './Screens/Login/login';
 import {GatepassReport} from "./Components/adminComponent/Report/gatepassreport"
 import {DefaulterReport} from "./Components/adminComponent/Report/defaulterreport"
 import { WardenReport } from "./Components/adminComponent/Report/wardenreport";
+import { BCHReport } from "./Components/adminComponent/Report/bchreport";
+
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
             <Route exact path="/gtreport" element={<GatepassReport />} />
             <Route exact path="/dreport" element={<DefaulterReport />} />
             <Route exact path="/wreport" element={<WardenReport />} />
-            <Route exact path="/bchreport" element={<User />} />
+            <Route exact path="/bchreport" element={<BCHReport />} />
 
           </Routes>
       </BrowserRouter>

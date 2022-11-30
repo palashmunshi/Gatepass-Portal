@@ -91,10 +91,12 @@ const Sidebar = () => {
             <span>Warden</span>
           </li>
           </Link>
+          <Link to="/bchreport" style={{ textDecoration: "none" }}>
           <li>
             <SettingsApplicationsIcon className="icon" />
             <span>BCH</span>
           </li>
+          </Link>
           <p className="title">OTHERS</p>
           <li>
             <ExitToAppIcon className="icon" />
