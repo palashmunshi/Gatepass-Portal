@@ -12,7 +12,7 @@ const StudentDashboard = () => {
   const [StudentGP, setStudentGP] = useState([]);
 
   useEffect(() => {
-    fetch("http://192.168.9.230:4000/gatepass/v2/admin/today_gatepass")
+    fetch("http://192.168.9.230:4000/gatepass/v2/student/recent_gatepass/BT19GCS157")
       .then((response) => {
         return response.json();
       })

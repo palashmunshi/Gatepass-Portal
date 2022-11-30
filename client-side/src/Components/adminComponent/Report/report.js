@@ -17,7 +17,7 @@ export const Report = () => {
             <ReportWidget type="sw" />
             <ReportWidget type="stw" />
             </div>
-        </div>
+          </div>
       </div>
     </div>
   );

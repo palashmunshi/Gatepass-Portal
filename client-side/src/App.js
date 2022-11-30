@@ -6,6 +6,11 @@ import Login from './Screens/Login/login';
 import {GatepassReport} from "./Components/adminComponent/Report/gatepassreport"
 import { Student } from "./Components/studentComponent/Student"
 import { LocalFixed } from "./Components/studentComponent/Gatepasses/LocalFixed/LocalFixed";
+import {DefaulterReport} from "./Components/adminComponent/Report/defaulterreport"
+import { WardenReport } from "./Components/adminComponent/Report/wardenreport";
+import { BCHReport } from "./Components/adminComponent/Report/bchreport";
+import OpenReport from "./Components/adminComponent/Report/OpenTable/OpenReport";
+
 
 function App() {
   return (
@@ -21,13 +26,15 @@ function App() {
             <Route exact path="/parameter" element={<User />} />
 
             <Route exact path="/sreport" element={<Report />} />
+            <Route exact path="/openreport" element={<OpenReport />} />
             <Route exact path="/gtreport" element={<GatepassReport />} />
-            <Route exact path="/rreport" element={<User />} />
-            <Route exact path="/wreport" element={<User />} />
-            <Route exact path="/bchreport" element={<User />} />
+            <Route exact path="/dreport" element={<DefaulterReport />} />
+            <Route exact path="/wreport" element={<WardenReport />} />
+            <Route exact path="/bchreport" element={<BCHReport />} />
 
             <Route path="/student" element={<Student />} />
             <Route path="/localfixed" element={<LocalFixed />} />
+
 
           </Routes>
       </BrowserRouter>

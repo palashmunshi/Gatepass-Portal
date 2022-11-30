@@ -1,0 +1,18 @@
+@api = http://localhost:4000/gatepass/v2/student
+
+###
+POST {{api}}/fixed_gatepass
+Content-Type: application/json
+
+{
+  "user_id": "00000087",
+  "from_date":"2022-12-01",
+  "from_time":"1970-01-01T00:00:00.000Z",
+  "to_date":"2022-12-01",
+  "to_time":"1970-01-01T00:00:00.000Z",
+  "purpose":"home visit",
+  "destination":"ynr",
+  "destination_contact":"8935241978",
+  "visit_to":"ynr",
+  "send_approval_to":"00000087"
+}

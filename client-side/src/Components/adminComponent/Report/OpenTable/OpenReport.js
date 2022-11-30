@@ -1,4 +1,4 @@
-import "./table.scss";
+import "../../LatestGatepasses/table.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,11 +8,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useEffect, useState } from "react";
 
-const List = () => {
+const OpenReport = () => {
   const [LatestGP, setLatestGP] = useState([]);
 
   useEffect(() => {
-    fetch("http:/172.19.23.69:4000/gatepass/v2/admin/today_gatepass")
+    fetch("http://172.19.23.69:4000/gatepass/v2/admin/tenure_wise_student_report/BT19GCS157/2019-09-01/2022-11-22")
       .then((response) => {
         return response.json();
       })
@@ -66,4 +66,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default OpenReport;
