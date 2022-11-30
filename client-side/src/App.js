@@ -4,6 +4,8 @@ import { Report } from "./Components/adminComponent/Report/report";
 import { User } from "./Components/adminComponent/Settings/User/User";
 import Login from './Screens/Login/login';
 import {GatepassReport} from "./Components/adminComponent/Report/gatepassreport"
+import { Student } from "./Components/studentComponent/Student"
+import { LocalFixed } from "./Components/studentComponent/Gatepasses/LocalFixed/LocalFixed";
 
 function App() {
   return (
@@ -23,6 +25,9 @@ function App() {
             <Route exact path="/rreport" element={<User />} />
             <Route exact path="/wreport" element={<User />} />
             <Route exact path="/bchreport" element={<User />} />
+
+            <Route path="/student" element={<Student />} />
+            <Route path="/localfixed" element={<LocalFixed />} />
 
           </Routes>
       </BrowserRouter>

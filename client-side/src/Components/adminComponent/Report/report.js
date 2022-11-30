@@ -10,10 +10,13 @@ export const Report = () => {
       <Sidebar />
       <div className="adminContainer">
         <Navbar /> 
-        <div className="widgets">
-          <ReportWidget type="student" />
-          <ReportWidget type="sw" />
-          <ReportWidget type="stw" />
+        <div className="listContainer">
+          <div className="listTitle">Student Reports</div>
+            <div className="widgets">
+            <ReportWidget type="student" />
+            <ReportWidget type="sw" />
+            <ReportWidget type="stw" />
+            </div>
         </div>
       </div>
     </div>

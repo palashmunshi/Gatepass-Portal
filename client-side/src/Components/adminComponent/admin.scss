@@ -5,15 +5,10 @@
   .adminContainer {
     flex: 6;
 
-    .widgets,
-    .charts {
+    .widgets {
       display: flex;
       padding: 20px;
       gap: 20px;
-    }
-
-    .charts {
-      padding: 5px 20px;
     }
 
     .listContainer {
@@ -23,6 +18,7 @@
       margin: 20px;
 
       .listTitle {
+        font-size: 20px;
         font-weight: 500;
         color: gray;
         margin-bottom: 15px;

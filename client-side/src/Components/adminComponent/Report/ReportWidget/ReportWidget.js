@@ -58,25 +58,25 @@ const ReportWidget = ({ type }) => {
     case "student":
       data = {
         title: "TENURE-WISE",
-        textinput: "Student Name",
+        textinput: "Enrollment No.",
       };
       break;
     case "stw":
       data = {
         title: "STATUS TENURE-WISE",
-        textinput: "Student Name",
+        textinput: "Enrollment No.",
       };
       break;
     case "sw":
       data = {
         title: "STATUS-WISE",
-        textinput: "Student Name",
+        textinput: "Enrollment No.",
       };
       break;
     case "gatepass":
         data = {
           title: "GATEPASS TYPE-BASED",
-          textinput: "Student Name",
+          textinput: "Enrollment No.",
         };
         break;
     default:
