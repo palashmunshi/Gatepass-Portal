@@ -40,7 +40,6 @@ export const ChangeRole = () => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell className="tableCell">S.No.</TableCell>
                             <TableCell className="tableCell">Name</TableCell>
                             <TableCell className="tableCell">Current Role</TableCell>
                             <TableCell className="tableCell">Change Role</TableCell>
@@ -52,7 +51,6 @@ export const ChangeRole = () => {
                     <TableBody>
                         {user.map((row) => (
                             <TableRow key={row.employeecode}>
-                                <TableCell className="tableCell">1</TableCell>
                                 <TableCell className="tableCell">{row.employeename}</TableCell>
                                 <TableCell className="tableCell">{row.employeerole}</TableCell>
                                 <TableCell className="tableCell">
