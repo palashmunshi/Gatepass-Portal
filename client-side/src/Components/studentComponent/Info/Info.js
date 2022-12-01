@@ -1,6 +1,7 @@
-import SidebarStudent from '../../Shared/Sidebar/studentSidebar';
+import SidebarStudent from '../../../Shared/Sidebar/studentSidebar';
 import React from 'react'
-import Navbar from '../../Shared/Navbar/navbar';
+import Navbar from '../../../Shared/Navbar/navbar';
+import './info.scss';
 
 const Info = () => {
     return (

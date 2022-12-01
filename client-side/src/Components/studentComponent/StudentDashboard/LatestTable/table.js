@@ -12,7 +12,7 @@ const StudentDashboard = () => {
   const [StudentGP, setStudentGP] = useState([]);
 
   useEffect(() => {
-    fetch("http://172.19.23.69:4000/gatepass/v2/student/recent_gatepass/BT19GCS157")
+    fetch("http://192.168.9.230:4000/gatepass/v2/student/recent_gatepass/00000087")
       .then((response) => {
         return response.json();
       })
@@ -23,9 +23,8 @@ const StudentDashboard = () => {
     })
 
     function changeDate(val) {
-      const d = new Date(val)
-      console.log(d.getDate())
-      return d.getDate()
+      const date = `${val.getFullYear()}-${val.getMonth() + 1}-${val.getDate()}`;
+      return date
     }
     
     
@@ -47,7 +46,7 @@ const StudentDashboard = () => {
         <TableBody>
           {StudentGP.map((row) => (
             <TableRow key={row.user_id}>
-              <TableCell className="tableCell">{row.applied_date}</TableCell>
+              <TableCell className="tableCell">changeDate({row.applied_time})</TableCell>
               <TableCell className="tableCell">{row.applied_time}</TableCell>
               <TableCell className="tableCell">{row.gatepass_type}</TableCell>
               <TableCell className="tableCell">{row.from_date}</TableCell>

@@ -20,10 +20,6 @@
       color: black;
       background-color: rgb(67, 66, 66, 0.151);
     }
-    &.Pending {
-      color: black;
-      background-color: rgb(67, 66, 66, 0.151);
-    }
     &.Approved {
       color: green;
       background-color: rgba(0, 128, 0, 0.151);
@@ -44,10 +40,6 @@
     &.Rejected {
       color: red;
       background-color: rgb(255, 30, 30, 0.155);
-    }
-    &.AutoApproved {
-      color: teal;
-      background-color: rgb(34, 163, 159, 0.105);
     }
   }
 }
