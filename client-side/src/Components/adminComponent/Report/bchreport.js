@@ -18,9 +18,8 @@ export const BCHReport = () => {
             <Widget type="outstation" />
           </div>
           <div className="widgets">
-            <ReportWidget type="defaulter" />
-            <ReportWidget type="bs" />
-            <ReportWidget type="bgr" />
+            <ReportWidget type="bch1" />
+            <ReportWidget type="bch2" />
           </div>
         </div>
       </div>

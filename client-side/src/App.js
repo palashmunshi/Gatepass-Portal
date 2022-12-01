@@ -9,6 +9,8 @@ import { LocalFixed } from "./Components/studentComponent/Gatepasses/LocalFixed/
 import {DefaulterReport} from "./Components/adminComponent/Report/defaulterreport"
 import { WardenReport } from "./Components/adminComponent/Report/wardenreport";
 import { BCHReport } from "./Components/adminComponent/Report/bchreport";
+import { ChangeRole } from "./Components/adminComponent/Settings/changerole";
+import { Parameter } from "./Components/adminComponent/Settings/parameter";
 import OpenReport from "./Components/adminComponent/Report/OpenTable/OpenReport";
 
 
@@ -21,9 +23,9 @@ function App() {
             <Route exact path="/admin" element={<Admin />} />
             
             <Route exact path="/users" element={<User />} />
-            <Route exact path="/changerole" element={<User />} />
+            <Route exact path="/changerole" element={<ChangeRole />} />
             <Route exact path="/group" element={<User />} />
-            <Route exact path="/parameter" element={<User />} />
+            <Route exact path="/parameter" element={<Parameter />} />
 
             <Route exact path="/sreport" element={<Report />} />
             <Route exact path="/openreport" element={<OpenReport />} />
