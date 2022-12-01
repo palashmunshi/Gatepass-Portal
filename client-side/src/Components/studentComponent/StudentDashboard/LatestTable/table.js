@@ -12,7 +12,7 @@ const StudentDashboard = () => {
   const [StudentGP, setStudentGP] = useState([]);
 
   useEffect(() => {
-    fetch("http://192.168.9.230:4000/gatepass/v2/student/recent_gatepass/BT19GCS157")
+    fetch("http://172.19.23.69:4000/gatepass/v2/student/recent_gatepass/BT19GCS157")
       .then((response) => {
         return response.json();
       })
@@ -36,21 +36,26 @@ const StudentDashboard = () => {
         <TableHead>
           <TableRow>
             <TableCell className="tableCell">Applied On</TableCell>
+            <TableCell className="tableCell">Applied Time</TableCell>
             <TableCell className="tableCell">Gatepass Type</TableCell>
-            <TableCell className="tableCell">Departure On</TableCell>
-            {/* <TableCell className="tableCell">Destination</TableCell> */}
+            <TableCell className="tableCell">From Date</TableCell>
+            <TableCell className="tableCell">From Time</TableCell>
             <TableCell className="tableCell">Status</TableCell>  
+            <TableCell className="tableCell">Comments</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {StudentGP.map((row) => (
             <TableRow key={row.user_id}>
-              <TableCell className="tableCell">{row.user_id}</TableCell>
+              <TableCell className="tableCell">{row.applied_date}</TableCell>
+              <TableCell className="tableCell">{row.applied_time}</TableCell>
               <TableCell className="tableCell">{row.gatepass_type}</TableCell>
               <TableCell className="tableCell">{row.from_date}</TableCell>
+              <TableCell className="tableCell">{row.from_time}</TableCell>
               <TableCell className="tableCell">
                 <span className={`status ${row.status}`}>{row.status}</span>
               </TableCell>
+              <TableCell className="tableCell">{row.comments}</TableCell>
             </TableRow>
           ))}
         </TableBody>
