@@ -12,6 +12,8 @@ import { BCHReport } from "./Components/adminComponent/Report/bchreport";
 import { ChangeRole } from "./Components/adminComponent/Settings/changerole";
 import { Parameter } from "./Components/adminComponent/Settings/parameter";
 import OpenReport from "./Components/adminComponent/Report/OpenTable/OpenReport";
+import { Warden } from "./Components/wardenComponent/warden";
+import Info from "./Components/studentComponent/Info/Info";
 
 
 function App() {
@@ -36,6 +38,9 @@ function App() {
 
             <Route path="/student" element={<Student />} />
             <Route path="/localfixed" element={<LocalFixed />} />
+            <Route path="/student/info" element={<Info />} />
+
+            <Route path="/warden" element={<Warden />} />
 
 
           </Routes>

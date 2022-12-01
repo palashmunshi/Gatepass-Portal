@@ -6,6 +6,7 @@ import CommuteSharpIcon from "@mui/icons-material/CommuteSharp";
 import NotInterestedSharpIcon from "@mui/icons-material/NotInterestedSharp";
 import { PlusOneRounded } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
+import { AllPendingRequest } from "../AllPendingRequest/AllPendingRequest";
 
 const Widget = ({ type }) => {
   const [Oncampus, setOncampus] = useState(0);
@@ -54,7 +55,7 @@ const Widget = ({ type }) => {
       data = {
         title: "PENDING REQUESTS",
         amount: `${PendingRequests}`,
-        link: "All users",
+        link: 'All Pending Request',
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -120,15 +121,9 @@ const Widget = ({ type }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">{data.amount}</span>
-        <span className="link">{data.link}</span>
+        {type === 'user' ? (<span className="link"><AllPendingRequest /></span>) : <span className="link">{data.link}</span>} 
       </div>
-      <div className="right">
-        {/* <div className="percentage positive">
-          <PlusOneRounded />
-          {5}
-        </div> */}
-        {data.icon}
-      </div>
+      <div className="right">{data.icon}</div>
     </div>
   );
 };
