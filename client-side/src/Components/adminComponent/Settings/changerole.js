@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Navbar from "../../../Shared/Navbar/navbar";
 import Sidebar from "../../../Shared/Sidebar/adminSidebar";
 import '../admin.scss'
@@ -16,7 +16,20 @@ import Dropdown from "react-dropdown";
 export const ChangeRole = () => {
   const role=["Admin", "Chief Warden", "Warden", "Guard", "BCH", "Student", "No Access", "Other"]; 
   const status=["Present", "Absent", "Gone"];  
-  return (
+  const [user, setUser] = useState([])
+  
+  useEffect(() => {
+    fetch("http://192.168.9.230:4000/gatepass/v2/admin/user_role")
+      .then((response) => {
+        return response.json();
+      })
+      .then((text) => {
+        setUser(text);
+      });
+      console.log(user)
+    })
+  
+    return (
     <div className="admin">
       <Sidebar />
       <div className="adminContainer">
@@ -28,7 +41,7 @@ export const ChangeRole = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell className="tableCell">S.No.</TableCell>
-                            <TableCell className="tableCell">Warden Name</TableCell>
+                            <TableCell className="tableCell">Name</TableCell>
                             <TableCell className="tableCell">Current Role</TableCell>
                             <TableCell className="tableCell">Change Role</TableCell>
                             <TableCell className="tableCell">Current Status</TableCell>
@@ -37,62 +50,36 @@ export const ChangeRole = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <TableRow>
-                            <TableCell className="tableCell">1</TableCell>
-                            <TableCell className="tableCell">Dhiren Pratap Singh</TableCell>
-                            <TableCell className="tableCell">No Access</TableCell>
-                            <TableCell className="tableCell">
-                                <Dropdown
-                                    options={role}
-                                    style={{ borderRadius: "40" }}
-                                    placeholder="Select a role"
-                                />
-                            </TableCell>
-                            <TableCell className="tableCell">G</TableCell>
-                            <TableCell className="tableCell">
-                                <Dropdown
-                                    options={status}
-                                    style={{ borderRadius: "40" }}
-                                    placeholder="Select a status"
-                                />
-                            </TableCell>
-                            <TableCell className="tableCell">
-                                <button
-                                type="button" 
-                                style={{ background: "green", color: "#fff", borderRadius: "5px" }}
-                                >
-                                    Save
-                                </button>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="tableCell">1</TableCell>
-                            <TableCell className="tableCell">Dhiren Pratap Singh</TableCell>
-                            <TableCell className="tableCell">No Access</TableCell>
-                            <TableCell className="tableCell">
-                                <Dropdown
-                                    options={role}
-                                    style={{ borderRadius: "40" }}
-                                    placeholder="Select a role"
-                                />
-                            </TableCell>
-                            <TableCell className="tableCell">G</TableCell>
-                            <TableCell className="tableCell">
-                                <Dropdown
-                                    options={status}
-                                    style={{ borderRadius: "40" }}
-                                    placeholder="Select a status"
-                                />
-                            </TableCell>
-                            <TableCell className="tableCell">
-                                <button
-                                type="button" 
-                                style={{ background: "green", color: "#fff", borderRadius: "5px" }}
-                                >
-                                    Save
-                                </button>
-                            </TableCell>
-                        </TableRow>
+                        {user.map((row) => (
+                            <TableRow key={row.employeecode}>
+                                <TableCell className="tableCell">1</TableCell>
+                                <TableCell className="tableCell">{row.employeename}</TableCell>
+                                <TableCell className="tableCell">{row.employeerole}</TableCell>
+                                <TableCell className="tableCell">
+                                    <Dropdown
+                                        options={role}
+                                        style={{ borderRadius: "40" }}
+                                        placeholder="Select a role"
+                                    />
+                                </TableCell>
+                                <TableCell className="tableCell">{row.employeestatus}</TableCell>
+                                <TableCell className="tableCell">
+                                    <Dropdown
+                                        options={status}
+                                        style={{ borderRadius: "40" }}
+                                        placeholder="Select a status"
+                                    />
+                                </TableCell>
+                                <TableCell className="tableCell">
+                                    <button
+                                    type="button" 
+                                    style={{ background: "green", color: "#fff", borderRadius: "5px" }}
+                                    >
+                                        Save
+                                    </button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>

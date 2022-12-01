@@ -16,7 +16,7 @@ const LFform = () => {
     current.getMonth() + 1
   }-${current.getDate()}`;
   // useEffect(() => {
-  //     fetch("http://172.19.23.69:4000/gatepass/v2/student/local_flexible_gatepass", {
+  //     fetch("http://192.168.9.230:4000/gatepass/v2/student/local_flexible_gatepass", {
   //       method: "POST",
   //       body: JSON.stringify(data),
   //       headers: {
@@ -46,7 +46,7 @@ const LFform = () => {
     };
 
     fetch(
-      "http://172.19.23.69:4000/gatepass/v2/student/local_flexible_gatepass",
+      "http://192.168.9.230:4000/gatepass/v2/student/local_flexible_gatepass",
       {
         method: "POST",
         body: JSON.stringify(data),

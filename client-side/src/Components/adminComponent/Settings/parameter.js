@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import Navbar from "../../../Shared/Navbar/navbar";
 import Sidebar from "../../../Shared/Sidebar/adminSidebar";
 import '../admin.scss'
@@ -13,6 +13,25 @@ import Paper from "@mui/material/Paper";
 
 
 export const Parameter = () => {
+    const [parameter, setParameter] = useState([]);
+    // const [limit, setLimit] = useState("")
+    // const [outTime, setOutTime] = useState("")
+    // const [inTime, setInTime] = useState("")
+    // const [arrivalUB, setArrivalUB] = useState("")
+    // const [arrivalLB, setArrivalLB] = useState("")
+    // const [flex, setFlex] = useState("")
+
+    useEffect(() => {
+        fetch("http://192.168.9.230:4000/gatepass/v2/admin/parameter_config")
+          .then((response) => {
+            return response.json();
+          })
+          .then((text) => {
+            setParameter(text);
+          });
+          console.log(parameter)
+    })  
+
   return (
     <div className="admin">
       <Sidebar />
@@ -32,10 +51,11 @@ export const Parameter = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <TableRow>
-                            <TableCell className="tableCell">1</TableCell>
-                            <TableCell className="tableCell">Week Limit</TableCell>
-                            <TableCell className="tableCell">2</TableCell>
+                        {parameter.map((row) => (
+                            <TableRow key={row.param_id}>
+                            <TableCell className="tableCell">{row.param_id}</TableCell>
+                            <TableCell className="tableCell">{row.parameter}</TableCell>
+                            <TableCell className="tableCell">{row.value}</TableCell>
                             <TableCell className="tableCell">
                                 <input
                                     className="e-input"
@@ -53,121 +73,8 @@ export const Parameter = () => {
                                     Change
                                 </button>
                             </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="tableCell">2</TableCell>
-                            <TableCell className="tableCell">Out Time</TableCell>
-                            <TableCell className="tableCell">21:59:59</TableCell>
-                            <TableCell className="tableCell">
-                                <input
-                                    className="e-input"
-                                    //value={name}
-                                    //onChange={(e) => setName(e.target.value)}
-                                    type="time"
-                                    step="2"
-                                    placeholder=""
-                                />
-                            </TableCell>
-                            <TableCell className="tableCell">
-                                <button
-                                type="button" 
-                                style={{ background: "green", color: "#fff", borderRadius: "5px" }}
-                                >
-                                    Change
-                                </button>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="tableCell">3</TableCell>
-                            <TableCell className="tableCell">In Time</TableCell>
-                            <TableCell className="tableCell">22:00:00</TableCell>
-                            <TableCell className="tableCell">
-                                <input
-                                    className="e-input"
-                                    //value={name}
-                                    //onChange={(e) => setName(e.target.value)}
-                                    type="time"
-                                    step="2"
-                                    placeholder=""
-                                />
-                            </TableCell>
-                            <TableCell className="tableCell">
-                                <button
-                                type="button" 
-                                style={{ background: "green", color: "#fff", borderRadius: "5px" }}
-                                >
-                                    Change
-                                </button>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="tableCell">4</TableCell>
-                            <TableCell className="tableCell">Arrival Restrict UB</TableCell>
-                            <TableCell className="tableCell">22:00:00</TableCell>
-                            <TableCell className="tableCell">
-                                <input
-                                    className="e-input"
-                                    //value={name}
-                                    //onChange={(e) => setName(e.target.value)}
-                                    type="time"
-                                    step="2"
-                                    placeholder=""
-                                />
-                            </TableCell>
-                            <TableCell className="tableCell">
-                                <button
-                                type="button" 
-                                style={{ background: "green", color: "#fff", borderRadius: "5px" }}
-                                >
-                                    Change
-                                </button>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="tableCell">5</TableCell>
-                            <TableCell className="tableCell">Arrival Restrict LB</TableCell>
-                            <TableCell className="tableCell">06:00:00</TableCell>
-                            <TableCell className="tableCell">
-                                <input
-                                    className="e-input"
-                                    //value={name}
-                                    //onChange={(e) => setName(e.target.value)}
-                                    type="time"
-                                    step="2"
-                                    placeholder=""
-                                />
-                            </TableCell>
-                            <TableCell className="tableCell">
-                                <button
-                                type="button" 
-                                style={{ background: "green", color: "#fff", borderRadius: "5px" }}
-                                >
-                                    Change
-                                </button>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="tableCell">6</TableCell>
-                            <TableCell className="tableCell">Flexible Entry(In Minutes)</TableCell>
-                            <TableCell className="tableCell">1</TableCell>
-                            <TableCell className="tableCell">
-                                <input
-                                    className="e-input"
-                                    //value={name}
-                                    //onChange={(e) => setName(e.target.value)}
-                                    type="text"
-                                    placeholder=""
-                                />
-                            </TableCell>
-                            <TableCell className="tableCell">
-                                <button
-                                type="button" 
-                                style={{ background: "green", color: "#fff", borderRadius: "5px" }}
-                                >
-                                    Change
-                                </button>
-                            </TableCell>
-                        </TableRow>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>
