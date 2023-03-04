@@ -17,16 +17,16 @@ const LFform = () => {
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
-      "user_id": "",
-      "from_date": date,
-      "from_time": "1970-01-01T00:00:00.000Z",
-      "to_date": date,
-      "to_time": "1970-01-01T00:00:00.000Z",
-      "purpose": "",
-      "destination": "",
-      "destination_contact": "",
-      "visit_to": "",
-      "send_approval_to": "70100296A",
+      user_id: "",
+      from_date: date,
+      from_time: "1970-01-01T00:00:00.000Z",
+      to_date: date,
+      to_time: "1970-01-01T00:00:00.000Z",
+      purpose: "",
+      destination: "",
+      destination_contact: "",
+      visit_to: "",
+      send_approval_to: "70100296A",
       // "from_date":"2022-11-30",
       // "from_time":"1970-01-01T00:00:00.000Z",
       // "to_date":"2022-12-01",
@@ -60,9 +60,10 @@ const LFform = () => {
       ...formInput,
     };
 
-    const id = data['user_id'];
+    const id = data["user_id"];
     fetch(
-      "http://192.168.9.230:4000/gatepass/v2/student/local_flexible_gatepass/"+`${id}`,
+      "http://127.0.0.1:4000/gatepass/v2/student/local_flexible_gatepass/" +
+        `${id}`,
       {
         method: "POST",
         body: JSON.stringify(data),
@@ -79,13 +80,9 @@ const LFform = () => {
   return (
     <div className="lfform">
       <form className="form" onSubmit={handleSubmit}>
-      <div className="common">
+        <div className="common">
           <label className="label">Enrollment ID</label>
-          <input
-            type="text"
-            name="user_id"
-            onChange={handleInput}
-          />
+          <input type="text" name="user_id" onChange={handleInput} />
         </div>
         <div className="common">
           <label className="label">Departure Date</label>
@@ -152,10 +149,7 @@ const LFform = () => {
         <div className="common" style={{ marginBottom: "60px" }}>
           <label className="label">Send Approval To</label>
           <div className="dropdown">
-            <ReactDropdown
-              options={warden}
-              placeholder="Select a warden"
-            />
+            <ReactDropdown options={warden} placeholder="Select a warden" />
           </div>
         </div>
         <div className="common">

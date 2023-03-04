@@ -12,23 +12,23 @@ const OpenReport = () => {
   const [LatestGP, setLatestGP] = useState([]);
 
   useEffect(() => {
-    fetch("http://192.168.9.230:4000/gatepass/v2/admin/tenure_wise_student_report/BT19GCS157/2019-09-01/2022-11-22")
+    fetch(
+      "http://127.0.0.1:4000/gatepass/v2/admin/tenure_wise_student_report/BT19GCS157/2019-09-01/2022-11-22"
+    )
       .then((response) => {
         return response.json();
       })
       .then((text) => {
         setLatestGP(text);
       });
-      console.log(LatestGP)
-    })
+    console.log(LatestGP);
+  });
 
-    function changeDate(val) {
-      const d = new Date(val)
-      console.log(d.getDate())
-      return d.getDate()
-    }
-    
-    
+  function changeDate(val) {
+    const d = new Date(val);
+    console.log(d.getDate());
+    return d.getDate();
+  }
 
   return (
     <TableContainer component={Paper} className="table">
@@ -42,7 +42,7 @@ const OpenReport = () => {
             <TableCell className="tableCell">Arrival</TableCell>
             <TableCell className="tableCell">Actual Arrival</TableCell>
             <TableCell className="tableCell">Destination</TableCell>
-            <TableCell className="tableCell">Status</TableCell>  
+            <TableCell className="tableCell">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
