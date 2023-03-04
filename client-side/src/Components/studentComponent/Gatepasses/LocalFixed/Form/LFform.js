@@ -7,7 +7,7 @@ const LFform = () => {
   // const DepartureTime = "17:30:00";
   // const ArrivalTime = "21:30:00";
   const current = new Date();
-  const time = `${current.getHours()}${current.getMinutes()}`;
+  const time = `${current.getHours()}:${current.getMinutes()}:`;
   console.log(time);
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
@@ -51,6 +51,8 @@ const LFform = () => {
     }
     console.log(name, value);
   };
+
+  const getDepartureTime = () => {};
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -97,7 +99,13 @@ const LFform = () => {
         <div className="common">
           <label className="label">Departure Time</label>
 
-          <input type="time" name="from_time" onChange={handleInput} />
+          <input
+            // type="time"
+            // name="from_time"
+            disabled={true}
+            placeholder="17:30:00"
+            // onChange={handleInput}
+          />
         </div>
         <div className="common">
           <label className="label">Arrival Date</label>
@@ -112,10 +120,16 @@ const LFform = () => {
 
         <div className="common">
           <label className="label">Arrival Time</label>
-          <input type="time" name="to_time" onChange={handleInput} />
+          <input
+            // type="time"
+            // name="to_time"
+            disabled={true}
+            placeholder="21:00:00"
+            // onChange={handleInput}
+          />
         </div>
 
-        <div className="common">
+        {/* <div className="common">
           <label className="label">Purpose</label>
           <input
             type="text"
@@ -123,9 +137,9 @@ const LFform = () => {
             placeholder="Type a valid reason"
             onChange={handleInput}
           />
-        </div>
+        </div> */}
 
-        <div className="common">
+        {/* <div className="common">
           <label className="label">Destination</label>
           <input
             type="text"
@@ -134,9 +148,9 @@ const LFform = () => {
             disabled={false}
             onChange={handleInput}
           />
-        </div>
+        </div> */}
 
-        <div className="common">
+        {/* <div className="common">
           <label className="label">Destination Contact</label>
           <input
             type="text"
@@ -144,14 +158,15 @@ const LFform = () => {
             disabled={false}
             onChange={handleInput}
           />
-        </div>
+        </div> */}
 
-        <div className="common" style={{ marginBottom: "60px" }}>
+        {/* <div className="common" style={{ marginBottom: "60px" }}>
           <label className="label">Send Approval To</label>
           <div className="dropdown">
             <ReactDropdown options={warden} placeholder="Select a warden" />
           </div>
-        </div>
+        </div> */}
+
         <div className="common">
           <button className="button" type="submit">
             Apply Gatepass
