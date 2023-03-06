@@ -32,6 +32,7 @@ export const queries = {
     addSubgroup: "INSERT INTO [gps_db].[gps_db].[gps_subgroup] (subgroup_id,subgroup_name,subgroup_mastergroup_id) VALUES (@subgroup_id,@subgroup_name,@subgroup_mastergroup_id)",
     deleteGroup: "DELETE FROM [gps_db].[gps_db].[gps_groups] WHERE gps_groupid=@id;",
     deleteSubgroup: "DELETE FROM [gps_db].[gps_db].[gps_subgroup] WHERE subgroup_id=@id;",  
+
     /////////////////////////////Roles//////////////////////////////
     settingsAllRole: "SELECT * FROM [gps_db].[gps_db].[gps_roles];",
     settingsUserRole:"SELECT [gps_db].[gps_db].[gps_usersmaster].user_id AS employeecode, [gps_db].[gps_db].[gps_usersmaster].name AS employeename, [gps_db].[gps_db].[gps_usersmaster].status AS employeestatus,[gps_db].[gps_db].[gps_roles].role_name AS employeerole, [gps_db].[gps_db].[gps_roles].role_id AS roleid FROM [gps_db].[gps_db].[gps_usersmaster],[gps_db].[gps_db].[gps_roles] WHERE gps_usersmaster.role_id != 1 and [gps_db].[gps_db].[gps_usersmaster].role_id = [gps_db].[gps_db].[gps_roles].role_id;",
@@ -59,7 +60,7 @@ export const queries = {
     /* __________________________________________________Blacklist Student QUERIES__________________________________________________ */
 
     addBlacklistedStudent: "INSERT INTO [gps_db].[gps_db].[gps_blacklist_students] (user_id,from_date,from_time,to_date,to_time,blacklisted_by,remark,visibility) VALUES (@user_id,@from_date,@from_time,@to_date,@to_time,@blacklisted_by,@remark,@visibility) UPDATE [gps_db].[gps_db].[gps_usersmaster] SET status = 'PB' where user_id=@user_id;",
-
+    getBlackListStudents: "SELECT user_id FROM [gps_db].[gps_db].[gps_blacklist_students] WHERE user_id=@id ",
 
 
     /* __________________________________________________Student QUERIES__________________________________________________ */
@@ -75,4 +76,12 @@ export const queries = {
 
     acceptGatepass:"UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Approved' WHERE request_id=@id;",
     rejectGatepass:"UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Rejected' WHERE request_id=@id;",
+
+    /* __________________________________________________Local Fixed QUERIES__________________________________________________ */
+    getNumberOfLocalFixedConfig: "SELECT value from [gps_db].[gps_db].[gps_configmaster] WHERE parameter=\'Week Limit\'",
+    getLocalFixedOutTime: "SELECT value from [gps_db].[gps_db].[gps_configmaster] WHERE parameter=\'Out Time\'",
+    getLocalFixedInTime:"SELECT value from [gps_db].[gps_db].[gps_configmaster] WHERE parameter=\'In Time\'", 
+    getNumberOfLocalFixedStudent: "SELECT COUNT(*) as total from [gps_db].[gps_db].[gps_gatepassmaster] WHERE gatepass_type='1' AND user_id=@user_id  AND (applied_date between @dateLowerBound AND @dateUpperBound) AND STATUS IN ('AutoApproved','CHECKEDIN','CHECKEDOUT') AND STATUS NOT IN ('Cancelled','Rejected','Expire') AND actual_out_date != '0000-00-00';",
+
 };
+
