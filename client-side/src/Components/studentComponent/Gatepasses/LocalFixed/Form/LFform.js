@@ -22,11 +22,12 @@ const LFform = () => {
       from_time: "1970-01-01T00:00:00.000Z",
       to_date: date,
       to_time: "1970-01-01T00:00:00.000Z",
-      purpose: "",
-      destination: "",
-      destination_contact: "",
-      visit_to: "",
-      send_approval_to: "70100296A",
+      // purpose: "",
+      // destination: "",
+      // destination_contact: "",
+      // visit_to: "",
+      // send_approval_to: "70100296A",
+
       // "from_date":"2022-11-30",
       // "from_time":"1970-01-01T00:00:00.000Z",
       // "to_date":"2022-12-01",
@@ -44,15 +45,31 @@ const LFform = () => {
     const value = event.target.value;
     console.log(name, value);
 
-    if (name === "destination") {
-      setFormInput({ [name]: value, visit_to: value });
-    } else {
-      setFormInput({ [name]: value });
-    }
-    console.log(name, value);
+    // if (name === "destination") {
+    //   setFormInput({ [name]: value, visit_to: value });
+    // } else {
+    //   setFormInput({ [name]: value });
+    // }
+    // console.log(name, value);
+
+    setFormInput({ [name]: value });
   };
 
-  const getDepartureTime = () => {};
+  const checkLocalFixed = (event) => {
+    event.preventDefault();
+    let data = { ...formInput };
+    const id = data["user_id"];
+    fetch("http://127.0.0.1:4000/gatepass/v2/student/blacklisted/" + `${id}`)
+      .then((Response) => Response.json())
+      .then((response) => {
+        if (response.blacklisted) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch((err) => console.log("error:", err));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -81,7 +98,7 @@ const LFform = () => {
 
   return (
     <div className="lfform">
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form">
         <div className="common">
           <label className="label">Enrollment ID</label>
           <input type="text" name="user_id" onChange={handleInput} />
@@ -168,7 +185,7 @@ const LFform = () => {
         </div> */}
 
         <div className="common">
-          <button className="button" type="submit">
+          <button className="button" type="submit" onClick={checkLocalFixed}>
             Apply Gatepass
           </button>
         </div>
