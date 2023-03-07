@@ -113,7 +113,7 @@ export const applyLocalFlexibleGatepass = async (req, res) => {
       .input("applied_time", sql.Time, applied_time)
       .query(queries.applyLocalFlexibleGatepass);
 
-    return res.status(200).json({msg: "Local Flexible Gatepass Requested!"});
+    return res.status(200).json({ msg: "Local Flexible Gatepass Requested!" });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -176,6 +176,72 @@ export const getDashboardDetails = async (req, res) => {
     return res.send(result.recordset[0]);
   } catch (error) {
     res.status(500);
+    res.send(error.message);
+  }
+};
+
+export const getBlacklistStudentBool = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("id", sql.VarChar, id)
+      .query(queries.getBlackListStudents);
+    if (result.rowsAffected[0] === 0) {
+      return res.send({ blacklisted: false });
+    }
+    return res.send({ blacklisted: true });
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+export const getNumberOfLocalFixedConfig = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .query(queries.getNumberOfLocalFixedConfig);
+    return res.send(result.recordset[0].value);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+export const getLocalFixedOutTime = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getLocalFixedOutTime);
+    return res.send(result.recordset[0].value);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+export const getLocalFixedInTime = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getLocalFixedInTime);
+    return res.send(result.recordset[0].value);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+export const getNumberOfLocalFixedStudent = async (req, res) => {
+  try {
+    const { user_id, dateLowerBound, dateUpperBound } = req.params;
+
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .input("dateLowerBound", sql.VarChar, dateLowerBound)
+      .input("dateUpperBound", sql.VarChar, dateUpperBound)
+      .query(queries.getNumberOfLocalFixedStudent);
+    return res.json(result.recordset[0]["total"]);
+  } catch (error) {
     res.send(error.message);
   }
 };
