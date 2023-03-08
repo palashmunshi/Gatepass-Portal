@@ -58,12 +58,16 @@ export const Parameter = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ value: newLimit }),
         };
-        fetch(
-          "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/week_limit/1",
-          requestOptions
-        );
-        refresh();
-        break;
+        if (window.confirm("Do you want to save changes?") == true) {
+          fetch(
+            "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/week_limit/1",
+            requestOptions
+          );
+          refresh();
+          break;
+        } else {
+          break;
+        }
       }
       case "outTime": {
         const requestOptions = {
@@ -71,11 +75,16 @@ export const Parameter = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ value: newOutTime }),
         };
-        fetch(
-          "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/out_time/2",
-          requestOptions
-        );
-        break;
+        if (window.confirm("Do you want to save changes?") == true) {
+          fetch(
+            "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/out_time/2",
+            requestOptions
+          );
+          refresh();
+          break;
+        } else {
+          break;
+        }
       }
       case "inTime": {
         const requestOptions = {
@@ -83,11 +92,16 @@ export const Parameter = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ value: newInTime }),
         };
-        fetch(
-          "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/in_time/3",
-          requestOptions
-        );
-        break;
+        if (window.confirm("Do you want to save changes?") == true) {
+          fetch(
+            "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/in_time/3",
+            requestOptions
+          );
+          refresh();
+          break;
+        } else {
+          break;
+        }
       }
       case "arrivalUB": {
         const requestOptions = {
@@ -95,11 +109,16 @@ export const Parameter = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ value: newArrivalUB }),
         };
-        fetch(
-          "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/arrival_restrict_ub/4",
-          requestOptions
-        );
-        break;
+        if (window.confirm("Do you want to save changes?") == true) {
+          fetch(
+            "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/arrival_restrict_ub/4",
+            requestOptions
+          );
+          refresh();
+          break;
+        } else {
+          break;
+        }
       }
       case "arrivalLB": {
         const requestOptions = {
@@ -107,11 +126,16 @@ export const Parameter = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ value: newArrivalLB }),
         };
-        fetch(
-          "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/arrival_restrict_lb/5",
-          requestOptions
-        );
-        break;
+        if (window.confirm("Do you want to save changes?") == true) {
+          fetch(
+            "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/arrival_restrict_lb/5",
+            requestOptions
+          );
+          refresh();
+          break;
+        } else {
+          break;
+        }
       }
       case "flex": {
         const requestOptions = {
@@ -119,11 +143,16 @@ export const Parameter = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ value: newFlex }),
         };
-        fetch(
-          "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/flexible_entry/6",
-          requestOptions
-        );
-        break;
+        if (window.confirm("Do you want to save changes?") == true) {
+          fetch(
+            "http://127.0.0.1:4000/gatepass/v2/admin/parameter_config/flexible_entry/6",
+            requestOptions
+          );
+          refresh();
+          break;
+        } else {
+          break;
+        }
       }
     }
   };
