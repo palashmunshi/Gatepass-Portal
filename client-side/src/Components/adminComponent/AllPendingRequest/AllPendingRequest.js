@@ -14,7 +14,7 @@ export const AllPendingRequest = () => {
     const [LatestGP, setLatestGP] = useState([]);
 
     useEffect(() => {
-    fetch("http://192.168.9.230:4000/gatepass/v2/admin/all_pending_request")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/all_pending_request")
         .then((response) => {
         return response.json();
         })

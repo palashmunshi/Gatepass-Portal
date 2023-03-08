@@ -22,7 +22,7 @@ export const Parameter = () => {
     // const [flex, setFlex] = useState("")
 
     useEffect(() => {
-        fetch("http://192.168.9.230:4000/gatepass/v2/admin/parameter_config")
+        fetch("http://127.0.0.1:4000/gatepass/v2/admin/parameter_config")
           .then((response) => {
             return response.json();
           })

@@ -24,7 +24,7 @@ const ReportWidget = ({ type }) => {
 
   //   useEffect(() => {
   //     fetch(
-  //       "http://192.168.9.230:4000/gatepass/v2/admin/tenure_wise_student_report/BT19GCS157/2019-09-01/2022-11-22"
+  //       "http://127.0.0.1:4000/gatepass/v2/admin/tenure_wise_student_report/BT19GCS157/2019-09-01/2022-11-22"
   //     )
   //       .then((response) => {
   //         return response.json();
@@ -40,7 +40,7 @@ const ReportWidget = ({ type }) => {
 
     axios
       .get(
-        `http://192.168.9.230:4000/gatepass/v2/admin/tenure_wise_student_report/download/${name}/${date}/${todate}`,
+        `http://127.0.0.1:4000/gatepass/v2/admin/tenure_wise_student_report/download/${name}/${date}/${todate}`,
         {
           responseType: "blob",
         }

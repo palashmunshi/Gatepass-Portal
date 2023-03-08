@@ -19,7 +19,7 @@ export const ChangeRole = () => {
   const [user, setUser] = useState([])
   
   useEffect(() => {
-    fetch("http://192.168.9.230:4000/gatepass/v2/admin/user_role")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/user_role")
       .then((response) => {
         return response.json();
       })

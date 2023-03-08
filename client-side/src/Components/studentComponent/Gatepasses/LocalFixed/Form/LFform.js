@@ -13,7 +13,23 @@ const LFform = () => {
     current.getMonth() + 1
   }-${current.getDate()}`;
 
-  const warden = ["Kamla Rawat", "Dhirendra Rathore", "Narendra Bisht"];
+  // const warden = ["Kamla Rawat", "Shail Deen","Abhinav Sharma","Narendra Bisht"];
+  
+  // function to get warden_data;
+  async function get_wardenData(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    return data;
+  }
+  var warden_names=[];//see line 163
+  const warden_data= get_wardenData('http://localhost:4000/gatepass/v2/student/getAllWardens')
+  for(let i=0;i<warden_data.length;i++){
+    warden_names.push(warden_data[i]['name'])
+  }
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -57,12 +73,12 @@ const LFform = () => {
 
     let data = {
       // "user_id": "00000087",
-      ...formInput,
+      ...formInput
     };
 
     const id = data['user_id'];
     fetch(
-      "http://192.168.9.230:4000/gatepass/v2/student/local_flexible_gatepass/"+`${id}`,
+      "http://127.0.0.1:4000/gatepass/v2/student/local_flexible_gatepass/"+`${id}`,
       {
         method: "POST",
         body: JSON.stringify(data),
@@ -153,7 +169,7 @@ const LFform = () => {
           <label className="label">Send Approval To</label>
           <div className="dropdown">
             <ReactDropdown
-              options={warden}
+              options={warden_names}//warden is replaced by name see line 16
               placeholder="Select a warden"
             />
           </div>

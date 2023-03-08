@@ -15,7 +15,7 @@ const Widget = ({ type }) => {
   const [Defaulter, setDefaulter] = useState(0);
 
   useEffect(() => {
-    fetch("http://192.168.9.230:4000/gatepass/v2/admin/pending_request")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/pending_request")
       .then((response) => {
         return response.json();
       })
@@ -23,7 +23,7 @@ const Widget = ({ type }) => {
         setPendingRequests(text);
       });
 
-    fetch("http://192.168.9.230:4000/gatepass/v2/admin/student_in_campus")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/student_in_campus")
       .then((response) => {
         return response.json();
       })
@@ -31,7 +31,7 @@ const Widget = ({ type }) => {
         setOncampus(text);
       });
 
-    fetch("http://192.168.9.230:4000/gatepass/v2/admin/student_out_campus")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/student_out_campus")
       .then((response) => {
         return response.json();
       })
@@ -39,7 +39,7 @@ const Widget = ({ type }) => {
         setOutcampus(text);
       });
 
-      fetch("http://192.168.9.230:4000/gatepass/v2/admin/blacklist_student")
+      fetch("http://127.0.0.1:4000/gatepass/v2/admin/blacklist_student")
       .then((response) => {
         return response.json();
       })
