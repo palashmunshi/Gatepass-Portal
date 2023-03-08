@@ -53,7 +53,7 @@ router.get('/admin/student_out_campus', getStudentOutCampus);
 router.get('/admin/blacklist_student', getBlacklistedStudent);
 router.get('/admin/profile_request', getProfileRequest);
 router.get('/admin/today_gatepass', getTodayGatepass);
-router.get('/admin/all_pending_request', getAllPendingRequest);
+router.get('/admin/all_pending_requests', getAllPendingRequest);
 
 
 

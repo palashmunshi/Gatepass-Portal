@@ -4,6 +4,7 @@ import {
     applyLocalFlexibleGatepass, 
     gatepassCancel,
     gatepassExpire,
+    getAllWardens,
 
     getRecentGatepass,
     getDashboardDetails,
@@ -18,5 +19,6 @@ router.post('/student/local_fixed_gatepass', applyLocalFixedGatepass);
 router.post('/student/local_flexible_gatepass', applyLocalFlexibleGatepass);
 router.get('/student/gatepass_cancel/:id', gatepassCancel);
 router.get('/student/gatepass_expire/:id', gatepassExpire);
+router.get('/student/getAllWardens', getAllWardens);
 
 export default router;

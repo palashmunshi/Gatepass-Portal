@@ -165,6 +165,24 @@ export const getRecentGatepass = async (req, res) => {
   }
 };
 
+export const getAllWardens = async (req, res) => {
+  try {
+    // const {col1,col2}= req.params.split('_');
+    // const {col}=req.params;
+  const pool = await getConnection();
+  const result = await pool
+      .request()
+      // .input("col",sql.VarChar,col)
+      // .input("col2",sql.VarChar,col2)
+      .query(queries.getAllWardens);
+  return res.json(result.recordset);
+  } catch (error) {
+      res.status(500);
+      res.send(error.message);
+  }
+};
+
+
 export const getDashboardDetails = async (req, res) => {
   try {
     const { email } = req.params;

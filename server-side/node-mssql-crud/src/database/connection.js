@@ -1,4 +1,4 @@
-import sql from 'mssql';
+import sql from 'mssql/msnodesqlv8';
 import config from '../config'
 
 const dbSettings = {
@@ -6,8 +6,9 @@ const dbSettings = {
     password: config.dbPassword,
     server: config.dbServer,
     database: config.dbDatabase,
+    driver: "msnodesqlv8",
     options: {
-        port: 1433, // default port
+        port: 1400, // default port
         encrypt: false, // for azure
         trustServerCertificate: true,
     },
