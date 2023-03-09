@@ -14,6 +14,7 @@ import { Parameter } from "./Components/adminComponent/Settings/parameter";
 import OpenReport from "./Components/adminComponent/Report/OpenTable/OpenReport";
 import { Warden } from "./Components/wardenComponent/warden";
 import Info from "./Components/studentComponent/Info/Info";
+import {Guard} from "./Components/guardComponent/guard"
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path="*" element={<Login />} /> 
             <Route exact path="/admin" element={<Admin />} />
+            <Route exact path="/guard" element={<Guard />} />
             
             <Route exact path="/users" element={<User />} />
             <Route exact path="/changerole" element={<ChangeRole />} />
