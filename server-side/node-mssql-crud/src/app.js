@@ -11,7 +11,7 @@ import cors from "cors";
 const app = express();
 
 // setting
-app.set('port', config.port);
+app.set('port', config.serverPort);
 
 //middleware
 app.use(express.json());

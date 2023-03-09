@@ -7,7 +7,7 @@ const dbSettings = {
     server: config.dbServer,
     database: config.dbDatabase,
     options: {
-        port: 1433, // default port
+        port: config.dbPort, // default port
         encrypt: false, // for azure
         trustServerCertificate: true,
     },
