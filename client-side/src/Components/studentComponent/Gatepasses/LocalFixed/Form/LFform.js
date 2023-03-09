@@ -2,16 +2,34 @@ import React, { useEffect, useState, useReducer } from "react";
 import ReactDropdown from "react-dropdown";
 import "./style.scss";
 
-const LFform = () => {
+const LFform = (props) => {
   // const DepartureDate = `${FormalValues.departuretime}`
   // const DepartureTime = "17:30:00";
   // const ArrivalTime = "21:30:00";
   const current = new Date();
-  const time = `${current.getHours()}:${current.getMinutes()}:`;
+  const time = `${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
   console.log(time);
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
+
+  function formatDate(date) {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  const lastMonday = new Date(
+    current.getFullYear(),
+    current.getMonth(),
+    current.getDate() - ((current.getDay() + 6) % 7)
+  );
+  const nextMonday = new Date(
+    current.getFullYear(),
+    current.getMonth(),
+    current.getDate() + (7 - ((current.getDay() + 6) % 7))
+  );
 
   const warden = ["Kamla Rawat", "Dhirendra Rathore", "Narendra Bisht"];
   const [formInput, setFormInput] = useReducer(
@@ -40,35 +58,97 @@ const LFform = () => {
     }
   );
 
+  const [lastMondayDate, setLastMondayDate] = useState("0000-00-00");
+  const [nextMondayDate, setNextMondayDate] = useState("0000-00-00");
+
+  const [isDisabled, setIsDisabled] = useState(false);
   const handleInput = async (event) => {
     const name = event.target.name;
     const value = event.target.value;
     console.log(name, value);
-
-    // if (name === "destination") {
-    //   setFormInput({ [name]: value, visit_to: value });
-    // } else {
-    //   setFormInput({ [name]: value });
-    // }
-    // console.log(name, value);
-
     setFormInput({ [name]: value });
   };
 
-  const checkLocalFixed = (event) => {
-    event.preventDefault();
+  const checkBlacklist = async () => {
     let data = { ...formInput };
+    let res = {};
     const id = data["user_id"];
-    fetch("http://127.0.0.1:4000/gatepass/v2/student/blacklisted/" + `${id}`)
+    const fetchData = await fetch(
+      "http://127.0.0.1:4000/gatepass/v2/student/blacklisted/" + `${id}`
+    )
       .then((Response) => Response.json())
       .then((response) => {
-        if (response.blacklisted) {
-          return true;
-        } else {
-          return false;
-        }
+        res = response;
+        return response.blacklisted;
       })
       .catch((err) => console.log("error:", err));
+    // if (res.length != 0) {
+    //   if (res[0].blacklisted === true) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // }
+    // console.log(res);
+    return fetchData;
+  };
+  const checkGatepassAvailability = async () => {
+    let data = { ...formInput };
+    const id = data["user_id"];
+
+    const fetchData = await fetch(
+      "http://127.0.0.1:4000/gatepass/v2/student/get_number_of_local_fixed_student/" +
+        `${id}/` +
+        `${formatDate(lastMonday)}/` +
+        `${formatDate(nextMonday)}`
+    )
+      .then((Response) => Response.json())
+      .then((response) => {
+        return response.gatepassesUsed;
+        // if (response.length != 0) {
+        //   if (response.gatepassesUsed < props.weekLimit) {
+        //     return true;
+        //   } else {
+        //     return false;
+        //   }
+        // }
+      })
+      .catch((err) => console.log("error:", err));
+
+    return fetchData;
+  };
+
+  const checkTime = () => {
+    if (props.departureTime <= time && time <= props.arrivalTime) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const checkLocalFixed = async () => {
+    const res1 = await checkTime();
+    const res2 = await checkGatepassAvailability();
+    const res3 = await checkBlacklist();
+
+    if (res1 == true && res2 < props.weekLimit && res3 == false) {
+      console.log("yay");
+    } else {
+      console.log("nay");
+    }
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    // const check = checkLocalFixed();
+    checkLocalFixed();
+    // if (check) {
+    //   alert("go ahead");
+    // } else {
+    //   alert("nahhhh");
+    // }
+    // console.log(check);
+    // console.log(checkBlacklist());
   };
 
   const handleSubmit = (event) => {
@@ -120,7 +200,7 @@ const LFform = () => {
             // type="time"
             // name="from_time"
             disabled={true}
-            placeholder="17:30:00"
+            placeholder={props.departureTime}
             // onChange={handleInput}
           />
         </div>
@@ -141,7 +221,7 @@ const LFform = () => {
             // type="time"
             // name="to_time"
             disabled={true}
-            placeholder="21:00:00"
+            placeholder={props.arrivalTime}
             // onChange={handleInput}
           />
         </div>
@@ -185,7 +265,12 @@ const LFform = () => {
         </div> */}
 
         <div className="common">
-          <button className="button" type="submit" onClick={checkLocalFixed}>
+          <button
+            className="button"
+            type="submit"
+            onClick={handleClick}
+            disabled={false}
+          >
             Apply Gatepass
           </button>
         </div>
