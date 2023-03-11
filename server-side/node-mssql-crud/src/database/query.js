@@ -1,3 +1,5 @@
+import { getAllCheckedOut } from "../controllers/guard.controller";
+
 export const queries = {
     getAllUser: 'SELECT * FROM [gps_db].[gps_db].[gps_usersmaster]',
     addUser: 'INSERT INTO [gps_db].[gps_db].[gps_usersmaster] (user_id,ad_user_name,email_id,contact_number,group_id,role_id,subgroup_id,name,room_no,address,p_number,punch_id,change_flag,hostel,hostel_tower,status,photo) VALUES (@user_id,@ad_user_name,@email_id,@contact_number,@group_id,@role_id,@subgroup_id,@name,@room_no,@address,@p_number,@punch_id,@change_flag,@hostel,@hostel_tower,@status,@photo)',
@@ -84,8 +86,8 @@ export const queries = {
     getNumberOfLocalFixedStudent: "SELECT COUNT(*) as total from [gps_db].[gps_db].[gps_gatepassmaster] WHERE gatepass_type='1' AND user_id=@user_id  AND (applied_date between @dateLowerBound AND @dateUpperBound) AND STATUS IN ('AutoApproved','CHECKEDIN','CHECKEDOUT') AND STATUS NOT IN ('Cancelled','Rejected','Expire') AND actual_out_date != '0000-00-00';",
 
     /* __________________________________________________GUARD QUERIES__________________________________________________ */
-    getApprovedStudents:"SELECT UM.name,UM.contact_number,GT.gatepass_name, GM.from_date, GM.from_time, GM.to_date, GM.to_time, GM.status from [gps_db].[gps_db].[gps_gatepassmaster] AS GM INNER JOIN [gps_db].[gps_db].[gps_usersmaster] AS UM ON GM.user_id=UM.user_id INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GM.gatepass_type=GT.gatepass_type WHERE GM.status in ('APPROVED','AUTOAPPROVED');"
-
+    getApprovedStudents:"SELECT UM.name,UM.contact_number,GT.gatepass_name, GM.from_date, GM.from_time, GM.to_date, GM.to_time, GM.status from [gps_db].[gps_db].[gps_gatepassmaster] AS GM INNER JOIN [gps_db].[gps_db].[gps_usersmaster] AS UM ON GM.user_id=UM.user_id INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GM.gatepass_type=GT.gatepass_type WHERE GM.status in ('APPROVED','AUTOAPPROVED');",
+    getCheckedOutStudents : "SELECT UM.name,UM.contact_number,GT.gatepass_name, GM.from_date, GM.from_time, GM.to_date, GM.to_time, GM.status from [gps_db].[gps_db].[gps_gatepassmaster] AS GM INNER JOIN [gps_db].[gps_db].[gps_usersmaster] AS UM ON GM.user_id=UM.user_id INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GM.gatepass_type=GT.gatepass_type WHERE GM.status in ('CHECKEDOUT');"
 
 };
 
