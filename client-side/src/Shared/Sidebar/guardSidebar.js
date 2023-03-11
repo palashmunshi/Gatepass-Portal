@@ -30,20 +30,33 @@ const Sidebar = () => {
       <hr />
       <div className="center">
         <ul>
+          <p className="title">MAIN</p>
+          <Link to="/admin" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
           <p className="title">OPTIONS</p>
-          <Link to="/biometric" style={{ textDecoration: "none" }}>
+          <Link to="/guard/biometric" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Biometric</span>
             </li>
           </Link>
-          <Link to="/manual" style={{ textDecoration: "none" }}>
+          <Link to="/guard/checkin" style={{ textDecoration: "none" }}>
             <li>
               <ManageAccountsSharpIcon className="icon" />
-              <span>Manual</span>
+              <span>Check-In</span>
             </li>
           </Link>
-          <Link to="/visitor" style={{ textDecoration: "none" }}>
+          <Link to="/guard/checkout" style={{ textDecoration: "none" }}>
+            <li>
+              <ManageAccountsSharpIcon className="icon" />
+              <span>Check-Out</span>
+            </li>
+          </Link>
+          <Link to="/guard/visitor" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
               <span>Visitor</span>
