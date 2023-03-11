@@ -8,15 +8,15 @@ import { PlusOneRounded } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 
 
-const Widget = ({ type }) => {
+const Widget = (props) => {
   
 
   return (
     <div className="widget">
       <div className="left">
-        <span className="title">No info available</span>
+        <span className="title">{props.title}</span>
         <span className="counter">0</span>
-        {type === "user" ? (
+        {props.type === "user" ? (
           <span className="link">
             
           </span>
@@ -24,7 +24,7 @@ const Widget = ({ type }) => {
           <span className="link"></span>
         )}
       </div>
-      <div className="right"></div>
+      <div className="right">{props.icon}</div>
     </div>
   );
 };
