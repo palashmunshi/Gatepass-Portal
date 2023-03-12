@@ -104,7 +104,7 @@ const LFform = (props) => {
     )
       .then((Response) => Response.json())
       .then((response) => {
-        return response.gatepassesUsed;
+        return response;
         // if (response.length != 0) {
         //   if (response.gatepassesUsed < props.weekLimit) {
         //     return true;
@@ -132,21 +132,21 @@ const LFform = (props) => {
     const res3 = await checkBlacklist();
 
     if (res1 == true && res2 < props.weekLimit && res3 == false) {
-      console.log("yay");
+      return true;
     } else {
-      console.log("nay");
+      return false;
     }
   };
 
-  const handleClick = (event) => {
+  const handleClick = async (event) => {
     event.preventDefault();
-    // const check = checkLocalFixed();
-    checkLocalFixed();
-    // if (check) {
-    //   alert("go ahead");
-    // } else {
-    //   alert("nahhhh");
-    // }
+    const check = await checkLocalFixed();
+
+    if (check == true) {
+      alert("go ahead");
+    } else {
+      alert("nahhhh");
+    }
     // console.log(check);
     // console.log(checkBlacklist());
   };
