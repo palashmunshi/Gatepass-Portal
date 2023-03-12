@@ -6,9 +6,9 @@ import { CheckinDetails } from "./checkinDetails/checkinDetails";
 
 export const Checkin = () => {
   return (
-    <div className="admin">
+    <div className="guard">
       <GuardSidebar />
-      <div className="adminContainer">
+      <div className="guardContainer">
         <Navbar />
         <CheckinDetails />
       </div>

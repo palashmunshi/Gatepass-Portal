@@ -35,20 +35,21 @@
       height: 30px;
     }
 
-    #hello{
+    #title{
       font-weight: bold;
     }
     #button1{
-      background-color: red;
+      background-color: brown;
       border: 1px solid black;
       border-radius: 5px;
       color: white;
+      
     }
     #button1:hover{
-      background-color: cyan;
-      border: 1px solid red;
+      background-color:  rgb(128, 35, 35);
+      border: 1px solid black;
       border-radius: 10px;
-      color: red;
+      color: white;
     }
 
     

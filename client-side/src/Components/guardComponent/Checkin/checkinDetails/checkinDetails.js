@@ -33,13 +33,13 @@ export const CheckinDetails = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell className="tableCell">User Details</TableCell>
-              <TableCell className="tableCell">Contact</TableCell>
-              <TableCell className="tableCell">Gatepass Type</TableCell>
-              <TableCell className="tableCell">Actual Departure</TableCell>
-              <TableCell className="tableCell">Expected Arrival</TableCell>
-              <TableCell className="tableCell">Status</TableCell>
-              <TableCell className="tableCell">Action</TableCell>
+            <TableCell className="tableCell" id="title">User Details</TableCell>
+              <TableCell className="tableCell" id="title">Contact</TableCell>
+              <TableCell className="tableCell" id="title">Gatepass Type</TableCell>
+              <TableCell className="tableCell" id="title">Actual Departure</TableCell>
+              <TableCell className="tableCell" id="title">Expected Arrival</TableCell>
+              <TableCell className="tableCell" id="title">Status</TableCell>
+              <TableCell className="tableCell" id="title">Action</TableCell>
             </TableRow>
           </TableHead>
 
@@ -52,7 +52,7 @@ export const CheckinDetails = () => {
                 <TableCell className="tableCell">{new Date(props.from_date).toLocaleDateString()} <br/> {new Date(props.from_time).toLocaleTimeString()}</TableCell>
                 <TableCell className="tableCell">{new Date(props.to_date).toLocaleDateString()} <br/> {new Date(props.to_time).toLocaleTimeString()}</TableCell>
                 <TableCell className="tableCell">{props.status}</TableCell>
-                <TableCell className="tableCell"><button>Check In</button></TableCell>
+                <TableCell className="tableCell"><button id="button2">Check In</button></TableCell>
                 </TableRow>
                 ))}
           </TableBody>
