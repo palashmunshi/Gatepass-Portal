@@ -52,7 +52,7 @@ export const CheckinDetails = () => {
                 <TableCell className="tableCell">{new Date(props.from_date).toLocaleDateString()} <br/> {new Date(props.from_time).toLocaleTimeString()}</TableCell>
                 <TableCell className="tableCell">{new Date(props.to_date).toLocaleDateString()} <br/> {new Date(props.to_time).toLocaleTimeString()}</TableCell>
                 <TableCell className="tableCell">{props.status}</TableCell>
-                <TableCell className="tableCell"><button id="button1">Check In</button></TableCell>
+                <TableCell className="tableCell"><button id="button2">Check In</button></TableCell>
                 </TableRow>
                 ))}
           </TableBody>
