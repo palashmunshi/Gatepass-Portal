@@ -32,15 +32,15 @@ export const CheckoutDetails = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell className="tableCell">name</TableCell>
-              <TableCell className="tableCell">cno.</TableCell>
-              <TableCell className="tableCell">gatepass_name</TableCell>
-              <TableCell className="tableCell">from date</TableCell>
-              <TableCell className="tableCell">from time</TableCell>
-              <TableCell className="tableCell">to date</TableCell>
-              <TableCell className="tableCell">to time</TableCell>
-              <TableCell className="tableCell">status</TableCell>
-              <TableCell className="tableCell"></TableCell>
+              <TableCell className="tableCell" id="hello">Name</TableCell>
+              <TableCell className="tableCell" id="hello">Phone</TableCell>
+              <TableCell className="tableCell" id="hello">Type</TableCell>
+              <TableCell className="tableCell" id="hello">From Date</TableCell>
+              <TableCell className="tableCell" id="hello">From Time</TableCell>
+              <TableCell className="tableCell" id="hello">To Date</TableCell>
+              <TableCell className="tableCell" id="hello">To Time</TableCell>
+              <TableCell className="tableCell" id="hello">Status</TableCell>
+              <TableCell className="tableCell" id="hello"></TableCell>
             </TableRow>
           </TableHead>
 
@@ -55,7 +55,7 @@ export const CheckoutDetails = () => {
                 <TableCell className="tableCell">{new Date(item.to_date).toLocaleDateString()}</TableCell>
                 <TableCell className="tableCell">{new Date(item.to_time).toLocaleTimeString()}</TableCell>
                 <TableCell className="tableCell">{item.status}</TableCell>
-                <TableCell className="tableCell"><button>Accept</button></TableCell>
+                <TableCell className="tableCell"><button id="button1">Accept</button></TableCell>
               </TableRow>
             ))}
           </TableBody>
