@@ -250,7 +250,7 @@ export const applyLocalFixedGatepass = async (req, res) => {
   const { user_id, punch_id, from_date, from_time, to_date, to_time } =
     req.body;
   const currentDate = new Date();
-  let applied_date = currentDate.getFullYear() + "-" + currentDate.getMonth() + "-" + currentDate.getDay();
+  let applied_date = currentDate.getFullYear() + "-" + (currentDate.getMonth() + 1) + "-" + currentDate.getDate();
   let applied_time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
 
   if (
