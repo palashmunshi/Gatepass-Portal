@@ -35,4 +35,23 @@
       height: 30px;
     }
 
+    #hello{
+      font-weight: bold;
+    }
+    #button1{
+      background-color: red;
+      border: 1px solid black;
+      border-radius: 5px;
+      color: white;
+    }
+    #button1:hover{
+      background-color: cyan;
+      border: 1px solid red;
+      border-radius: 10px;
+      color: red;
+    }
+
+    
+
+
 }
