@@ -87,7 +87,7 @@ export const queries = {
 
     /* __________________________________________________GUARD QUERIES__________________________________________________ */
     getApprovedStudents:"SELECT UM.name,UM.contact_number,UM.user_id,GT.gatepass_name, GM.from_date, GM.from_time, GM.to_date, GM.to_time, GM.status from [gps_db].[gps_db].[gps_gatepassmaster] AS GM INNER JOIN [gps_db].[gps_db].[gps_usersmaster] AS UM ON GM.user_id=UM.user_id INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GM.gatepass_type=GT.gatepass_type WHERE GM.status in ('APPROVED','AUTOAPPROVED');",
-    getCheckedOutStudents : "SELECT UM.name,UM.contact_number,UM.user_id,GT.gatepass_name, GM.from_date, GM.from_time, GM.to_date, GM.to_time, GM.status from [gps_db].[gps_db].[gps_gatepassmaster] AS GM INNER JOIN [gps_db].[gps_db].[gps_usersmaster] AS UM ON GM.user_id=UM.user_id INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GM.gatepass_type=GT.gatepass_type WHERE GM.status in ('CHECKEDOUT');"
+    getCheckedOutStudents : "SELECT UM.name,UM.contact_number,UM.user_id,GT.gatepass_name, GM.from_date, GM.from_time, GM.to_date, GM.to_time, GM.status from [gps_db].[gps_db].[gps_gatepassmaster] AS GM INNER JOIN [gps_db].[gps_db].[gps_usersmaster] AS UM ON GM.user_id=UM.user_id INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GM.gatepass_type=GT.gatepass_type WHERE GM.status in ('CHECKEDOUT') AND GM.gatepass_type!=4;"
 
 };
 
