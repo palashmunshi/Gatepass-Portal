@@ -35,4 +35,22 @@
       height: 30px;
     }
 
+    #title{
+      font-weight: bold;
+    }
+
+    #button1{
+      background-color: rgba(35, 157, 59, 0.814);
+      border: 1px solid black;
+      border-radius: 5px;
+      color: white;
+      
+    }
+    #button1:hover{
+      background-color:  #77DE79;
+      border: 1px solid black;
+      border-radius: 10px;
+      color: rgba(0, 0, 0, 0.668);
+    }
+
 }
