@@ -138,14 +138,39 @@ const LFform = (props) => {
     }
   };
 
+  const applyLocalFixedGatepass = async () => {
+    let data = { ...formInput };
+    const id = data["user_id"];
+    let fetchData = fetch(
+      "http://127.0.0.1:4000/gatepass/v2/student/apply_local_fixed/",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: id,
+          punch_id: null,
+          from_date: data["from_date"],
+          from_time: props.departureTime,
+          to_date: data["to_date"],
+          to_time: props.arrivalTime,
+        }),
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => console.log("success:" + response.msg))
+      .catch((error) => console.log("error: " + error));
+
+    return fetchData;
+  };
+
   const handleClick = async (event) => {
     event.preventDefault();
     const check = await checkLocalFixed();
 
     if (check == true) {
-      alert("go ahead");
+      await applyLocalFixedGatepass();
     } else {
-      alert("nahhhh");
+      alert("You cannot apply for Local Fixed Gatepass!!");
     }
     // console.log(check);
     // console.log(checkBlacklist());
