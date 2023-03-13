@@ -2,15 +2,16 @@ import sql from "mssql";
 import config from "../config";
 
 const dbSettings = {
-    user: config.dbUser,
-    password: config.dbPassword,
-    server: config.dbServer,
-    database: config.dbDatabase,
-    options: {
-        port: config.dbPort, // default port
-        encrypt: false, // for azure
-        trustServerCertificate: true,
-    },
+  user: config.dbUser,
+  password: config.dbPassword,
+  server: config.dbServer,
+  database: config.dbDatabase,
+  driver: "msnodesqlv8",
+  options: {
+    port: 1433, // default port: 1433
+    encrypt: false, // for azure
+    trustServerCertificate: true,
+  },
 };
 
 export const getConnection = async () => {
