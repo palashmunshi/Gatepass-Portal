@@ -1,4 +1,5 @@
 import "./widget.scss";
+import React, { useEffect, useState } from "react";
 
 
 
@@ -9,7 +10,7 @@ const Widget = (props) => {
     <div className="widget">
       <div className="left">
         <span className="title">{props.title}</span>
-        <span className="counter">0</span>
+        <span className="counter">{props.counter}</span>
         {props.type === "user" ? (
           <span className="link">
             

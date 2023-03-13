@@ -92,3 +92,53 @@ export const studentCheckout = async (req, res) => {
 
 // YOU CAN START WRITING CODE FROM HERE
 //
+
+/* __________________________________________________DASHBOARD API__________________________________________________ */
+export const getApprovedToday = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.dashboardApprovedToday);
+    return res.json(result.recordset[0]['TOTAL']);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};
+
+
+export const getStudentsReturning = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.dashboardStudentsReturning);
+    return res.json(result.recordset[0]['TOTAL']);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};
+
+export const getStudentInCampus = async (req, res) => {
+  try {
+  const pool = await getConnection();
+  const result = await pool
+      .request()
+      .query(queries.dashboardStudentInCampus);
+  return res.json(result.recordset[0]['TOTAL']);
+  } catch (error) {
+      res.status(500);
+      res.send(error.message);
+  }
+};
+
+export const getBlacklistedStudent = async (req, res) => {
+  try {
+  const pool = await getConnection();
+  const result = await pool
+      .request()
+      .query(queries.dashboardBlacklistStudent);
+  return res.json(result.recordset[0]['TOTAL']);
+  } catch (error) {
+      res.status(500);
+      res.send(error.message);
+  }
+};

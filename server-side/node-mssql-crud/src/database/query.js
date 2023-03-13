@@ -90,6 +90,10 @@ export const queries = {
     getCheckedOutStudents : "SELECT UM.name,UM.contact_number,UM.user_id,GT.gatepass_name, GM.from_date, GM.from_time, GM.to_date, GM.to_time, GM.status from [gps_db].[gps_db].[gps_gatepassmaster] AS GM INNER JOIN [gps_db].[gps_db].[gps_usersmaster] AS UM ON GM.user_id=UM.user_id INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GM.gatepass_type=GT.gatepass_type WHERE GM.status in ('CHECKEDOUT') AND GM.gatepass_type!=4;",
     
     studentCheckout: "UPDATE [gps_db2].[gps_db].[gps_gatepassmaster] SET check_out_by =@check_out_by, actual_out_date =@actual_out_date, actual_out_time=@actual_out_time, status='checkedout' WHERE status IN ('approved', 'autoapproved') AND user_id=@user_id;",  //DO NOT USE THIS QUERY 
-    studentCheckin: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET check_in_by=@check_in_by, actual_in_date=@actual_in_date, actual_in_time=@actual_in_time, status='checkedin' where status in ('checkedout') AND user_id=@user_id;"                            // DO NOT USE THIS QUERY
+    studentCheckin: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET check_in_by=@check_in_by, actual_in_date=@actual_in_date, actual_in_time=@actual_in_time, status='checkedin' where status in ('checkedout') AND user_id=@user_id;",                            // DO NOT USE THIS QUERY
+
+    /* __________________________________________________GUARD DASHBOARD QUERIES__________________________________________________ */
+    dashboardApprovedToday:"SELECT COUNT(*) AS TOTAL from [gps_db].[gps_db].[gps_gatepassmaster] where status in ('Approved','AutoApproved') and approved_or_rejected_date=CONVERT(VARCHAR, GETDATE(), 23);",
+    dashboardStudentsReturning:"SELECT COUNT(*) AS TOTAL from [gps_db].[gps_db].[gps_gatepassmaster] where to_date=CONVERT(VARCHAR, GETDATE(), 23) and to_time<='23:59:59';",
 };
 
