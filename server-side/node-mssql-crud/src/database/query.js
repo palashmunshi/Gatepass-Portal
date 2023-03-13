@@ -93,7 +93,7 @@ export const queries = {
     studentCheckin: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET check_in_by=@check_in_by, actual_in_date=@actual_in_date, actual_in_time=@actual_in_time, status='checkedin' where status in ('checkedout') AND user_id=@user_id;",                            // DO NOT USE THIS QUERY
 
     /* __________________________________________________GUARD DASHBOARD QUERIES__________________________________________________ */
-    dashboardApprovedToday:"SELECT COUNT(*) AS TOTAL from [gps_db].[gps_db].[gps_gatepassmaster] where status in ('Approved','AutoApproved') and approved_or_rejected_date=CONVERT(VARCHAR, GETDATE(), 23);",
+    dashboardApprovedToday:"SELECT COUNT(*) AS TOTAL from gps_db.gps_gatepassmaster where status in ('Approved','AutoApproved') and approved_or_rejected_date in (CONVERT(VARCHAR, GETDATE(), 23),'0000-00-00');",
     dashboardStudentsReturning:"SELECT COUNT(*) AS TOTAL from [gps_db].[gps_db].[gps_gatepassmaster] where to_date=CONVERT(VARCHAR, GETDATE(), 23) and to_time<='23:59:59';",
 };
 
