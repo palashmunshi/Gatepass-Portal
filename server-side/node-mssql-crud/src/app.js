@@ -1,5 +1,5 @@
 import express from "express";
-import config from "./config";
+import config from "./dbConfig";
 import userRoutes from "./routes/user.routes";
 import adminRoutes from "./routes/admin.routes";
 import studentRoutes from "./routes/student.routes";
