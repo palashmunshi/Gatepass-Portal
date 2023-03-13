@@ -8,7 +8,7 @@ const dbSettings = {
   database: config.dbDatabase,
   driver: "msnodesqlv8",
   options: {
-    port: 1433, // default port: 1433
+    port: config.dbPort, // default port: 1433
     encrypt: false, // for azure
     trustServerCertificate: true,
   },
