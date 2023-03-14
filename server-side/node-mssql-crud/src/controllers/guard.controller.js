@@ -30,8 +30,8 @@ export const studentCheckin = async (req, res) => {
   const currentDate = new Date();
   let actual_in_date =
     currentDate.getFullYear() +
-    "-0" +
-    (currentDate.getMonth() + 1) +
+    "-" +
+    String(currentDate.getMonth() + 1).padStart(2, "0") +
     "-" +
     currentDate.getDate() +
     " " +
@@ -73,8 +73,8 @@ export const studentCheckout = async (req, res) => {
   const currentDate = new Date();
   let actual_out_date =
     currentDate.getFullYear() +
-    "-0" +
-    (currentDate.getMonth() + 1) +
+    "-" +
+    String(currentDate.getMonth() + 1).padStart(2, "0") +
     "-" +
     currentDate.getDate() +
     " " +
