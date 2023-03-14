@@ -22,8 +22,33 @@ export const CheckoutDetails = () => {
       });
   }, []);
 
-  const handleApprove = (props) => {
-    // to be added later by some knowledgeble creature
+  const checkoutStudent = async (user_id) => {
+    let fetchData = fetch(
+      "http://127.0.0.1:4000/gatepass/v2/guard/checkout_student/",
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          check_out_by: "nugr11",
+          user_id: user_id,
+        }),
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => console.log("Success: " + response.msg))
+      .catch((error) => console.log("error: " + error));
+    return fetchData;
+  };
+
+  const handleApprove = async (event) => {
+    const request_id = event.target.name;
+    const currentUser = user.filter((obj) => {
+      return obj.request_id == request_id;
+    });
+    // console.log(currentUser[0].user_id);
+    const user_id = currentUser[0].user_id;
+    await checkoutStudent(user_id);
+    window.location.reload(true);
   };
 
   return (
@@ -79,7 +104,13 @@ export const CheckoutDetails = () => {
                 </TableCell>
                 <TableCell className="tableCell">{props.status}</TableCell>
                 <TableCell className="tableCell">
-                  <button id="button1">Check Out</button>
+                  <button
+                    id="button1"
+                    onClick={handleApprove}
+                    name={props.request_id}
+                  >
+                    Check Out
+                  </button>
                 </TableCell>
               </TableRow>
             ))}
