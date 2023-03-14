@@ -7,24 +7,50 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import moment from "moment";
 
 export const CheckinDetails = () => {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
-    
-      fetch(
-        "http://127.0.0.1:4000/gatepass/v2/guard/checked_out_students"
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          setUser(data);
-        })
-        .catch((err) => console.log("error:", err));
-    }, []
-  );
+    fetch("http://127.0.0.1:4000/gatepass/v2/guard/checked_out_students")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((err) => console.log("error:", err));
+  }, []);
+
+  const checkinStudent = async (user_id) => {
+    let fetchData = fetch(
+      "http://127.0.0.1:4000/gatepass/v2/guard/checkin_student/",
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          check_in_by: "nugr11",
+          user_id: user_id,
+        }),
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => console.log("Success: " + response.msg))
+      .catch((error) => console.log("error: " + error));
+    return fetchData;
+  };
+
+  const handleApprove = async (event) => {
+    const request_id = event.target.name;
+    const currentUser = user.filter((obj) => {
+      return obj.request_id == request_id;
+    });
+    // console.log(currentUser[0].user_id);
+    const user_id = currentUser[0].user_id;
+    await checkinStudent(user_id);
+    window.location.reload(true);
+  };
 
   return (
     <div className="listContainer">
@@ -33,28 +59,63 @@ export const CheckinDetails = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-            <TableCell className="tableCell" id="title">User Details</TableCell>
-              <TableCell className="tableCell" id="title">Contact</TableCell>
-              <TableCell className="tableCell" id="title">Gatepass Type</TableCell>
-              <TableCell className="tableCell" id="title">Actual Departure</TableCell>
-              <TableCell className="tableCell" id="title">Expected Arrival</TableCell>
-              <TableCell className="tableCell" id="title">Status</TableCell>
-              <TableCell className="tableCell" id="title">Action</TableCell>
+              <TableCell className="tableCell" id="title">
+                User Details
+              </TableCell>
+              <TableCell className="tableCell" id="title">
+                Contact
+              </TableCell>
+              <TableCell className="tableCell" id="title">
+                Gatepass Type
+              </TableCell>
+              <TableCell className="tableCell" id="title">
+                Actual Departure
+              </TableCell>
+              <TableCell className="tableCell" id="title">
+                Expected Arrival
+              </TableCell>
+              <TableCell className="tableCell" id="title">
+                Status
+              </TableCell>
+              <TableCell className="tableCell" id="title">
+                Action
+              </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-          {user.map((props) => (
-              <TableRow key={props.user_id}>
-                <TableCell className="tableCell">{props.name} <br/> {props.user_id} </TableCell>
-                <TableCell className="tableCell">{props.contact_number}</TableCell>
-                <TableCell className="tableCell">{props.gatepass_name}</TableCell>
-                <TableCell className="tableCell">{new Date(props.from_date).toLocaleDateString()} <br/> {new Date(props.from_time).toLocaleTimeString()}</TableCell>
-                <TableCell className="tableCell">{new Date(props.to_date).toLocaleDateString()} <br/> {new Date(props.to_time).toLocaleTimeString()}</TableCell>
+            {user.map((props) => (
+              <TableRow key={props.request_id}>
+                <TableCell className="tableCell">
+                  {props.name} <br /> {props.user_id}{" "}
+                </TableCell>
+                <TableCell className="tableCell">
+                  {props.contact_number}
+                </TableCell>
+                <TableCell className="tableCell">
+                  {props.gatepass_name}
+                </TableCell>
+                <TableCell className="tableCell">
+                  {moment(props.actual_out_date).utc().format("YYYY-MM-DD")}{" "}
+                  <br />{" "}
+                  {moment(props.actual_out_time).utc().format("HH:mm:ss")}
+                </TableCell>
+                <TableCell className="tableCell">
+                  {moment(props.to_date).utc().format("YYYY-MM-DD")} <br />{" "}
+                  {moment(props.to_time).utc().format("HH:mm:ss")}
+                </TableCell>
                 <TableCell className="tableCell">{props.status}</TableCell>
-                <TableCell className="tableCell"><button id="button2">Check In</button></TableCell>
-                </TableRow>
-                ))}
+                <TableCell className="tableCell">
+                  <button
+                    id="button2"
+                    onClick={handleApprove}
+                    name={props.request_id}
+                  >
+                    Check In
+                  </button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

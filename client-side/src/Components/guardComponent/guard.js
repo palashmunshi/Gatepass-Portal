@@ -15,7 +15,7 @@ export const Guard = () => {
   const [BlackListStudent, setBlacklistStudent] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(()=>{async function fetchData() {
+    async function fetchData() {
       await fetch("http://127.0.0.1:4000/gatepass/v2/guard/approved_today")
         .then((response) => {
           return response.json();
@@ -44,13 +44,14 @@ export const Guard = () => {
         .then((data) => {
           setBlacklistStudent(data);
         });
-
     }
+    fetchData();
+    const id = setInterval(() => {
+      fetchData();
+    }, 300000);
 
-    fetchData()},500);
-
-    return () => clearInterval(id); 
-  });
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <div className="admin">

@@ -119,12 +119,28 @@ const LFform = (props) => {
     }
   };
 
+  const checkApprovedOrCheckedout = async () => {
+    let data = { ...formInput };
+    const id = data["user_id"];
+    const fetchData = await fetch(
+      "http://127.0.0.1:4000/gatepass/v2/student/get_bool_student_checkedout_autoapproved/" +
+        `${id}/`
+    )
+      .then((Response) => Response.json())
+      .then((response) => {
+        return response.row_affected;
+      })
+      .catch((err) => console.log("error: ", err));
+    return fetchData;
+  };
+
   const checkLocalFixed = async () => {
-    const res1 = await checkTime();
+    const res1 = checkTime();
     const res2 = await checkGatepassAvailability();
     const res3 = await checkBlacklist();
+    const res4 = await checkApprovedOrCheckedout();
 
-    if (res1 == true && res2 < props.weekLimit && res3 == false) {
+    if (res1 == true && res2 < props.weekLimit && res3 == false && res4 == 0) {
       return true;
     } else {
       return false;
@@ -162,6 +178,7 @@ const LFform = (props) => {
 
     if (check == true) {
       await applyLocalFixedGatepass();
+      alert("You have successfuly applied for Local Fixed Gatepass!");
     } else {
       alert("You cannot apply for Local Fixed Gatepass!!");
     }

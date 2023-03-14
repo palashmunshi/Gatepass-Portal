@@ -368,7 +368,7 @@ export const getParameterConfig = async (req, res) => {
 
 export const updateWeekLimit = async (req, res) => {
     
-    const { id } = req.params;
+    const { param_id } = req.params;
     const { value } = req.body
 
         if (value == null){
@@ -380,8 +380,8 @@ export const updateWeekLimit = async (req, res) => {
             const pool =  await getConnection();
             await pool
             .request()
-            .input("value",sql.VarChar, value)
-            .input("param_id",sql.Int, id)
+            .input("value",sql.Int, value)
+            .input("param_id",sql.Int, param_id)
             .query(queries.updateParameterConfig)
 
             return res.send('Week Limit updated successfully!')
@@ -396,7 +396,7 @@ export const updateWeekLimit = async (req, res) => {
 
 export const updateOutTime = async (req, res) => {
     
-    const { id } = req.params;
+    const { param_id } = req.params;
     const { value } = req.body
 
         if (value == null){
@@ -409,7 +409,7 @@ export const updateOutTime = async (req, res) => {
             await pool
             .request()
             .input("value",sql.VarChar, value)
-            .input("param_id",sql.Int, id)
+            .input("param_id",sql.Int, param_id)
             .query(queries.updateParameterConfig)
 
             return res.send('Out Time updated successfully!')
@@ -424,7 +424,7 @@ export const updateOutTime = async (req, res) => {
 
 export const updateInTime = async (req, res) => {
     
-    const { id } = req.params;
+    const { param_id } = req.params;
     const { value } = req.body
 
         if (value == null){
@@ -437,7 +437,7 @@ export const updateInTime = async (req, res) => {
             await pool
             .request()
             .input("value",sql.VarChar, value)
-            .input("param_id",sql.Int, id)
+            .input("param_id",sql.Int, param_id)
             .query(queries.updateParameterConfig)
 
             return res.send('In Time updated successfully!')
@@ -452,7 +452,7 @@ export const updateInTime = async (req, res) => {
 
 export const updateArrivalRestrictUB = async (req, res) => {
     
-    const { id } = req.params;
+    const { param_id } = req.params;
     const { value } = req.body
 
         if (value == null){
@@ -465,7 +465,7 @@ export const updateArrivalRestrictUB = async (req, res) => {
             await pool
             .request()
             .input("value",sql.VarChar, value)
-            .input("param_id",sql.Int, id)
+            .input("param_id",sql.Int, param_id)
             .query(queries.updateParameterConfig)
 
             return res.send('Arrival Restrict UB updated successfully!')
@@ -480,7 +480,7 @@ export const updateArrivalRestrictUB = async (req, res) => {
 
 export const updateArrivalRestrictLB = async (req, res) => {
     
-    const { id } = req.params;
+    const { param_id } = req.params;
     const { value } = req.body
 
         if (value == null){
@@ -493,7 +493,7 @@ export const updateArrivalRestrictLB = async (req, res) => {
             await pool
             .request()
             .input("value",sql.VarChar, value)
-            .input("param_id",sql.Int, id)
+            .input("param_id",sql.Int, param_id)
             .query(queries.updateParameterConfig)
 
             return res.send('Arrival Restrict LB updated successfully!')
@@ -508,7 +508,7 @@ export const updateArrivalRestrictLB = async (req, res) => {
 
 export const updateFlexibleEntry = async (req, res) => {
     
-    const { id } = req.params;
+    const { param_id } = req.params;
     const { value } = req.body
 
         if (value == null){
@@ -520,8 +520,8 @@ export const updateFlexibleEntry = async (req, res) => {
             const pool =  await getConnection();
             await pool
             .request()
-            .input("value",sql.VarChar, value)
-            .input("param_id",sql.Int, id)
+            .input("value",sql.Int, value)
+            .input("param_id",sql.Int, param_id)
             .query(queries.updateParameterConfig)
 
             return res.send('Flexible Entry updated successfully!')

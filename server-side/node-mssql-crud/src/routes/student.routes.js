@@ -13,6 +13,7 @@ import {
   getLocalFixedOutTime,
   getLocalFixedInTime,
   getNumberOfLocalFixedStudent,
+  getStudentCheckedoutOrApproved,
 } from "../controllers/student.controller";
 
 const router = Router();
@@ -30,6 +31,7 @@ router.get("/student/get_number_of_local_fixed_config/",getNumberOfLocalFixedCon
 router.get("/student/get_local_fixed_outtime/", getLocalFixedOutTime);
 router.get("/student/get_local_fixed_intime/", getLocalFixedInTime);
 router.get("/student/get_number_of_local_fixed_student/:user_id/:dateLowerBound/:dateUpperBound",getNumberOfLocalFixedStudent);
+router.get("/student/get_bool_student_checkedout_autoapproved/:user_id", getStudentCheckedoutOrApproved);
 
 router.post("/student/apply_local_fixed/", applyLocalFixedGatepass);
 
