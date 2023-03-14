@@ -291,3 +291,17 @@ export const applyLocalFixedGatepass = async (req, res) => {
     res.send(error.message);
   }
 };
+
+export const getStudentCheckedoutOrApproved = async (req, res) => {
+  try {
+    const { user_id } = req.params;
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.studentCheckedoutOrAutoapproved);
+    return res.json({ row_affected: result.rowsAffected[0] });
+  } catch (error) {
+    res.send(error.message);
+  }
+};
