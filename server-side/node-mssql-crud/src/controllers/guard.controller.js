@@ -56,18 +56,8 @@ export const studentCheckin = async (req, res) => {
 export const studentCheckout = async (req, res) => {
   const { check_out_by, user_id } = req.body;
   const currentDate = new Date();
-  let actual_out_date =
-    currentDate.getFullYear() +
-    "-" +
-    currentDate.getMonth() +
-    "-" +
-    currentDate.getDate();
-  let actual_out_time =
-    currentDate.getHours() +
-    ":" +
-    currentDate.getMinutes() +
-    ":" +
-    currentDate.getSeconds();
+  let actual_out_date = currentDate.getFullYear() + "-" +currentDate.getMonth() + "-" + currentDate.getDate() + " " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+  let actual_out_time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
 
   if (check_out_by == null) {
     return res.status(400).json({ msg: "Bad Request" });
