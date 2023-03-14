@@ -29,7 +29,7 @@ export const getAllCheckedOut = async (req, res) => {
 export const studentCheckin = async (req, res) => {
   const { check_in_by, user_id } = req.body;
   const currentDate = new Date();
-  let actual_in_date = currentDate.getFullYear() + "-" + currentDate.getMonth() + "-" + currentDate.getDate();
+  let actual_in_date = currentDate.getFullYear() + "-" + currentDate.getMonth() + "-" + currentDate.getDate() + " " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
   let actual_in_time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
 
   if (check_in_by == null) {
