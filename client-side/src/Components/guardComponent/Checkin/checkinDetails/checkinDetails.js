@@ -85,7 +85,7 @@ export const CheckinDetails = () => {
 
           <TableBody>
             {user.map((props) => (
-              <TableRow key={props.user_id}>
+              <TableRow key={props.request_id}>
                 <TableCell className="tableCell">
                   {props.name} <br /> {props.user_id}{" "}
                 </TableCell>
