@@ -23,6 +23,35 @@ export const CheckinDetails = () => {
       .catch((err) => console.log("error:", err));
   }, []);
 
+  const checkinStudent = async (user_id) => {
+    let fetchData = fetch(
+      "http://127.0.0.1:4000/gatepass/v2/guard/checkin_student/",
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          check_in_by: "nugr11",
+          user_id: user_id,
+        }),
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => console.log("Success: " + response.msg))
+      .catch((error) => console.log("error: " + error));
+    return fetchData;
+  };
+
+  const handleApprove = async (event) => {
+    const request_id = event.target.name;
+    const currentUser = user.filter((obj) => {
+      return obj.request_id == request_id;
+    });
+    // console.log(currentUser[0].user_id);
+    const user_id = currentUser[0].user_id;
+    await checkinStudent(user_id);
+    window.location.reload(true);
+  };
+
   return (
     <div className="listContainer">
       <div className="listTitle">Check-In Dashboard</div>
@@ -77,7 +106,13 @@ export const CheckinDetails = () => {
                 </TableCell>
                 <TableCell className="tableCell">{props.status}</TableCell>
                 <TableCell className="tableCell">
-                  <button id="button2">Check In</button>
+                  <button
+                    id="button2"
+                    onClick={handleApprove}
+                    name={props.request_id}
+                  >
+                    Check In
+                  </button>
                 </TableCell>
               </TableRow>
             ))}

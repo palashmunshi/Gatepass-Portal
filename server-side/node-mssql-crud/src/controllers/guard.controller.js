@@ -24,13 +24,28 @@ export const getAllCheckedOut = async (req, res) => {
   }
 };
 
-
 // DO NOT USE THE BELOW 2 FUNCTIONS.... THEY ARE NOT WORKING RIGHT NOW
 export const studentCheckin = async (req, res) => {
   const { check_in_by, user_id } = req.body;
   const currentDate = new Date();
-  let actual_in_date = currentDate.getFullYear() + "-" + currentDate.getMonth() + "-" + currentDate.getDate() + " " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-  let actual_in_time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+  let actual_in_date =
+    currentDate.getFullYear() +
+    "-0" +
+    (currentDate.getMonth() + 1) +
+    "-" +
+    currentDate.getDate() +
+    " " +
+    currentDate.getHours() +
+    ":" +
+    currentDate.getMinutes() +
+    ":" +
+    currentDate.getSeconds();
+  let actual_in_time =
+    currentDate.getHours() +
+    ":" +
+    currentDate.getMinutes() +
+    ":" +
+    currentDate.getSeconds();
 
   if (check_in_by == null) {
     return res.status(400).json({ msg: "Bad Request" });
@@ -56,8 +71,24 @@ export const studentCheckin = async (req, res) => {
 export const studentCheckout = async (req, res) => {
   const { check_out_by, user_id } = req.body;
   const currentDate = new Date();
-  let actual_out_date = currentDate.getFullYear() + "-" +currentDate.getMonth() + "-" + currentDate.getDate() + " " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-  let actual_out_time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+  let actual_out_date =
+    currentDate.getFullYear() +
+    "-0" +
+    (currentDate.getMonth() + 1) +
+    "-" +
+    currentDate.getDate() +
+    " " +
+    currentDate.getHours() +
+    ":" +
+    currentDate.getMinutes() +
+    ":" +
+    currentDate.getSeconds();
+  let actual_out_time =
+    currentDate.getHours() +
+    ":" +
+    currentDate.getMinutes() +
+    ":" +
+    currentDate.getSeconds();
 
   if (check_out_by == null) {
     return res.status(400).json({ msg: "Bad Request" });
@@ -88,19 +119,20 @@ export const getApprovedToday = async (req, res) => {
   try {
     const pool = await getConnection();
     const result = await pool.request().query(queries.dashboardApprovedToday);
-    return res.json(result.recordset[0]['TOTAL']);
+    return res.json(result.recordset[0]["TOTAL"]);
   } catch (error) {
     res.status(500);
     res.send(error.message);
   }
 };
 
-
 export const getStudentsReturning = async (req, res) => {
   try {
     const pool = await getConnection();
-    const result = await pool.request().query(queries.dashboardStudentsReturning);
-    return res.json(result.recordset[0]['TOTAL']);
+    const result = await pool
+      .request()
+      .query(queries.dashboardStudentsReturning);
+    return res.json(result.recordset[0]["TOTAL"]);
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -109,26 +141,24 @@ export const getStudentsReturning = async (req, res) => {
 
 export const getStudentInCampus = async (req, res) => {
   try {
-  const pool = await getConnection();
-  const result = await pool
-      .request()
-      .query(queries.dashboardStudentInCampus);
-  return res.json(result.recordset[0]['TOTAL']);
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.dashboardStudentInCampus);
+    return res.json(result.recordset[0]["TOTAL"]);
   } catch (error) {
-      res.status(500);
-      res.send(error.message);
+    res.status(500);
+    res.send(error.message);
   }
 };
 
 export const getBlacklistedStudent = async (req, res) => {
   try {
-  const pool = await getConnection();
-  const result = await pool
+    const pool = await getConnection();
+    const result = await pool
       .request()
       .query(queries.dashboardBlacklistStudent);
-  return res.json(result.recordset[0]['TOTAL']);
+    return res.json(result.recordset[0]["TOTAL"]);
   } catch (error) {
-      res.status(500);
-      res.send(error.message);
+    res.status(500);
+    res.send(error.message);
   }
 };
