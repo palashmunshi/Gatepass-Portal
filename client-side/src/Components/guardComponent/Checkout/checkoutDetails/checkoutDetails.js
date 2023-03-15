@@ -22,7 +22,7 @@ export const CheckoutDetails = () => {
       });
   }, []);
 
-  const checkoutStudent = async (user_id) => {
+  const checkoutStudent = async (user_id, request_id) => {
     let fetchData = fetch(
       "http://127.0.0.1:4000/gatepass/v2/guard/checkout_student/",
       {
@@ -31,6 +31,7 @@ export const CheckoutDetails = () => {
         body: JSON.stringify({
           check_out_by: "nugr11",
           user_id: user_id,
+          request_id: request_id,
         }),
       }
     )
@@ -47,7 +48,7 @@ export const CheckoutDetails = () => {
     });
     // console.log(currentUser[0].user_id);
     const user_id = currentUser[0].user_id;
-    await checkoutStudent(user_id);
+    await checkoutStudent(user_id, request_id);
     window.location.reload(true);
   };
 

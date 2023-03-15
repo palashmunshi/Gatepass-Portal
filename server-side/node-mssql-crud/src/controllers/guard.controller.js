@@ -26,7 +26,7 @@ export const getAllCheckedOut = async (req, res) => {
 
 // DO NOT USE THE BELOW 2 FUNCTIONS.... THEY ARE NOT WORKING RIGHT NOW
 export const studentCheckin = async (req, res) => {
-  const { check_in_by, user_id } = req.body;
+  const { check_in_by, user_id, request_id } = req.body;
   const currentDate = new Date();
   let actual_in_date =
     currentDate.getFullYear() +
@@ -47,7 +47,7 @@ export const studentCheckin = async (req, res) => {
     ":" +
     currentDate.getSeconds();
 
-  if (check_in_by == null) {
+  if (check_in_by == null || request_id == null || user_id == null) {
     return res.status(400).json({ msg: "Bad Request" });
   }
 
@@ -56,6 +56,7 @@ export const studentCheckin = async (req, res) => {
     const result = await pool
       .request()
       .input("user_id", sql.VarChar, user_id)
+      .input("request_id", sql.Int, request_id)
       .input("check_in_by", sql.VarChar, check_in_by)
       .input("actual_in_date", sql.VarChar, actual_in_date)
       .input("actual_in_time", sql.VarChar, actual_in_time)
@@ -69,7 +70,7 @@ export const studentCheckin = async (req, res) => {
 };
 
 export const studentCheckout = async (req, res) => {
-  const { check_out_by, user_id } = req.body;
+  const { check_out_by, user_id, request_id } = req.body;
   const currentDate = new Date();
   let actual_out_date =
     currentDate.getFullYear() +
@@ -90,7 +91,7 @@ export const studentCheckout = async (req, res) => {
     ":" +
     currentDate.getSeconds();
 
-  if (check_out_by == null) {
+  if (check_out_by == null || request_id == null || user_id == null) {
     return res.status(400).json({ msg: "Bad Request" });
   }
 
@@ -99,6 +100,7 @@ export const studentCheckout = async (req, res) => {
     const result = await pool
       .request()
       .input("user_id", sql.VarChar, user_id)
+      .input("request_id", sql.Int, request_id)
       .input("check_out_by", sql.VarChar, check_out_by)
       .input("actual_out_date", sql.VarChar, actual_out_date)
       .input("actual_out_time", sql.VarChar, actual_out_time)

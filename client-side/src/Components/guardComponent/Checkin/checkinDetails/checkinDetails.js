@@ -23,7 +23,7 @@ export const CheckinDetails = () => {
       .catch((err) => console.log("error:", err));
   }, []);
 
-  const checkinStudent = async (user_id) => {
+  const checkinStudent = async (user_id, request_id) => {
     let fetchData = fetch(
       "http://127.0.0.1:4000/gatepass/v2/guard/checkin_student/",
       {
@@ -32,6 +32,7 @@ export const CheckinDetails = () => {
         body: JSON.stringify({
           check_in_by: "nugr11",
           user_id: user_id,
+          request_id: request_id,
         }),
       }
     )
@@ -48,7 +49,7 @@ export const CheckinDetails = () => {
     });
     // console.log(currentUser[0].user_id);
     const user_id = currentUser[0].user_id;
-    await checkinStudent(user_id);
+    await checkinStudent(user_id, request_id);
     window.location.reload(true);
   };
 
