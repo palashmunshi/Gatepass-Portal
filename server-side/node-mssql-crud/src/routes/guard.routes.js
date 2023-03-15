@@ -8,6 +8,7 @@ import {
   getStudentsReturning,
   studentCheckin,
   studentCheckout,
+  updateDefaulterFlag,
 } from "../controllers/guard.controller";
 
 const router = Router();
@@ -15,11 +16,12 @@ const router = Router();
 /* __________________________________________________CHECK OUT ROUTES__________________________________________________ */
 
 router.get("/guard/approved_students", getAllApproved);
-router.put("/guard/checkout_student", studentCheckout); //DO NOT USE THIS ROUTE RIGHT NOW
+router.put("/guard/checkout_student", studentCheckout);
 
 /* __________________________________________________CHECK IN ROUTES__________________________________________________ */
 router.get("/guard/checked_out_students", getAllCheckedOut);
-router.put("/guard/checkin_student", studentCheckin); //DO NOT USE THIS ROUTE RIGHT NOW
+router.put("/guard/checkin_student", studentCheckin);
+router.put("/guard/update_defaulter_flag", updateDefaulterFlag)
 
 /* __________________________________________________DASHBOARD ROUTES__________________________________________________ */
 router.get("/guard/approved_today",getApprovedToday);
