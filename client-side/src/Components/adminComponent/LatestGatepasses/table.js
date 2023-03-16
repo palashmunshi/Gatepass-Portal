@@ -45,26 +45,22 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {LatestGP.map((row) => (
-            <TableRow key={row.request_id}>
-              <TableCell className="tableCell">{row.user_id}</TableCell>
-              <TableCell className="tableCell">{row.gatepass_type}</TableCell>
-              <TableCell className="tableCell">
-                {changeDate(Date(row.from_date))}
-              </TableCell>
-              <TableCell className="tableCell">{row.from_time}</TableCell>
-              <TableCell className="tableCell">{row.to_date}</TableCell>
-              <TableCell className="tableCell">{row.to_time}</TableCell>
-              <TableCell className="tableCell">{row.destination}</TableCell>
-              <TableCell className="tableCell">
-                <span className={`status ${row.status}`}>{row.status}</span>
-              </TableCell>
+          {LatestGP.map((gp) => (
+            <TableRow key={gp.request_id}>
+              <TableCell>{gp.user_id}</TableCell>
+              <TableCell>{gp.gatepass_type}</TableCell>
+              <TableCell>{gp.from_date.substring(0, 10)}</TableCell>
+              <TableCell>{gp.from_time.substring(11, 16)}</TableCell>
+              <TableCell>{gp.to_date.substring(0, 10)}</TableCell>
+              <TableCell>{gp.to_time.substring(11, 16)}</TableCell>
+              <TableCell>{gp.destination}</TableCell>
+              <TableCell>{gp.status}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
   );
-};
+          }
 
 export default List;
