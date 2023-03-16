@@ -94,7 +94,7 @@ export const queries = {
     studentCheckin: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET check_in_by=@check_in_by, actual_in_date=@actual_in_date, actual_in_time=@actual_in_time, status='CHECKEDIN' where status in ('checkedout') AND user_id=@user_id AND request_id=@request_id;",                            
     updateDefaulterFlag:"UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET defaulter_flag = CASE WHEN TRY_CAST(actual_in_date AS DATE) < TRY_CAST(to_date AS DATE) OR (TRY_CAST(actual_in_date AS DATE) = TRY_CAST(to_date AS DATE) AND TRY_CAST(actual_in_time AS TIME) <= TRY_CAST(to_time AS TIME)) THEN 0 ELSE 1 END where user_id=@user_id AND request_id=@request_id and status = 'checkedin'; ",
     /* __________________________________________________GUARD DASHBOARD QUERIES__________________________________________________ */
-    dashboardApprovedToday:"SELECT COUNT(*) AS TOTAL from gps_db.gps_gatepassmaster where status in ('Approved','AutoApproved') and approved_or_rejected_date in (CONVERT(VARCHAR, GETDATE(), 23),'0000-00-00');",
+    dashboardApprovedToday:"SELECT COUNT(*) AS TOTAL from [gps_db].[gps_db].[gps_gatepassmaster] where status in ('Approved','AutoApproved') and (approved_or_rejected_date<=(CONVERT(VARCHAR, GETDATE(), 23)) and from_date<=(CONVERT(VARCHAR, GETDATE(), 23)));",
     dashboardStudentsReturning:"SELECT COUNT(*) AS TOTAL from [gps_db].[gps_db].[gps_gatepassmaster] where to_date=CONVERT(VARCHAR, GETDATE(), 23) and to_time<='23:59:59' and status in ('CHECKEDOUT');",
 };
 
