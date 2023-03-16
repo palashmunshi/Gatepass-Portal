@@ -24,7 +24,6 @@ export const getAllCheckedOut = async (req, res) => {
   }
 };
 
-// DO NOT USE THE BELOW 2 FUNCTIONS.... THEY ARE NOT WORKING RIGHT NOW
 export const studentCheckin = async (req, res) => {
   const { check_in_by, user_id, request_id } = req.body;
   const currentDate = new Date();
@@ -113,8 +112,24 @@ export const studentCheckout = async (req, res) => {
   }
 };
 
-// YOU CAN START WRITING CODE FROM HERE
-//
+export const updateDefaulterFlag = async (req, res) => {
+  const { check_out_by, user_id, request_id } = req.body;
+  if (request_id == null || user_id == null) {
+    return res.status(400).json({ msg: "Bad Request" });
+  }
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .input("request_id", sql.Int, request_id)
+      .query(queries.updateDefaulterFlag);
+    return res.send("defaulter flag updated");
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};
 
 /* __________________________________________________DASHBOARD API__________________________________________________ */
 export const getApprovedToday = async (req, res) => {

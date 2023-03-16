@@ -76,7 +76,7 @@ export const Guard = () => {
 
           <Widget
             type="oncampus"
-            title="Approved today"
+            title="Students Leaving Today"
             icon={
               <DoneOutlineIcon
                 className="icon"
