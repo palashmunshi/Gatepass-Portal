@@ -13,14 +13,21 @@ export const CheckinDetails = () => {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:4000/gatepass/v2/guard/checked_out_students")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setUser(data);
-      })
-      .catch((err) => console.log("error:", err));
+    async function fetchData() {
+      fetch("http://localhost:4000/gatepass/v2/guard/checked_out_students")
+        .then((response) => {
+          return response.json();
+        })
+        .then((text) => {
+          setUser(text);
+        });
+    }
+    fetchData();
+    const id = setInterval(() => {
+      fetchData();
+    }, 300000);
+
+    return () => clearInterval(id);
   }, []);
 
   const checkinStudent = async (user_id, request_id) => {
