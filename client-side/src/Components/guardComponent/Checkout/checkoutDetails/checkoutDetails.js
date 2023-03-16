@@ -41,6 +41,23 @@ export const CheckoutDetails = () => {
     return fetchData;
   };
 
+  const updateUserStatus = async (user_id) => {
+    let fetchData = fetch(
+      "http://127.0.0.1:4000/gatepass/v2/guard/update_user_status_absent/",
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: user_id,
+        }),
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => console.log("success: " + response.msg))
+      .catch((error) => console.log("error: " + error));
+    return fetchData;
+  };
+
   const handleApprove = async (event) => {
     const request_id = event.target.name;
     const currentUser = user.filter((obj) => {
@@ -49,6 +66,7 @@ export const CheckoutDetails = () => {
     // console.log(currentUser[0].user_id);
     const user_id = currentUser[0].user_id;
     await checkoutStudent(user_id, request_id);
+    await updateUserStatus(user_id);
     window.location.reload(true);
   };
 
