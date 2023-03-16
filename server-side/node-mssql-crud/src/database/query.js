@@ -92,6 +92,9 @@ export const queries = {
     
     studentCheckout: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET check_out_by =@check_out_by, actual_out_date =@actual_out_date, actual_out_time=@actual_out_time, status='CHECKEDOUT' WHERE status IN ('approved', 'autoapproved') AND user_id=@user_id and request_id=@request_id;",   
     studentCheckin: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET check_in_by=@check_in_by, actual_in_date=@actual_in_date, actual_in_time=@actual_in_time, status='CHECKEDIN' where status in ('checkedout') AND user_id=@user_id AND request_id=@request_id;",                            
+    updateUserStatusCheckout: "UPDATE [gps_db].[gps_db].[gps_usersmaster] SET status='A' WHERE user_id=@user_id",
+    updateUserStatusCheckin:"UPDATE [gps_db].[gps_db].[gps_usersmaster] SET status='P' WHERE user_id=@user_id",
+    updateUserStatusNonReturnable: "UPDATE [gps_db].[gps_db].[gps_usersmaster] SET status='G' WHERE user_id=@user_id",
     updateDefaulterFlag:"UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET defaulter_flag = CASE WHEN TRY_CAST(actual_in_date AS DATE) < TRY_CAST(to_date AS DATE) OR (TRY_CAST(actual_in_date AS DATE) = TRY_CAST(to_date AS DATE) AND TRY_CAST(actual_in_time AS TIME) <= TRY_CAST(to_time AS TIME)) THEN 0 ELSE 1 END where user_id=@user_id AND request_id=@request_id and status = 'checkedin'; ",
     /* __________________________________________________GUARD DASHBOARD QUERIES__________________________________________________ */
     dashboardApprovedToday:"SELECT COUNT(*) AS TOTAL from [gps_db].[gps_db].[gps_gatepassmaster] where status in ('Approved','AutoApproved') and (approved_or_rejected_date<=(CONVERT(VARCHAR, GETDATE(), 23)) and from_date<=(CONVERT(VARCHAR, GETDATE(), 23)));",
