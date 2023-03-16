@@ -161,12 +161,6 @@ const LFform = (props) => {
     } else {
       return true;
     }
-
-    // if (res1 == true && res2 < props.weekLimit && res3 == false && res4 == 0) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
   };
 
   const applyLocalFixedGatepass = async () => {
