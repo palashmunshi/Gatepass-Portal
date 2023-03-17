@@ -36,61 +36,72 @@ const SidebarStudent = () => {
           <Link to="/student" style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className="icon" />
-              <span>Dashboard</span>
+              {/* <span>Dashboard</span> */}
+              &nbsp;&nbsp;&nbsp;Dashboard
             </li>
           </Link>
           <p className="title">SETTINGS</p>
           <Link to="/myprofile" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>My Profile</span>
+              {/* <span>My Profile</span> */}
+              &nbsp;&nbsp;&nbsp;My Profile
             </li>
           </Link>
           <p className="title">Gatepass</p>
           <Link to="/localfixed" style={{ textDecoration: "none" }}>
             <li>
               <InsertChartIcon className="icon" />
-              <span>Local Fixed</span>
+              {/* <span>Local Fixed</span> */}
+              &nbsp;&nbsp;&nbsp;Local Fixed
             </li>
           </Link>
           <Link to="/flexible" style={{ textDecoration: "none" }}>
             <li>
               <NotificationsNoneIcon className="icon" />
-              <span>Local Flexible</span>
+              {/* <span>Local Flexible</span> */}
+              &nbsp;&nbsp;&nbsp;Local Flexible
             </li>
           </Link>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>Outstation</span>
+            {/* <span>Outstation</span> */}
+            &nbsp;&nbsp;&nbsp;Outstation
           </li>
           <li>
             <PsychologyOutlinedIcon className="icon" />
-            <span>Emergency</span>
+            {/* <span>Emergency</span> */}
+            &nbsp;&nbsp;&nbsp;Emergency
           </li>
           <li>
             <SettingsApplicationsIcon className="icon" />
-            <span>Non-Returnable</span>
+            {/* <span>Non-Returnable</span> */}
+            &nbsp;&nbsp;&nbsp;Non-Returnable
           </li>
           <p className="title">Visitor</p>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
-            <span>Apply Gatepass</span>
+            {/* <span>Apply Gatepass</span> */}
+            &nbsp;&nbsp;&nbsp;Apply Gatepass
           </li>
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Check Request</span>
+            {/* <span>Check Request</span> */}
+            &nbsp;&nbsp;&nbsp;Check Request
           </li>
           <p className="title">OTHERS</p>
           <Link to="/student/info" style={{ textDecoration: "none" }}>
             <li>
               <InfoRounded className="icon" />
-              <span>Info</span>
+              {/* <span>Info</span> */}
+              &nbsp;&nbsp;&nbsp;Info
             </li>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <ExitToAppIcon className="icon" />
-              <span>Logout</span>
+              {/* <span>Logout</span> */}
+              &nbsp;&nbsp;&nbsp;Logout
             </li>
           </Link>
         </ul>
