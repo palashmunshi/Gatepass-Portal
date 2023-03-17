@@ -100,9 +100,17 @@ export const CheckinDetails = () => {
 
   return (
     <>
-      <input type="search" placeholder="Search here" onChange={handleChange} />
       <div className="listContainer">
-        <div className="listTitle">Check-In Dashboard</div>
+        <div className="listTitle">
+          Check-In Dashboard
+          <input
+            type="search"
+            placeholder="Search"
+            onChange={handleChange}
+            id="anything"
+          />
+        </div>
+
         <TableContainer component={Paper} className="table">
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
