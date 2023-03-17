@@ -154,9 +154,7 @@ const LFform = (props) => {
       );
       return false;
     } else if (res1 == false) {
-      alert(
-        "Cannot Apply: You are not within the time limit of Local FIxed Gatepass"
-      );
+      alert("Cannot Apply: You cannot apply a gatepass in the outside hours");
       return false;
     } else {
       return true;
