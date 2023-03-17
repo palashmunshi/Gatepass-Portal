@@ -15,7 +15,8 @@ import { Link } from "react-router-dom";
 // import { useContext } from "react";
 import { NotificationAdd } from "@mui/icons-material";
 import "./sidebar.scss";
-import logo from "../../assets/logo.png";
+// import logo from "../../assets/logo.png";
+import logo from "../../assets/NU-logo.png";
 
 const Sidebar = () => {
   //const { dispatch } = useContext(DarkModeContext);
@@ -23,8 +24,9 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/admin" style={{ textDecoration: "none" }}>
-        <span className="logo"><img src={logo} height="35" weight="35" alt="logo.png" />
-           NU GATEPASS PORTAL</span>
+          <span className="logo">
+            <img src={logo} height="70" weight="70" alt="logo.png" />
+          </span>
         </Link>
       </div>
       <hr />
@@ -34,87 +36,102 @@ const Sidebar = () => {
           <Link to="/admin" style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className="icon" />
-              <span>Dashboard</span>
+              {/* <span>Dashboard</span>   */}
+              &nbsp;&nbsp;&nbsp;Dashboard
             </li>
           </Link>
           <p className="title">SETTINGS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Users</span>
+              {/* <span>Users</span> */}
+              &nbsp;&nbsp;&nbsp;Users
             </li>
           </Link>
           <Link to="/changerole" style={{ textDecoration: "none" }}>
             <li>
               <ManageAccountsSharpIcon className="icon" />
-              <span>Change Role</span>
+              {/* <span>Change Role</span> */}
+              &nbsp;&nbsp;&nbsp;Change Roles
             </li>
           </Link>
           <Link to="/group" style={{ textDecoration: "none" }}>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Group/Subgroup</span>
-          </li>
+            <li>
+              <CreditCardIcon className="icon" />
+              {/* <span>Group/Subgroup</span> */}
+              &nbsp;&nbsp;&nbsp;Group/Subgroup
+            </li>
           </Link>
           <Link to="/parameter" style={{ textDecoration: "none" }}>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Parameter Config</span>
-          </li>
+            <li>
+              <LocalShippingIcon className="icon" />
+              {/* <span>Parameter Config</span> */}
+              &nbsp;&nbsp;&nbsp;Parameter Config
+            </li>
           </Link>
           <Link to="/profile" style={{ textDecoration: "none" }}></Link>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
+            {/* <span>Profile</span> */}
+            &nbsp;&nbsp;&nbsp;Profile
           </li>
           <p className="title">REPORT</p>
           <Link to="/sreport" style={{ textDecoration: "none" }}>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span>Student</span>
-          </li>
+            <li>
+              <InsertChartIcon className="icon" />
+              {/* <span>Student</span> */}
+              &nbsp;&nbsp;&nbsp;Student
+            </li>
           </Link>
           <Link to="/gtreport" style={{ textDecoration: "none" }}>
-          <li>
-            <NotificationsNoneIcon className="icon" />
-            <span>Gatepass Type</span>
-          </li>
+            <li>
+              <NotificationsNoneIcon className="icon" />
+              {/* <span>Gatepass Type</span> */}
+              &nbsp;&nbsp;&nbsp;Gatepass Type
+            </li>
           </Link>
           <Link to="/dreport" style={{ textDecoration: "none" }}>
             <li>
               <SettingsSystemDaydreamOutlinedIcon className="icon" />
-              <span>Defaulter</span>
+              {/* <span>Defaulter</span> */}
+              &nbsp;&nbsp;&nbsp;Defaulter
             </li>
           </Link>
           <Link to="/wreport" style={{ textDecoration: "none" }}>
-          <li>
-            <PsychologyOutlinedIcon className="icon" />
-            <span>Warden</span>
-          </li>
+            <li>
+              <PsychologyOutlinedIcon className="icon" />
+              {/* <span>Warden</span> */}
+              &nbsp;&nbsp;&nbsp;Warden
+            </li>
           </Link>
           <Link to="/bchreport" style={{ textDecoration: "none" }}>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>BCH</span>
-          </li>
+            <li>
+              <SettingsApplicationsIcon className="icon" />
+              {/* <span>BCH</span> */}
+              &nbsp;&nbsp;&nbsp;BCH
+            </li>
           </Link>
           <p className="title">OTHERS</p>
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Blacklist/Autoapprove Group</span>
+            {/* <span>Blacklist/Autoapprove Group</span> */}
+            &nbsp;&nbsp;&nbsp;Blacklisted
           </li>
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Autoapproved</span>
+            {/* <span>Autoapproved</span> */}
+            &nbsp;&nbsp;&nbsp;Autoapproved
           </li>
           <li>
             <NotificationAdd className="icon" />
-            <span>Notification</span>
+            {/* <span>Notification</span> */}
+            &nbsp;&nbsp;&nbsp;Notification
           </li>
           <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <ExitToAppIcon className="icon" />
-              <span>Logout</span>
+              {/* <span>Logout</span> */}
+              &nbsp;&nbsp;&nbsp;Logout
             </li>
           </Link>
         </ul>
