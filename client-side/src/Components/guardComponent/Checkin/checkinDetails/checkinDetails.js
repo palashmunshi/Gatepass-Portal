@@ -8,6 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import moment from "moment";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+
 
 export const CheckinDetails = () => {
   const [user, setUser] = useState([]);
@@ -103,13 +105,16 @@ export const CheckinDetails = () => {
       <div className="listContainer">
         <div className="listTitle">
           Check-In Dashboard
-          <input
-            type="search"
-            placeholder="Search"
+       <input
+            type="text"
+            placeholder="Enrollment Number"
             onChange={handleChange}
-            id="anything"
+            id="search"
+            
           />
+         
         </div>
+      
 
         <TableContainer component={Paper} className="table">
           <Table sx={{ minWidth: 650 }} aria-label="simple table">

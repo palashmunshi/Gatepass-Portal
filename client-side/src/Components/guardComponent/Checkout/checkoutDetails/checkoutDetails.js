@@ -83,7 +83,7 @@ export const CheckoutDetails = () => {
     <div className="listContainer">
       <div className="listTitle">
         Check-Out Dashboard
-        <input type="search" placeholder="Search" onChange={handleChange} />
+        <input type="text" placeholder="Enrollment Number" onChange={handleChange} id="search" />
       </div>
       <TableContainer component={Paper} className="table">
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

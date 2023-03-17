@@ -11,7 +11,8 @@
         object-fit: cover;
       }
     }
-    
+ 
+   
     .status {
       padding: 5px;
       border-radius: 5px;
@@ -50,7 +51,27 @@
       background-color: rgb(38, 154, 6);
       border: 1px solid black;
       border-radius: 2px;
+    
       color: white;
     }
+    
 
 }
+
+#search{
+  margin-left: 75%; 
+  padding: 3px;
+ 
+  outline: none;
+ background-image: url('https://cdn-icons-png.flaticon.com/512/482/482631.png');
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  border: 1px solid black;
+  
+  
+ 
+ 
+  
+}
+
