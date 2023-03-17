@@ -68,6 +68,25 @@ export const studentCheckin = async (req, res) => {
   }
 };
 
+export const updateUserStatusCheckin = async (req, res) => {
+  const { user_id } = req.body;
+  if (user_id == null) {
+    return res.status(400).json({ msg: "Bad request" });
+  }
+
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.updateUserStatusCheckin);
+    return res.send("Status updated in the Usermaster table");
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};
+
 export const studentCheckout = async (req, res) => {
   const { check_out_by, user_id, request_id } = req.body;
   const currentDate = new Date();
@@ -106,6 +125,25 @@ export const studentCheckout = async (req, res) => {
       .query(queries.studentCheckout);
 
     return res.send("Student is now Checkedout");
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};
+
+export const updateUserStatusCheckout = async (req, res) => {
+  const { user_id } = req.body;
+  if (user_id == null) {
+    return res.status(400).json({ msg: "Bad request" });
+  }
+
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.updateUserStatusCheckout);
+    return res.send("Status updated in the Usermaster table");
   } catch (error) {
     res.status(500);
     res.send(error.message);

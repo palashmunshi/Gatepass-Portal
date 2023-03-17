@@ -140,10 +140,24 @@ const LFform = (props) => {
     const res3 = await checkBlacklist();
     const res4 = await checkApprovedOrCheckedout();
 
-    if (res1 == true && res2 < props.weekLimit && res3 == false && res4 == 0) {
-      return true;
-    } else {
+    if (res3 == true) {
+      alert("Cannot Apply: You are blacklisted, you cannot apply for Gatepass");
       return false;
+    } else if (res2 >= props.weekLimit) {
+      alert(
+        "Cannot Apply: You have exhausted all your weekly Local Fixed Gatepass "
+      );
+      return false;
+    } else if (res4 != 0) {
+      alert(
+        "Cannot Apply: You have already applied for a Local Fixed Gatepass"
+      );
+      return false;
+    } else if (res1 == false) {
+      alert("Cannot Apply: You cannot apply a gatepass in the outside hours");
+      return false;
+    } else {
+      return true;
     }
   };
 
@@ -179,8 +193,6 @@ const LFform = (props) => {
     if (check == true) {
       await applyLocalFixedGatepass();
       alert("You have successfuly applied for Local Fixed Gatepass!");
-    } else {
-      alert("You cannot apply for Local Fixed Gatepass!!");
     }
   };
 

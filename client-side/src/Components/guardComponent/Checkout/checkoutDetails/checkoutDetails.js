@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableBody } from "@mui/material";
 import moment from "moment";
+import { sortBy } from "lodash";
 
 export const CheckoutDetails = () => {
   const [user, setUser] = useState([]);
@@ -31,6 +32,10 @@ export const CheckoutDetails = () => {
 
     return () => clearInterval(id);
   }, []);
+  const sortedUser = sortBy(user, [
+    (o) => moment(o.from_date).unix(),
+    (o) => moment(o.from_time).unix(),
+  ]);
 
   const checkoutStudent = async (user_id, request_id) => {
     let fetchData = fetch(
@@ -51,6 +56,23 @@ export const CheckoutDetails = () => {
     return fetchData;
   };
 
+  const updateUserStatus = async (user_id) => {
+    let fetchData = fetch(
+      "http://127.0.0.1:4000/gatepass/v2/guard/update_user_status_absent/",
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: user_id,
+        }),
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => console.log("success: " + response.msg))
+      .catch((error) => console.log("error: " + error));
+    return fetchData;
+  };
+
   const handleApprove = async (event) => {
     const request_id = event.target.name;
     const currentUser = user.filter((obj) => {
@@ -59,6 +81,7 @@ export const CheckoutDetails = () => {
     // console.log(currentUser[0].user_id);
     const user_id = currentUser[0].user_id;
     await checkoutStudent(user_id, request_id);
+    await updateUserStatus(user_id);
     window.location.reload(true);
   };
 
@@ -75,7 +98,7 @@ export const CheckoutDetails = () => {
       console.log(currentUsers);
       setFilterData(currentUsers);
     } else {
-      setFilterData(user);
+      setFilterData(sortedUser);
     }
   };
 
@@ -83,7 +106,12 @@ export const CheckoutDetails = () => {
     <div className="listContainer">
       <div className="listTitle">
         Check-Out Dashboard
-        <input type="text" placeholder="Enrollment Number" onChange={handleChange} id="search" />
+        <input
+          type="text"
+          placeholder="Enrollment Number"
+          onChange={handleChange}
+          id="search"
+        />
       </div>
       <TableContainer component={Paper} className="table">
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -146,7 +174,7 @@ export const CheckoutDetails = () => {
                     </TableCell>
                   </TableRow>
                 ))
-              : user.map((props) => (
+              : sortedUser.map((props) => (
                   <TableRow key={props.request_id}>
                     <TableCell className="tableCell">
                       {props.name} <br /> {props.user_id}{" "}

@@ -8,8 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import moment from "moment";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-
+import { sortBy } from "lodash";
 
 export const CheckinDetails = () => {
   const [user, setUser] = useState([]);
@@ -33,6 +32,11 @@ export const CheckinDetails = () => {
 
     return () => clearInterval(id);
   }, []);
+
+  const sortedUser = sortBy(user, [
+    (o) => moment(o.to_date).unix(),
+    (o) => moment(o.to_time).unix(),
+  ]);
 
   const checkinStudent = async (user_id, request_id) => {
     let fetchData = fetch(
@@ -71,6 +75,23 @@ export const CheckinDetails = () => {
     return fetchData;
   };
 
+  const updateUserStatus = async (user_id) => {
+    let fetchData = fetch(
+      "http://127.0.0.1:4000/gatepass/v2/guard/update_user_status_present/",
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: user_id,
+        }),
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => console.log("success: " + response.msg))
+      .catch((error) => console.log("error: " + error));
+    return fetchData;
+  };
+
   const handleApprove = async (event) => {
     const request_id = event.target.name;
     const currentUser = user.filter((obj) => {
@@ -79,6 +100,7 @@ export const CheckinDetails = () => {
     // console.log(currentUser[0].user_id);
     const user_id = currentUser[0].user_id;
     await checkinStudent(user_id, request_id);
+    await updateUserStatus(user_id);
     await updateDefaulterFlag(user_id, request_id);
     window.location.reload(true);
   };
@@ -96,7 +118,7 @@ export const CheckinDetails = () => {
       console.log(currentUsers);
       setFilterData(currentUsers);
     } else {
-      setFilterData(user);
+      setFilterData(sortedUser);
     }
   };
 
@@ -105,16 +127,13 @@ export const CheckinDetails = () => {
       <div className="listContainer">
         <div className="listTitle">
           Check-In Dashboard
-       <input
+          <input
             type="text"
             placeholder="Enrollment Number"
             onChange={handleChange}
             id="search"
-            
           />
-         
         </div>
-      
 
         <TableContainer component={Paper} className="table">
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -182,7 +201,7 @@ export const CheckinDetails = () => {
                       </TableCell>
                     </TableRow>
                   ))
-                : user.map((props) => (
+                : sortedUser.map((props) => (
                     <TableRow key={props.request_id}>
                       <TableCell className="tableCell">
                         {props.name} <br /> {props.user_id}{" "}
