@@ -11,19 +11,22 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import ManageAccountsSharpIcon from '@mui/icons-material/ManageAccountsSharp';
+import ManageAccountsSharpIcon from "@mui/icons-material/ManageAccountsSharp";
 import { Link } from "react-router-dom";
 //import { DarkModeContext } from "../../../../context/darkModeContext";
 import { useContext } from "react";
 import { InfoRounded, NotificationAdd } from "@mui/icons-material";
+import logo from "../../assets/NU-logo.png";
 
 const SidebarStudent = () => {
-//   const { dispatch } = useContext(DarkModeContext);
+  //   const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="sidebar">
       <div className="top">
         <Link to="/student" style={{ textDecoration: "none" }}>
-          <span className="logo">NU GATEPASS PORTAL</span>
+          <span className="logo">
+            <img src={logo} height="70" weight="70" alt="logo.png" />
+          </span>
         </Link>
       </div>
       <hr />
@@ -42,13 +45,13 @@ const SidebarStudent = () => {
               <PersonOutlineIcon className="icon" />
               <span>My Profile</span>
             </li>
-          </Link>          
+          </Link>
           <p className="title">Gatepass</p>
           <Link to="/localfixed" style={{ textDecoration: "none" }}>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span>Local Fixed</span>
-          </li>
+            <li>
+              <InsertChartIcon className="icon" />
+              <span>Local Fixed</span>
+            </li>
           </Link>
           <Link to="/flexible" style={{ textDecoration: "none" }}>
             <li>
@@ -85,10 +88,10 @@ const SidebarStudent = () => {
             </li>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
-          <li>
-            <ExitToAppIcon className="icon" />
-            <span>Logout</span>
-          </li>
+            <li>
+              <ExitToAppIcon className="icon" />
+              <span>Logout</span>
+            </li>
           </Link>
         </ul>
       </div>

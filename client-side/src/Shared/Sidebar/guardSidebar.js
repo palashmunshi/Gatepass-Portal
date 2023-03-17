@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 import "./sidebar.scss";
 import { NotificationAdd } from "@mui/icons-material";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/NU-logo.png";
 
 const Sidebar = () => {
   return (
@@ -22,8 +22,7 @@ const Sidebar = () => {
       <div className="top">
         <Link to="/guard" style={{ textDecoration: "none" }}>
           <span className="logo">
-            <img src={logo} height="35" weight="35" alt="logo.png" />
-            NU GATEPASS PORTAL
+            <img src={logo} height="70" weight="70" alt="logo.png" />
           </span>
         </Link>
       </div>
@@ -33,39 +32,47 @@ const Sidebar = () => {
           <p className="title">MAIN</p>
           <Link to="/guard" style={{ textDecoration: "none" }}>
             <li>
-              <DashboardIcon className="icon" />
-              <span>Dashboard</span>
+              <div className="test">
+                <DashboardIcon className="icon" />
+                {/* <span>Dashboard</span> */}
+                &nbsp;&nbsp;&nbsp;Dashboard
+              </div>
             </li>
           </Link>
           <p className="title">OPTIONS</p>
           <Link to="/guard/biometric" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Biometric</span>
+              {/* <span>Biometric</span> */}
+              &nbsp;&nbsp;&nbsp;Biometric
             </li>
           </Link>
           <Link to="/guard/checkin" style={{ textDecoration: "none" }}>
             <li>
               <ManageAccountsSharpIcon className="icon" />
-              <span>Check-In</span>
+              {/* <span>Check-In</span> */}
+              &nbsp;&nbsp;&nbsp;Check In
             </li>
           </Link>
           <Link to="/guard/checkout" style={{ textDecoration: "none" }}>
             <li>
               <ManageAccountsSharpIcon className="icon" />
-              <span>Check-Out</span>
+              {/* <span>Check-Out</span> */}
+              &nbsp;&nbsp;&nbsp;Check out
             </li>
           </Link>
           <Link to="/guard/visitor" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
-              <span>Visitor</span>
+              {/* <span>Visitor</span> */}
+              &nbsp;&nbsp;&nbsp;Visitor
             </li>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <ExitToAppIcon className="icon" />
-              <span>Logout</span>
+              {/* <span>Logout</span> */}
+              &nbsp;&nbsp;&nbsp;Logout
             </li>
           </Link>
         </ul>
