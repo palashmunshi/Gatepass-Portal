@@ -8,6 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableBody } from "@mui/material";
 import moment from "moment";
+import { sortBy } from "lodash";
+
 
 export const CheckoutDetails = () => {
   const [user, setUser] = useState([]);
@@ -29,6 +31,8 @@ export const CheckoutDetails = () => {
 
     return () => clearInterval(id);
   }, []);
+  const sortedUser = sortBy(user, [(o) => moment(o.from_date).unix(), (o) => moment(o.from_time).unix()]);
+
 
   const checkoutStudent = async (user_id, request_id) => {
     let fetchData = fetch(
@@ -108,9 +112,9 @@ export const CheckoutDetails = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-
+  
           <TableBody>
-            {user.map((props) => (
+            {sortedUser.map((props) => (
               <TableRow key={props.request_id}>
                 <TableCell className="tableCell">
                   {props.name} <br /> {props.user_id}
