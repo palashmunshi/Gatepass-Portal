@@ -38,6 +38,8 @@ import {
     getDefaulterDateWise,
     getEOD,
     getWarden,
+    getAllGroups,
+    getAllSubGroups,
 
     createBlacklistedStudent,
 
@@ -105,6 +107,6 @@ router.get('/admin/warden_report/:id/:sd/:ed', getWarden);
 
 
 router.post('/admin/blacklist_student', createBlacklistedStudent);
-
-
+router.get("/admin/get_all_groups", getAllGroups);
+router.get("/admin/get_all_sub_groups", getAllSubGroups);
 export default router;
