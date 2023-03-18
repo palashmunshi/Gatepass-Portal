@@ -1,0 +1,54 @@
+#heading {
+    color: white;
+    background-color: #85151C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+  }
+.Align{
+    display:flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#add{
+margin-left: 10px;
+width: 30px;
+height: 30px;
+font-size: 16px;
+font-weight: bold;
+background-color: #85151C;
+border: none;
+color: white;
+}
+.GroupDesign{
+    margin: 20px;
+}
+.search3{
+    margin-top: 20px;
+    width:100%;
+    align-items:center;
+    justify-content: center;
+    
+    text-align: center;
+
+}
+#search1{
+    width:80%;
+}
+.GroupDesign{
+    border: 1px solid #85151C;
+    width: 100%;
+    height: 400px;
+}
+
+.MultyGroupDesign{
+    display: flex;
+    
+}
