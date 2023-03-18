@@ -17,6 +17,7 @@ import Info from "./Components/studentComponent/Info/Info";
 import { Guard } from "./Components/guardComponent/guard";
 import { Checkin } from "./Components/guardComponent/Checkin/checkin";
 import { Checkout } from "./Components/guardComponent/Checkout/checkout";
+import {Group} from "./Components/adminComponent/Settings/group";
 import { VisitorCheckin } from "./Components/guardComponent/VisitorCheckin/checkin";
 
 import { VisitorCheckout } from "./Components/guardComponent/VisitorCheckout/checkout";
@@ -31,7 +32,7 @@ function App() {
             
             <Route exact path="/users" element={<User />} />
             <Route exact path="/changerole" element={<ChangeRole />} />
-            <Route exact path="/group" element={<User />} />
+            <Route exact path="/group" element={<Group />} />
             <Route exact path="/parameter" element={<Parameter />} />
 
             <Route exact path="/sreport" element={<Report />} />
