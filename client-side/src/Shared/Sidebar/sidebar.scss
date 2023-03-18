@@ -2,7 +2,7 @@
   flex: 1;
   border-right: 0.5px solid rgb(230, 227, 227);
   min-height: 100vh;
-  background-color: white;
+  background-color: #85151C;
 
   .top {
     height: 50px;
@@ -13,7 +13,9 @@
     .logo {
       font-size: 20px;
       font-weight: bold;
-      color: brown;
+      color: white;
+      margin-top: 2px;
+      margin-right: 2px;
     }
   }
 
@@ -24,6 +26,9 @@
 
   .center {
     padding-left: 10px;
+  }
+
+
 
     ul {
       list-style: none;
@@ -33,7 +38,7 @@
       .title {
         font-size: 10px;
         font-weight: bold;
-        color: brown;
+        color: white;
         margin-top: 15px;
         margin-bottom: 5px;
       }
@@ -43,25 +48,32 @@
         align-items: center;
         padding: 5px;
         cursor: pointer;
+        font-size: 13px;
+          font-weight: 600;
+          color: whitesmoke;
+          margin-left: 10px;
 
         &:hover {
           background-color: #ece8ff;
+          color: #85151C;
+          
         }
 
-        .icon {
-          font-size: 18px;
-          color: brown;
+        // .icon {
+        //   font-size: 18px;
+        //   color: whitesmoke;
+          
+        //   }
         }
 
-        span {
-          font-size: 13px;
-          font-weight: 600;
-          color: #888;
-          margin-left: 10px;
-        }
+        // span {
+        //   font-size: 13px;
+        //   font-weight: 600;
+        //   color: whitesmoke;
+        //   margin-left: 10px;
+        // }
       }
     }
-  }
 
   .bottom {
     display: flex;
@@ -87,4 +99,3 @@
       }
     }
   }
-}
