@@ -200,7 +200,7 @@ export const CheckoutDetails = () => {
                         onClick={handleApprove}
                         name={props.request_id}
                       >
-                        Check In
+                        Check Out
                       </button>
                     </TableCell>
                   </TableRow>

@@ -10,6 +10,9 @@ import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSyst
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ManageAccountsSharpIcon from "@mui/icons-material/ManageAccountsSharp";
+import PersonRemoveAlt1Icon from "@mui/icons-material/PersonRemoveAlt1";
+import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import { Link } from "react-router-dom";
 
 import "./sidebar.scss";
@@ -61,11 +64,18 @@ const Sidebar = () => {
               &nbsp;&nbsp;&nbsp;Check out
             </li>
           </Link>
-          <Link to="/guard/visitor" style={{ textDecoration: "none" }}>
+          <Link to="/guard/VisitorCheckin" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonAddAlt1Icon className="icon" />
+              {/* <span>Visitor Check-In</span> */}
+              &nbsp;&nbsp;&nbsp;Visitor Check-In
+            </li>
+          </Link>
+          <Link to="/guard/VisitorCheckout" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
-              {/* <span>Visitor</span> */}
-              &nbsp;&nbsp;&nbsp;Visitor
+              {/* <span>Visitor Check-Out</span> */}
+              &nbsp;&nbsp;&nbsp;Visitor Check-Out
             </li>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
