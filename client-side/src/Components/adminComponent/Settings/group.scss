@@ -71,5 +71,27 @@ color: white;
     border-right: 1px solid #ccc;
     
   }
+  .modify {
+    border: none;
+    height: 20px;
+    text-align: center;
+    background-color: brown;
+    font-size: 10px;
+    color: white;
+    border-radius: 7px;
+    transition: 0.6s ease-in-out;
+  }
   
-  
+  .modify:hover {
+    background-color: white;
+    border: 1px solid brown;
+    color: brown;
+  }
+  .eventShow{
+    color: brown;
+    font-size: 12px;
+    margin-left:80%;
+  }
+  .eventShow:hover{
+    cursor: pointer;
+  }
