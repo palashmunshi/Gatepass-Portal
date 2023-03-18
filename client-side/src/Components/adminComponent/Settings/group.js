@@ -8,6 +8,11 @@ import "./group.scss";
 export const Group = () => {
   const [groups, setGroups] = useState([]);
   const [subgroups, setSubgroups] = useState([]);
+  const counter = () =>{
+    let counter1 = 0;
+    counter1++;
+    return counter1;
+  }
 
   useEffect(() => {
     fetch("http://localhost:4000/gatepass/v2/admin/get_all_groups")
@@ -19,6 +24,10 @@ export const Group = () => {
       .then((response) => response.json())
       .then((data) => setSubgroups(data))
       .catch((error) => console.log(error));
+
+     
+
+      
   }, []);
 
 
@@ -70,17 +79,17 @@ export const Group = () => {
               <table className="table1">
                 <thead>
                   <tr>
-                    <th>Subgroup ID</th>
+                    <th>S.No</th>
                     <th>Subgroup Name</th>
-                    <th>Master ID</th>
+                    <th>Edit/Update</th>
                   </tr>
                 </thead>
                 <tbody>
                   {subgroups.map((subgroup) => (
                     <tr key={subgroup.subgroup_id}>
-                      <td>{subgroup.subgroup_id}</td>
+                      <td>{counter}</td>
                       <td>{subgroup.subgroup_name}</td>
-                      <td>{subgroup.subgroup_mastergroup_id}</td>
+                      <td><button>Update</button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -89,6 +98,7 @@ export const Group = () => {
           </div>
          
         </div>
+        <p>Note- The table is fucked</p>
       </div>
     </div>
   );
