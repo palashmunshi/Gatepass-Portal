@@ -6,8 +6,8 @@ import "./group.scss";
 export const Group = () => {
   const [groups, setGroups] = useState([]);
   const [subgroups, setSubgroups] = useState([]);
-  const [showMore, setShowMore] = useState(false);
-  const [showMore1, setShowMore1] = useState(false);
+  const [showMoreGroup, setShowMoreGroup] = useState(false);
+  const [showMoreSubGroup, setShowMoreSubGroup] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
@@ -23,20 +23,20 @@ export const Group = () => {
   }, []);
 
   const handleShowMore = () => {
-    setShowMore(true);
+    setShowMoreGroup(true);
     setShowPopup(true);
   };
 
   const handleShowLess = () => {
-    setShowMore(false);
+    setShowMoreGroup(false);
   };
 
   const handleShowMore1 = () => {
-    setShowMore1(true);
+    setShowMoreSubGroup(true);
   };
 
   const handleShowLess1 = () => {
-    setShowMore1(false);
+    setShowMoreSubGroup(false);
   };
 
   const handleClosePopup = () => {
@@ -72,7 +72,7 @@ export const Group = () => {
                 </thead>
                 <tbody>
                   {groups
-                    .slice(0, showMore ? groups.length : 10)
+                    .slice(0, showMoreGroup ? groups.length : 10)
                     .map((group, index) => (
                       <tr key={group.gps_groupid}>
                         <td>{index + 1}</td>
@@ -89,12 +89,12 @@ export const Group = () => {
                     ))}
                 </tbody>
               </table>
-              {groups.length > 10 && !showMore && (
+              {groups.length > 10 && !showMoreGroup && (
                 <p onClick={handleShowMore} className="eventShow">
                   Show More
                 </p>
               )}
-              {showMore && (
+              {showMoreGroup && (
                 <p onClick={handleShowLess} className="eventShow">
                   Show Less
                 </p>
@@ -124,7 +124,7 @@ export const Group = () => {
                 </thead>
                 <tbody>
                   {subgroups
-                    .slice(0, showMore1 ? subgroups.length : 10)
+                    .slice(0, showMoreSubGroup ? subgroups.length : 10)
                     .map((subgroup, index) => (
                       <tr key={subgroups.gps_groupid}>
                         <td>{index + 1}</td>
@@ -141,12 +141,12 @@ export const Group = () => {
                     ))}
                 </tbody>
               </table>
-              {subgroups.length > 10 && !showMore1 && (
-                <p onClick={handleShowMore1} className="eventShow">
+              {subgroups.length > 10 && !showMoreSubGroup && (
+                <p onClick={handleShowMore} className="eventShow">
                   Show More
                 </p>
               )}
-              {showMore1 && (
+              {showMoreSubGroup && (
                 <p onClick={handleShowLess1} className="eventShow">
                   Show Less
                 </p>
