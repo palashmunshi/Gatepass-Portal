@@ -6,8 +6,8 @@ import "./group.scss";
 export const Group = () => {
   const [groups, setGroups] = useState([]);
   const [subgroups, setSubgroups] = useState([]);
-  const [showMoreGroup, setShowMoreGroup] = useState(false);
-  const [showMoreSubGroup, setShowMoreSubGroup] = useState(false);
+  const [showMoreGroup, setshowMoreGroup] = useState(false);
+  const [showMoreGroupSubGroup, setshowMoreGroupSubGroup] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
@@ -22,21 +22,21 @@ export const Group = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const handleShowMore = () => {
-    setShowMoreGroup(true);
+  const handleshowMoreGroup = () => {
+    setshowMoreGroup(true);
     setShowPopup(true);
   };
 
   const handleShowLess = () => {
-    setShowMoreGroup(false);
+    setshowMoreGroup(false);
   };
 
-  const handleShowMore1 = () => {
-    setShowMoreSubGroup(true);
+  const handleshowMoreGroupSubGroup = () => {
+    setshowMoreGroupSubGroup(true);
   };
 
   const handleShowLess1 = () => {
-    setShowMoreSubGroup(false);
+    setshowMoreGroupSubGroup(false);
   };
 
   const handleClosePopup = () => {
@@ -90,7 +90,7 @@ export const Group = () => {
                 </tbody>
               </table>
               {groups.length > 10 && !showMoreGroup && (
-                <p onClick={handleShowMore} className="eventShow">
+                <p onClick={handleshowMoreGroup} className="eventShow">
                   Show More
                 </p>
               )}
@@ -124,7 +124,7 @@ export const Group = () => {
                 </thead>
                 <tbody>
                   {subgroups
-                    .slice(0, showMoreSubGroup ? subgroups.length : 10)
+                    .slice(0, showMoreGroupSubGroup ? subgroups.length : 10)
                     .map((subgroup, index) => (
                       <tr key={subgroups.gps_groupid}>
                         <td>{index + 1}</td>
@@ -141,12 +141,12 @@ export const Group = () => {
                     ))}
                 </tbody>
               </table>
-              {subgroups.length > 10 && !showMoreSubGroup && (
-                <p onClick={handleShowMore} className="eventShow">
+              {subgroups.length > 10 && !showMoreGroupSubGroup && (
+                <p onClick={handleshowMoreGroupSubGroup} className="eventShow">
                   Show More
                 </p>
               )}
-              {showMoreSubGroup && (
+              {showMoreGroupSubGroup && (
                 <p onClick={handleShowLess1} className="eventShow">
                   Show Less
                 </p>
