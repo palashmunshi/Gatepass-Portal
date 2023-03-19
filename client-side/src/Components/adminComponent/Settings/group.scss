@@ -1,6 +1,6 @@
 #heading {
     color: white;
-    background-color: #85151C;
+    background-color: brown;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +23,7 @@ width: 30px;
 height: 30px;
 font-size: 16px;
 font-weight: bold;
-background-color: #85151C;
+background-color: brown;
 border: none;
 color: white;
 }
@@ -45,10 +45,53 @@ color: white;
 .GroupDesign{
     border: 1px solid #85151C;
     width: 100%;
-    height: 400px;
+    height: fit-content;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .MultyGroupDesign{
     display: flex;
     
 }
+.table1 {
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    width: 85%;
+    margin-bottom: 20px;
+  }
+
+  .table1 tbody tr {
+    border: 1px solid #ccc;
+  }
+
+  .table1 td,th {
+    border-right: 1px solid #ccc;
+    
+  }
+  .modify {
+    border: none;
+    height: 20px;
+    text-align: center;
+    background-color: brown;
+    font-size: 10px;
+    color: white;
+    border-radius: 7px;
+    transition: 0.4s;
+  }
+  
+  .modify:hover {
+    background-color: white;
+    border: 1px solid brown;
+    color: brown;
+  }
+  .eventShow{
+    color: brown;
+    font-size: 12px;
+    margin-left:80%;
+  }
+  .eventShow:hover{
+    cursor: pointer;
+  }

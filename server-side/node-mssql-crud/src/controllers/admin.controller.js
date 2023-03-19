@@ -950,3 +950,25 @@ export const createBlacklistedStudent = async (req, res) => {
         res.send(error.message);
     }
 };
+
+// ---------------------------------- Groups and Subgroups API ------------------------------------
+export const getAllGroups = async (req, res) => {
+    try {
+      const pool = await getConnection();
+      const result = await pool.request().query(queries.getAllGroups);
+      res.json(result.recordset);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  };
+
+  export const getAllSubGroups = async (req, res) => {
+    try {
+      const pool = await getConnection();
+      const result = await pool.request().query(queries.getAllSubGroups);
+      res.json(result.recordset);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  };
+
