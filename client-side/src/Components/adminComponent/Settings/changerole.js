@@ -12,22 +12,40 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Dropdown from "react-dropdown";
 
-
 export const ChangeRole = () => {
-  const role = [
-    "Admin",
-    "Chief Warden",
-    "Warden",
-    "Guard",
-    "BCH",
-    "Student",
-    "No Access",
-    "Other",
-  ];
-  const status = ["Present", "Absent", "Gone"];
+  // const role = [
+  //   "Admin",
+  //   "Chief Warden",
+  //   "Warden",
+  //   "Guard",
+  //   "BCH",
+  //   "Student",
+  //   "No Access",
+  //   "Other",
+  // ];
+  // const status = ["Present", "Absent", "Gone"];
   const [user, setUser] = useState([]);
-
+  const [role, setRole] = useState([]);
+  const [status, setStatus] = useState([]);
   useEffect(() => {
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/all_role")
+      .then((response) => {
+        return response.json();
+      })
+      .then((text) => {
+        setRole(text);
+      });
+    console.log(role);
+
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/all_status")
+      .then((response) => {
+        return response.json();
+      })
+      .then((text) => {
+        setStatus(text);
+      });
+    console.log(status);
+
     fetch("http://127.0.0.1:4000/gatepass/v2/admin/user_role")
       .then((response) => {
         return response.json();
@@ -36,7 +54,7 @@ export const ChangeRole = () => {
         setUser(text);
       });
     console.log(user);
-  });
+  }, []);
 
   return (
     <div className="admin">
@@ -68,7 +86,7 @@ export const ChangeRole = () => {
                     </TableCell>
                     <TableCell className="tableCell">
                       <Dropdown
-                        options={role}
+                        options={role.map((props) => props.role_name)}
                         style={{ borderRadius: "40" }}
                         placeholder="Select a role"
                       />
@@ -78,7 +96,7 @@ export const ChangeRole = () => {
                     </TableCell>
                     <TableCell className="tableCell">
                       <Dropdown
-                        options={status}
+                        options={status.map((props) => props.status)}
                         style={{ borderRadius: "40" }}
                         placeholder="Select a status"
                       />
