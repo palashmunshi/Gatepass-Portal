@@ -1,0 +1,95 @@
+.table1 {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.table1 tbody tr {
+    border: 1px solid #ccc;
+}
+
+.table1 td {
+    border: 1px solid #ccc;
+}
+.table1 th {
+  background-color: brown;
+  color: white;
+  border: 1px solid #ccc;
+}
+.buttonCSS {
+  color: brown;
+}
+
+.buttonCSS:hover {
+  color: rgb(190, 67, 67);
+  cursor: pointer;
+}
+
+#buttonhandler {
+  display: flex;
+ margin-left: 40px;
+
+}
+
+.TableShaper {
+    width: 50%;
+
+
+}
+#showless {
+    margin-left: 70%;
+}
+
+.ContentShaper{
+   display: flex;
+   width: 100%;
+   height: fit-content;
+   text-align: center;
+ 
+  
+}
+
+.AddDetails{
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: center;
+    width: 50%;
+    padding-bottom: 10px;
+    margin-right: 20px;
+    height: fit-content;
+    border: 1px solid #ccc;
+    
+}
+.label{
+    margin-top: 20px;
+    color: brown;
+    margin-bottom: 10px;
+}
+.option{
+    width: 50%;
+    background-color: brown;
+    margin-right: 20px;
+}
+.handleBulkUpload{
+    display: flex;
+    flex-direction: column;
+    padding-left: 30%;
+    padding-right: 30%;
+    
+}
+h5{
+    background-color: brown;
+    color: white;
+    
+}
+.button{
+    background-color: brown;
+    color: white;
+    border: none;
+    margin-top: 10px;
+    border-radius: 10px;
+    width: fit-content;
+    
+}

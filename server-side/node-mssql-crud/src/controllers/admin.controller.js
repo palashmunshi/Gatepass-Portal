@@ -972,3 +972,18 @@ export const getAllGroups = async (req, res) => {
     }
   };
 
+
+
+
+  // ----------------------------------------All users api -------------------------
+
+  export const getAllUsers = async (req, res) => {
+    try {
+      const pool = await getConnection();
+      const result = await pool.request().query(queries.getAllusers);
+      res.json(result.recordset);
+    } catch (err) {
+      res.status(500).send(err.message);
+    }
+  };
+

@@ -46,6 +46,7 @@ export const queries = {
     updateUser: "UPDATE [gps_db].[gps_db].[gps_usersmaster] SET ad_user_name=@ad_user_name,email_id=@email_id,contact_number=@contact_number,group_id=@group_id,role_id=@role_id,subgroup_id=@subgroup_id,name=@name,room_no=@room_no,address=@address,p_number=@p_number,punch_id=@punch_id,change_flag=@change_flag,hostel=@hostel,hostel_tower=@hostel_tower,status=@status,photo=@photo WHERE user_id=@user_id;",
     getAllGroups: "SELECT * FROM [gps_db].[gps_db].[gps_groups]",
     getAllSubGroups: "SELECT * FROM [gps_db].[gps_db].[gps_subgroup]",
+    getAllusers: "SELECT [user_id],[email_id],[name],[status] FROM [gps_db].[gps_db].[gps_usersmaster]",
     /* __________________________________________________ADMIN REPORT QUERIES__________________________________________________ */
 
 
