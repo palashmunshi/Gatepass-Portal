@@ -9,6 +9,8 @@ export const User = () => {
   const [data, setData] = useState([]);
   const [displayCount, setDisplayCount] = useState(20);
   const [showMore, setShowMore] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,32 +32,62 @@ export const User = () => {
     setShowMore(false);
   };
 
+  const handleChange = (event) => {
+    event.preventDefault();
+    const search = event.target.value;
+
+    setSearch(search);
+    console.log(search);
+    if (search.length > 0) {
+      const currentUsers = data.filter((obj) => {
+        return obj.name.toLowerCase().includes(search.toLowerCase());
+      });
+      console.log(currentUsers);
+      setFilterData(currentUsers);
+    } else {
+      setFilterData(data);
+    }
+  };
+
   return (
     <div className="admin">
       <Sidebar />
       <div className="adminContainer">
         <Navbar />
         <div>
-          //Search Function 
+          <input
+            type="text"
+            placeholder="Search Name"
+            onChange={handleChange}
+            id="searchbar"
+          />
           <div className="ContentShaper">
             <div className="TableShaper">
               <table className="table1">
                 <thead>
                   <tr>
                     <th>S.No</th>
-                  
+
                     <th>Name</th>
                     <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {data.slice(0, displayCount).map((user, index) => (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{user.name}</td>
-                      <td>{user.status}</td>
-                    </tr>
-                  ))}
+                  {search.length > 1
+                    ? filterData.slice(0, displayCount).map((user, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{user.name}</td>
+                          <td>{user.status}</td>
+                        </tr>
+                      ))
+                    : data.slice(0, displayCount).map((user, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{user.name}</td>
+                          <td>{user.status}</td>
+                        </tr>
+                      ))}
                 </tbody>
               </table>
               <div id="buttonhandler">
@@ -69,42 +101,40 @@ export const User = () => {
             </div>
             <div className="AddDetails">
               <div className="BulkUpload">
-               <h5>Bulk Upload</h5>
+                <h5>Bulk Upload</h5>
                 <form action="" method="post">
+                  <div className="handleBulkUpload">
+                    <label className="label">Select a role</label>
+                    <select name="role" defaultValue="">
+                      <option disabled="" className="option">
+                        Please select one
+                      </option>
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                      <option value="guest">Guest</option>
+                    </select>
 
-                  <div className="handleBulkUpload"><label className="label">Select a role</label>
-                  <select name="role">
-                    <option value="" disabled="" selected="" className="option">
-                      Please select one
-                    </option>
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                    <option value="guest">Guest</option>
-                  </select>
-                  
-                  <label className="label">Select A Group</label>
-                  <select name="role">
-                    <option value="" disabled="" selected="" className="option">
-                      Please select one
-                    </option>
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                    <option value="guest">Guest</option>
-                  </select>
+                    <label className="label">Select A Group</label>
+                    <select name="role" defaultValue="">
+                      <option disabled="" className="option">
+                        Please select one
+                      </option>
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                      <option value="guest">Guest</option>
+                    </select>
 
-                  <label className="label">Select a subgroup</label>
-                  <select name="role">
-                    <option value="" disabled="" selected="" className="option">
-                      Please select one
-                    </option>
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                    <option value="guest">Guest</option>
-                  </select>
+                    <label className="label">Select a subgroup</label>
+                    <select name="role" defaultValue="">
+                      <option disabled="" className="option">
+                        Please select one
+                      </option>
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                      <option value="guest">Guest</option>
+                    </select>
                   </div>
                   <button className="button">Upload</button>
-
-                  
                 </form>
               </div>
             </div>
