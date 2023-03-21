@@ -40,6 +40,7 @@ import {
     getWarden,
     getAllGroups,
     getAllSubGroups,
+    getAllUsers,
 
     createBlacklistedStudent,
     updateRoleAndStatus,
@@ -111,4 +112,5 @@ router.get('/admin/warden_report/:id/:sd/:ed', getWarden);
 router.post('/admin/blacklist_student', createBlacklistedStudent);
 router.get("/admin/get_all_groups", getAllGroups);
 router.get("/admin/get_all_sub_groups", getAllSubGroups);
+router.get("/admin/get_all_users", getAllUsers);
 export default router;
