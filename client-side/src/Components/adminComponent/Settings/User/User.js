@@ -37,12 +37,10 @@ export const User = () => {
     const search = event.target.value;
 
     setSearch(search);
-    console.log(search);
     if (search.length > 0) {
       const currentUsers = data.filter((obj) => {
         return obj.name.toLowerCase().includes(search.toLowerCase());
       });
-      console.log(currentUsers);
       setFilterData(currentUsers);
     } else {
       setFilterData(data);
