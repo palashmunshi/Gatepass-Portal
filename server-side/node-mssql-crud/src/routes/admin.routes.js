@@ -42,6 +42,7 @@ import {
     getAllSubGroups,
 
     createBlacklistedStudent,
+    updateRoleAndStatus,
 
 } from "../controllers/admin.controller"
 
@@ -77,6 +78,7 @@ router.get('/admin/all_role', getAllRole);
 router.get('/admin/user_role', getUserRole);
 router.get('/admin/all_status', getAllStatus);
 router.put('/admin/user/:id', updateUser);
+router.put('/admin/update_role_and_status',updateRoleAndStatus)
 /////////////Param Config/////////////////////
 router.get('/admin/parameter_config', getParameterConfig);
 router.put('/admin/parameter_config/week_limit/:param_id', updateWeekLimit);

@@ -39,6 +39,7 @@ export const queries = {
     settingsAllRole: "SELECT * FROM [gps_db].[gps_db].[gps_roles];",
     settingsUserRole:"SELECT [gps_db].[gps_db].[gps_usersmaster].user_id AS employeecode, [gps_db].[gps_db].[gps_usersmaster].name AS employeename, [gps_db].[gps_db].[gps_usersmaster].status AS employeestatus,[gps_db].[gps_db].[gps_roles].role_name AS employeerole, [gps_db].[gps_db].[gps_roles].role_id AS roleid FROM [gps_db].[gps_db].[gps_usersmaster],[gps_db].[gps_db].[gps_roles] WHERE gps_usersmaster.role_id != 1 and [gps_db].[gps_db].[gps_usersmaster].role_id = [gps_db].[gps_db].[gps_roles].role_id;",
     settingsAllStatus:"select DISTINCT [gps_db].[gps_db].[gps_usersmaster].status from [gps_db].[gps_db].[gps_usersmaster];",
+    updateRoleStatus: "UPDATE [gps_db].[gps_usersmaster] SET role_id = CASE WHEN (role_id != @role_id AND @role_id IS NOT NULL) THEN @role_id else role_id END, status = CASE WHEN (status != @status AND @status IS NOT NULL) THEN @status else status END WHERE user_id = @user_id;",
     /////////////////////////////Param Config//////////////////////////////
     settingsParameterConfig:"SELECT * FROM [gps_db].[gps_db].[gps_configmaster]",
     updateParameterConfig:"UPDATE [gps_db].[gps_db].[gps_configmaster] SET value=@value WHERE param_id=@param_id;",
