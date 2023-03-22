@@ -70,11 +70,7 @@ const SidebarStudent = () => {
               &nbsp;&nbsp;&nbsp;Outstaion
             </li>
           </Link>
-          <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            {/* <span>Outstation</span> */}
-            &nbsp;&nbsp;&nbsp;Outstation
-          </li>
+       
           <li>
             <PsychologyOutlinedIcon className="icon" />
             {/* <span>Emergency</span> */}
