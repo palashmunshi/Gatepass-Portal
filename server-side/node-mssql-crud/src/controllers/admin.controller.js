@@ -122,9 +122,9 @@ export const createGroup = async (req, res) => {
 
   try {
     const pool = await getConnection();
-    let count = await pool.request().query(queries.getGroupCount);
+    let count = await pool.request().query(queries.getMaxGroupId);
 
-    const gps_groupid = count.recordset[0]["TOTAL"];
+    const gps_groupid = count.recordset[0].max_num + 1;
 
     const result = await pool
       .request()
@@ -170,9 +170,9 @@ export const createSubgroup = async (req, res) => {
 
   try {
     const pool = await getConnection();
-    let count = await pool.request().query(queries.getSubgroupCount);
+    let count = await pool.request().query(queries.getMaxSubgroupId);
 
-    const subgroup_id = count.recordset[0]["TOTAL"];
+    const subgroup_id = count.recordset[0].max_num + 1;
 
     const result = await pool
       .request()
@@ -930,37 +930,33 @@ export const createBlacklistedStudent = async (req, res) => {
 
 // ---------------------------------- Groups and Subgroups API ------------------------------------
 export const getAllGroups = async (req, res) => {
-    try {
-      const pool = await getConnection();
-      const result = await pool.request().query(queries.getAllGroups);
-      res.json(result.recordset);
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  };
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllGroups);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
 
-  export const getAllSubGroups = async (req, res) => {
-    try {
-      const pool = await getConnection();
-      const result = await pool.request().query(queries.getAllSubGroups);
-      res.json(result.recordset);
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  };
+export const getAllSubGroups = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllSubGroups);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
 
+// ----------------------------------------All users api -------------------------
 
-
-
-  // ----------------------------------------All users api -------------------------
-
-  export const getAllUsers = async (req, res) => {
-    try {
-      const pool = await getConnection();
-      const result = await pool.request().query(queries.getAllusers);
-      res.json(result.recordset);
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  };
-
+export const getAllUsers = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllusers);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
