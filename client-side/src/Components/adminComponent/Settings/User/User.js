@@ -4,6 +4,8 @@ import Sidebar from "../../../../Shared/Sidebar/adminSidebar";
 import "../../admin.scss";
 import axios from "axios";
 import "./User.scss";
+import ReactModal from "react-modal";
+import Dropdown from "react-dropdown";
 
 export const User = () => {
   const [data, setData] = useState([]);
@@ -11,6 +13,7 @@ export const User = () => {
   const [showMore, setShowMore] = useState(false);
   const [search, setSearch] = useState("");
   const [filterData, setFilterData] = useState([]);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,6 +50,10 @@ export const User = () => {
     }
   };
 
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
   return (
     <div className="admin">
       <Sidebar />
@@ -59,6 +66,63 @@ export const User = () => {
             onChange={handleChange}
             id="searchbar"
           />
+          <ReactModal
+            className="Modal"
+            overlayClassName="Overlay"
+            isOpen={modal}
+            contentLabel="Example Modal"
+            onRequestClose={() => setModal(false)}
+            // style={(className = "modalContainer")}
+          >
+            <form>
+              <label>
+                Name:
+                <input type="text" name="name" />
+              </label>
+              <br />
+              <label>
+                Enrollment Number:
+                <input type="text" name="user_id" />
+              </label>
+              <br />
+              <label>
+                Email ID:
+                <input type="text" name="email" />
+              </label>
+              <br />
+              <label>
+                Role: <Dropdown placeholder="-Role-" />
+              </label>
+              <br />
+              <label>
+                Group Setting: <Dropdown option="No role" />
+              </label>
+              <br />
+              <label>
+                Hostel:
+                <input type="text" name="email" />
+              </label>
+              <br />
+              <label>
+                Room Number:
+                <input type="text" name="email" />
+              </label>
+              <br />
+              <label>
+                Contact Number:
+                <input type="text" name="email" />
+              </label>
+              <br />
+              <label>
+                Parents Contact Number:
+                <input type="text" name="email" />
+              </label>
+            </form>
+            <div>Login/Signup</div>
+            <button onClick={() => setModal(false)} className="align">
+              X
+            </button>
+          </ReactModal>
           <div className="ContentShaper">
             <div className="TableShaper">
               <table className="table1">
@@ -73,7 +137,7 @@ export const User = () => {
                 <tbody>
                   {search.length > 1
                     ? filterData.slice(0, displayCount).map((user, index) => (
-                        <tr key={index}>
+                        <tr key={index} onClick={() => setModal(true)}>
                           <td>{index + 1}</td>
                           <td>{user.name}</td>
                           <td>{user.status}</td>
