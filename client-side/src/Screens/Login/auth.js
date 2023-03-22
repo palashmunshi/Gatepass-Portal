@@ -1,83 +1,56 @@
 import React, { useState } from "react";
-import {BrowserRouter as Redirect } from "react-router-dom";
-import { user } from "../../Data/logindata";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { GoogleLoginButton } from "react-social-login-buttons";
+import { LoginSocialGoogle } from "reactjs-social-login";
+import Rolecheck from "./Rolecheck";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default function () {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+export default function Auth() {
+  const [role_id, setRoleId] = useState(null);
+  const [error, setError] = useState(null);
+  const [email,setEmail]=useState("");
+  const navigate = useNavigate(); // Add this line to get navigate object\
+  const [userInfo, setUserInfo] = useState({ email: "", roleId: null });
 
-  // Check Roles
-  const checkRoles = () => {
-    console.log("entered")
-    if (email === "" || password === "") {
-      setError("Fields are required");
-      return;
-    }
-    
-    else if (email === user[0].username) {
-      console.log(user[0].username);
-      <Redirect to="/warden" />
-    }
-
-    else if (email === user[1].username) {
-      console.log(user[1].username);
-      <Redirect to="/student" />
-    }
-
-    else if (email === user[2].username) {
-      console.log(user[2].username);
-      <Redirect to="/admin" />
-    }
-
-    else if (email === user[3].username) {
-      console.log(user[3].username);
-      <Redirect to="/guard" />
-    }
-
-    else if (email === user[4].username) {
-      console.log(user[4].username);
-      <Redirect to="/bch" />
-    }
-
-  };
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const response = await fetch(`http://127.0.0.1:4000/gatepass/v2/auth/user_information/${email}`);
+      const data = await response.json();
+      setUserInfo({ email: data.email_id, roleId: data.role_id });
+      console.log(data.roleId)
+    };
+    fetchUserInfo();
+  }, []);
 
   return (
     <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign In</h3>
-          <div className="form-group mt-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              className="form-control mt-1"
-              placeholder="Enter email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control mt-1"
-              placeholder="Enter password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary" onClick={checkRoles}>
-              Submit
-            </button>
-          </div>
-          <p className="forgot-password text-right mt-2">
-            Forgot <a href="/">password?</a>
-          </p>
+          <LoginSocialGoogle
+          client_id={"372946592599-u1gj83quodhpdae46ejslj4tto3mn3vn.apps.googleusercontent.com"}
+          scope="openid profile email"
+          discoveryDocs="claims_supported"  
+          access_type="offline"
+          onResolve={({ provider, data }) => {
+            console.log(data);
+            const send_email = data.email;
+            setEmail(send_email);
+            console.log(email);
+            // navigate(`/Rolecheck ?email={send_email}`); // navigate to RoleCheck
+            // <Rolecheck email={send_email}/>
+            navigate('/Rolecheck' ,{ state:{email:send_email }});  
+          }}
+          onReject={(err) => {
+            console.log(err);
+          }}
+        >
+          <GoogleLoginButton />
+          </LoginSocialGoogle>
+          {error && <p className="error">{error}</p>}
         </div>
       </form>
     </div>
-  )
+  );
+  
 }
