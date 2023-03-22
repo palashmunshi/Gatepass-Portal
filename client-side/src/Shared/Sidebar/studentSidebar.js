@@ -56,11 +56,18 @@ const SidebarStudent = () => {
               &nbsp;&nbsp;&nbsp;Local Fixed
             </li>
           </Link>
-          <Link to="/flexible" style={{ textDecoration: "none" }}>
+          <Link to="/student/localflexible" style={{ textDecoration: "none" }}>
             <li>
               <NotificationsNoneIcon className="icon" />
               {/* <span>Local Flexible</span> */}
               &nbsp;&nbsp;&nbsp;Local Flexible
+            </li>
+          </Link>
+          <Link to="/student/Outstation" style={{ textDecoration: "none" }}>
+            <li>
+              <NotificationsNoneIcon className="icon" />
+              {/* <span>Local Flexible</span> */}
+              &nbsp;&nbsp;&nbsp;Outstaion
             </li>
           </Link>
           <li>
