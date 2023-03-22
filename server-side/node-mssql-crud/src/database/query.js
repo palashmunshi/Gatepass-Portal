@@ -102,5 +102,8 @@ export const queries = {
     /* __________________________________________________GUARD DASHBOARD QUERIES__________________________________________________ */
     dashboardApprovedToday:"SELECT COUNT(*) AS TOTAL from [gps_db].[gps_db].[gps_gatepassmaster] where status in ('Approved','AutoApproved') and (approved_or_rejected_date<=(CONVERT(VARCHAR, GETDATE(), 23)) and from_date<=(CONVERT(VARCHAR, GETDATE(), 23)));",
     dashboardStudentsReturning:"SELECT COUNT(*) AS TOTAL from [gps_db].[gps_db].[gps_gatepassmaster] where to_date=CONVERT(VARCHAR, GETDATE(), 23) and to_time<='23:59:59' and status in ('CHECKEDOUT');",
+
+    /* __________________________________________________GUARD DASHBOARD QUERIES__________________________________________________ */
+    getUserInformation: "SELECT * FROM [gps_db].[gps_db].[gps_usersmaster] WHERE email_id=@email_id",
 };
 
