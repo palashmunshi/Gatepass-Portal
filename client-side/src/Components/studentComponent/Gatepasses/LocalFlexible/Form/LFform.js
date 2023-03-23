@@ -190,7 +190,7 @@ const LFform = (props) => {
 
     if (check == true) {
       await applyLocalFlexibleGatepass();
-      alert("You have successfuly applied for Local Fixed Gatepass!");
+      alert("You have successfuly applied for Local Flexible Gatepass!");
     }
   };
 
