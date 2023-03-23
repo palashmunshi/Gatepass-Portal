@@ -69,10 +69,10 @@ router.get('/admin/all_pending_request', getAllPendingRequest);
 
 /////////////Group/Subgroup//////////////////
 router.get('/admin/group', getGroup);
-router.post('/admin/group', createGroup);
+router.post('/admin/create_group', createGroup);
 router.delete('/admin/group/:id', deleteGroup);
 router.get('/admin/subgroup', getSubgroup);
-router.post('/admin/subgroup', createSubgroup);
+router.post('/admin/create_subgroup', createSubgroup);
 router.delete('/admin/subgroup/:id', deleteSubgroup);
 //////////////Roles///////////////////////////
 router.get('/admin/all_role', getAllRole);
