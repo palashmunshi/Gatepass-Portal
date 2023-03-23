@@ -70,17 +70,20 @@ const SidebarStudent = () => {
               &nbsp;&nbsp;&nbsp;Outstaion
             </li>
           </Link>
-       
+       <Link to="/student/EmergencyGP" style={{textDecoration:"none"}}>
           <li>
             <PsychologyOutlinedIcon className="icon" />
             {/* <span>Emergency</span> */}
             &nbsp;&nbsp;&nbsp;Emergency
           </li>
+          </Link>
+          <Link to="/student/Non_returnable">
           <li>
             <SettingsApplicationsIcon className="icon" />
             {/* <span>Non-Returnable</span> */}
             &nbsp;&nbsp;&nbsp;Non-Returnable
           </li>
+          </Link>
           <p className="title">Visitor</p>
           <Link to="/student/VisitorGatepass" style={{ textDecoration: "none" }}>
           <li>
