@@ -29,11 +29,18 @@ export const queries = {
     settingsGroup: "SELECT * FROM [gps_db].[gps_db].[gps_groups] WHERE gps_groupname NOT like '%alms%';",
     settingsSubgroup: "SELECT * FROM [gps_db].[gps_db].[gps_subgroup] WHERE subgroup_name NOT like '%NA%';",
     getGroupCount:"SELECT COUNT(*) AS TOTAL FROM [gps_db].[gps_db].[gps_groups]",
+    getMaxSubgroupId: "SELECT MAX(subgroup_id) AS max_num FROM [gps_db].[gps_db].[gps_subgroup]",
     getSubgroupCount:"SELECT COUNT(*) AS TOTAL FROM [gps_db].[gps_db].[gps_subgroup]",
+    getMaxGroupId: "SELECT MAX(gps_groupid) AS max_num FROM [gps_db].[gps_db].[gps_groups] WHERE gps_groupid < (SELECT MAX(gps_groupid) AS max_num FROM gps_db.gps_groups)",
     addGroup: "INSERT INTO [gps_db].[gps_db].[gps_groups] (gps_groupid,gps_groupname,gps_group_mastergroup_id) VALUES (@gps_groupid,@gps_groupname,@gps_group_mastergroup_id)",
     addSubgroup: "INSERT INTO [gps_db].[gps_db].[gps_subgroup] (subgroup_id,subgroup_name,subgroup_mastergroup_id) VALUES (@subgroup_id,@subgroup_name,@subgroup_mastergroup_id)",
     deleteGroup: "DELETE FROM [gps_db].[gps_db].[gps_groups] WHERE gps_groupid=@id;",
-    deleteSubgroup: "DELETE FROM [gps_db].[gps_db].[gps_subgroup] WHERE subgroup_id=@id;",  
+    deleteSubgroup: "DELETE FROM [gps_db].[gps_db].[gps_subgroup] WHERE subgroup_id=@id;",
+    
+
+    getAllGroups: "SELECT * FROM [gps_db].[gps_db].[gps_groups]",
+    getAllSubGroups: "SELECT * FROM [gps_db].[gps_db].[gps_subgroup]",
+    getAllusers: "SELECT [user_id],[email_id],[name],[status] FROM [gps_db].[gps_db].[gps_usersmaster]",
 
     /////////////////////////////Roles//////////////////////////////
     settingsAllRole: "SELECT * FROM [gps_db].[gps_db].[gps_roles];",
@@ -45,9 +52,8 @@ export const queries = {
     updateParameterConfig:"UPDATE [gps_db].[gps_db].[gps_configmaster] SET value=@value WHERE param_id=@param_id;",
     addUser: "INSERT INTO [gps_db].[gps_db].[gps_usersmaster] (user_id,ad_user_name,email_id,contact_number,group_id,role_id,subgroup_id,name,room_no,address,p_number,punch_id,change_flag,hostel,hostel_tower,status,photo) VALUES (@user_id,@ad_user_name,@email_id,@contact_number,@group_id,@role_id,@subgroup_id,@name,@room_no,@address,@p_number,@punch_id,@change_flag,@hostel,@hostel_tower,@status,@photo);",
     updateUser: "UPDATE [gps_db].[gps_db].[gps_usersmaster] SET ad_user_name=@ad_user_name,email_id=@email_id,contact_number=@contact_number,group_id=@group_id,role_id=@role_id,subgroup_id=@subgroup_id,name=@name,room_no=@room_no,address=@address,p_number=@p_number,punch_id=@punch_id,change_flag=@change_flag,hostel=@hostel,hostel_tower=@hostel_tower,status=@status,photo=@photo WHERE user_id=@user_id;",
-    getAllGroups: "SELECT * FROM [gps_db].[gps_db].[gps_groups]",
-    getAllSubGroups: "SELECT * FROM [gps_db].[gps_db].[gps_subgroup]",
-    getAllusers: "SELECT [user_id],[email_id],[name],[status] FROM [gps_db].[gps_db].[gps_usersmaster]",
+    
+
     /* __________________________________________________ADMIN REPORT QUERIES__________________________________________________ */
 
 
