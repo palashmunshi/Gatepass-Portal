@@ -82,11 +82,13 @@ const SidebarStudent = () => {
             &nbsp;&nbsp;&nbsp;Non-Returnable
           </li>
           <p className="title">Visitor</p>
+          <Link to="/student/VisitorGatepass" style={{ textDecoration: "none" }}>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             {/* <span>Apply Gatepass</span> */}
             &nbsp;&nbsp;&nbsp;Apply Gatepass
           </li>
+          </Link>
           <li>
             <ExitToAppIcon className="icon" />
             {/* <span>Check Request</span> */}

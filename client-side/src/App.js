@@ -7,6 +7,7 @@ import {GatepassReport} from "./Components/adminComponent/Report/gatepassreport"
 import { Student } from "./Components/studentComponent/Student"
 import { LocalFixed } from "./Components/studentComponent/Gatepasses/LocalFixed/LocalFixed";
 import { LocalFlexible } from "./Components/studentComponent/Gatepasses/LocalFlexible/LocalFlexible";
+import { VisitorGatepass } from "./Components/studentComponent/Gatepasses/VisitorGatepass/VisitorGatepass";
 import { Outstation } from "./Components/studentComponent/Gatepasses/Outstation/Outstation";
 import {DefaulterReport} from "./Components/adminComponent/Report/defaulterreport"
 import { WardenReport } from "./Components/adminComponent/Report/wardenreport";
@@ -47,6 +48,7 @@ function App() {
             <Route path="/student" element={<Student />} />
             <Route path="/localfixed" element={<LocalFixed />} />
             <Route path="/student/localflexible" element={<LocalFlexible />} />
+            <Route path="/student/VisitorGatepass" element={<VisitorGatepass />} />
             <Route path="/student/Outstation" element={<Outstation />} />
             <Route path="/student/info" element={<Info />} />
             <Route path="/warden" element={<Warden />} />
