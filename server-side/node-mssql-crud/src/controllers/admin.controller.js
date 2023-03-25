@@ -267,93 +267,93 @@ export const updateRoleAndStatus = async (req, res) => {
   }
 };
 
-export const updateUser = async (req, res) => {
-  const { id } = req.params;
-  const {
-    ad_user_name,
-    email_id,
-    group_id,
-    role_id,
-    subgroup_id,
-    name,
-    address,
-    p_number,
-    change_flag,
-    status,
-    photo,
-  } = req.body;
+// export const updateUser = async (req, res) => {
+//   const { user_id } = req.params;
+//   const {
+//     ad_user_name,
+//     email_id,
+//     group_id,
+//     role_id,
+//     subgroup_id,
+//     name,
+//     address,
+//     p_number,
+//     change_flag,
+//     status,
+//     photo,
+//   } = req.body;
 
-  let { contact_number, room_no, punch_id, hostel, hostel_tower } = req.body;
+//   let { contact_number, room_no, punch_id, hostel, hostel_tower } = req.body;
 
-  // validating
-  if (
-    ad_user_name == null ||
-    email_id == null ||
-    contact_number == null ||
-    group_id == null ||
-    role_id == null ||
-    subgroup_id == null ||
-    name == null ||
-    room_no == null ||
-    address == null ||
-    p_number == null ||
-    punch_id == null ||
-    change_flag == null ||
-    hostel == null ||
-    hostel_tower == null ||
-    status == null ||
-    photo == null
-  ) {
-    return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
-  }
+//   // validating
+//   if (
+//     ad_user_name == null ||
+//     email_id == null ||
+//     contact_number == null ||
+//     group_id == null ||
+//     role_id == null ||
+//     subgroup_id == null ||
+//     name == null ||
+//     room_no == null ||
+//     address == null ||
+//     p_number == null ||
+//     punch_id == null ||
+//     change_flag == null ||
+//     hostel == null ||
+//     hostel_tower == null ||
+//     status == null ||
+//     photo == null
+//   ) {
+//     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
+//   }
 
-  try {
-    const pool = await getConnection();
-    await pool
-      .request()
-      .input("ad_user_name", sql.VarChar, ad_user_name)
-      .input("email_id", sql.VarChar, email_id)
-      .input("contact_number", sql.VarChar, contact_number)
-      .input("group_id", sql.Int, group_id)
-      .input("role_id", sql.Int, role_id)
-      .input("subgroup_id", sql.Int, subgroup_id)
-      .input("name", sql.VarChar, name)
-      .input("room_no", sql.VarChar, room_no)
-      .input("address", sql.VarChar, address)
-      .input("p_number", sql.VarChar, p_number)
-      .input("punch_id", sql.Int, punch_id)
-      .input("change_flag", sql.BigInt, change_flag)
-      .input("hostel", sql.VarChar, hostel)
-      .input("hostel_tower", sql.VarChar, hostel_tower)
-      .input("status", sql.VarChar, status)
-      .input("photo", sql.VarChar, photo)
-      .input("user_id", sql.VarChar, id)
-      .query(queries.updateUser);
+//   try {
+//     const pool = await getConnection();
+//     await pool
+//       .request()
+//       .input("ad_user_name", sql.VarChar, ad_user_name)
+//       .input("email_id", sql.VarChar, email_id)
+//       .input("contact_number", sql.VarChar, contact_number)
+//       .input("group_id", sql.Int, group_id)
+//       .input("role_id", sql.Int, role_id)
+//       .input("subgroup_id", sql.Int, subgroup_id)
+//       .input("name", sql.VarChar, name)
+//       .input("room_no", sql.VarChar, room_no)
+//       .input("address", sql.VarChar, address)
+//       .input("p_number", sql.VarChar, p_number)
+//       .input("punch_id", sql.Int, punch_id)
+//       .input("change_flag", sql.BigInt, change_flag)
+//       .input("hostel", sql.VarChar, hostel)
+//       .input("hostel_tower", sql.VarChar, hostel_tower)
+//       .input("status", sql.VarChar, status)
+//       .input("photo", sql.VarChar, photo)
+//       .input("user_id", sql.VarChar, user_id)
+//       .query(queries.updateUser);
 
-    res.json({
-      id,
-      ad_user_name,
-      email_id,
-      contact_number,
-      group_id,
-      role_id,
-      subgroup_id,
-      name,
-      room_no,
-      address,
-      p_number,
-      punch_id,
-      change_flag,
-      hostel,
-      hostel_tower,
-      status,
-      photo,
-    });
-  } catch (error) {
-    res.status(500);
-    res.send(error.message);
-  }
-};
+//     res.json({
+//       id,
+//       ad_user_name,
+//       email_id,
+//       contact_number,
+//       group_id,
+//       role_id,
+//       subgroup_id,
+//       name,
+//       room_no,
+//       address,
+//       p_number,
+//       punch_id,
+//       change_flag,
+//       hostel,
+//       hostel_tower,
+//       status,
+//       photo,
+//     });
+//   } catch (error) {
+//     res.status(500);
+//     res.send(error.message);
+//   }
+// };
 
 /* ##################Parameter Config API##################  */
 
@@ -930,37 +930,68 @@ export const createBlacklistedStudent = async (req, res) => {
 
 // ---------------------------------- Groups and Subgroups API ------------------------------------
 export const getAllGroups = async (req, res) => {
-    try {
-      const pool = await getConnection();
-      const result = await pool.request().query(queries.getAllGroups);
-      res.json(result.recordset);
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  };
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllGroups);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
 
-  export const getAllSubGroups = async (req, res) => {
-    try {
-      const pool = await getConnection();
-      const result = await pool.request().query(queries.getAllSubGroups);
-      res.json(result.recordset);
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  };
+export const getAllSubGroups = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllSubGroups);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+// ----------------------------------------All users api -------------------------
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllusers);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+export const updateUser = async (req, res) => {
+  const { user_id } = req.params;
+  const {
+    role_id,
+    group_id,
+    subgroup_id,
+    hostel,
+    room_no,
+    contact_number,
+    p_number,
+  } = req.body;
 
 
+  
+  try {
+    const pool = await getConnection();
+    const ew = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .input("role_id", sql.Int, role_id)
+      .input("group_id", sql.Int, group_id)
+      .input("subgroup_id", sql.Int, subgroup_id)
+      .input("hostel", sql.VarChar, hostel)
+      .input("room_no", sql.VarChar, room_no)
+      .input("contact_number", sql.VarChar, contact_number)
+      .input("p_number", sql.VarChar, p_number)
+      .query(queries.updateUser);
 
-
-  // ----------------------------------------All users api -------------------------
-
-  export const getAllUsers = async (req, res) => {
-    try {
-      const pool = await getConnection();
-      const result = await pool.request().query(queries.getAllusers);
-      res.json(result.recordset);
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  };
-
+    return res.send("User updated successfully!");
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};

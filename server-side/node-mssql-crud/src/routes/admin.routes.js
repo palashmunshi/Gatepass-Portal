@@ -77,8 +77,6 @@ router.delete('/admin/subgroup/:id', deleteSubgroup);
 //////////////Roles///////////////////////////
 router.get('/admin/all_role', getAllRole);
 router.get('/admin/user_role', getUserRole);
-router.get('/admin/all_status', getAllStatus);
-router.put('/admin/user/:id', updateUser);
 router.put('/admin/update_role_and_status',updateRoleAndStatus)
 /////////////Param Config/////////////////////
 router.get('/admin/parameter_config', getParameterConfig);
@@ -88,8 +86,9 @@ router.put('/admin/parameter_config/in_time/:param_id', updateInTime);
 router.put('/admin/parameter_config/arrival_restrict_ub/:param_id', updateArrivalRestrictUB);
 router.put('/admin/parameter_config/arrival_restrict_lb/:param_id', updateArrivalRestrictLB);
 router.put('/admin/parameter_config/flexible_entry/:param_id', updateFlexibleEntry);
-
-
+//////////////Users///////////////////////////
+router.get('/admin/all_status', getAllStatus);
+router.put('/admin/user/:user_id', updateUser);
 
 router.post('/admin/user', createUser);
 

@@ -44,11 +44,12 @@ export const queries = {
     settingsParameterConfig:"SELECT * FROM [gps_db].[gps_db].[gps_configmaster]",
     updateParameterConfig:"UPDATE [gps_db].[gps_db].[gps_configmaster] SET value=@value WHERE param_id=@param_id;",
     addUser: "INSERT INTO [gps_db].[gps_db].[gps_usersmaster] (user_id,ad_user_name,email_id,contact_number,group_id,role_id,subgroup_id,name,room_no,address,p_number,punch_id,change_flag,hostel,hostel_tower,status,photo) VALUES (@user_id,@ad_user_name,@email_id,@contact_number,@group_id,@role_id,@subgroup_id,@name,@room_no,@address,@p_number,@punch_id,@change_flag,@hostel,@hostel_tower,@status,@photo);",
-    updateUser: "UPDATE [gps_db].[gps_db].[gps_usersmaster] SET ad_user_name=@ad_user_name,email_id=@email_id,contact_number=@contact_number,group_id=@group_id,role_id=@role_id,subgroup_id=@subgroup_id,name=@name,room_no=@room_no,address=@address,p_number=@p_number,punch_id=@punch_id,change_flag=@change_flag,hostel=@hostel,hostel_tower=@hostel_tower,status=@status,photo=@photo WHERE user_id=@user_id;",
+    // updateUser: "UPDATE [gps_db].[gps_db].[gps_usersmaster] SET ad_user_name=@ad_user_name,email_id=@email_id,contact_number=@contact_number,group_id=@group_id,role_id=@role_id,subgroup_id=@subgroup_id,name=@name,room_no=@room_no,address=@address,p_number=@p_number,punch_id=@punch_id,change_flag=@change_flag,hostel=@hostel,hostel_tower=@hostel_tower,status=@status,photo=@photo WHERE user_id=@user_id;",
     getAllGroups: "SELECT * FROM [gps_db].[gps_db].[gps_groups]",
     getAllSubGroups: "SELECT * FROM [gps_db].[gps_db].[gps_subgroup]",
     getAllusers: "SELECT * FROM [gps_db].[gps_db].[gps_usersmaster]",
     /////////////////////////////Users//////////////////////////////
+    updateUser: "UPDATE [gps_db].[gps_usersmaster] SET role_id = CASE WHEN (role_id != @role_id AND @role_id IS NOT NULL) THEN @role_id else role_id END, group_id = CASE WHEN (group_id != @group_id AND @group_id IS NOT NULL) THEN @group_id else group_id END ,subgroup_id = CASE WHEN (subgroup_id != @subgroup_id AND @subgroup_id IS NOT NULL) THEN @subgroup_id else subgroup_id END , room_no = CASE WHEN (room_no != @room_no AND @room_no IS NOT NULL) THEN @room_no else room_no END , hostel = CASE WHEN (hostel != @hostel AND @hostel IS NOT NULL) THEN @hostel else hostel END , contact_number = CASE WHEN (contact_number != @contact_number AND @contact_number IS NOT NULL) THEN @contact_number else contact_number END , p_number = CASE WHEN (p_number != @p_number AND @p_number IS NOT NULL) THEN @p_number else p_number END WHERE user_id = @user_id;",
 
     /* __________________________________________________ADMIN REPORT QUERIES__________________________________________________ */
 
