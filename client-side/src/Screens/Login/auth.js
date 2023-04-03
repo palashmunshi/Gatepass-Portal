@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { LoginSocialGoogle } from "reactjs-social-login";
@@ -12,15 +12,7 @@ export default function Auth() {
   const navigate = useNavigate(); // Add this line to get navigate object\
   const [userInfo, setUserInfo] = useState({ email: "", roleId: null });
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      const response = await fetch(`http://127.0.0.1:4000/gatepass/v2/auth/user_information/${email}`);
-      const data = await response.json();
-      setUserInfo({ email: data.email_id, roleId: data.role_id });
-      console.log(data.roleId)
-    };
-    fetchUserInfo();
-  }, []);
+  
 
   return (
     <div className="Auth-form-container">
