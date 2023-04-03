@@ -975,7 +975,7 @@ export const updateUser = async (req, res) => {
 
   try {
     const pool = await getConnection();
-    const ew = await pool
+    const result = await pool
       .request()
       .input("user_id", sql.VarChar, user_id)
       .input("role_id", sql.Int, role_id)
