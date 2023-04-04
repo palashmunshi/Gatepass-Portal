@@ -15,11 +15,13 @@ export const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        "http://localhost:4000/gatepass/v2//admin/get_all_users"
+        "http://localhost:4000/gatepass/v2/admin/get_all_users"
       );
       setData(result.data);
     };
     fetchData();
+    console.log(data);
+    console.log("bruh");
   }, []);
 
   const handleShowMore = () => {
