@@ -246,6 +246,23 @@ export const updateGroup = async (req, res) => {
   }
 };
 
+export const updateSubGroup = async (req, res) => {
+  const { subGroup_id } = req.params;
+  const { new_subGroup_name } = req.body;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("subGroup_id", sql.Int, subGroup_id)
+      .input("new_subGroup_name", sql.VarChar, new_subGroup_name)
+      .query(queries.updateSubGroup);
+
+    return res.send("Sub-Group updated successfully")
+  } catch (error) {
+    res.status(500);
+    res.send(error.message)
+  }
+};
 /* ##################Chnage Role API##################  */
 export const getAllRole = async (req, res) => {
   try {
