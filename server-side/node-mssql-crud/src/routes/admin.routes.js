@@ -45,6 +45,7 @@ import {
     createBlacklistedStudent,
     updateRoleAndStatus,
     updateGroup,
+    updateSubGroup,
 
 } from "../controllers/admin.controller"
 
@@ -76,6 +77,7 @@ router.get('/admin/subgroup', getSubgroup);
 router.post('/admin/create_subgroup', createSubgroup);
 router.delete('/admin/subgroup/:id', deleteSubgroup);
 router.put('/admin/update_group/:group_id', updateGroup);
+router.put('/admin/update_subgroup/:subGroup_id', updateSubGroup);
 //////////////Roles///////////////////////////
 router.get('/admin/all_role', getAllRole);
 router.get('/admin/user_role', getUserRole);
