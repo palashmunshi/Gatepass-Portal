@@ -19,8 +19,9 @@ import { Checkin } from "./Components/guardComponent/Checkin/checkin";
 import { Checkout } from "./Components/guardComponent/Checkout/checkout";
 import {Group} from "./Components/adminComponent/Settings/group";
 import { VisitorCheckin } from "./Components/guardComponent/VisitorCheckin/checkin";
-
 import { VisitorCheckout } from "./Components/guardComponent/VisitorCheckout/checkout";
+import Rolecheck from "./Screens/Login/Rolecheck";
+
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route exact path="/changerole" element={<ChangeRole />} />
             <Route exact path="/group" element={<Group />} />
             <Route exact path="/parameter" element={<Parameter />} />
+            <Route exact path="/Rolecheck" element={<Rolecheck/>}/>
 
             <Route exact path="/sreport" element={<Report />} />
             <Route exact path="/openreport" element={<OpenReport />} />
