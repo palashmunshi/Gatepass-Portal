@@ -228,6 +228,24 @@ export const getAllSubGroups = async (req, res) => {
   }
 };
 
+export const updateGroup = async (req, res) => {
+  const { group_id } = req.params;
+  const { new_group_name } = req.body;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("group_id", sql.Int, group_id)
+      .input("new_group_name", sql.VarChar, new_group_name)
+      .query(queries.updateGroup);
+
+    return res.send("Group updated successfully")
+  } catch (error) {
+    res.status(500);
+    res.send(error.message)
+  }
+};
+
 /* ##################Chnage Role API##################  */
 export const getAllRole = async (req, res) => {
   try {
@@ -741,16 +759,16 @@ export const getStudentTenureWiseDownload = async (req, res) => {
     const d = new Date();
     wb.write(
       "Datewise-" +
-        d.getDate() +
-        "-" +
-        d.getMonth() +
-        "-" +
-        d.getFullYear() +
-        "-" +
-        d.getHours() +
-        "-" +
-        d.getMinutes() +
-        ".xlsx",
+      d.getDate() +
+      "-" +
+      d.getMonth() +
+      "-" +
+      d.getFullYear() +
+      "-" +
+      d.getHours() +
+      "-" +
+      d.getMinutes() +
+      ".xlsx",
       res
     );
   } catch (error) {
