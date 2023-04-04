@@ -34,6 +34,8 @@ export const queries = {
   getMaxGroupId: "SELECT MAX(gps_groupid) AS max_num FROM [gps_db].[gps_db].[gps_groups] WHERE gps_groupid < (SELECT MAX(gps_groupid) AS max_num FROM gps_db.gps_groups)",
   addGroup: "INSERT INTO [gps_db].[gps_db].[gps_groups] (gps_groupid,gps_groupname,gps_group_mastergroup_id) VALUES (@gps_groupid,@gps_groupname,@gps_group_mastergroup_id)",
   addSubgroup: "INSERT INTO [gps_db].[gps_db].[gps_subgroup] (subgroup_id,subgroup_name,subgroup_mastergroup_id) VALUES (@subgroup_id,@subgroup_name,@subgroup_mastergroup_id)",
+  updateGroup: "UPDATE [gps_db].[gps_db].[gps_groups] SET gps_groupname = CASE WHEN (@new_group_name IS NOT NULL) THEN @new_group_name ELSE gps_groupname END WHERE gps_groupid=@group_id",
+
   deleteGroup: "DELETE FROM [gps_db].[gps_db].[gps_groups] WHERE gps_groupid=@id;",
   deleteSubgroup: "DELETE FROM [gps_db].[gps_db].[gps_subgroup] WHERE subgroup_id=@id;",
 
