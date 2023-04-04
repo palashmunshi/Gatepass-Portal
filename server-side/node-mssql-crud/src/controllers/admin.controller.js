@@ -208,6 +208,26 @@ export const deleteSubgroup = async (req, res) => {
   }
 };
 
+export const getAllGroups = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllGroups);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
+export const getAllSubGroups = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllSubGroups);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
+
 /* ##################Chnage Role API##################  */
 export const getAllRole = async (req, res) => {
   try {
@@ -925,27 +945,6 @@ export const createBlacklistedStudent = async (req, res) => {
   } catch (error) {
     res.status(500);
     res.send(error.message);
-  }
-};
-
-// ---------------------------------- Groups and Subgroups API ------------------------------------
-export const getAllGroups = async (req, res) => {
-  try {
-    const pool = await getConnection();
-    const result = await pool.request().query(queries.getAllGroups);
-    res.json(result.recordset);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
-};
-
-export const getAllSubGroups = async (req, res) => {
-  try {
-    const pool = await getConnection();
-    const result = await pool.request().query(queries.getAllSubGroups);
-    res.json(result.recordset);
-  } catch (err) {
-    res.status(500).send(err.message);
   }
 };
 
