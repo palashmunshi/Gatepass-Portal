@@ -44,6 +44,7 @@ import {
 
     createBlacklistedStudent,
     updateRoleAndStatus,
+    updateGroup,
 
 } from "../controllers/admin.controller"
 
@@ -74,10 +75,11 @@ router.delete('/admin/group/:id', deleteGroup);
 router.get('/admin/subgroup', getSubgroup);
 router.post('/admin/create_subgroup', createSubgroup);
 router.delete('/admin/subgroup/:id', deleteSubgroup);
+router.put('/admin/update_group/:group_id', updateGroup);
 //////////////Roles///////////////////////////
 router.get('/admin/all_role', getAllRole);
 router.get('/admin/user_role', getUserRole);
-router.put('/admin/update_role_and_status',updateRoleAndStatus)
+router.put('/admin/update_role_and_status', updateRoleAndStatus)
 /////////////Param Config/////////////////////
 router.get('/admin/parameter_config', getParameterConfig);
 router.put('/admin/parameter_config/week_limit/:param_id', updateWeekLimit);
@@ -100,10 +102,10 @@ router.get('/admin/tenure_wise_student_report/download/:id/:sd/:ed', getStudentT
 router.get('/admin/status_wise_student_report/:statuslist/:sd/:ed', getStudentStatusWise);
 router.get('/admin/status_and_tenure_wise_student_report/:statuslist/:id/:sd/:ed', getStudentStatusTenureWise);
 router.get('/admin/gatepass_type_report/:gpt/:sd/:ed', getGatepassTypeWise);
-router.get('/admin/blacklisted_student_date_wise_report/:sd/:ed',getBlacklistedStudentDateWise);
-router.get('/admin/blacklisted_group_date_wise_report/:sd/:ed',getBlacklistedGroupDateWise);
-router.get('/admin/defaulter_date_wise_report/:sd/:ed',getDefaulterDateWise);
-router.get('/admin/eod_report/:date',getEOD);
+router.get('/admin/blacklisted_student_date_wise_report/:sd/:ed', getBlacklistedStudentDateWise);
+router.get('/admin/blacklisted_group_date_wise_report/:sd/:ed', getBlacklistedGroupDateWise);
+router.get('/admin/defaulter_date_wise_report/:sd/:ed', getDefaulterDateWise);
+router.get('/admin/eod_report/:date', getEOD);
 router.get('/admin/warden_report/:id/:sd/:ed', getWarden);
 
 
