@@ -1,5 +1,5 @@
 import ReactModal from "react-modal";
-
+import "./Modal.scss"
 export const Modal = (props) => {
   return (
     <ReactModal
@@ -32,7 +32,7 @@ export const Modal = (props) => {
       }}
     >
       {"This is the content of the modal."}
-      <div>Login/Signup</div>
+      <div>Login/</div>
       <button onClick={() => setModal(false)}>X</button>1
     </ReactModal>
   );

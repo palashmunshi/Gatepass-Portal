@@ -6,6 +6,7 @@ import axios from "axios";
 import "./User.scss";
 import ReactModal from "react-modal";
 import Dropdown from "react-dropdown";
+import "./Dialog.scss";
 
 export const User = () => {
   const [data, setData] = useState([]);
@@ -66,6 +67,7 @@ export const User = () => {
             onChange={handleChange}
             id="searchbar"
           />
+
           <ReactModal
             className="Modal"
             overlayClassName="Overlay"
@@ -73,55 +75,52 @@ export const User = () => {
             contentLabel="Example Modal"
             onRequestClose={() => setModal(false)}
             // style={(className = "modalContainer")}
+            
           >
+             <div class="title">Edit User</div>
             <form>
-              <label>
-                Name:
-                <input type="text" name="name" />
-              </label>
-              <br />
-              <label>
-                Enrollment Number:
-                <input type="text" name="user_id" />
-              </label>
-              <br />
-              <label>
-                Email ID:
-                <input type="text" name="email" />
-              </label>
-              <br />
-              <label>
-                Role: <Dropdown placeholder="-Role-" />
-              </label>
-              <br />
-              <label>
-                Group Setting: <Dropdown option="No role" />
-              </label>
-              <br />
-              <label>
-                Hostel:
-                <input type="text" name="email" />
-              </label>
-              <br />
-              <label>
-                Room Number:
-                <input type="text" name="email" />
-              </label>
-              <br />
-              <label>
-                Contact Number:
-                <input type="text" name="email" />
-              </label>
-              <br />
-              <label>
-                Parents Contact Number:
-                <input type="text" name="email" />
-              </label>
+           
+              <div class="container">
+                
+                <div class="column">
+                  <label for="name">Name:</label>
+                  <input type="text" id="name" name="name"></input>
+                  <label for="user_id">Enrollment Number:</label>
+                  <input type="text" id="user_id" name="user_id"></input>
+                  <label for="email">Email ID:</label>
+                  <input type="text" id="email" name="email"></input>
+                  <label for="role">Role:</label>
+                  <select id="role" name="role">
+                    <option value="">-Role-</option>
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="staff">Staff</option>
+                  </select>
+                </div>
+
+                <div class="column">
+                  <label for="group_setting">Group Setting:</label>
+                  <select id="group_setting" name="group_setting">
+                    <option value="no_role">No Role</option>
+                  </select>
+                  <label for="group_setting">Subgroup Setting:</label>
+                  <select id="group_setting" name="group_setting">
+                    <option value="no_role">No Role</option>
+                  </select>
+                  <label for="hostel">Hostel:</label>
+                  <input type="text" id="hostel" name="hostel"></input>
+                  <label for="room_number">Room Number:</label>
+                  <input type="text" id="room_number" name="room_number"></input>
+                  <label for="contact_number">Contact Number:</label>
+                  <input type="text" id="contact_number" name="contact_number"></input>
+                  <label for="parents_contact_number">Parents Contact Number:</label>
+                  <input type="text" id="parents_contact_number" name="parents_contact_number"></input>
+                </div>
+              </div>
+              <button type="submit" onClick={() => setModal(false)}>Update User</button>
             </form>
-            <div>Login/Signup</div>
-            <button onClick={() => setModal(false)} className="align">
-              X
-            </button>
+          
+          
           </ReactModal>
           <div className="ContentShaper">
             <div className="TableShaper">

@@ -1,0 +1,51 @@
+.title{
+    margin-bottom: 30px;
+    font-size: 30px;
+  }
+  
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
+  label {
+    margin-top: 12px;
+    display: block;
+  }
+ 
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .column {
+    width: 50%;
+    padding: 0 10px;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      padding-bottom: 0;
+    }
+  }
+  
