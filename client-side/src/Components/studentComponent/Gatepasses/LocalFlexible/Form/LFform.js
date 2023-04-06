@@ -57,11 +57,6 @@ const LFform = (props) => {
       // "send_approval_to":"00000087"
     }
   );
-
-  const [lastMondayDate, setLastMondayDate] = useState("0000-00-00");
-  const [nextMondayDate, setNextMondayDate] = useState("0000-00-00");
-
-  const [isDisabled, setIsDisabled] = useState(false);
   const handleInput = async (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -82,41 +77,7 @@ const LFform = (props) => {
         return response.blacklisted;
       })
       .catch((err) => console.log("error:", err));
-    // if (res.length != 0) {
-    //   if (res[0].blacklisted === true) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // }
-    // console.log(res);
     return fetchData;
-  };
-  const checkGatepassAvailability = async () => {
-    let data = { ...formInput };
-    const id = data["user_id"];
-
-    const fetchData = await fetch(
-      "http://127.0.0.1:4000/gatepass/v2/student/get_number_of_local_fixed_student/" +
-        `${id}/` +
-        `${formatDate(lastMonday)}/` +
-        `${formatDate(nextMonday)}`
-    )
-      .then((Response) => Response.json())
-      .then((response) => {
-        return response;
-      })
-      .catch((err) => console.log("error:", err));
-
-    return fetchData;
-  };
-
-  const checkTime = () => {
-    if (props.departureTime <= time && time <= props.arrivalTime) {
-      return true;
-    } else {
-      return false;
-    }
   };
 
   const checkApprovedOrCheckedout = async () => {
@@ -135,7 +96,7 @@ const LFform = (props) => {
   };
 
   const checkLocalFlexible = async () => {
-    const res1 = checkTime();
+    // const res1 = checkTime();
     // const res2 = await checkGatepassAvailability();
     const res2 = await checkBlacklist();
     const res3 = await checkApprovedOrCheckedout();
@@ -149,10 +110,7 @@ const LFform = (props) => {
     else if (res2 == true) {
       alert("Cannot Apply: You are blacklisted, you cannot apply for Gatepass");
       return false; 
-    } else if (res1 == false) {
-      alert("Cannot Apply: You cannot apply a gatepass in the outside hours");
-      return false;
-    } else {
+      } else {
       return true;
     }
   };
