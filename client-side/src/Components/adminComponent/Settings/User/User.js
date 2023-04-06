@@ -75,52 +75,119 @@ export const User = () => {
             contentLabel="Example Modal"
             onRequestClose={() => setModal(false)}
             // style={(className = "modalContainer")}
-            
           >
-             <div class="title">Edit User</div>
+            <div class="title">Edit User</div>
+
             <form>
-           
               <div class="container">
-                
-                <div class="column">
-                  <label for="name">Name:</label>
-                  <input type="text" id="name" name="name"></input>
-                  <label for="user_id">Enrollment Number:</label>
-                  <input type="text" id="user_id" name="user_id"></input>
-                  <label for="email">Email ID:</label>
-                  <input type="text" id="email" name="email"></input>
-                  <label for="role">Role:</label>
-                  <select id="role" name="role">
+                <div class="column left-column">
+                  <label for="name" id="name-label">
+                    Name:
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    aria-labelledby="name-label"
+                  ></input>
+                  <label for="user_id" id="user-id-label">
+                    Enrollment Number:
+                  </label>
+                  <input
+                    type="text"
+                    id="user_id"
+                    name="user_id"
+                    aria-labelledby="user-id-label"
+                  ></input>
+                  <label for="email" id="email-label">
+                    Email ID:
+                  </label>
+                  <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    aria-labelledby="email-label"
+                  ></input>
+                  <label for="role" id="role-label">
+                    Role:
+                  </label>
+                  <select id="role" name="role" aria-labelledby="role-label">
                     <option value="">-Role-</option>
                     <option value="student">Student</option>
                     <option value="faculty">Faculty</option>
                     <option value="staff">Staff</option>
                   </select>
                 </div>
-
-                <div class="column">
-                  <label for="group_setting">Group Setting:</label>
-                  <select id="group_setting" name="group_setting">
+                <div class="column right-column">
+                  <label for="group_setting" id="group-setting-label">
+                    Group Setting:
+                  </label>
+                  <select
+                    id="group_setting"
+                    name="group_setting"
+                    aria-labelledby="group-setting-label"
+                  >
                     <option value="no_role">No Role</option>
                   </select>
-                  <label for="group_setting">Subgroup Setting:</label>
-                  <select id="group_setting" name="group_setting">
+                  <label for="subgroup_setting" id="subgroup-setting-label">
+                    Subgroup Setting:
+                  </label>
+                  <select
+                    id="subgroup_setting"
+                    name="subgroup_setting"
+                    aria-labelledby="subgroup-setting-label"
+                  >
                     <option value="no_role">No Role</option>
                   </select>
-                  <label for="hostel">Hostel:</label>
-                  <input type="text" id="hostel" name="hostel"></input>
-                  <label for="room_number">Room Number:</label>
-                  <input type="text" id="room_number" name="room_number"></input>
-                  <label for="contact_number">Contact Number:</label>
-                  <input type="text" id="contact_number" name="contact_number"></input>
-                  <label for="parents_contact_number">Parents Contact Number:</label>
-                  <input type="text" id="parents_contact_number" name="parents_contact_number"></input>
+                  <label for="hostel" id="hostel-label">
+                    Hostel:
+                  </label>
+                  <input
+                    type="text"
+                    id="hostel"
+                    name="hostel"
+                    aria-labelledby="hostel-label"
+                  ></input>
+                  <label for="room_number" id="room-number-label">
+                    Room Number:
+                  </label>
+                  <input
+                    type="text"
+                    id="room_number"
+                    name="room_number"
+                    aria-labelledby="room-number-label"
+                  ></input>
+                  <label for="contact_number" id="contact-number-label">
+                    Contact Number:
+                  </label>
+                  <input
+                    type="text"
+                    id="contact_number"
+                    name="contact_number"
+                    aria-labelledby="contact-number-label"
+                  ></input>
+                  <label
+                    for="parents_contact_number"
+                    id="parents-contact-number-label"
+                  >
+                    Parents Contact Number:
+                  </label>
+                  <input
+                    type="text"
+                    id="parents_contact_number"
+                    name="parents_contact_number"
+                    aria-labelledby="parents-contact-number-label"
+                  ></input>
                 </div>
               </div>
-              <button type="submit" onClick={() => setModal(false)}>Update User</button>
+              <button
+                type="submit"
+                id="update-button"
+                onClick={() => setModal(false)}
+              >
+                Update User
+              </button>
             </form>
-          
-          
           </ReactModal>
           <div className="ContentShaper">
             <div className="TableShaper">
