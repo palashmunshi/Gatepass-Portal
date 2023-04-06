@@ -74,7 +74,7 @@ export const Group = () => {
                   {groups
                     .slice(0, showMoreGroup ? groups.length : 10)
                     .map((group, index) => (
-                      <tr key={group.gps_groupid}>
+                      <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{group.gps_groupname}</td>
                         <td>
