@@ -1,4 +1,4 @@
-.lfform {
+.lfxform {
   flex: inline-flex;
   width: 30rem;
   margin-top: 20px;
@@ -37,6 +37,8 @@
     }
 
     .button {
+      margin-top:-5%;
+      margin-left: 30%;
       font-size: 18px;
       background: brown;
       color: white;

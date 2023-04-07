@@ -186,7 +186,7 @@ const LFform = (props) => {
   };
 
   return (
-    <div className="lfform">
+    <div className="lfxform">
       <form className="form">
         <div className="common">
           <label className="label">Enrollment ID</label>
@@ -250,7 +250,7 @@ const LFform = (props) => {
           />
         </div>
 
-        <div className="common" style={{ marginBottom: "60px" }}>
+        <div className="common" style={{ marginBottom: "50px" }}>
           <label className="label">Send Approval To</label>
           <div className="dropdown">
             <ReactDropdown  options={warden} placeholder="Select a warden" name= "warden" />
