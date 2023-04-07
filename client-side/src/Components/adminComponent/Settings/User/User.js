@@ -29,7 +29,7 @@ export const User = () => {
   }, []);
 
   const handleShowMore = () => {
-    setDisplayCount(displayCount + 20);
+    setDisplayCount(displayCount + 40);
     setShowMore(true);
   };
 
@@ -63,6 +63,56 @@ export const User = () => {
       <div className="adminContainer">
         <Navbar />
         <div>
+          <div className="AddDetails">
+            <div className="BulkUpload">
+              <h5>Bulk Upload</h5>
+              <div className="Shaper">
+                <form action="" method="post">
+                  <div className="handleBulkUpload">
+                    <label className="label">role</label>
+                    <select name="role" defaultValue="" className="option1">
+                      <option disabled="" className="option">
+                        Please select one
+                      </option>
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                      <option value="guest">Guest</option>
+                    </select>
+
+                    <label className="label">group</label>
+                    <select name="role" defaultValue="" className="option1">
+                      <option disabled="" className="option">
+                        Please select one
+                      </option>
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                      <option value="guest">Guest</option>
+                    </select>
+
+                    <label className="label">subgroup</label>
+                    <select name="role" defaultValue="" className="option1">
+                      <option disabled="" className="option">
+                        Please select one
+                      </option>
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                      <option value="guest">Guest</option>
+                    </select>
+
+                    <label className="label">select</label>
+                    <select name="role" defaultValue="" className="option1">
+                      <option disabled="" className="option">
+                        choose
+                      </option>
+                    </select>
+
+                    <p className="button">Upload</p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
           <input
             type="text"
             placeholder="Search Name"
@@ -191,6 +241,7 @@ export const User = () => {
               </button>
             </form>
           </ReactModal>
+
           <div className="ContentShaper">
             <div className="TableShaper">
               <table className="table1">
@@ -229,42 +280,108 @@ export const User = () => {
                 </p>
               </div>
             </div>
-            <div className="AddDetails">
-              <div className="BulkUpload">
-                <h5>Bulk Upload</h5>
-                <form action="" method="post">
-                  <div className="handleBulkUpload">
-                    <label className="label">Select a role</label>
-                    <select name="role" defaultValue="">
-                      <option disabled="" className="option">
-                        Please select one
-                      </option>
-                      <option value="admin">Admin</option>
-                      <option value="user">User</option>
-                      <option value="guest">Guest</option>
-                    </select>
 
-                    <label className="label">Select A Group</label>
-                    <select name="role" defaultValue="">
-                      <option disabled="" className="option">
-                        Please select one
-                      </option>
-                      <option value="admin">Admin</option>
-                      <option value="user">User</option>
-                      <option value="guest">Guest</option>
-                    </select>
+            <div className="add_Form">
+              <p>Create User</p>
+              <div className="Form">
+                <form id = "form-container">
+                  <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required className="form_input" />
+                  </div>
 
-                    <label className="label">Select a subgroup</label>
-                    <select name="role" defaultValue="">
-                      <option disabled="" className="option">
-                        Please select one
-                      </option>
-                      <option value="admin">Admin</option>
-                      <option value="user">User</option>
-                      <option value="guest">Guest</option>
+                  <div>
+                    <label for="enrollment">Enrollment Number:</label>
+                    <input
+                      type="text"
+                      id="enrollment"
+                      name="enrollment"
+                      required
+                      className="form_input"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required  className="form_input"/>
+                  </div>
+
+                  <div>
+                    <label for="role">Role:</label>
+                    <select id="role" name="role">
+                      <option value="student">Student</option>
+                      <option value="faculty">Faculty</option>
                     </select>
                   </div>
-                  <button className="button">Upload</button>
+
+                  <div>
+                    <label for="group">Group:</label>
+                    <select id="group" name="group">
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="subgroup">Subgroup:</label>
+                    <select id="subgroup" name="subgroup">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="hostelroom">Hostel Room Number:</label>
+                    <input
+                      type="text"
+                      id="hostelroom"
+                      name="hostelroom"
+                      required
+                      className="form_input"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="contact">Contact Number:</label>
+                    <input
+                      type="tel"
+                      id="contact"
+                      name="contact"
+                      pattern="[0-9]{10}"
+                      required
+                      className="form_input"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="parentscontact">Parent's Contact Number:</label>
+                    <input
+                      type="tel"
+                      id="parentscontact"
+                      name="parentscontact"
+                      pattern="[0-9]{10}"
+                      required
+                      className="form_input"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="address">Address:</label>
+                    <textarea
+                      id="address"
+                      name="address"
+                      rows="5"
+                      cols="30"
+                      required
+                    ></textarea>
+                  </div>
+                  <div>
+                    <label for="punchid">Punch ID:</label>
+                    <input type="text" id="punchid" name="punchid" required />
+                    
+                  </div>
+
+                  <input type="submit" value="Submit" className="form_input"/>
                 </form>
               </div>
             </div>
