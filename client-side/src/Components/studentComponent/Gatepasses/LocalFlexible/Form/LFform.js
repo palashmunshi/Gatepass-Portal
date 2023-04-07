@@ -60,9 +60,17 @@ const LFform = (props) => {
   const handleInput = async (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    console.log(name, value);
+    // console.log(name, value);
     setFormInput({ [name]: value });
+    
   };
+  // const resizeinput= async (element,defaultheight)=>{
+  //   if(element){
+  //     const target= element.target?element.target : element;
+  //     target.style.height=defaultheight;
+  //     target.style.height=`${target.scrollHeight}px`;
+  //   }
+  // }
 
   const checkBlacklist = async () => {
     let data = { ...formInput };
@@ -182,11 +190,12 @@ const LFform = (props) => {
       <form className="form">
         <div className="common">
           <label className="label">Enrollment ID</label>
-          <input type="text" name="user_id" onChange={handleInput} />
+          <input type="text" className="forminput" name="user_id" onChange={handleInput} />
         </div>
         <div className="common">
           <label className="label">Departure Date</label>
           <input
+          className="forminput"
             type="text"
             name="from_date"
             placeholder={date}
@@ -198,6 +207,7 @@ const LFform = (props) => {
           <label className="label">Departure Time</label>
 
           <input
+          className="forminput"
             type="time"
             name="from_time"
             disabled={false}
@@ -208,6 +218,7 @@ const LFform = (props) => {
         <div className="common">
           <label className="label">Arrival Date</label>
           <input
+          className="forminput"
             type="time"
             name="to_date"
             placeholder={date}
@@ -219,6 +230,7 @@ const LFform = (props) => {
         <div className="common">
           <label className="label">Arrival Time</label>
           <input
+          className="forminput"
             type="time"
             name="to_time"
             disabled={false}
@@ -230,6 +242,7 @@ const LFform = (props) => {
         <div className="common">
           <label className="label">Purpose</label>
           <input
+          className="forminput"
             type="text"
             name="purpose"
             placeholder="Type a valid reason"
@@ -240,7 +253,7 @@ const LFform = (props) => {
         <div className="common" style={{ marginBottom: "60px" }}>
           <label className="label">Send Approval To</label>
           <div className="dropdown">
-            <ReactDropdown options={warden} placeholder="Select a warden" name= "warden" />
+            <ReactDropdown  options={warden} placeholder="Select a warden" name= "warden" />
           </div>
         </div>
 
