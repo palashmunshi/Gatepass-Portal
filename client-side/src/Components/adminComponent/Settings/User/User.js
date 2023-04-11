@@ -53,6 +53,11 @@ export const User = () => {
     }
   };
 
+  const fillModal = (event) => {
+    const user_id = event.target.value;
+    console.log(event.target)
+  }
+
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -76,7 +81,7 @@ export const User = () => {
             isOpen={modal}
             contentLabel="Example Modal"
             onRequestClose={() => setModal(false)}
-            // style={(className = "modalContainer")}
+          // style={(className = "modalContainer")}
           >
             <div class="title">Edit User</div>
 
@@ -205,19 +210,19 @@ export const User = () => {
                 <tbody>
                   {search.length > 1
                     ? filterData.slice(0, displayCount).map((user, index) => (
-                        <tr key={index} onClick={() => setModal(true)}>
-                          <td>{index + 1}</td>
-                          <td>{user.name}</td>
-                          <td>{user.status}</td>
-                        </tr>
-                      ))
+                      <tr key={user.user_id} onClick={fillModal}>
+                        <td>{index + 1}</td>
+                        <td>{user.name}</td>
+                        <td>{user.status}</td>
+                      </tr>
+                    ))
                     : data.slice(0, displayCount).map((user, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>{user.name}</td>
-                          <td>{user.status}</td>
-                        </tr>
-                      ))}
+                      <tr key={user.user_id} onClick={() => setModal(true)}>
+                        <td>{index + 1}</td>
+                        <td>{user.name}</td>
+                        <td>{user.status}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
               <div id="buttonhandler">
