@@ -53,8 +53,11 @@ function App() {
   <Route exact path="/guard/checkout" element={<Checkout />} />
   <Route exact path="/guard/VisitorCheckout" element={<VisitorCheckout />} />
   <Route exact path="/guard/VisitorCheckin" element={<VisitorCheckin />} />
+  {/* <Route exact path="/student" element={<Student />} /> */}
 
-  <Route path="/student" element={<PrivateRoute component={Student} role="student" />} />
+  <Route  element={<PrivateRoute  role="1"/>} >
+  <Route exact path="/student" element={<Student />} />
+    </Route>
 </Routes>
 
       </BrowserRouter>

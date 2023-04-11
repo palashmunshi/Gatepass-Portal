@@ -30,7 +30,7 @@ export default function Auth() {
       client_id:
         "372946592599-u1gj83quodhpdae46ejslj4tto3mn3vn.apps.googleusercontent.com",
       callback: handleCallbackResponse,
-    });
+    });     
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {
       theme: "outline",
       size: "large",
@@ -44,8 +44,8 @@ export default function Auth() {
       console.log("User and role values set in localStorage:", user, role);
       
 
-      if (role === 1) {
-        navigate("/student");
+      if (role === 1) { 
+        navigate("/student");   
       } else if (role === 2) {
         navigate("/admin");
       }
