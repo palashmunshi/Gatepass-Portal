@@ -93,7 +93,7 @@ router.put('/admin/parameter_config/arrival_restrict_lb/:param_id', updateArriva
 router.put('/admin/parameter_config/flexible_entry/:param_id', updateFlexibleEntry);
 //////////////Users///////////////////////////
 router.get('/admin/all_status', getAllStatus);
-router.put('/admin/user/:user_id', updateUser);
+router.put('/admin/update_user/:user_id', updateUser);
 router.get('/admin/user_info/:user_id', getUserDetails)
 
 router.post('/admin/user', createUser);
