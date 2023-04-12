@@ -46,6 +46,7 @@ import {
     updateRoleAndStatus,
     updateGroup,
     updateSubGroup,
+    getUserDetails,
 
 } from "../controllers/admin.controller"
 
@@ -82,6 +83,7 @@ router.put('/admin/update_subgroup/:subGroup_id', updateSubGroup);
 router.get('/admin/all_role', getAllRole);
 router.get('/admin/user_role', getUserRole);
 router.put('/admin/update_role_and_status', updateRoleAndStatus)
+router.get('/admin/user_info/:user_id', getUserDetails)
 /////////////Param Config/////////////////////
 router.get('/admin/parameter_config', getParameterConfig);
 router.put('/admin/parameter_config/week_limit/:param_id', updateWeekLimit);
