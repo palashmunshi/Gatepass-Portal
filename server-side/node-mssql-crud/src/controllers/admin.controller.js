@@ -1027,3 +1027,17 @@ export const updateUser = async (req, res) => {
     res.send(error.message);
   }
 };
+
+export const getUserDetails = async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.getUserById);
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
