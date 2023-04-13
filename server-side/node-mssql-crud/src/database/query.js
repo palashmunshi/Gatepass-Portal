@@ -58,7 +58,7 @@ export const queries = {
 
 
   /////////////////////////////Users//////////////////////////////
-  updateUser: "UPDATE [gps_db].[gps_usersmaster] SET role_id = CASE WHEN (@role_id IS NOT NULL) THEN @role_id else role_id END, group_id = CASE WHEN (@group_id IS NOT NULL) THEN @group_id else group_id END ,subgroup_id = CASE WHEN (@subgroup_id IS NOT NULL) THEN @subgroup_id else subgroup_id END , room_no = @room_no, hostel = @hostel, contact_number = @contact_number, p_number =  CASE WHEN (@p_number IS NOT NULL) THEN @p_number else p_number END WHERE user_id = @user_id;",
+  updateUser: "UPDATE [gps_db].[gps_db].[gps_usersmaster] SET role_id = CASE WHEN (@role_id IS NOT NULL) THEN @role_id else role_id END, group_id = CASE WHEN (@group_id IS NOT NULL) THEN @group_id else group_id END ,subgroup_id = CASE WHEN (@subgroup_id IS NOT NULL) THEN @subgroup_id else subgroup_id END , room_no = @room_no, hostel = @hostel, contact_number = @contact_number, p_number =  CASE WHEN (@p_number IS NOT NULL) THEN @p_number else p_number END WHERE user_id = @user_id;",
 
   /* __________________________________________________ADMIN REPORT QUERIES__________________________________________________ */
 
