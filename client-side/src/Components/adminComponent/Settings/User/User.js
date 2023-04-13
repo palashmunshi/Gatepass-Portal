@@ -15,7 +15,18 @@ export const User = () => {
   const [search, setSearch] = useState("");
   const [filterData, setFilterData] = useState([]);
   const [modal, setModal] = useState(false);
-  const [details, setDetails] = useState([])
+  const [details, setDetails] = useState([]);
+  const [role_id, setRoleID] = useState(0);
+  const [group_id, setGroup] = useState(0);
+  const [subgroup_id, setSubgroup] = useState(0);
+  const [hostel, setHostel] = useState("");
+  const [room_no, setRoomNo] = useState(0);
+  const [contact_number, setContactNo] = useState("");
+  const [p_number, setPno] = useState("");
+  const [user_id, setUserId] = useState("")
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,11 +66,64 @@ export const User = () => {
   };
 
   const fillModal = async (event) => {
+    setModal(true)
     const user_id = event.target.name;
+    console.log(user_id)
     await fetch(
       `http://localhost:4000/gatepass/v2/admin/user_info/${user_id}`
     ).then((res) => res.json()).then((data) => setDetails(data));
+
+    details.slice(0).map((props) => {
+      setUserId(props.user_id)
+      setHostel(props.hostel);
+      setContactNo(props.contact_number)
+      setPno(props.p_number)
+      setRoleID(props.role_id)
+      setGroup(props.group_id)
+      setSubgroup(props.subgroup_id)
+      setRoomNo(props.room_no)
+
+    })
+    console.log(user_id)
   };
+
+  // const emptyModal = () => {
+  //   setDetails([])
+  //   setModal(false)
+  // }
+
+
+  const handleUpdate = (event) => {
+
+    const id = user_id;
+    console.log(id)
+    console.log("working")
+    console.log(room_no);
+    let fetchData = fetch(
+      `http://127.0.0.1:4000/gatepass/v2/admin/update_user/${user_id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          role_id: role_id,
+          group_id: group_id,
+          subgroup_id: subgroup_id,
+          hostel: hostel,
+          room_no: room_no,
+          contact_number: contact_number,
+          p_number: p_number
+        }),
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => console.log("success: " + response.msg))
+      .catch((error) => console.log("error: " + error));
+
+    setDetails([])
+    setModal(false);
+    return fetchData;
+
+  }
 
   return (
     <div className="admin">
@@ -79,12 +143,13 @@ export const User = () => {
             overlayClassName="Overlay"
             isOpen={modal}
             contentLabel="Example Modal"
-            onRequestClose={() => setModal(false)}
+            onRequestClose={() => { setModal(false); setDetails([]) }}
           // style={(className = "modalContainer")}
           >
 
             <div class="title">Edit User</div>
             {details.slice(0).map((user) => (
+
               <form>
                 <div class="container">
                   <div class="column left-column">
@@ -124,7 +189,7 @@ export const User = () => {
                     <label for="role" id="role-label">
                       Role:
                     </label>
-                    <select id="role" name="role" aria-labelledby="role-label">
+                    <select id="role" name="role" aria-labelledby="role-label" onChange={(event) => setRoleID(event.target.value)}>
                       <option value="">-Role-</option>
                       <option value="student">Student</option>
                       <option value="faculty">Faculty</option>
@@ -139,6 +204,7 @@ export const User = () => {
                       id="group_setting"
                       name="group_setting"
                       aria-labelledby="group-setting-label"
+                      onChange={(event) => setGroup(event.target.value)}
                     >
                       <option value="no_role">No Role</option>
                     </select>
@@ -149,6 +215,7 @@ export const User = () => {
                       id="subgroup_setting"
                       name="subgroup_setting"
                       aria-labelledby="subgroup-setting-label"
+                      onChange={(event) => setSubgroup(event.target.value)}
                     >
                       <option value="no_role">No Role</option>
                     </select>
@@ -161,6 +228,7 @@ export const User = () => {
                       name="hostel"
                       aria-labelledby="hostel-label"
                       defaultValue={user.hostel}
+                      onChange={(event) => setHostel(event.target.value)}
                     ></input>
                     <label for="room_number" id="room-number-label">
                       Room Number:
@@ -171,6 +239,7 @@ export const User = () => {
                       name="room_number"
                       aria-labelledby="room-number-label"
                       defaultValue={user.room_no}
+                      onChange={(event) => setRoomNo(event.target.value)}
                     ></input>
                     <label for="contact_number" id="contact-number-label">
                       Contact Number:
@@ -181,6 +250,7 @@ export const User = () => {
                       name="contact_number"
                       aria-labelledby="contact-number-label"
                       defaultValue={user.contact_number}
+                      onChange={(event) => setContactNo(event.target.value)}
                     ></input>
                     <label
                       for="parents_contact_number"
@@ -194,13 +264,14 @@ export const User = () => {
                       name="parents_contact_number"
                       aria-labelledby="parents-contact-number-label"
                       defaultValue={user.p_number}
+                      onChange={(event) => setPno(event.target.value)}
                     ></input>
                   </div>
                 </div>
                 <button
                   type="submit"
                   id="update-button"
-                  onClick={() => setModal(false)}
+                  onClick={handleUpdate}
                 >
                   Update User
                 </button>
@@ -221,14 +292,14 @@ export const User = () => {
                 <tbody>
                   {search.length > 1
                     ? filterData.slice(0, displayCount).map((user, index) => (
-                      <tr key={user.user_id} onClick={() => setModal(true)}>
+                      <tr key={user.user_id}>
                         <td>{index + 1}</td>
                         <td>{user.name}</td>
                         <td><button onClick={fillModal} name={user.user_id}>Edit</button></td>
                       </tr>
                     ))
                     : data.slice(0, displayCount).map((user, index) => (
-                      <tr key={user.user_id} onClick={() => setModal(true)}>
+                      <tr key={user.user_id}>
                         <td>{index + 1}</td>
                         <td>{user.name}</td>
                         <td><button onClick={fillModal} name={user.user_id}>Edit</button></td>
