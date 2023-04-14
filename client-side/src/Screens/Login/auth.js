@@ -1,48 +1,71 @@
 import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { GoogleLoginButton } from "react-social-login-buttons";
-import { LoginSocialGoogle } from "reactjs-social-login";
-import Rolecheck from "./Rolecheck";
+import { useEffect } from "react";
+import jwt_decode from "jwt-decode";
 
 export default function Auth() {
-  const [role_id, setRoleId] = useState(null);
-  const [error, setError] = useState(null);
-  const [email,setEmail]=useState("");
-  const navigate = useNavigate(); // Add this line to get navigate object\
-  const [userInfo, setUserInfo] = useState({ email: "", roleId: null });
+  const [user, setUser] = useState({});
+  const [role, setRole] = useState({});
+  const navigate = useNavigate();
 
-  
+  function handleCallbackResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+    const userObject = jwt_decode(response.credential);
+    setUser(userObject);
+    fetch(
+      `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${userObject.email}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setRole(data.role_id);
+        console.log(data.role_id);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:
+        "372946592599-u1gj83quodhpdae46ejslj4tto3mn3vn.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });     
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outline",
+      size: "large",
+    });
+  }, []);
+
+  useEffect(() => {
+    if (user && role) {
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("role", JSON.stringify(role));
+      console.log("User and role values set in localStorage:", user, role);
+      
+
+      if (role === 1) { 
+        navigate("/student");   
+      } else if (role === 4) {
+        navigate("/admin");
+      }
+      else if(role === 7){
+        navigate("/bch")
+      }
+      else if(role === 5){
+        navigate("/guard")
+      }
+    }
+  }, [user, role]);
 
   return (
     <div className="Auth-form-container">
       <form className="Auth-form">
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign In</h3>
-          <LoginSocialGoogle
-          client_id={"372946592599-u1gj83quodhpdae46ejslj4tto3mn3vn.apps.googleusercontent.com"}
-          scope="openid profile email"
-          discoveryDocs="claims_supported"  
-          access_type="offline"
-          onResolve={({ provider, data }) => {
-            console.log(data);
-            const send_email = data.email;
-            setEmail(send_email);
-            console.log(email);
-            // navigate(`/Rolecheck ?email={send_email}`); // navigate to RoleCheck
-            // <Rolecheck email={send_email}/>
-            navigate('/Rolecheck' ,{ state:{email:send_email }});  
-          }}
-          onReject={(err) => {
-            console.log(err);
-          }}
-        >
-          <GoogleLoginButton />
-          </LoginSocialGoogle>
-          {error && <p className="error">{error}</p>}
+          <div id="signInDiv"></div>
         </div>
       </form>
     </div>
   );
-  
 }
