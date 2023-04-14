@@ -15,6 +15,18 @@ export const User = () => {
   const [search, setSearch] = useState("");
   const [filterData, setFilterData] = useState([]);
   const [modal, setModal] = useState(false);
+  const [details, setDetails] = useState([]);
+  const [role_id, setRoleId] = useState(0);
+  const [group_id, setGroupId] = useState(0);
+  const [subgroup_id, setSubgroupId] = useState(0);
+  const [hostel, setHostel] = useState("");
+  const [room_no, setRoomNo] = useState(0);
+  const [contact_number, setContactNumber] = useState("");
+  const [p_number, setPnumber] = useState("");
+  const [user_id, setUserId] = useState("");
+  const [roles, setRoles] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [subgroups, setSubgroups] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,10 +34,20 @@ export const User = () => {
         "http://localhost:4000/gatepass/v2/admin/get_all_users"
       );
       setData(result.data);
+
+      await fetch("http://localhost:4000/gatepass/v2/admin/all_role")
+        .then((res) => res.json())
+        .then((data) => setRoles(data));
+
+      await fetch("http://localhost:4000/gatepass/v2/admin/get_all_groups")
+        .then((res) => res.json())
+        .then((data) => setGroups(data));
+
+      await fetch("http://localhost:4000/gatepass/v2/admin/get_all_sub_groups")
+        .then((res) => res.json())
+        .then((data) => setSubgroups(data));
     };
     fetchData();
-    console.log(data);
-    console.log("bruh");
   }, []);
 
   const handleShowMore = () => {
@@ -53,8 +75,46 @@ export const User = () => {
     }
   };
 
-  const toggleModal = () => {
-    setModal(!modal);
+  const fillModal = async (event) => {
+    setModal(true);
+    const id = event.target.name;
+
+    await fetch(`http://localhost:4000/gatepass/v2/admin/user_info/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setDetails(data);
+        setUserId(data[0].user_id);
+        setHostel(data[0].hostel);
+        setContactNumber(data[0].contact_number);
+        setPnumber(data[0].p_number);
+        setRoleId(data[0].role_id);
+        setGroupId(data[0].group_id);
+        setSubgroupId(data[0].subgroup_id);
+        setRoomNo(data[0].room_no);
+      });
+  };
+
+  const handleUpdate = async (event) => {
+    const id = event.target.name;
+    await fetch(`http://127.0.0.1:4000/gatepass/v2/admin/update_user/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        role_id: role_id,
+        group_id: group_id,
+        subgroup_id: subgroup_id,
+        hostel: hostel,
+        room_no: room_no,
+        contact_number: contact_number,
+        p_number: p_number,
+      }),
+    })
+      .then((Response) => Response.text())
+      .then((response) => console.log("success: " + response.msg))
+      .catch((error) => console.log("error: " + error));
+
+    setDetails([]);
+    setModal(false);
   };
 
   return (
@@ -125,121 +185,163 @@ export const User = () => {
             overlayClassName="Overlay"
             isOpen={modal}
             contentLabel="Example Modal"
-            onRequestClose={() => setModal(false)}
-            // style={(className = "modalContainer")}
+            onRequestClose={() => {
+              setModal(false);
+              setDetails([]);
+            }}
           >
             <div class="title">Edit User</div>
-
-            <form>
-              <div class="container">
-                <div class="column left-column">
-                  <label for="name" id="name-label">
-                    Name:
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    aria-labelledby="name-label"
-                  ></input>
-                  <label for="user_id" id="user-id-label">
-                    Enrollment Number:
-                  </label>
-                  <input
-                    type="text"
-                    id="user_id"
-                    name="user_id"
-                    aria-labelledby="user-id-label"
-                  ></input>
-                  <label for="email" id="email-label">
-                    Email ID:
-                  </label>
-                  <input
-                    type="text"
-                    id="email"
-                    name="email"
-                    aria-labelledby="email-label"
-                  ></input>
-                  <label for="role" id="role-label">
-                    Role:
-                  </label>
-                  <select id="role" name="role" aria-labelledby="role-label">
-                    <option value="">-Role-</option>
-                    <option value="student">Student</option>
-                    <option value="faculty">Faculty</option>
-                    <option value="staff">Staff</option>
-                  </select>
+            {details.slice(0).map((user) => (
+              <form>
+                <div class="container">
+                  <div class="column left-column">
+                    <label for="name" id="name-label">
+                      Name:
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      aria-labelledby="name-label"
+                      defaultValue={user.name}
+                      disabled={true}
+                    ></input>
+                    <label for="user_id" id="user-id-label">
+                      Enrollment Number:
+                    </label>
+                    <input
+                      type="text"
+                      id="user_id"
+                      name="user_id"
+                      aria-labelledby="user-id-label"
+                      defaultValue={user.user_id}
+                      disabled={true}
+                    ></input>
+                    <label for="email" id="email-label">
+                      Email ID:
+                    </label>
+                    <input
+                      type="text"
+                      id="email"
+                      name="email"
+                      aria-labelledby="email-label"
+                      defaultValue={user.email_id}
+                      disabled={true}
+                    ></input>
+                    <label for="role" id="role-label">
+                      Role:
+                    </label>
+                    <select
+                      id="role"
+                      name="role"
+                      aria-labelledby="role-label"
+                      onChange={(event) => setRoleId(event.target.value)}
+                    >
+                      <option value="">-Role-</option>
+                      {roles.slice(0, roles.length).map((props) => (
+                        <>
+                          <option value={props.role_id}>
+                            {props.role_name}
+                          </option>
+                        </>
+                      ))}
+                    </select>
+                  </div>
+                  <div class="column right-column">
+                    <label for="group_setting" id="group-setting-label">
+                      Group Setting:
+                    </label>
+                    <select
+                      id="group_setting"
+                      name="group_setting"
+                      aria-labelledby="group-setting-label"
+                      onChange={(event) => setGroupId(event.target.value)}
+                    >
+                      <option value="">-Group-</option>
+                      {groups.slice(0, groups.length).map((props) => (
+                        <option value={props.gps_groupid}>
+                          {props.gps_groupname}
+                        </option>
+                      ))}
+                    </select>
+                    <label for="subgroup_setting" id="subgroup-setting-label">
+                      Subgroup Setting:
+                    </label>
+                    <select
+                      id="subgroup_setting"
+                      name="subgroup_setting"
+                      aria-labelledby="subgroup-setting-label"
+                      onChange={(event) => setSubgroupId(event.target.value)}
+                    >
+                      <option value="">-Subgroup-</option>
+                      {subgroups.slice(0, subgroups.length).map((props) => (
+                        <option value={props.subgroup_id}>
+                          {props.subgroup_name}
+                        </option>
+                      ))}
+                    </select>
+                    <label for="hostel" id="hostel-label">
+                      Hostel:
+                    </label>
+                    <input
+                      type="text"
+                      id="hostel"
+                      name="hostel"
+                      aria-labelledby="hostel-label"
+                      defaultValue={user.hostel}
+                      onChange={(event) => setHostel(event.target.value)}
+                    ></input>
+                    <label for="room_number" id="room-number-label">
+                      Room Number:
+                    </label>
+                    <input
+                      type="text"
+                      id="room_number"
+                      name="room_number"
+                      aria-labelledby="room-number-label"
+                      defaultValue={user.room_no}
+                      onChange={(event) => setRoomNo(event.target.value)}
+                    ></input>
+                    <label for="contact_number" id="contact-number-label">
+                      Contact Number:
+                    </label>
+                    <input
+                      type="text"
+                      id="contact_number"
+                      name="contact_number"
+                      aria-labelledby="contact-number-label"
+                      defaultValue={user.contact_number}
+                      onChange={(event) =>
+                        setContactNumber(event.target.value.toString())
+                      }
+                    ></input>
+                    <label
+                      for="parents_contact_number"
+                      id="parents-contact-number-label"
+                    >
+                      Parents Contact Number:
+                    </label>
+                    <input
+                      type="text"
+                      id="parents_contact_number"
+                      name="parents_contact_number"
+                      aria-labelledby="parents-contact-number-label"
+                      defaultValue={user.p_number}
+                      onChange={(event) => setPnumber(event.target.value)}
+                    ></input>
+                  </div>
                 </div>
-                <div class="column right-column">
-                  <label for="group_setting" id="group-setting-label">
-                    Group Setting:
-                  </label>
-                  <select
-                    id="group_setting"
-                    name="group_setting"
-                    aria-labelledby="group-setting-label"
-                  >
-                    <option value="no_role">No Role</option>
-                  </select>
-                  <label for="subgroup_setting" id="subgroup-setting-label">
-                    Subgroup Setting:
-                  </label>
-                  <select
-                    id="subgroup_setting"
-                    name="subgroup_setting"
-                    aria-labelledby="subgroup-setting-label"
-                  >
-                    <option value="no_role">No Role</option>
-                  </select>
-                  <label for="hostel" id="hostel-label">
-                    Hostel:
-                  </label>
-                  <input
-                    type="text"
-                    id="hostel"
-                    name="hostel"
-                    aria-labelledby="hostel-label"
-                  ></input>
-                  <label for="room_number" id="room-number-label">
-                    Room Number:
-                  </label>
-                  <input
-                    type="text"
-                    id="room_number"
-                    name="room_number"
-                    aria-labelledby="room-number-label"
-                  ></input>
-                  <label for="contact_number" id="contact-number-label">
-                    Contact Number:
-                  </label>
-                  <input
-                    type="text"
-                    id="contact_number"
-                    name="contact_number"
-                    aria-labelledby="contact-number-label"
-                  ></input>
-                  <label
-                    for="parents_contact_number"
-                    id="parents-contact-number-label"
-                  >
-                    Parents Contact Number:
-                  </label>
-                  <input
-                    type="text"
-                    id="parents_contact_number"
-                    name="parents_contact_number"
-                    aria-labelledby="parents-contact-number-label"
-                  ></input>
-                </div>
-              </div>
-              <button
-                type="submit"
-                id="update-button"
-                onClick={() => setModal(false)}
-              >
-                Update User
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  id="update-button"
+                  onClick={handleUpdate}
+                  s
+                  name={user.user_id}
+                >
+                  Update User
+                </button>
+              </form>
+            ))}
           </ReactModal>
 
           <div className="ContentShaper">
@@ -250,25 +352,33 @@ export const User = () => {
                     <th>S.No</th>
 
                     <th>Name</th>
-                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {search.length > 1
                     ? filterData.slice(0, displayCount).map((user, index) => (
-                        <tr key={index} onClick={() => setModal(true)}>
-                          <td>{index + 1}</td>
-                          <td>{user.name}</td>
-                          <td>{user.status}</td>
-                        </tr>
-                      ))
+                      <tr key={user.user_id}>
+                        <td>{index + 1}</td>
+                        <td>{user.name}</td>
+                        <td>
+                          <button onClick={fillModal} name={user.user_id}>
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                    ))
                     : data.slice(0, displayCount).map((user, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>{user.name}</td>
-                          <td>{user.status}</td>
-                        </tr>
-                      ))}
+                      <tr key={user.user_id}>
+                        <td>{index + 1}</td>
+                        <td>{user.name}</td>
+                        <td>
+                          <button onClick={fillModal} name={user.user_id}>
+                            Edit
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
               <div id="buttonhandler">
