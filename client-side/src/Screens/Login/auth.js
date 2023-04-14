@@ -49,6 +49,12 @@ export default function Auth() {
       } else if (role === 4) {
         navigate("/admin");
       }
+      else if(role === 7){
+        navigate("/bch")
+      }
+      else if(role === 5){
+        navigate("/guard")
+      }
     }
   }, [user, role]);
 
