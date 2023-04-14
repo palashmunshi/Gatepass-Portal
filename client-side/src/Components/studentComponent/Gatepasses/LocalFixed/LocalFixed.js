@@ -21,20 +21,14 @@ export const LocalFixed = () => {
   const [arrivalTime, setarrivalTime] = useState("00:00:00");
 
   useEffect(() => {
-    const fetchData = async () => {
-      fetch("http://127.0.0.1:4000/gatepass/v2/admin/parameter_config")
-        .then((response) => response.json())
-        .then((text) => setParameter(text));
-      console.log(parameter);
-      if (parameter.length !== 0) {
-        setWeekLimit(parameter[0]["value"]);
-        setDepartureTime(parameter[1]["value"]);
-        setarrivalTime(parameter[2]["value"]);
-      }
-    };
-    const timer = setTimeout(() => fetchData(), 1000);
-    return () => clearInterval(timer);
-  });
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/parameter_config")
+      .then((response) => response.json())
+      .then((text) => {
+        setWeekLimit(text[0]["value"]);
+        setDepartureTime(text[1]["value"]);
+        setarrivalTime(text[2]["value"]);
+      });
+  }, []);
 
   return (
     <div className="admin">
