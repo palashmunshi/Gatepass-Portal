@@ -2,8 +2,8 @@
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "all": "^0.0.0",
-    "nodemon": "^2.0.21",
     "moment": "^2.29.4",
+    "nodemon": "^2.0.22",
     "react-date-picker": "^9.1.0",
     "react-use-fetch-api": "^2.1.1"
   }
