@@ -29,7 +29,7 @@ function App() {
       <BrowserRouter>
       <Routes>
   <Route path="*" element={<Login />} />
-  <Route exact path="/admin" element={<Admin />} />
+
 
   <Route exact path="/users" element={<User />} />
   <Route exact path="/changerole" element={<ChangeRole />} />
@@ -43,8 +43,8 @@ function App() {
   <Route exact path="/wreport" element={<WardenReport />} />
   <Route exact path="/bchreport" element={<BCHReport />} />
 
-  <Route path="/localfixed" element={<LocalFixed />} />
-  <Route path="/student/info" element={<Info />} />
+ 
+ 
 
   <Route path="/warden" element={<Warden />} />
 
@@ -57,6 +57,12 @@ function App() {
 
   <Route  element={<PrivateRoute  role="1"/>} >
   <Route exact path="/student" element={<Student />} />
+  <Route path="/localfixed" element={<LocalFixed />} />
+  <Route path="/student/info" element={<Info />} />
+    </Route>
+
+    <Route  element={<PrivateRoute  role="4"/>} >
+  <Route exact path="/admin" element={<Admin />} />
     </Route>
 </Routes>
 

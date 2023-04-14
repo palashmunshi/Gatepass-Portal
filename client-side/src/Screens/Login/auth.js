@@ -46,7 +46,7 @@ export default function Auth() {
 
       if (role === 1) { 
         navigate("/student");   
-      } else if (role === 2) {
+      } else if (role === 4) {
         navigate("/admin");
       }
     }
