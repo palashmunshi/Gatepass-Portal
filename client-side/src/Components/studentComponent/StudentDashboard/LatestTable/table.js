@@ -78,7 +78,7 @@ const StudentDashboard = () => {
               <TableCell className="tableCell">
                 {changeToTime(row.applied_time)}
               </TableCell>
-              <TableCell className="tableCell">{row.gatepass_type}</TableCell>
+              <TableCell className="tableCell">{row.gatepass_name}</TableCell>
               <TableCell className="tableCell">
                 {changeToDate(row.from_date)}
               </TableCell>
