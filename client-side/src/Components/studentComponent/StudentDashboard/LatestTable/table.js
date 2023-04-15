@@ -34,7 +34,6 @@ const StudentDashboard = () => {
         .then((text) => {
           setStudentGP(text);
         });
-      console.log(StudentGP);
     }
 
     fetchData();
@@ -71,7 +70,7 @@ const StudentDashboard = () => {
         </TableHead>
         <TableBody>
           {StudentGP.map((row) => (
-            <TableRow key={row.user_id}>
+            <TableRow key={row.applied_time}>
               <TableCell className="tableCell">
                 {changeToDate(row.applied_date)}
               </TableCell>
