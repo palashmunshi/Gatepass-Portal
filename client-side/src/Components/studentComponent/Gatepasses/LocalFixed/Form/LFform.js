@@ -3,12 +3,26 @@ import ReactDropdown from "react-dropdown";
 import "./style.scss";
 
 const LFform = (props) => {
-  // const DepartureDate = `${FormalValues.departuretime}`
-  // const DepartureTime = "17:30:00";
-  // const ArrivalTime = "21:30:00";
+  const [localFixedUsed, setLocalFixedUsed] = useState(0);
+
+  useEffect(() => {
+    const id = props.userDetails.user_id;
+
+    fetch(
+      "http://127.0.0.1:4000/gatepass/v2/student/get_number_of_local_fixed_student/" +
+        `${id}/` +
+        `${formatDate(lastMonday)}/` +
+        `${formatDate(nextMonday)}`
+    )
+      .then((Response) => Response.json())
+      .then((response) => {
+        setLocalFixedUsed(response);
+      })
+      .catch((err) => console.log("error:", err));
+  });
+
   const current = new Date();
-  const time = `${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
-  console.log(time);
+  const time = current.toTimeString().split(" ")[0];
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
@@ -35,7 +49,6 @@ const LFform = (props) => {
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
-      user_id: "",
       from_date: date,
       from_time: "1970-01-01T00:00:00.000Z",
       to_date: date,
@@ -72,7 +85,7 @@ const LFform = (props) => {
   const checkBlacklist = async () => {
     let data = { ...formInput };
     let res = {};
-    const id = data["user_id"];
+    const id = props.userDetails.user_id;
     const fetchData = await fetch(
       "http://127.0.0.1:4000/gatepass/v2/student/blacklisted/" + `${id}`
     )
@@ -94,7 +107,7 @@ const LFform = (props) => {
   };
   const checkGatepassAvailability = async () => {
     let data = { ...formInput };
-    const id = data["user_id"];
+    const id = props.userDetails.user_id;
 
     const fetchData = await fetch(
       "http://127.0.0.1:4000/gatepass/v2/student/get_number_of_local_fixed_student/" +
@@ -121,7 +134,7 @@ const LFform = (props) => {
 
   const checkApprovedOrCheckedout = async () => {
     let data = { ...formInput };
-    const id = data["user_id"];
+    const id = props.userDetails.user_id;
     const fetchData = await fetch(
       "http://127.0.0.1:4000/gatepass/v2/student/get_bool_student_checkedout_autoapproved/" +
         `${id}/`
@@ -163,7 +176,7 @@ const LFform = (props) => {
 
   const applyLocalFixedGatepass = async () => {
     let data = { ...formInput };
-    const id = data["user_id"];
+    const id = props.userDetails.user_id;
     let fetchData = fetch(
       "http://127.0.0.1:4000/gatepass/v2/student/apply_local_fixed/",
       {
@@ -196,38 +209,13 @@ const LFform = (props) => {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    let data = {
-      // "user_id": "00000087",
-      ...formInput,
-    };
-
-    const id = data["user_id"];
-    fetch(
-      "http://127.0.0.1:4000/gatepass/v2/student/local_flexible_gatepass/" +
-        `${id}`,
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((Response) => Response.json())
-      .then((response) => console.log("success:", response.msg))
-      .catch((err) => console.log("error:", err));
-  };
-
   return (
     <div className="lfform">
+      <div className="link">
+        You have {props.weekLimit - localFixedUsed} gatepasses left on
+        autoapproval
+      </div>
       <form className="form">
-        <div className="common">
-          <label className="label">Enrollment ID</label>
-          <input type="text" name="user_id" onChange={handleInput} />
-        </div>
         <div className="common">
           <label className="label">Departure Date</label>
           <input
