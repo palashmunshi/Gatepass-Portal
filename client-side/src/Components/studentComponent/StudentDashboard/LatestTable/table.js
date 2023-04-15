@@ -40,9 +40,19 @@ const StudentDashboard = () => {
     fetchData();
   }, []);
 
-  function changeDate(val) {
-    const date = `${val.getFullYear()}-${val.getMonth() + 1}-${val.getDate()}`;
-    return date;
+  function changeToDate(timestamp) {
+    const date = new Date(timestamp);
+    const day = date.getUTCDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
+  }
+
+  function changeToTime(timestamp) {
+    const date = new Date(timestamp);
+    const time = date.toISOString().substr(11, 8);
+    return time;
   }
 
   return (
@@ -62,11 +72,19 @@ const StudentDashboard = () => {
         <TableBody>
           {StudentGP.map((row) => (
             <TableRow key={row.user_id}>
-              <TableCell className="tableCell">({row.applied_time})</TableCell>
-              <TableCell className="tableCell">{row.applied_time}</TableCell>
+              <TableCell className="tableCell">
+                {changeToDate(row.applied_date)}
+              </TableCell>
+              <TableCell className="tableCell">
+                {changeToTime(row.applied_time)}
+              </TableCell>
               <TableCell className="tableCell">{row.gatepass_type}</TableCell>
-              <TableCell className="tableCell">{row.from_date}</TableCell>
-              <TableCell className="tableCell">{row.from_time}</TableCell>
+              <TableCell className="tableCell">
+                {changeToDate(row.from_date)}
+              </TableCell>
+              <TableCell className="tableCell">
+                {changeToTime(row.from_time)}
+              </TableCell>
               <TableCell className="tableCell">
                 <span className={`status ${row.status}`}>{row.status}</span>
               </TableCell>
