@@ -20,7 +20,7 @@ const StudentDashboard = () => {
         setStudentGP(text);
       });
     console.log(StudentGP);
-  });
+  }, []);
 
   function changeDate(val) {
     const date = `${val.getFullYear()}-${val.getMonth() + 1}-${val.getDate()}`;
