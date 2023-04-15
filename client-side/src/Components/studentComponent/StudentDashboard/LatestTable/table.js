@@ -10,17 +10,35 @@ import React, { useEffect, useState } from "react";
 
 const StudentDashboard = () => {
   const [StudentGP, setStudentGP] = useState([]);
+  const [userDetails, setUserDetails] = useState([]);
+  const localInfo = localStorage.getItem("user");
+  const obj = JSON.parse(localInfo);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:4000/gatepass/v2/student/recent_gatepass/00000087")
-      .then((response) => {
-        return response.json();
-      })
-      .then((text) => {
-        setStudentGP(text);
-      });
-    console.log(StudentGP);
-  });
+    let details;
+
+    async function fetchData() {
+      const response = await fetch(
+        `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${obj.email}`
+      );
+      const data = await response.json();
+      details = data;
+      setUserDetails(data);
+
+      fetch(
+        `http://127.0.0.1:4000/gatepass/v2/student/recent_gatepass/${details.user_id}`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((text) => {
+          setStudentGP(text);
+        });
+      console.log(StudentGP);
+    }
+
+    fetchData();
+  }, []);
 
   function changeDate(val) {
     const date = `${val.getFullYear()}-${val.getMonth() + 1}-${val.getDate()}`;
@@ -44,9 +62,7 @@ const StudentDashboard = () => {
         <TableBody>
           {StudentGP.map((row) => (
             <TableRow key={row.user_id}>
-              <TableCell className="tableCell">
-                changeDate({row.applied_time})
-              </TableCell>
+              <TableCell className="tableCell">({row.applied_time})</TableCell>
               <TableCell className="tableCell">{row.applied_time}</TableCell>
               <TableCell className="tableCell">{row.gatepass_type}</TableCell>
               <TableCell className="tableCell">{row.from_date}</TableCell>
