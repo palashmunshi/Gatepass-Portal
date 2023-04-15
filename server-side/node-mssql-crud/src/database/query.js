@@ -85,7 +85,7 @@ export const queries = {
   applyLocalFlexibleGatepass: "INSERT INTO [gps_db].[gps_db].[gps_gatepassmaster] (user_id,gatepass_type,from_date,from_time,to_date,to_time,purpose,destination,destination_contact,visit_to,send_approval_to,applied_date,applied_time,status) VALUES (@user_id,2,@from_date,@from_time,@to_date,@to_time,@purpose,@destination,@destination_contact,@visit_to,@send_approval_to,@applied_date,@applied_time,'Pending')",
   cancelGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Cancelled' WHERE request_id=@id;",
   expireGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Expire' WHERE request_id=@id;",
-  recentGatepass: "SELECT TOP 3 status , comments , applied_date , applied_time , gatepass_type , from_date , from_time FROM [gps_db].[gps_db].[gps_gatepassmaster] WHERE user_id=@id ORDER BY applied_date DESC , applied_time DESC;",
+  recentGatepass: "SELECT TOP 3 status , GP.comments , GP.applied_date , GP.applied_time , GT.gatepass_name , GP.from_date , GP.from_time FROM [gps_db].[gps_db].[gps_gatepassmaster] AS GP INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GP.gatepass_type = GT.gatepass_type  WHERE user_id=@id ORDER BY applied_date DESC , applied_time DESC;",
   getDashboardDetails: "SELECT * FROM [gps_db].[gps_db].[gps_usersmaster] WHERE email_id = @email",
 
   /* __________________________________________________Warden QUERIES__________________________________________________ */
