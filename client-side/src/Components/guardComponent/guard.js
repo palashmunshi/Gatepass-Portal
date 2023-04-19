@@ -7,7 +7,6 @@ import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import NotInterestedSharpIcon from "@mui/icons-material/NotInterestedSharp";
 import DirectionsCarFilledRoundedIcon from "@mui/icons-material/DirectionsCarFilledRounded";
 import Widget from "./WidgetGuard/Widget";
-import "./guard.scss";
 export const Guard = () => {
   const [ApprovedToday, setApprovedToday] = useState(0);
   const [ReturningToday, setReturningToday] = useState(0);

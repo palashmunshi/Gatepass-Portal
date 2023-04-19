@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../../Shared/Navbar/navbar";
 import Sidebar from "../../../Shared/Sidebar/adminSidebar";
-import "./group.scss";
 
 export const Group = () => {
   const [groups, setGroups] = useState([]);

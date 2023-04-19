@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 // import { DarkModeContext } from "../../../context/darkModeContext";
 // import { useContext } from "react";
 import { NotificationAdd } from "@mui/icons-material";
-import "./sidebar.scss";
+
 // import logo from "../../assets/logo.png";
 import logo from "../../assets/NU-logo.png";
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./checkinDetails.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -31,8 +30,10 @@ export const CheckinDetails = () => {
   //   return () => clearInterval(id);
   // }, []);
 
-  const sortedUser = sortBy(user, [(o) => moment(o.to_date).unix(), (o) => moment(o.to_time).unix()]);
-
+  const sortedUser = sortBy(user, [
+    (o) => moment(o.to_date).unix(),
+    (o) => moment(o.to_time).unix(),
+  ]);
 
   // const checkinStudent = async (user_id, request_id) => {
   //   let fetchData = fetch(
@@ -136,7 +137,7 @@ export const CheckinDetails = () => {
                 <TableCell className="tableCell">
                   {props.gatepass_name}
                 </TableCell>
-             
+
                 <TableCell className="tableCell">{props.status}</TableCell>
                 <TableCell className="tableCell">
                   <button

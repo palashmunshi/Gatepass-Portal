@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../../../Shared/Navbar/navbar";
 import SidebarStudent from "../../../../Shared/Sidebar/studentSidebar";
 import LFform from "./Form/LFform";
-import "./localfixed.scss";
 
 export const LocalFixed = () => {
   const [weekLimit, setWeekLimit] = useState(0);

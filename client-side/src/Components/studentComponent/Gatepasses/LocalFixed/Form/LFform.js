@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useReducer } from "react";
 import ReactDropdown from "react-dropdown";
-import "./style.scss";
 
 const LFform = (props) => {
   const [localFixedUsed, setLocalFixedUsed] = useState(0);

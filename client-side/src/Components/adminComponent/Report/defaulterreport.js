@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "../../../Shared/Navbar/navbar";
 import Sidebar from "../../../Shared/Sidebar/adminSidebar";
-import '../admin.scss'
 import ReportWidget from "./ReportWidget/ReportWidget";
 
 export const DefaulterReport = () => {
@@ -9,7 +8,7 @@ export const DefaulterReport = () => {
     <div className="admin">
       <Sidebar />
       <div className="adminContainer">
-        <Navbar /> 
+        <Navbar />
         <div className="listContainer">
           <div className="listTitle">Restricted Students Reports</div>
           <div className="widgets">

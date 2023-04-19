@@ -1,4 +1,3 @@
-import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
@@ -21,7 +20,7 @@ import logo from "../../assets/NU-logo.png";
 const SidebarStudent = () => {
   //   const { dispatch } = useContext(DarkModeContext);
   return (
-    <div className="sidebar">
+    <div className="bg-red-400">
       <div className="top">
         <Link to="/student" style={{ textDecoration: "none" }}>
           <span className="logo">
@@ -43,7 +42,7 @@ const SidebarStudent = () => {
           <p className="title">SETTINGS</p>
           <Link to="/myprofile" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <PersonOutlineIcon className="font-bold" />
               {/* <span>My Profile</span> */}
               &nbsp;&nbsp;&nbsp;My Profile
             </li>
@@ -63,7 +62,7 @@ const SidebarStudent = () => {
               &nbsp;&nbsp;&nbsp;Local Flexible
             </li>
           </Link>
-          <li>
+          <li className="font-bold">
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
             {/* <span>Outstation</span> */}
             &nbsp;&nbsp;&nbsp;Outstation

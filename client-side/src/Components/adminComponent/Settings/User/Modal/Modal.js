@@ -1,5 +1,4 @@
 import ReactModal from "react-modal";
-import "./Modal.scss"
 export const Modal = (props) => {
   return (
     <ReactModal

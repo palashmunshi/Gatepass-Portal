@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-import "./reportwidget.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
 

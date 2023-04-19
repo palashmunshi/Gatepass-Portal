@@ -15,7 +15,6 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import { Link } from "react-router-dom";
 
-import "./sidebar.scss";
 import { NotificationAdd } from "@mui/icons-material";
 import logo from "../../assets/NU-logo.png";
 

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../../../Shared/Navbar/navbar";
 import Sidebar from "../../../../Shared/Sidebar/adminSidebar";
-import "../../admin.scss";
 import axios from "axios";
-import "./User.scss";
 import ReactModal from "react-modal";
 import Dropdown from "react-dropdown";
-import "./Dialog.scss";
 
 export const User = () => {
   const [data, setData] = useState([]);
@@ -358,27 +355,27 @@ export const User = () => {
                 <tbody>
                   {search.length > 1
                     ? filterData.slice(0, displayCount).map((user, index) => (
-                      <tr key={user.user_id}>
-                        <td>{index + 1}</td>
-                        <td>{user.name}</td>
-                        <td>
-                          <button onClick={fillModal} name={user.user_id}>
-                            Edit
-                          </button>
-                        </td>
-                      </tr>
-                    ))
+                        <tr key={user.user_id}>
+                          <td>{index + 1}</td>
+                          <td>{user.name}</td>
+                          <td>
+                            <button onClick={fillModal} name={user.user_id}>
+                              Edit
+                            </button>
+                          </td>
+                        </tr>
+                      ))
                     : data.slice(0, displayCount).map((user, index) => (
-                      <tr key={user.user_id}>
-                        <td>{index + 1}</td>
-                        <td>{user.name}</td>
-                        <td>
-                          <button onClick={fillModal} name={user.user_id}>
-                            Edit
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                        <tr key={user.user_id}>
+                          <td>{index + 1}</td>
+                          <td>{user.name}</td>
+                          <td>
+                            <button onClick={fillModal} name={user.user_id}>
+                              Edit
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                 </tbody>
               </table>
               <div id="buttonhandler">
@@ -394,10 +391,16 @@ export const User = () => {
             <div className="add_Form">
               <p>Create User</p>
               <div className="Form">
-                <form id = "form-container">
+                <form id="form-container">
                   <div>
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required className="form_input" />
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className="form_input"
+                    />
                   </div>
 
                   <div>
@@ -413,7 +416,13 @@ export const User = () => {
 
                   <div>
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required  className="form_input"/>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="form_input"
+                    />
                   </div>
 
                   <div>
@@ -488,10 +497,9 @@ export const User = () => {
                   <div>
                     <label for="punchid">Punch ID:</label>
                     <input type="text" id="punchid" name="punchid" required />
-                    
                   </div>
 
-                  <input type="submit" value="Submit" className="form_input"/>
+                  <input type="submit" value="Submit" className="form_input" />
                 </form>
               </div>
             </div>

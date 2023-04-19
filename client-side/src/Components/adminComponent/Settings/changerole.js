@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../../Shared/Navbar/navbar";
 import Sidebar from "../../../Shared/Sidebar/adminSidebar";
-import "../admin.scss";
-import "./table.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";

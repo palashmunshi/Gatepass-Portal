@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "../../../Shared/Navbar/navbar";
 import Sidebar from "../../../Shared/Sidebar/adminSidebar";
 import Widget from "../Widget/Widget";
-import '../admin.scss'
 import ReportWidget from "./ReportWidget/ReportWidget";
 
 export const BCHReport = () => {

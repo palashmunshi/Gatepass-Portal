@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./checkoutDetails.scss";
 import Table from "@mui/material/Table";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
