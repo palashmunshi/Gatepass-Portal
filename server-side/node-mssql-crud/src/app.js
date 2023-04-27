@@ -10,6 +10,7 @@ import morgan from "morgan";
 import cors from "cors";
 
 const app = express();
+const cookieParser = require("cookie-parser");
 
 // setting
 app.set("port", config.serverPort);
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({ exposedHeaders: "*" }));
 app.use(morgan("dev"));
+app.use(cookieParser());
 
 app.use("/gatepass/v2", userRoutes);
 app.use("/gatepass/v2", adminRoutes);

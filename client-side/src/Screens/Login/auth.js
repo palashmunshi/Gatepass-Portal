@@ -22,6 +22,18 @@ export default function Auth() {
         console.log(data.role_id);
       })
       .catch((error) => console.log(error));
+
+    fetch(
+      "http://localhost:4000/gatepass/v2/auth/google_JWT",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+
+        body: JSON.stringify({
+          googleJWT: response.credential
+        })
+      }).then((Response) => (Response.json()))
+
   }
 
   useEffect(() => {
@@ -30,7 +42,7 @@ export default function Auth() {
       client_id:
         "372946592599-u1gj83quodhpdae46ejslj4tto3mn3vn.apps.googleusercontent.com",
       callback: handleCallbackResponse,
-    });     
+    });
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {
       theme: "outline",
       size: "large",
@@ -42,17 +54,17 @@ export default function Auth() {
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("role", JSON.stringify(role));
       console.log("User and role values set in localStorage:", user, role);
-      
 
-      if (role === 1) { 
-        navigate("/student");   
+
+      if (role === 1) {
+        navigate("/student");
       } else if (role === 4) {
         navigate("/admin");
       }
-      else if(role === 7){
+      else if (role === 7) {
         navigate("/bch")
       }
-      else if(role === 5){
+      else if (role === 5) {
         navigate("/guard")
       }
     }
