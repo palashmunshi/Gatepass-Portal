@@ -9,12 +9,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Cookies from "js-cookie";
 
 export const AllPendingRequest = () => {
   const [LatestGP, setLatestGP] = useState([]);
-
+  const accessToken = Cookies.get("ACCESS_TOKEN");
   useEffect(() => {
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/all_pending_request")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/all_pending_request", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => {
         return response.json();
       })

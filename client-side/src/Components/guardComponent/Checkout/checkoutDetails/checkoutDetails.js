@@ -9,15 +9,21 @@ import Paper from "@mui/material/Paper";
 import { TableBody } from "@mui/material";
 import moment from "moment";
 import { sortBy } from "lodash";
+import Cookies from "js-cookie";
 
 export const CheckoutDetails = () => {
   const [user, setUser] = useState([]);
   const [search, setSearch] = useState("");
   const [filterData, setFilterData] = useState([]);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
 
   useEffect(() => {
     async function fetchData() {
-      fetch("http://localhost:4000/gatepass/v2/guard/approved_students")
+      fetch("http://localhost:4000/gatepass/v2/guard/approved_students", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
         .then((response) => {
           return response.json();
         })
@@ -42,7 +48,10 @@ export const CheckoutDetails = () => {
       "http://127.0.0.1:4000/gatepass/v2/guard/checkout_student/",
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
         body: JSON.stringify({
           check_out_by: "nugr11",
           user_id: user_id,
@@ -61,7 +70,10 @@ export const CheckoutDetails = () => {
       "http://127.0.0.1:4000/gatepass/v2/guard/update_user_status_absent/",
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
         body: JSON.stringify({
           user_id: user_id,
         }),

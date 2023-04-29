@@ -7,26 +7,38 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 
 const StudentDashboard = () => {
   const [StudentGP, setStudentGP] = useState([]);
-  const [userDetails, setUserDetails] = useState([]);
-  const localInfo = localStorage.getItem("user");
-  const obj = JSON.parse(localInfo);
+  // const [userDetails, setUserDetails] = useState([]);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
+  const decoded = jwt_decode(accessToken);
+  const userDetails = decoded.data;
 
   useEffect(() => {
     let details;
 
     async function fetchData() {
       const response = await fetch(
-        `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${obj.email}`
+        `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${userDetails.email_id}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
       );
       const data = await response.json();
       details = data;
-      setUserDetails(data);
 
       fetch(
-        `http://127.0.0.1:4000/gatepass/v2/student/recent_gatepass/${details.user_id}`
+        `http://127.0.0.1:4000/gatepass/v2/student/recent_gatepass/${userDetails.user_id}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
       )
         .then((response) => {
           return response.json();

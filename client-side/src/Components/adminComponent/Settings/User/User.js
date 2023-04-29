@@ -7,6 +7,7 @@ import "./User.scss";
 import ReactModal from "react-modal";
 import Dropdown from "react-dropdown";
 import "./Dialog.scss";
+import Cookies from "js-cookie";
 
 export const User = () => {
   const [data, setData] = useState([]);
@@ -27,23 +28,44 @@ export const User = () => {
   const [roles, setRoles] = useState([]);
   const [groups, setGroups] = useState([]);
   const [subgroups, setSubgroups] = useState([]);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        "http://localhost:4000/gatepass/v2/admin/get_all_users"
+        "http://localhost:4000/gatepass/v2/admin/get_all_users",
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
       );
       setData(result.data);
 
-      await fetch("http://localhost:4000/gatepass/v2/admin/all_role")
+      await fetch("http://localhost:4000/gatepass/v2/admin/all_role", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
         .then((res) => res.json())
         .then((data) => setRoles(data));
 
-      await fetch("http://localhost:4000/gatepass/v2/admin/get_all_groups")
+      await fetch("http://localhost:4000/gatepass/v2/admin/get_all_groups", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
         .then((res) => res.json())
         .then((data) => setGroups(data));
 
-      await fetch("http://localhost:4000/gatepass/v2/admin/get_all_sub_groups")
+      await fetch(
+        "http://localhost:4000/gatepass/v2/admin/get_all_sub_groups",
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => setSubgroups(data));
     };
@@ -79,7 +101,11 @@ export const User = () => {
     setModal(true);
     const id = event.target.name;
 
-    await fetch(`http://localhost:4000/gatepass/v2/admin/user_info/${id}`)
+    await fetch(`http://localhost:4000/gatepass/v2/admin/user_info/${id}`, {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setDetails(data);
@@ -98,7 +124,10 @@ export const User = () => {
     const id = event.target.name;
     await fetch(`http://127.0.0.1:4000/gatepass/v2/admin/update_user/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: accessToken,
+      },
       body: JSON.stringify({
         role_id: role_id,
         group_id: group_id,
@@ -358,27 +387,27 @@ export const User = () => {
                 <tbody>
                   {search.length > 1
                     ? filterData.slice(0, displayCount).map((user, index) => (
-                      <tr key={user.user_id}>
-                        <td>{index + 1}</td>
-                        <td>{user.name}</td>
-                        <td>
-                          <button onClick={fillModal} name={user.user_id}>
-                            Edit
-                          </button>
-                        </td>
-                      </tr>
-                    ))
+                        <tr key={user.user_id}>
+                          <td>{index + 1}</td>
+                          <td>{user.name}</td>
+                          <td>
+                            <button onClick={fillModal} name={user.user_id}>
+                              Edit
+                            </button>
+                          </td>
+                        </tr>
+                      ))
                     : data.slice(0, displayCount).map((user, index) => (
-                      <tr key={user.user_id}>
-                        <td>{index + 1}</td>
-                        <td>{user.name}</td>
-                        <td>
-                          <button onClick={fillModal} name={user.user_id}>
-                            Edit
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                        <tr key={user.user_id}>
+                          <td>{index + 1}</td>
+                          <td>{user.name}</td>
+                          <td>
+                            <button onClick={fillModal} name={user.user_id}>
+                              Edit
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                 </tbody>
               </table>
               <div id="buttonhandler">
@@ -394,10 +423,16 @@ export const User = () => {
             <div className="add_Form">
               <p>Create User</p>
               <div className="Form">
-                <form id = "form-container">
+                <form id="form-container">
                   <div>
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required className="form_input" />
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className="form_input"
+                    />
                   </div>
 
                   <div>
@@ -413,7 +448,13 @@ export const User = () => {
 
                   <div>
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required  className="form_input"/>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="form_input"
+                    />
                   </div>
 
                   <div>
@@ -488,10 +529,9 @@ export const User = () => {
                   <div>
                     <label for="punchid">Punch ID:</label>
                     <input type="text" id="punchid" name="punchid" required />
-                    
                   </div>
 
-                  <input type="submit" value="Submit" className="form_input"/>
+                  <input type="submit" value="Submit" className="form_input" />
                 </form>
               </div>
             </div>

@@ -7,12 +7,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 const List = () => {
   const [LatestGP, setLatestGP] = useState([]);
-
+  const accessToken = Cookies.get("ACCESS_TOKEN");
   useEffect(() => {
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/today_gatepass")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/today_gatepass", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => {
         return response.json();
       })
@@ -61,6 +66,6 @@ const List = () => {
       </Table>
     </TableContainer>
   );
-          }
+};
 
 export default List;

@@ -9,15 +9,21 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import moment from "moment";
 import { sortBy } from "lodash";
+import Cookies from "js-cookie";
 
 export const CheckinDetails = () => {
   const [user, setUser] = useState([]);
   const [search, setSearch] = useState("");
   const [filterData, setFilterData] = useState([]);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
 
   useEffect(() => {
     async function fetchData() {
-      fetch("http://localhost:4000/gatepass/v2/guard/checked_out_students")
+      fetch("http://localhost:4000/gatepass/v2/guard/checked_out_students", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
         .then((response) => {
           return response.json();
         })
@@ -43,7 +49,10 @@ export const CheckinDetails = () => {
       "http://127.0.0.1:4000/gatepass/v2/guard/checkin_student/",
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
         body: JSON.stringify({
           check_in_by: "nugr11",
           user_id: user_id,
@@ -62,7 +71,10 @@ export const CheckinDetails = () => {
       "http://127.0.0.1:4000/gatepass/v2/guard/update_defaulter_flag/",
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
         body: JSON.stringify({
           user_id: user_id,
           request_id: request_id,
@@ -80,7 +92,10 @@ export const CheckinDetails = () => {
       "http://127.0.0.1:4000/gatepass/v2/guard/update_user_status_present/",
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
         body: JSON.stringify({
           user_id: user_id,
         }),
