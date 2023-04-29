@@ -8,6 +8,7 @@ import guardRoutes from "./routes/guard.routes";
 import authRoutes from "./routes/auth.routes";
 import morgan from "morgan";
 import cors from "cors";
+import { authenticate } from "./middleware/authenticate";
 
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -22,11 +23,14 @@ app.use(cors({ exposedHeaders: "*" }));
 app.use(morgan("dev"));
 app.use(cookieParser());
 
+app.use("/gatepass/v2", authRoutes);
+
+app.use(authenticate);
+
 app.use("/gatepass/v2", userRoutes);
 app.use("/gatepass/v2", adminRoutes);
 app.use("/gatepass/v2", studentRoutes);
 app.use("/gatepass/v2", wardenRoutes);
 app.use("/gatepass/v2", guardRoutes);
-app.use("/gatepass/v2", authRoutes);
 
 export default app;
