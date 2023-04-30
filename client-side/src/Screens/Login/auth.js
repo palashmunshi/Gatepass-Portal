@@ -8,20 +8,13 @@ import Cookies from "js-cookie";
 export default function Auth() {
   const [user, setUser] = useState({});
   const [role, setRole] = useState({});
+  const [nrole, setNrole] = useState();
   const navigate = useNavigate();
 
   function handleCallbackResponse(response) {
     // console.log("Encoded JWT ID token: " + response.credential);
     const userObject = jwt_decode(response.credential);
     setUser(userObject);
-    fetch(
-      `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${userObject.email}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setRole(data.role_id);
-      })
-      .catch((error) => console.log(error));
 
     fetch("http://localhost:4000/gatepass/v2/auth/google_JWT", {
       method: "POST",
@@ -32,7 +25,12 @@ export default function Auth() {
       }),
     })
       .then((Response) => Response.json())
-      .then((response) => Cookies.set("ACCESS_TOKEN", response.ACCESS_TOKEN));
+      .then((response) => {
+        Cookies.set("ACCESS_TOKEN", response.ACCESS_TOKEN);
+        const access_token = response.ACCESS_TOKEN;
+        const decoded = jwt_decode(access_token);
+        setRole(decoded.data.role_id);
+      });
   }
   // const accessToken = Cookies.get('ACCESS_TOKEN');   this code is to access the cookie
   // Cookies.remove('ACCESS_TOKEN');   this is to remove the token from the cookie
