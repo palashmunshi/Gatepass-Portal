@@ -117,4 +117,8 @@ export const queries = {
 
   /* __________________________________________________AUTH QUERIES__________________________________________________ */
   getUserInformation: "SELECT * FROM [gps_db].[gps_db].[gps_usersmaster] WHERE email_id=@email_id",
+
+    /* __________________________________________________LOGOUT QUERY__________________________________________________ */
+
+  insertLoggedOutJWT: "INSERT INTO [gps_db].[gps_db].[gps_logged_out_jwts] (jwt) VALUES (@jwt); "
 };
