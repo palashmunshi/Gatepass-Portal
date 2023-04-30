@@ -122,7 +122,7 @@ export const applyLocalFlexibleGatepass = async (req, res) => {
 
 export const gatepassCancel = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -137,7 +137,7 @@ export const gatepassCancel = async (req, res) => {
 
 export const gatepassExpire = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -152,7 +152,7 @@ export const gatepassExpire = async (req, res) => {
 
 export const getRecentGatepass = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -167,7 +167,7 @@ export const getRecentGatepass = async (req, res) => {
 
 export const getDashboardDetails = async (req, res) => {
   try {
-    const { email } = req.params;
+    const email = req.user.data.email_id;
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -182,7 +182,7 @@ export const getDashboardDetails = async (req, res) => {
 
 export const getBlacklistStudentBool = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -231,7 +231,8 @@ export const getLocalFixedInTime = async (req, res) => {
 
 export const getNumberOfLocalFixedStudent = async (req, res) => {
   try {
-    const { user_id, dateLowerBound, dateUpperBound } = req.params;
+    const { dateLowerBound, dateUpperBound } = req.params;
+    const user_id = req.user.data.user_id;
 
     const pool = await getConnection();
     const result = await pool
@@ -247,8 +248,9 @@ export const getNumberOfLocalFixedStudent = async (req, res) => {
 };
 
 export const applyLocalFixedGatepass = async (req, res) => {
-  const { user_id, punch_id, from_date, from_time, to_date, to_time } =
-    req.body;
+  const { from_date, from_time, to_date, to_time } = req.body;
+  const user_id = req.user.data.user_id;
+  const punch_id = req.user.data.punch_id;
   const currentDate = new Date();
   let applied_date =
     currentDate.getFullYear() +
@@ -286,7 +288,7 @@ export const applyLocalFixedGatepass = async (req, res) => {
       .input("applied_time", sql.VarChar, applied_time)
       .query(queries.applyLocalFixedGatepass);
 
-    return res.send("Local fixed Gatepass Applied!");
+    return res.json({ Success: "Local fixed Gatepass Applied!" });
   } catch (error) {
     res.send(error.message);
   }
@@ -294,7 +296,7 @@ export const applyLocalFixedGatepass = async (req, res) => {
 
 export const getStudentCheckedoutOrApproved = async (req, res) => {
   try {
-    const { user_id } = req.params;
+    const user_id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()

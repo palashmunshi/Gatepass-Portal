@@ -16,6 +16,7 @@ export const authenticate = async (req, res, next) => {
       if (err) {
         res.json({ error: err });
       } else {
+        req.user = decoded;
         next();
       }
     });
