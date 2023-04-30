@@ -29,17 +29,6 @@ export const LocalFixed = () => {
       });
     // const localInfo = localStorage.getItem("user");
     // const obj = JSON.parse(localInfo);
-
-    fetch(
-      `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${userData.email_id}`,
-      {
-        headers: {
-          Authorization: accessToken,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => setUserDetails(data));
   }, []);
 
   return (
@@ -54,7 +43,6 @@ export const LocalFixed = () => {
             departureTime={departureTime}
             arrivalTime={arrivalTime}
             weekLimit={weekLimit}
-            userDetails={userDetails}
           />
         </div>
       </div>
