@@ -122,7 +122,7 @@ export const applyLocalFlexibleGatepass = async (req, res) => {
 
 export const gatepassCancel = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -137,7 +137,7 @@ export const gatepassCancel = async (req, res) => {
 
 export const gatepassExpire = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -152,7 +152,7 @@ export const gatepassExpire = async (req, res) => {
 
 export const getRecentGatepass = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -182,7 +182,7 @@ export const getDashboardDetails = async (req, res) => {
 
 export const getBlacklistStudentBool = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -288,7 +288,7 @@ export const applyLocalFixedGatepass = async (req, res) => {
       .input("applied_time", sql.VarChar, applied_time)
       .query(queries.applyLocalFixedGatepass);
 
-    return res.send("Local fixed Gatepass Applied!");
+    return res.json({ Success: "Local fixed Gatepass Applied!" });
   } catch (error) {
     res.send(error.message);
   }
