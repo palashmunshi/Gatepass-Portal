@@ -8,36 +8,61 @@ import NotInterestedSharpIcon from "@mui/icons-material/NotInterestedSharp";
 import DirectionsCarFilledRoundedIcon from "@mui/icons-material/DirectionsCarFilledRounded";
 import Widget from "./WidgetGuard/Widget";
 import "./guard.scss";
+import Cookies from "js-cookie";
+
 export const Guard = () => {
   const [ApprovedToday, setApprovedToday] = useState(0);
   const [ReturningToday, setReturningToday] = useState(0);
   const [StudentsIn, setStudentsIn] = useState(0);
   const [BlackListStudent, setBlacklistStudent] = useState(0);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
 
   useEffect(() => {
     async function fetchData() {
-      await fetch("http://127.0.0.1:4000/gatepass/v2/guard/approved_today")
+      await fetch("http://127.0.0.1:4000/gatepass/v2/guard/approved_today", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
         .then((response) => {
           return response.json();
         })
         .then((data) => {
           setApprovedToday(data);
         });
-      await fetch("http://127.0.0.1:4000/gatepass/v2/guard/returning_today")
+      await fetch("http://127.0.0.1:4000/gatepass/v2/guard/returning_today", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
         .then((response) => {
           return response.json();
         })
         .then((data) => {
           setReturningToday(data);
         });
-      await fetch("http://127.0.0.1:4000/gatepass/v2/guard/students_in_campus")
+      await fetch(
+        "http://127.0.0.1:4000/gatepass/v2/guard/students_in_campus",
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      )
         .then((response) => {
           return response.json();
         })
         .then((data) => {
           setStudentsIn(data);
         });
-      await fetch("http://127.0.0.1:4000/gatepass/v2/guard/blacklist_students")
+      await fetch(
+        "http://127.0.0.1:4000/gatepass/v2/guard/blacklist_students",
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      )
         .then((response) => {
           return response.json();
         })

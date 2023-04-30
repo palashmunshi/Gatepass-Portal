@@ -17,9 +17,27 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { InfoRounded, NotificationAdd } from "@mui/icons-material";
 import logo from "../../assets/NU-logo.png";
+import Cookies from "js-cookie";
 
 const SidebarStudent = () => {
   //   const { dispatch } = useContext(DarkModeContext);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
+
+  const logout = () => {
+    fetch("http://localhost:4000/gatepass/v2/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: accessToken,
+      },
+      body: JSON.stringify({ accessToken: accessToken }),
+    })
+      .then((response) => response.json())
+      .then((response) => console.log(response));
+
+    Cookies.remove("ACCESS_TOKEN");
+  };
+
   return (
     <div className="sidebar">
       <div className="top">
@@ -97,7 +115,7 @@ const SidebarStudent = () => {
               &nbsp;&nbsp;&nbsp;Info
             </li>
           </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link onClick={logout} to="/" style={{ textDecoration: "none" }}>
             <li>
               <ExitToAppIcon className="icon" />
               {/* <span>Logout</span> */}

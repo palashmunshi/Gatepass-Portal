@@ -3,26 +3,40 @@ import Navbar from "../../../../Shared/Navbar/navbar";
 import SidebarStudent from "../../../../Shared/Sidebar/studentSidebar";
 import LFform from "./Form/LFform";
 import "./localfixed.scss";
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 
 export const LocalFixed = () => {
   const [weekLimit, setWeekLimit] = useState(0);
   const [departureTime, setDepartureTime] = useState("00:00:00");
   const [arrivalTime, setarrivalTime] = useState("00:00:00");
   const [userDetails, setUserDetails] = useState([]);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
+  const decoded = jwt_decode(accessToken);
+  const userData = decoded.data;
 
   useEffect(() => {
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/parameter_config")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/parameter_config", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => response.json())
       .then((text) => {
         setWeekLimit(text[0]["value"]);
         setDepartureTime(text[1]["value"]);
         setarrivalTime(text[2]["value"]);
       });
-    const localInfo = localStorage.getItem("user");
-    const obj = JSON.parse(localInfo);
+    // const localInfo = localStorage.getItem("user");
+    // const obj = JSON.parse(localInfo);
 
     fetch(
-      `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${obj.email}`
+      `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${userData.email_id}`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
     )
       .then((response) => response.json())
       .then((data) => setUserDetails(data));

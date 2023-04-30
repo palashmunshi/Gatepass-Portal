@@ -10,6 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Cookies from "js-cookie";
 
 export const Parameter = () => {
   const [parameter, setParameter] = useState([]);
@@ -27,9 +28,14 @@ export const Parameter = () => {
   const [newArrivalUB, setNewArrivalUB] = useState("00:00:00");
   const [newArrivalLB, setNewArrivalLB] = useState("00:00:00");
   const [newFlex, setNewFlex] = useState(0);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/parameter_config")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/parameter_config", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => response.json())
       .then((text) => {
         setParameter(text);
@@ -55,7 +61,10 @@ export const Parameter = () => {
       case "limit": {
         const requestOptions = {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
           body: JSON.stringify({ value: newLimit }),
         };
         if (window.confirm("Do you want to save changes?") == true) {
@@ -72,7 +81,10 @@ export const Parameter = () => {
       case "outTime": {
         const requestOptions = {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
           body: JSON.stringify({ value: newOutTime }),
         };
         if (window.confirm("Do you want to save changes?") == true) {
@@ -89,7 +101,10 @@ export const Parameter = () => {
       case "inTime": {
         const requestOptions = {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
           body: JSON.stringify({ value: newInTime }),
         };
         if (window.confirm("Do you want to save changes?") == true) {
@@ -106,7 +121,10 @@ export const Parameter = () => {
       case "arrivalUB": {
         const requestOptions = {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
           body: JSON.stringify({ value: newArrivalUB }),
         };
         if (window.confirm("Do you want to save changes?") == true) {
@@ -123,7 +141,10 @@ export const Parameter = () => {
       case "arrivalLB": {
         const requestOptions = {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
           body: JSON.stringify({ value: newArrivalLB }),
         };
         if (window.confirm("Do you want to save changes?") == true) {
@@ -140,7 +161,10 @@ export const Parameter = () => {
       case "flex": {
         const requestOptions = {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: accessToken,
+          },
           body: JSON.stringify({ value: newFlex }),
         };
         if (window.confirm("Do you want to save changes?") == true) {

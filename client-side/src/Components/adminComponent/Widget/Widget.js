@@ -7,15 +7,21 @@ import NotInterestedSharpIcon from "@mui/icons-material/NotInterestedSharp";
 import { PlusOneRounded } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { AllPendingRequest } from "../AllPendingRequest/AllPendingRequest";
+import Cookies from "js-cookie";
 
 const Widget = ({ type }) => {
   const [Oncampus, setOncampus] = useState(0);
   const [Outcampus, setOutcampus] = useState(0);
   const [PendingRequests, setPendingRequests] = useState(0);
   const [Defaulter, setDefaulter] = useState(0);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/pending_request")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/pending_request", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => {
         return response.json();
       })
@@ -23,7 +29,11 @@ const Widget = ({ type }) => {
         setPendingRequests(text);
       });
 
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/student_in_campus")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/student_in_campus", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => {
         return response.json();
       })
@@ -31,7 +41,11 @@ const Widget = ({ type }) => {
         setOncampus(text);
       });
 
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/student_out_campus")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/student_out_campus", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => {
         return response.json();
       })
@@ -39,7 +53,11 @@ const Widget = ({ type }) => {
         setOutcampus(text);
       });
 
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/blacklist_student")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/blacklist_student", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => {
         return response.json();
       })
