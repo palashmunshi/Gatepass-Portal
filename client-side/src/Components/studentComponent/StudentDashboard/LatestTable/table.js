@@ -32,14 +32,11 @@ const StudentDashboard = () => {
       const data = await response.json();
       details = data;
 
-      fetch(
-        `http://127.0.0.1:4000/gatepass/v2/student/recent_gatepass/${userDetails.user_id}`,
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      )
+      fetch(`http://127.0.0.1:4000/gatepass/v2/student/recent_gatepass/`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
         .then((response) => {
           return response.json();
         })
