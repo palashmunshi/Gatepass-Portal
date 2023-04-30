@@ -120,5 +120,6 @@ export const queries = {
 
     /* __________________________________________________LOGOUT QUERY__________________________________________________ */
 
-  insertLoggedOutJWT: "INSERT INTO [gps_db].[gps_db].[gps_logged_out_jwts] (jwt) VALUES (@jwt); "
+  insertLoggedOutJWT: "INSERT INTO [gps_db].[gps_db].[gps_logged_out_jwts] (jwt) VALUES (@jwt);",
+  getBlacklistedJwt: "SELECT COUNT(*) as TOTAL FROM [gps_db].[gps_db].[gps_logged_out_jwts] WHERE jwt=@jwt"
 };
