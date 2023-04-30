@@ -247,8 +247,9 @@ export const getNumberOfLocalFixedStudent = async (req, res) => {
 };
 
 export const applyLocalFixedGatepass = async (req, res) => {
-  const { user_id, punch_id, from_date, from_time, to_date, to_time } =
-    req.body;
+  const { from_date, from_time, to_date, to_time } = req.body;
+  const user_id = req.user.data.user_id;
+  const punch_id = req.user.data.punch_id;
   const currentDate = new Date();
   let applied_date =
     currentDate.getFullYear() +
