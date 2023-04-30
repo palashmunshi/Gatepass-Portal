@@ -231,7 +231,8 @@ export const getLocalFixedInTime = async (req, res) => {
 
 export const getNumberOfLocalFixedStudent = async (req, res) => {
   try {
-    const { user_id, dateLowerBound, dateUpperBound } = req.params;
+    const { dateLowerBound, dateUpperBound } = req.params;
+    const user_id = req.user.data.user_id;
 
     const pool = await getConnection();
     const result = await pool
@@ -295,7 +296,7 @@ export const applyLocalFixedGatepass = async (req, res) => {
 
 export const getStudentCheckedoutOrApproved = async (req, res) => {
   try {
-    const { user_id } = req.params;
+    const user_id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
