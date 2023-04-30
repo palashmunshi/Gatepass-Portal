@@ -7,16 +7,16 @@ const StudentSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   let Links = [
-    { name: "Dashboard", link: "/", icon: homeOutline },
-    { name: "My Profile", link: "/", icon: personOutline },
-    { name: "Local Fixed Gatepass", link: "/", icon: carOutline },
-    { name: "Local Flexible Gatepass", link: "/", icon: busOutline },
-    { name: "Outstation", link: "/", icon: airplaneOutline },
-    { name: "Emergency", link: "/", icon: alertOutline },
-    { name: "Non-Returnable", link: "/", icon: banOutline },
-    { name: "Visitor-Gatepass", link: "/", icon: peopleOutline },
-    { name: "Visitor-Request", link: "/", icon: addOutline },
-    { name: "Info", link: "/", icon: informationOutline },
+    { name: "Dashboard", link: "/student", icon: homeOutline },
+    { name: "My Profile", link: "/student/profile", icon: personOutline },
+    { name: "Local Fixed Gatepass", link: "/student/localfixed", icon: carOutline },
+    { name: "Local Flexible Gatepass", link: "/student/flexible", icon: busOutline },
+    { name: "Outstation", link: "/student/outstation", icon: airplaneOutline },
+    { name: "Emergency", link: "/student/emergency", icon: alertOutline },
+    { name: "Non-Returnable", link: "/student/nonreturnable", icon: banOutline },
+    { name: "Visitor-Gatepass", link: "/student/vgatepass", icon: peopleOutline },
+    { name: "Visitor-Request", link: "/student/vrequest", icon: addOutline },
+    { name: "Info", link: "/student/info", icon: informationOutline },
     { name: "Logout", link: "/", icon: logOutOutline },
   ];
 
@@ -26,7 +26,7 @@ const StudentSidebar = () => {
 
   return (
     <div
-      className={`sidebar fixed top-0 bottom-0 p-2 w-[300px] overflow-y-auto text-center bg-brown transition-all duration-300 ${
+      className={`sidebar fixed top-0 bottom-0  pr-10 w-[300px] overflow-y-auto text-center bg-brown transition-all duration-300 ${
         isOpen ? "left-0" : "left-[-260px]"
       }`}
     >

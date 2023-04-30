@@ -22,6 +22,7 @@ import { VisitorCheckin } from "./Components/guardComponent/VisitorCheckin/check
 import { VisitorCheckout } from "./Components/guardComponent/VisitorCheckout/checkout";
 import { PrivateRoute } from "./PrivateRoutes";
 import GatepassState from "./Context/GatepassState";
+import StudentProfile from "./Components/studentComponent/MyProfile";
 
 function App() {
   return (
@@ -44,8 +45,9 @@ function App() {
 
 
           <Route exact path="/student" element={<Student />} />
-            <Route path="/localfixed" element={<LocalFixed />} />
+            <Route path="/student/localfixed" element={<LocalFixed />} />
             <Route path="/student/info" element={<Info />} />
+            <Route path="/student/profile" element={<StudentProfile/>}/>
 
           <Route element={<PrivateRoute role="1" />}>
         
