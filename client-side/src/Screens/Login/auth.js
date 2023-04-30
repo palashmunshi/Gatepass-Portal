@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-
+import React, { useContext, useState } from "react";
+import GatePassContext from "../../Context/GatepassContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 
-export default function Auth() {
+const Auth = () =>  {
   const [user, setUser] = useState({});
-  const [role, setRole] = useState({});
+  const [role, setRole] = useState();
+  const [email, setEmail] = useState();
   const navigate = useNavigate();
 
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
     const userObject = jwt_decode(response.credential);
     setUser(userObject);
+    setEmail(userObject.email);
     fetch(
       `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${userObject.email}`
     )
@@ -37,11 +39,12 @@ export default function Auth() {
     });
   }, []);
 
+  const { updateState } = useContext(GatePassContext);
   useEffect(() => {
-    if (user && role) {
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("role", JSON.stringify(role));
-      console.log("User and role values set in localStorage:", user, role);
+    if (email && role) {
+      updateState(email, role);
+      console.log("The email and role are as follows", email, role)
+     
       
 
       if (role === 1) { 
@@ -56,7 +59,7 @@ export default function Auth() {
         navigate("/guard")
       }
     }
-  }, [user, role]);
+  }, [email, role, navigate]);
 
   return (
     <div className="Auth-form-container">
@@ -69,3 +72,4 @@ export default function Auth() {
     </div>
   );
 }
+export default Auth;

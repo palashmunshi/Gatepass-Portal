@@ -3,13 +3,14 @@ import Navbar from "../../../Shared/Navbar/navbar";
 import GuardSidebar from "../../../Shared/Sidebar/guardSidebar";
 import "./checkout.scss";
 import { CheckoutDetails } from "./checkoutDetails/checkoutDetails";
+import StudentSidebar from "../../../Shared/SideBarTailWind/StudentSidebar";
 
 export const Checkout = () => {
   return (
     <div className="guard">
-      <GuardSidebar />
+      <StudentSidebar />
       <div className="guardContainer">
-        <Navbar />
+     
         <CheckoutDetails />
       </div>
     </div>

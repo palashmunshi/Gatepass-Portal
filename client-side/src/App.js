@@ -21,10 +21,12 @@ import { Group } from "./Components/adminComponent/Settings/group";
 import { VisitorCheckin } from "./Components/guardComponent/VisitorCheckin/checkin";
 import { VisitorCheckout } from "./Components/guardComponent/VisitorCheckout/checkout";
 import { PrivateRoute } from "./PrivateRoutes";
+import GatepassState from "./Context/GatepassState";
 
 function App() {
   return (
     <div className="App">
+    <GatepassState>
       <BrowserRouter>
         <Routes>
           <Route path="*" element={<Login />} />
@@ -40,12 +42,15 @@ function App() {
 
           {/* <Route exact path="/student" element={<Student />} /> */}
 
-          <Route element={<PrivateRoute role="1" />}>
-            <Route exact path="/student" element={<Student />} />
+
+          <Route exact path="/student" element={<Student />} />
             <Route path="/localfixed" element={<LocalFixed />} />
             <Route path="/student/info" element={<Info />} />
-          </Route>
 
+          <Route element={<PrivateRoute role="1" />}>
+        
+          </Route>
+      
           <Route element={<PrivateRoute role="4" />}>
             <Route exact path="/admin" element={<Admin />} />
             <Route exact path="/users" element={<User />} />
@@ -53,11 +58,11 @@ function App() {
             <Route exact path="/group" element={<Group />} />
             <Route exact path="/parameter" element={<Parameter />} />
           </Route>
-
-          <Route element={<PrivateRoute role="5" />}>
-            <Route exact path="/guard" element={<Guard />} />
+ <Route exact path="/guard" element={<Guard />} />
             <Route exact path="/guard/checkin" element={<Checkin />} />
             <Route exact path="/guard/checkout" element={<Checkout />} />
+          <Route element={<PrivateRoute role="5" />}>
+           
             <Route
               exact
               path="/guard/VisitorCheckout"
@@ -71,6 +76,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </GatepassState>
     </div>
   );
 }
