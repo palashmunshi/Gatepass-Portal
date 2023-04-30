@@ -21,6 +21,7 @@ const LFform = (props) => {
       .then((Response) => Response.json())
       .then((response) => {
         setLocalFixedUsed(response);
+        console.log(response);
       })
       .catch((err) => console.log("error:", err));
   });
