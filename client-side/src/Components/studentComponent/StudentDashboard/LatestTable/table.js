@@ -22,7 +22,7 @@ const StudentDashboard = () => {
 
     async function fetchData() {
       const response = await fetch(
-        `http://127.0.0.1:4000/gatepass/v2/auth/user_information/${userDetails.email_id}`,
+        `http://127.0.0.1:4000/gatepass/v2/user_details/${userDetails.email_id}`,
         {
           headers: {
             Authorization: accessToken,
