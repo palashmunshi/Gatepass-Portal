@@ -167,7 +167,7 @@ export const getRecentGatepass = async (req, res) => {
 
 export const getDashboardDetails = async (req, res) => {
   try {
-    const { email } = req.params;
+    const email = req.user.data.email_id;
     const pool = await getConnection();
     const result = await pool
       .request()

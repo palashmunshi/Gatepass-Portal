@@ -19,7 +19,7 @@ import {
 const router = Router();
 
 router.get("/student/recent_gatepass/", getRecentGatepass);
-router.get("/student/dashboard_details/:email", getDashboardDetails);
+router.get("/student/dashboard_details", getDashboardDetails);
 
 // router.post("/student/local_fixed_gatepass", applyLocalFixedGatepass);
 router.post("/student/local_flexible_gatepass", applyLocalFlexibleGatepass);
