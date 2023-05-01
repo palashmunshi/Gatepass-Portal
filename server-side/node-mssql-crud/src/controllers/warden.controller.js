@@ -23,3 +23,20 @@ export const gatepassApproveOrReject = async (req, res) => {
             res.send(error.message);
         }
 }
+
+
+export const gatepassCancelAndReject = async(req,res) => {
+    const approval_to = req.user.data.user_id
+    try{
+        const pool= await getConnection();
+        const result = await pool
+        .request()
+        .input("approval_to",sql.VarChar,approval_to)
+        .query(queries.getRejectedAndCancelledGatepass)
+
+    return res.json(result.recordsets[0])
+    }
+    catch(error){
+        res.send(error.message)
+    }
+}
