@@ -23,3 +23,18 @@ export const gatepassApproveOrReject = async (req, res) => {
             res.send(error.message);
         }
 }
+
+export const getApprovedGatepass = async (req, res) => {
+    try {
+      const user_id = req.user.data.user_id;
+      const pool = await getConnection();
+      const result = await pool
+        .request()
+        .input("user_id", sql.VarChar, user_id)
+        .query(queries.getApprovedGatepass);
+      return res.send(result.recordset);
+    } catch (error) {
+      res.status(500);
+      res.send(error.message);
+    }
+  };

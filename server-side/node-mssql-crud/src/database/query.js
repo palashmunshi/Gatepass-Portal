@@ -93,6 +93,7 @@ export const queries = {
 
   acceptGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Approved' WHERE request_id=@id;",
   rejectGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Rejected' WHERE request_id=@id;",
+  getApprovedGatepass: "SELECT name, gps_db.gps_gatepass_type.gatepass_name,approved_or_rejected_date, [gps_db].[gps_db].[gps_gatepassmaster].status FROM [gps_db].[gps_db].[gps_gatepassmaster] JOIN gps_db.gps_gatepass_type ON gps_gatepassmaster.gatepass_type = gps_gatepass_type.gatepass_type JOIN gps_db.gps_usersmaster ON gps_gatepassmaster.user_id= gps_db.gps_usersmaster.user_id WHERE send_approval_to=@user_id and ([gps_db].[gps_db].[gps_gatepassmaster].status='Approved' or [gps_db].[gps_db].[gps_gatepassmaster].status='CHECKEDIN');",
 
   /* __________________________________________________Local Fixed QUERIES__________________________________________________ */
   getNumberOfLocalFixedConfig: "SELECT value from [gps_db].[gps_db].[gps_configmaster] WHERE parameter='Week Limit'",
