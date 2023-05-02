@@ -11,6 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Dropdown from "react-dropdown";
+import Cookies from "js-cookie";
 
 export const ChangeRole = () => {
   // const role = [
@@ -29,8 +30,14 @@ export const ChangeRole = () => {
   const [status, setStatus] = useState([]);
   const [newRole, setNewRole] = useState({ role_name: null, role_id: null });
   const [newStatus, setNewStatus] = useState({ status: null });
+  const accessToken = Cookies.get("ACCESS_TOKEN");
+
   useEffect(() => {
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/all_role")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/all_role", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => {
         return response.json();
       })
@@ -39,7 +46,11 @@ export const ChangeRole = () => {
       });
     console.log(role);
 
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/all_status")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/all_status", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => {
         return response.json();
       })
@@ -48,7 +59,11 @@ export const ChangeRole = () => {
       });
     console.log(status);
 
-    fetch("http://127.0.0.1:4000/gatepass/v2/admin/user_role")
+    fetch("http://127.0.0.1:4000/gatepass/v2/admin/user_role", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => {
         return response.json();
       })
@@ -63,7 +78,10 @@ export const ChangeRole = () => {
       "http://127.0.0.1:4000/gatepass/v2/admin/update_role_and_status",
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
         body: JSON.stringify({
           user_id: user_id,
           status: status,

@@ -1,18 +1,16 @@
-import React, { useContext } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import GatePassContext from './Context/GatepassContext';
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 
-export const PrivateRoute = ({  role, ...rest }) => {
-    const {state} = useContext(GatePassContext);
-    const userRole = state.role;
-    console.log("From Protected side", userRole);
+export const PrivateRoute = ({ role, ...rest }) => {
+  const accessToken = Cookies.get("ACCESS_TOKEN");
+  const decoded = jwt_decode(accessToken);
+  const user_role = decoded.data.role_id;
 
-    if (userRole === Number(role)) {
-      return <Outlet/>
-    }
-    else{
-      <Navigate to="/"/>
-    }
-    
-
-    }
+  if (user_role === Number(role)) {
+    return <Outlet />;
+  } else {
+    <Navigate to="/" />;
+  }
+};

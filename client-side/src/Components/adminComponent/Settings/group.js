@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../../Shared/Navbar/navbar";
 import Sidebar from "../../../Shared/Sidebar/adminSidebar";
 import "./group.scss";
+import Cookies from "js-cookie";
 
 export const Group = () => {
   const [groups, setGroups] = useState([]);
@@ -9,14 +10,23 @@ export const Group = () => {
   const [showMoreGroup, setshowMoreGroup] = useState(false);
   const [showMoreGroupSubGroup, setshowMoreGroupSubGroup] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
 
   useEffect(() => {
-    fetch("http://localhost:4000/gatepass/v2/admin/get_all_groups")
+    fetch("http://localhost:4000/gatepass/v2/admin/get_all_groups", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => response.json())
       .then((data) => setGroups(data))
       .catch((error) => console.log(error));
 
-    fetch("http://localhost:4000/gatepass/v2/admin/get_all_sub_groups")
+    fetch("http://localhost:4000/gatepass/v2/admin/get_all_sub_groups", {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
       .then((response) => response.json())
       .then((data) => setSubgroups(data))
       .catch((error) => console.log(error));

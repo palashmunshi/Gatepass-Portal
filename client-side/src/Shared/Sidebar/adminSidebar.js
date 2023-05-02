@@ -17,8 +17,25 @@ import { NotificationAdd } from "@mui/icons-material";
 import "./sidebar.scss";
 // import logo from "../../assets/logo.png";
 import logo from "../../assets/NU-logo.png";
+import Cookies from "js-cookie";
 
 const Sidebar = () => {
+  const accessToken = Cookies.get("ACCESS_TOKEN");
+
+  const logout = () => {
+    fetch("http://localhost:4000/gatepass/v2/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: accessToken,
+      },
+      body: JSON.stringify({ accessToken: accessToken }),
+    })
+      .then((response) => response.json())
+      .then((response) => console.log(response));
+
+    Cookies.remove("ACCESS_TOKEN");
+  };
   //const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="sidebar">
@@ -127,7 +144,7 @@ const Sidebar = () => {
             {/* <span>Notification</span> */}
             &nbsp;&nbsp;&nbsp;Notification
           </li>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link onClick={logout} to="/" style={{ textDecoration: "none" }}>
             <li>
               <ExitToAppIcon className="icon" />
               {/* <span>Logout</span> */}

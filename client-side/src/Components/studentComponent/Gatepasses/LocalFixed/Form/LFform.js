@@ -1,18 +1,22 @@
 import React, { useEffect, useState, useReducer } from "react";
 import ReactDropdown from "react-dropdown";
 import "./style.scss";
+import Cookies from "js-cookie";
 
 const LFform = (props) => {
   const [localFixedUsed, setLocalFixedUsed] = useState(0);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
 
   useEffect(() => {
-    const id = props.userDetails.user_id;
-
     fetch(
       "http://127.0.0.1:4000/gatepass/v2/student/get_number_of_local_fixed_student/" +
-        `${id}/` +
         `${formatDate(lastMonday)}/` +
-        `${formatDate(nextMonday)}`
+        `${formatDate(nextMonday)}`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
     )
       .then((Response) => Response.json())
       .then((response) => {
@@ -83,11 +87,14 @@ const LFform = (props) => {
   };
 
   const checkBlacklist = async () => {
-    let data = { ...formInput };
     let res = {};
-    const id = props.userDetails.user_id;
     const fetchData = await fetch(
-      "http://127.0.0.1:4000/gatepass/v2/student/blacklisted/" + `${id}`
+      "http://127.0.0.1:4000/gatepass/v2/student/blacklisted/",
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
     )
       .then((Response) => Response.json())
       .then((response) => {
@@ -106,14 +113,15 @@ const LFform = (props) => {
     return fetchData;
   };
   const checkGatepassAvailability = async () => {
-    let data = { ...formInput };
-    const id = props.userDetails.user_id;
-
     const fetchData = await fetch(
       "http://127.0.0.1:4000/gatepass/v2/student/get_number_of_local_fixed_student/" +
-        `${id}/` +
         `${formatDate(lastMonday)}/` +
-        `${formatDate(nextMonday)}`
+        `${formatDate(nextMonday)}`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
     )
       .then((Response) => Response.json())
       .then((response) => {
@@ -133,11 +141,13 @@ const LFform = (props) => {
   };
 
   const checkApprovedOrCheckedout = async () => {
-    let data = { ...formInput };
-    const id = props.userDetails.user_id;
     const fetchData = await fetch(
-      "http://127.0.0.1:4000/gatepass/v2/student/get_bool_student_checkedout_autoapproved/" +
-        `${id}/`
+      "http://127.0.0.1:4000/gatepass/v2/student/get_bool_student_checkedout_autoapproved/",
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
     )
       .then((Response) => Response.json())
       .then((response) => {
@@ -176,14 +186,15 @@ const LFform = (props) => {
 
   const applyLocalFixedGatepass = async () => {
     let data = { ...formInput };
-    const id = props.userDetails.user_id;
     let fetchData = fetch(
-      "http://127.0.0.1:4000/gatepass/v2/student/apply_local_fixed/",
+      "http://127.0.0.1:4000/gatepass/v2/student/apply_local_fixed",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
         body: JSON.stringify({
-          user_id: id,
           punch_id: null,
           from_date: data["from_date"],
           from_time: props.departureTime,
@@ -193,7 +204,7 @@ const LFform = (props) => {
       }
     )
       .then((Response) => Response.json())
-      .then((response) => console.log("success:" + response.msg))
+      .then((response) => response)
       .catch((error) => console.log("error: " + error));
 
     return fetchData;
