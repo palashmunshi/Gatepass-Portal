@@ -92,8 +92,7 @@ export const queries = {
   /* __________________________________________________Warden QUERIES__________________________________________________ */
 
   acceptGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Approved' WHERE request_id=@id;",
-  rejectGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Rejected' WHERE request_id=@id;",
-  cancelApprovedGatepass:"UPDATE [gps_db].[gps_gatepassmaster] SET status = 'cancelled', approved_or_rejected_by= @user_id , approved_or_rejected_date = @date, approved_or_rejected_time = @time, comments = @comments WHERE request_id= @req_id",
+  rejectGatepass:"UPDATE [gps_db].[gps_gatepassmaster] SET status = 'Re', approved_or_rejected_by= @user_id , approved_or_rejected_date = @date, approved_or_rejected_time = @time, comments = @comments WHERE request_id= @request_id ",
 
   /* __________________________________________________Local Fixed QUERIES__________________________________________________ */
   getNumberOfLocalFixedConfig: "SELECT value from [gps_db].[gps_db].[gps_configmaster] WHERE parameter='Week Limit'",
