@@ -23,24 +23,24 @@ export const gatepassApproveOrReject = async (req, res) => {
             res.send(error.message);
         }
 }
-export const cancelApprovedGatepass= async (req,res)=>{
+export const rejectGatepass= async (req,res)=>{
     try {
-        const d = new Date();
-        let applied_date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
+        const currentDate = new Date();
+        let applied_date =   currentDate.getFullYear() +"-" +String(currentDate.getMonth() + 1).padStart(2, "0") +"-" +String(currentDate.getDate() + 1).padStart(2, "0")
         const id = req.user.data.user_id;
-        const {req_id,comments}= req.body;
-        console.log(req_id);
+        const {request_id,comments}= req.body;
+        console.log(request_id);
         console.log(comments);
         const pool = await getConnection();
         const result = await pool
           .request()
           .input("user_id", sql.VarChar, id)
-          .input("req_id",sql.Int,req_id)
+          .input("request_id",sql.Int,request_id)
           .input("comments",sql.VarChar,comments)
           .input("date",sql.VarChar,applied_date)
-          .input("time",sql.Time,d)
+          .input("time",sql.Time,currentDate)
           .query(queries.cancelApprovedGatepass);
-        return res.send("Gatepass Cancelled!");
+        return res.send("Gatepass rejected!");
       } catch (error) {
         res.status(500);
         res.send(error.message);
