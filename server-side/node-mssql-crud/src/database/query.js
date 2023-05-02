@@ -91,7 +91,7 @@ export const queries = {
 
   /* __________________________________________________Warden QUERIES__________________________________________________ */
 
-  acceptGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Approved' WHERE request_id=@id;",
+  approveGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Approved', approved_or_rejected_by=@approved_or_rejected_by, approved_or_rejected_date=@approved_or_rejected_date, approved_or_rejected_time=@approved_or_rejected_time, comments=@comments where request_id=@request_id;",
   rejectGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Rejected' WHERE request_id=@id;",
 
   /* __________________________________________________Local Fixed QUERIES__________________________________________________ */
