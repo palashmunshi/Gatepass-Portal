@@ -2,9 +2,26 @@ import React, { useState } from "react";
 import logo from "../../assets/NU-logo.png";
 import { IonIcon } from '@ionic/react';
 import { homeOutline, personOutline, carOutline, busOutline, airplaneOutline, alertOutline, banOutline, peopleOutline, addOutline, informationOutline, logOutOutline } from 'ionicons/icons';
+import Cookies from "js-cookie";
 
 const StudentSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const accessToken = Cookies.get("ACCESS_TOKEN");
+
+  const logout = () => {
+    fetch("http://localhost:4000/gatepass/v2/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: accessToken,
+      },
+      body: JSON.stringify({ accessToken: accessToken }),
+    })
+      .then((response) => response.json())
+      .then((response) => console.log(response));
+
+    Cookies.remove("ACCESS_TOKEN");
+  };
 
   let Links = [
     { name: "Dashboard", link: "/student", icon: homeOutline },
@@ -17,7 +34,7 @@ const StudentSidebar = () => {
     { name: "Visitor-Gatepass", link: "/student/vgatepass", icon: peopleOutline },
     { name: "Visitor-Request", link: "/student/vrequest", icon: addOutline },
     { name: "Info", link: "/student/info", icon: informationOutline },
-    { name: "Logout", link: "/", icon: logOutOutline },
+    { name: "Logout", link: "/", icon: logOutOutline, onClick: logout },
   ];
 
   const toggleSidebar = () => {
