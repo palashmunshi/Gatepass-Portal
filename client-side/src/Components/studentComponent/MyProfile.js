@@ -1,7 +1,7 @@
 import React from "react";
 import StudentSidebar from "../../Shared/SideBarTailWind/StudentSidebar";
-import StudentNavbar from "../../Shared/NavbarTailwind/StudentNavbar";
-import { IonIcon } from "@ionic/react";
+import StudentNavbar from "../../Shared/NavbarTailWind/StudentNavbar"
+import { IonIcon } from "@ionic/react"; 
 import { personCircle } from "ionicons/icons";
 
 const StudentProfile = () => {

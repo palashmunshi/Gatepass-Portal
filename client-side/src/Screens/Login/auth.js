@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
-import GatePassContext from "../../Context/GatepassContext";
+import React, { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
 
-const Auth = () =>  {
+export default function Auth() {
   const [user, setUser] = useState({});
   const [role, setRole] = useState({});
   const [nrole, setNrole] = useState();
@@ -48,7 +48,6 @@ const Auth = () =>  {
     });
   }, []);
 
-  const { updateState } = useContext(GatePassContext);
   useEffect(() => {
     if (user && role) {
       if (role === 1) {
@@ -61,7 +60,7 @@ const Auth = () =>  {
         navigate("/guard");
       }
     }
-  }, [email, role, navigate]);
+  }, [user, role]);
 
   return (
     <div className="Auth-form-container">
@@ -74,4 +73,3 @@ const Auth = () =>  {
     </div>
   );
 }
-export default Auth;

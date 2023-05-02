@@ -4,7 +4,8 @@ import React from "react";
 import '../adminComponent/admin.scss'
 import List from "./LatestGatepasses/table";
 import WardenSidebar from "../../Shared/SideBarTailWind/WardenSidebar";
-import StudentNavbar from "../../Shared/NavbarTailwind/StudentNavbar";
+import StudentNavbar from "../../Shared/NavbarTailWind/StudentNavbar";
+
 
 
 export const OtherWarden = () => {
