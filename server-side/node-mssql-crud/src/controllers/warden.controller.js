@@ -34,7 +34,7 @@ export const gatepassCancelAndReject = async(req,res) => {
         .input("approval_to",sql.VarChar,approval_to)
         .query(queries.getRejectedAndCancelledGatepass)
 
-    return res.json(result.recordsets[0])
+    return res.json(result.recordset)
     }
     catch(error){
         res.send(error.message)
