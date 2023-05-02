@@ -24,6 +24,23 @@ export const gatepassApproveOrReject = async (req, res) => {
         }
 }
 
+
+export const gatepassCancelAndReject = async(req,res) => {
+    const approval_to = req.user.data.user_id
+    try{
+        const pool= await getConnection();
+        const result = await pool
+        .request()
+        .input("approval_to",sql.VarChar,approval_to)
+        .query(queries.getRejectedAndCancelledGatepass)
+
+    return res.json(result.recordset)
+    }
+    catch(error){
+        res.send(error.message)
+    }
+}
+
 export const getApprovedGatepass = async (req, res) => {
     try {
       const user_id = req.user.data.user_id;
