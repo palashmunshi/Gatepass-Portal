@@ -1,14 +1,18 @@
 import React from 'react'
-import Navbar from '../../Shared/Navbar/navbar';
-import SidebarStudent from '../../Shared/Sidebar/studentSidebar';
+
+
 import StudentDashboard from './StudentDashboard/LatestTable/table';
+import StudentSidebar from '../../Shared/SideBarTailWind/StudentSidebar';
+import StudentNavbar from '../../Shared/NavbarTailwind/StudentNavbar';
+
 
 export const Student = () => {
     return (
         <div className="admin">
-          <SidebarStudent />
+        <StudentNavbar/>
+          <StudentSidebar/>
           <div className="adminContainer">
-            <Navbar /> 
+           
             <div className="listContainer">
               <div className="listTitle">Latest Gatepasses</div>
               <StudentDashboard />          
