@@ -23,6 +23,7 @@ import { VisitorCheckout } from "./Components/guardComponent/VisitorCheckout/che
 import { PrivateRoute } from "./PrivateRoutes";
 import GatepassState from "./Context/GatepassState";
 import StudentProfile from "./Components/studentComponent/MyProfile";
+import { OtherWarden } from "./Components/wardenComponent/OtherDashboard";
 
 function App() {
   return (
@@ -76,6 +77,10 @@ function App() {
               element={<VisitorCheckin />}
             />
           </Route>
+
+
+          <Route exact path = "/warden" element={<Warden/>}/>
+          <Route exact path = "/warden/other" element={<OtherWarden/>}/>
         </Routes>
       </BrowserRouter>
       </GatepassState>
