@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { 
-    gatepassApproveOrReject, gatepassCancelAndReject,rejectGatepass, getApprovedGatepass, approveGatepass } from "../controllers/warden.controller"
+    gatepassApproveOrReject, gatepassCancelAndReject,rejectGatepass, getApprovedGatepass, approveGatepass, getAutoApprovedBatches } from "../controllers/warden.controller"
 
 
 
@@ -11,5 +11,6 @@ router.put("/warden/approve_gatepass", approveGatepass);
 router.put('/warden/reject_Gatepass', rejectGatepass) // requires gatepass req_id and comments from the client
 router.get('/warden/cancelled_and_rejected_gatepass', gatepassCancelAndReject);
 router.get("/warden/getApprovedGatepass", getApprovedGatepass);
+router.get("/warden/AutoApprovedBatches",getAutoApprovedBatches);
 
 export default router;
