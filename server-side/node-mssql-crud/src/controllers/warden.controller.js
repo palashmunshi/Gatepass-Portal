@@ -46,3 +46,35 @@ export const rejectGatepass= async (req,res)=>{
         res.send(error.message);
       }
     };
+
+
+export const gatepassCancelAndReject = async(req,res) => {
+    const approval_to = req.user.data.user_id
+    try{
+        const pool= await getConnection();
+        const result = await pool
+        .request()
+        .input("approval_to",sql.VarChar,approval_to)
+        .query(queries.getRejectedAndCancelledGatepass)
+
+    return res.json(result.recordset)
+    }
+    catch(error){
+        res.send(error.message)
+    }
+}
+
+export const getApprovedGatepass = async (req, res) => {
+    try {
+      const user_id = req.user.data.user_id;
+      const pool = await getConnection();
+      const result = await pool
+        .request()
+        .input("user_id", sql.VarChar, user_id)
+        .query(queries.getApprovedGatepass);
+      return res.send(result.recordset);
+    } catch (error) {
+      res.status(500);
+      res.send(error.message);
+    }
+  };
