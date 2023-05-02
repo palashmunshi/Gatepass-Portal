@@ -94,7 +94,7 @@ export const queries = {
   getRejectedAndCancelledGatepass:"SELECT UM.name,UM.user_id,GT.gatepass_name, GM.from_date, GM.from_time, GM.to_date, GM.to_time, GM.status, GM.approved_or_rejected_date, GM.destination, GM.visit_to, GM.purpose, GM.destination_contact, GG.gps_groupname, GM.comments from [gps_db].[gps_db].[gps_gatepassmaster] AS GM INNER JOIN [gps_db].[gps_db].[gps_usersmaster] AS UM ON GM.user_id=UM.user_id INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GM.gatepass_type=GT.gatepass_type INNER JOIN [gps_db].[gps_db].[gps_groups] AS GG ON UM.group_id=GG.gps_groupid WHERE GM.status IN ('REJECTED','CANCELLED') AND GM.send_approval_to=@approval_to;",
 
   acceptGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Approved' WHERE request_id=@id;",
-  rejectGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Rejected' WHERE request_id=@id;",
+  rejectGatepass:"UPDATE [gps_db].[gps_gatepassmaster] SET status = 'Rejected', approved_or_rejected_by= @user_id , approved_or_rejected_date = @date, approved_or_rejected_time = @time, comments = @comments WHERE request_id= @request_id ",
   getApprovedGatepass: "SELECT name, gatepass_name,approved_or_rejected_date,GM.status FROM [gps_db].[gps_db].[gps_gatepassmaster] AS GM JOIN gps_db.gps_gatepass_type as GT ON GM.gatepass_type = GT.gatepass_type JOIN gps_db.gps_usersmaster as GU ON GM.user_id= GU.user_id WHERE send_approval_to= @user_id and GM.status IN ('Approved' ,'CHECKEDIN' ,'CHECKEDOUT');",
 
   /* __________________________________________________Local Fixed QUERIES__________________________________________________ */
