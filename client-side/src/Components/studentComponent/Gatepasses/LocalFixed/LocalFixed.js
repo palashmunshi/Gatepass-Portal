@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../../../Shared/Navbar/navbar";
-import SidebarStudent from "../../../../Shared/Sidebar/studentSidebar";
+import StudentSidebar from "../../../../Shared/SideBarTailWind/StudentSidebar";
+
 import LFform from "./Form/LFform";
 import "./localfixed.scss";
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
+
 
 export const LocalFixed = () => {
   const [weekLimit, setWeekLimit] = useState(0);
@@ -33,9 +35,9 @@ export const LocalFixed = () => {
 
   return (
     <div className="admin">
-      <SidebarStudent />
+      <StudentSidebar/>
       <div className="adminContainer">
-        <Navbar />
+      
         <div className="listContainer">
           <div className="listTitle">Local Fixed Gatepass</div>
 

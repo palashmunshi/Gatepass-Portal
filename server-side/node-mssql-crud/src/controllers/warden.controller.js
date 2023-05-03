@@ -64,6 +64,7 @@ export const approveGatepass = async (req, res) => {
     res.send(error.message);
   }
 };
+
 export const rejectGatepass = async (req, res) => {
   try {
     const currentDate = new Date();
@@ -104,6 +105,7 @@ export const gatepassCancelAndReject = async (req, res) => {
 
     return res.json(result.recordset);
   } catch (error) {
+    res.status(500);
     res.send(error.message);
   }
 };
@@ -136,4 +138,31 @@ export const getPendingGatepass = async (req, res) => {
     res.send(error.message);
   }
 
+}
+
+export const getAutoApprovedBatches = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAutoApprovedBatches);
+    return res.send(result.recordset);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};
+
+export const getDashboardOthers = async(req,res) =>{
+  try{
+    const approval_to = req.user.data.user_id;
+    const pool = await getConnection();
+    const result= await pool
+    .request()
+    .input("approval_to",sql.VarChar,approval_to)
+    .query(queries.getDashboardOthers)
+
+    return res.send(result.recordset)
+  }catch(error){
+    res.status(500)
+    res.send(error.message)
+  }
 }

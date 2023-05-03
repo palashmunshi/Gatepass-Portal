@@ -21,56 +21,65 @@ import { Group } from "./Components/adminComponent/Settings/group";
 import { VisitorCheckin } from "./Components/guardComponent/VisitorCheckin/checkin";
 import { VisitorCheckout } from "./Components/guardComponent/VisitorCheckout/checkout";
 import { PrivateRoute } from "./PrivateRoutes";
+import GatepassState from "./Context/GatepassState";
+import StudentProfile from "./Components/studentComponent/MyProfile";
+import { OtherWarden } from "./Components/wardenComponent/OtherDashboard";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<Login />} />
+      <GatepassState>
+        <BrowserRouter>
+          <Routes>
+            <Route path="*" element={<Login />} />
 
-          <Route exact path="/sreport" element={<Report />} />
-          <Route exact path="/openreport" element={<OpenReport />} />
-          <Route exact path="/gtreport" element={<GatepassReport />} />
-          <Route exact path="/dreport" element={<DefaulterReport />} />
-          <Route exact path="/wreport" element={<WardenReport />} />
-          <Route exact path="/bchreport" element={<BCHReport />} />
+            <Route exact path="/sreport" element={<Report />} />
+            <Route exact path="/openreport" element={<OpenReport />} />
+            <Route exact path="/gtreport" element={<GatepassReport />} />
+            <Route exact path="/dreport" element={<DefaulterReport />} />
+            <Route exact path="/wreport" element={<WardenReport />} />
+            <Route exact path="/bchreport" element={<BCHReport />} />
 
-          <Route path="/warden" element={<Warden />} />
+            {/* <Route exact path="/student" element={<Student />} /> */}
 
-          {/* <Route exact path="/student" element={<Student />} /> */}
+            <Route element={<PrivateRoute role="1" />}>
+              <Route exact path="/student" element={<Student />} />
+              <Route path="/student/localfixed" element={<LocalFixed />} />
+              <Route path="/student/info" element={<Info />} />
+              <Route path="/student/profile" element={<StudentProfile />} />
+            </Route>
 
-          <Route element={<PrivateRoute role="1" />}>
-            <Route exact path="/student" element={<Student />} />
-            <Route path="/localfixed" element={<LocalFixed />} />
-            <Route path="/student/info" element={<Info />} />
-          </Route>
+            <Route element={<PrivateRoute role="4" />}>
+              <Route exact path="/admin" element={<Admin />} />
+              <Route exact path="/users" element={<User />} />
+              <Route exact path="/changerole" element={<ChangeRole />} />
+              <Route exact path="/group" element={<Group />} />
+              <Route exact path="/parameter" element={<Parameter />} />
+            </Route>
 
-          <Route element={<PrivateRoute role="4" />}>
-            <Route exact path="/admin" element={<Admin />} />
-            <Route exact path="/users" element={<User />} />
-            <Route exact path="/changerole" element={<ChangeRole />} />
-            <Route exact path="/group" element={<Group />} />
-            <Route exact path="/parameter" element={<Parameter />} />
-          </Route>
+            <Route element={<PrivateRoute role="5" />}>
+              <Route exact path="/guard" element={<Guard />} />
+              <Route exact path="/guard/checkin" element={<Checkin />} />
+              <Route exact path="/guard/checkout" element={<Checkout />} />
+              <Route
+                exact
+                path="/guard/VisitorCheckout"
+                element={<VisitorCheckout />}
+              />
+              <Route
+                exact
+                path="/guard/VisitorCheckin"
+                element={<VisitorCheckin />}
+              />
+            </Route>
 
-          <Route element={<PrivateRoute role="5" />}>
-            <Route exact path="/guard" element={<Guard />} />
-            <Route exact path="/guard/checkin" element={<Checkin />} />
-            <Route exact path="/guard/checkout" element={<Checkout />} />
-            <Route
-              exact
-              path="/guard/VisitorCheckout"
-              element={<VisitorCheckout />}
-            />
-            <Route
-              exact
-              path="/guard/VisitorCheckin"
-              element={<VisitorCheckin />}
-            />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route element={<PrivateRoute role="2" />}>
+              <Route exact path="/warden" element={<Warden />} />
+              <Route exact path="/warden/other" element={<OtherWarden />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </GatepassState>
     </div>
   );
 }
