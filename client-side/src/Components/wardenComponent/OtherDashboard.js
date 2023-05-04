@@ -19,7 +19,7 @@ export const OtherWarden = () => {
       <div>
         <WardenSidebar/>
         <div className="mt-24 px-20">
-          <div>Other Gatepasses</div>
+          <div>Other Warden's Pending Gatepasses</div>
           <OtherGatepass />
               
         </div>
