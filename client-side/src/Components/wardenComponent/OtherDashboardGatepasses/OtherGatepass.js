@@ -77,7 +77,7 @@ const OtherGatepass = () => {
                     </td>
                     <td className="whitespace-nowrap px-6 py-2">
                       <button
-                        className="bg-[#85151C] hover:bg-red-700 text-white font-bold py-2 px-4 border border-sky-400 rounded"
+                        className="bg-[#1A85BD] hover:bg-sky-800 text-white font-bold py-2 px-4 border border-sky-800 rounded"
                         name={row.request_id}
                         onClick={() => {
                           setShowModal(true);
