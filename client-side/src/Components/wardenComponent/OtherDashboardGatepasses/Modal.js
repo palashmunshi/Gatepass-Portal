@@ -27,7 +27,7 @@ export default function Modal({ setOpenModal, data }) {
 
     window.location.reload(true);
     setOpenModal(false);
-    setRemarks(null)
+    setRemarks("NA")
   };
 
   const handleReject = async (event) => {
@@ -53,6 +53,7 @@ export default function Modal({ setOpenModal, data }) {
 
     window.location.reload(true);
     setOpenModal(false);
+    setRemarks("NA")
     }
     
   };
@@ -70,7 +71,7 @@ export default function Modal({ setOpenModal, data }) {
               </h3>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                onClick={() => setOpenModal(false)}
+                onClick={() => {setOpenModal(false);setRemarks("NA")}}
               >
                 <span className="bg-transparent text-white h-6 w-6 text-2xl block outline-none focus:outline-none">
                   ×
