@@ -96,7 +96,7 @@ const StudentSidebar = () => {
             to="/student"
             className="w-full flex items-center gap-x-1.5 group select-none text-white"
           >
-            <div className="w-full flex items-center gap-x-1.5 group select-none text-white">
+            <div className="w-full flex items-center gap-x-1.5 group select-none text-white text-lg pb-3">
               <div className="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-white transition-all duration-300"></div>
               </div>
@@ -111,7 +111,7 @@ const StudentSidebar = () => {
                     <path d="M11 6h2v2h-2Zm4 0h2v2h-2Zm0 4.03h2v1.96h-2Zm0 3.96h2v2h-2Zm-8 1h2v2H7Z"></path>
                   </g>
                 </svg>
-                <span className="font-QuicksandMedium">Dashboard</span>
+                <span className="text-lg">Dashboard</span>
               </div>
             </div>
           </Link>
@@ -122,7 +122,7 @@ const StudentSidebar = () => {
             to="/student/profile"
             className="w-full flex items-center gap-x-1.5 group select-none text-white"
           >
-            <div className="w-full flex items-center gap-x-1.5 group select-none text-white">
+            <div className="w-full flex items-center gap-x-1.5 group select-none text-white pb-3">
               <div className="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-white transition-all duration-300"></div>
               </div>
@@ -140,7 +140,7 @@ const StudentSidebar = () => {
                     <path d="M11 6h2v2h-2Zm4 0h2v2h-2Zm0 4.03h2v1.96h-2Zm0 3.96h2v2h-2Zm-8 1h2v2H7Z"></path>
                   </g>
                 </svg>
-                <span className="font-QuicksandMedium">My Profile</span>
+                <span className="text-lg">My Profile</span>
               </div>
             </div>
           </Link>
@@ -167,7 +167,7 @@ const StudentSidebar = () => {
                   <path d="M16 21H14C14 18.2386 11.7614 16 9 16C6.23858 16 4 18.2386 4 21H2C2 17.134 5.13401 14 9 14C12.866 14 16 17.134 16 21Z"></path>
                 </svg>
 
-                <span className="font-QuicksandMedium">Local Fixed</span>
+                <span className="text-lg">Local Fixed</span>
               </div>
             </div>
           </Link>
@@ -187,7 +187,7 @@ const StudentSidebar = () => {
                 <path d="M16 21H14C14 18.2386 11.7614 16 9 16C6.23858 16 4 18.2386 4 21H2C2 17.134 5.13401 14 9 14C12.866 14 16 17.134 16 21Z"></path>
               </svg>
 
-              <span className="font-QuicksandMedium">Local Flexible</span>
+              <span className="text-lg">Local Flexible</span>
             </div>
           </div>
           <div className="w-full flex items-center gap-x-1.5 group select-none text-white">
@@ -206,7 +206,7 @@ const StudentSidebar = () => {
                 <path d="M16 21H14C14 18.2386 11.7614 16 9 16C6.23858 16 4 18.2386 4 21H2C2 17.134 5.13401 14 9 14C12.866 14 16 17.134 16 21Z"></path>
               </svg>
 
-              <span className="font-QuicksandMedium">Outstation</span>
+              <span className="text-lg">Outstation</span>
             </div>
           </div>
           <div className="w-full flex items-center gap-x-1.5 group select-none text-white">
@@ -225,10 +225,10 @@ const StudentSidebar = () => {
                 <path d="M16 21H14C14 18.2386 11.7614 16 9 16C6.23858 16 4 18.2386 4 21H2C2 17.134 5.13401 14 9 14C12.866 14 16 17.134 16 21Z"></path>
               </svg>
 
-              <span className="font-QuicksandMedium">Emergency</span>
+              <span className="text-lg">Emergency</span>
             </div>
           </div>
-          <div className="w-full flex items-center gap-x-1.5 group select-none text-white">
+          <div className="w-full flex items-center gap-x-1.5 group select-none text-white pb-3">
             <div className="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-white transition-all duration-300"></div>
             </div>
@@ -244,7 +244,7 @@ const StudentSidebar = () => {
                 <path d="M16 21H14C14 18.2386 11.7614 16 9 16C6.23858 16 4 18.2386 4 21H2C2 17.134 5.13401 14 9 14C12.866 14 16 17.134 16 21Z"></path>
               </svg>
 
-              <span className="font-QuicksandMedium">Non-Returnable</span>
+              <span className="text-lg">Non-Returnable</span>
             </div>
           </div>
           <div className="pl-4 text-white text-xs text-[11px] uppercase">
@@ -263,10 +263,10 @@ const StudentSidebar = () => {
                 <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C21.9939 17.5203 17.5203 21.9939 12 22ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C19.995 7.58378 16.4162 4.00496 12 4ZM17 13H11V7H13V11H17V13Z"></path>
               </svg>
 
-              <span className="font-QuicksandMedium">Apply Gatepass soon</span>
+              <span className="text-lg">Apply Gatepass soon</span>
             </div>
           </div>
-          <div className="w-full flex items-center gap-x-1.5 group select-none text-white">
+          <div className="w-full flex items-center gap-x-1.5 group select-none text-white pb-3">
             <div className="w-1 rounded-xl h-8 bg-transparent transition-colors duration-200 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-[102%] translate-y-full group-hover:translate-y-0 bg-white transition-all duration-300"></div>
             </div>
@@ -279,7 +279,7 @@ const StudentSidebar = () => {
                 <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C21.9939 17.5203 17.5203 21.9939 12 22ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C19.995 7.58378 16.4162 4.00496 12 4ZM17 13H11V7H13V11H17V13Z"></path>
               </svg>
 
-              <span className="font-QuicksandMedium">Check Request</span>
+              <span className="text-lg">Check Request</span>
             </div>
           </div>
           <div className="pl-4 text-white text-xs text-[11px] uppercase">
@@ -302,7 +302,7 @@ const StudentSidebar = () => {
                   <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C21.9939 17.5203 17.5203 21.9939 12 22ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C19.995 7.58378 16.4162 4.00496 12 4ZM17 13H11V7H13V11H17V13Z"></path>
                 </svg>
 
-                <span className="font-QuicksandMedium">Info</span>
+                <span className="text-lg">Info</span>
               </div>
             </div>
           </Link>
@@ -324,7 +324,7 @@ const StudentSidebar = () => {
                   <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C21.9939 17.5203 17.5203 21.9939 12 22ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C19.995 7.58378 16.4162 4.00496 12 4ZM17 13H11V7H13V11H17V13Z"></path>
                 </svg>
 
-                <span className="font-QuicksandMedium">Logout</span>
+                <span className="text-lg">Logout</span>
               </div>
             </div>
           </Link>
