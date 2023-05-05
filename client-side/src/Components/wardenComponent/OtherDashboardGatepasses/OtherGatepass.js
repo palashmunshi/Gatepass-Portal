@@ -75,7 +75,7 @@ const OtherGatepass = () => {
                       {moment(row.applied_date).utc().format("DD-MM-YYYY")} |{" "}
                       {moment(row.applied_time).utc().format("hh:mm:ss A")}
                     </td>
-                    <td className="whitespace-nowrap px-6 py-2">
+                    <td className="whitespace-nowrap px-6 py-2 text-center">
                       <button
                         className="bg-[#1A85BD] hover:bg-sky-800 text-white font-bold py-2 px-4 border border-sky-800 rounded"
                         name={row.request_id}
