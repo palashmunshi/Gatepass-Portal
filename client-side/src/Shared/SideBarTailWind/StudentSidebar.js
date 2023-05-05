@@ -27,7 +27,7 @@ const StudentSidebar = () => {
     { name: "Dashboard", link: "/student", icon: homeOutline },
     { name: "My Profile", link: "/student/profile", icon: personOutline },
     { name: "Local Fixed Gatepass", link: "/student/localfixed", icon: carOutline },
-    { name: "Local Flexible Gatepass", link: "/student/flexible", icon: busOutline },
+    { name: "Local Flexible Gatepass", link: "/student/localflexible", icon: busOutline },
     { name: "Outstation", link: "/student/outstation", icon: airplaneOutline },
     { name: "Emergency", link: "/student/emergency", icon: alertOutline },
     { name: "Non-Returnable", link: "/student/nonreturnable", icon: banOutline },
