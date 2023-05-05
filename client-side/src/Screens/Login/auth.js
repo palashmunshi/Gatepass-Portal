@@ -28,7 +28,6 @@ export default function Auth() {
       .then((response) => {
         Cookies.set("ACCESS_TOKEN", response.ACCESS_TOKEN);
         const access_token = response.ACCESS_TOKEN;
-        console.log(access_token);
         const decoded = jwt_decode(access_token);
         setRole(decoded.data.role_id);
       });

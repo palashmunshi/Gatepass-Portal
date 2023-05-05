@@ -122,6 +122,21 @@ export const getApprovedGatepass = async (req, res) => {
     res.send(error.message);
   }
 };
+export const getPendingGatepass = async (req, res) => {
+  try {
+    const user_id = req.user.data.user_id;
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("approval_to", sql.VarChar, user_id)
+      .query(queries.getPendingGatepass);
+    return res.send(result.recordset);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+
+}
 
 export const getAutoApprovedBatches = async (req, res) => {
   try {
