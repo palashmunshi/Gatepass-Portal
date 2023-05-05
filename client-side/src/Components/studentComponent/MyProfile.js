@@ -1,19 +1,17 @@
 import React from "react";
 import StudentSidebar from "../../Shared/SideBarTailWind/StudentSidebar";
-import StudentNavbar from "../../Shared/NavbarTailWind/StudentNavbar"
-import { IonIcon } from "@ionic/react"; 
+import StudentNavbar from "../../Shared/NavbarTailWind/StudentNavbar";
+import { IonIcon } from "@ionic/react";
 import { personCircle } from "ionicons/icons";
 
 const StudentProfile = () => {
   return (
     <div>
-      <div>
-        <StudentNavbar />
-      </div>
-      <div className="mt-20">
+      <div></div>
+      <div className="mt-20 -z-1">
         <div className="flex flex-wrap">
           {/* Left Side */}
-          <div className="flex-auto w-70 ">
+          <div className="flex-auto w-70 bg-white drop-shadow-2xl rounded-lg mx-24 my-10">
             <div className="p-10 flex flex-col justify-start items-center">
               {/* Profile Photo */}
               <div className=" bg-white rounded-full flex items-center justify-center mb-5">
@@ -39,7 +37,7 @@ const StudentProfile = () => {
 
           {/* Right Side */}
           <div className="flex-auto w-70 ">
-            <div className="p-10 mt-10">
+            <div className="p-10 mt-10 ml-20">
               <div>
                 <h1 className="text-2xl font-bold">Perosonal Infromation</h1>
                 <p className="text-gray-500 text-xl mt-6">
@@ -65,6 +63,7 @@ const StudentProfile = () => {
           </div>
         </div>
       </div>
+      <StudentNavbar />
       <StudentSidebar />
     </div>
   );
