@@ -76,8 +76,6 @@ export const rejectGatepass = async (req, res) => {
       String(currentDate.getDate() + 1).padStart(2, "0");
     const id = req.user.data.user_id;
     const { request_id, comments } = req.body;
-    console.log(request_id);
-    console.log(comments);
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -86,7 +84,7 @@ export const rejectGatepass = async (req, res) => {
       .input("comments", sql.VarChar, comments)
       .input("date", sql.VarChar, applied_date)
       .input("time", sql.Time, currentDate)
-      .query(queries.cancelApprovedGatepass);
+      .query(queries.rejectGatepass);
     return res.send("Gatepass rejected!");
   } catch (error) {
     res.status(500);
