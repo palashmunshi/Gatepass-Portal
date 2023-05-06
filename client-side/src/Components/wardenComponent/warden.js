@@ -8,18 +8,19 @@ import List from "./LatestGatepasses/table";
 //import StudentNavbar from "../../Shared/NavbarTailwind/StudentNavbar";
 import StudentNavbar from "../../Shared/NavbarTailWind/StudentNavbar";
 import WardenSidebar from "../../Shared/SideBarTailWind/WardenSidebar"
+import MyGatepassDashboard from "./MyDashboardGatepasses/MyGatepassDashboard";
 
 
 export const Warden = () => {
   return (
-    <div className="admin">
+    <div>
     <StudentNavbar/>
     <WardenSidebar/>
-      <div className="adminContainer">
+      <div>
        
         <div className="mt-24 px-20">
-          <div className="listTitle">Latest Gatepasses</div>
-          <List />
+          <div>Pending Gatepasses</div>
+          <MyGatepassDashboard/>
               
         </div>
       </div>

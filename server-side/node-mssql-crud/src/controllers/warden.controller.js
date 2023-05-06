@@ -122,7 +122,7 @@ export const getApprovedGatepass = async (req, res) => {
     res.send(error.message);
   }
 };
-export const getPendingGatepass = async (req, res) => {
+export const getDashboardMy = async (req, res) => {
   try {
     const user_id = req.user.data.user_id;
     const pool = await getConnection();

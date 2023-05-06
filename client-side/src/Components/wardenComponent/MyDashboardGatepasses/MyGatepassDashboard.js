@@ -2,16 +2,16 @@ import "../LatestGatepasses/table.scss";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import moment from "moment";
-import Modal from "./Modal";
+import Modal from "../OtherDashboardGatepasses/Modal";
 
-const OtherGatepass = () => {
-  const [otherGP, setOtherGP] = useState([]);
+const MyGatepassDashboard = () => {
+  const [myGP, setMyGP] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [userData, setUserData] = useState([]);
   const accessToken = Cookies.get("ACCESS_TOKEN");
 
   useEffect(() => {
-    fetch("http://localhost:4000/gatepass/v2/warden/get_dashboard_others", {
+    fetch("http://localhost:4000/gatepass/v2/warden/get_dashboard_my", {
       headers: {
         Authorization: accessToken,
       },
@@ -20,7 +20,7 @@ const OtherGatepass = () => {
         return response.json();
       })
       .then((text) => {
-        setOtherGP(text);
+        setMyGP(text);
       });
   }, []);
 
@@ -43,9 +43,6 @@ const OtherGatepass = () => {
                     Gatepass Type
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Requested To
-                  </th>
-                  <th scope="col" className="px-6 py-3">
                     Applied Date | Time
                   </th>
                   <th scope="col" className="px-6 py-3">
@@ -54,7 +51,7 @@ const OtherGatepass = () => {
                 </tr>
               </thead>
               <tbody>
-                {otherGP.map((row) => (
+                {myGP.map((row) => (
                   <tr
                     key={row.request_id}
                     className="rounded-full border-b transition duration-300 ease-in-out hover:bg-neutral-200 dark:border-neutral-500"
@@ -69,9 +66,6 @@ const OtherGatepass = () => {
                       {row.gatepass_name}
                     </td>
                     <td className="whitespace-nowrap px-6 py-2 font-medium">
-                      {row.Requested_to}
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-2 font-medium">
                       {moment(row.applied_date).utc().format("DD-MM-YYYY")} |{" "}
                       {moment(row.applied_time).utc().format("hh:mm:ss A")}
                     </td>
@@ -82,7 +76,7 @@ const OtherGatepass = () => {
                         onClick={() => {
                           setShowModal(true);
                           setUserData(
-                            otherGP.filter((obj) => {
+                            myGP.filter((obj) => {
                               return obj.request_id == row.request_id;
                             })
                           );
@@ -102,4 +96,4 @@ const OtherGatepass = () => {
   );
 };
 
-export default OtherGatepass;
+export default MyGatepassDashboard;
