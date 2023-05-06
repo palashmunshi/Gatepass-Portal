@@ -9,13 +9,13 @@ const StudentNavbar = () => {
                 
                 </div>
 
-                <div className="absolute right-8 top-3 cursor-pointer md:hidden">
+                <div className="text-3xl absolute right-8 top-3 cursor-pointer md:hidden">
                 <ion-icon name="grid-outline"></ion-icon>
               
                 </div>
                 
-                      <ul className={`md:flex md:items-center md:pb-0 pb-12 text-red-800 text-xl absolute md:static  md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-11 transition-all duration-500 ease-in`}>
-                        <li>Welcome People</li>
+                      <ul className={`md:flex md:items-center md:pb-0 pb-12 text-red-800 text-3xl absolute md:static  md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-11 transition-all duration-500 ease-in`}>
+                        <li>Welcome Student</li>
                    
                 </ul>
                
