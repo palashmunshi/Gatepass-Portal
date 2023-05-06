@@ -24,6 +24,9 @@ import { PrivateRoute } from "./PrivateRoutes";
 import GatepassState from "./Context/GatepassState";
 import StudentProfile from "./Components/studentComponent/MyProfile";
 import { OtherWarden } from "./Components/wardenComponent/OtherDashboard";
+import LocalFlexible from "./Components/studentComponent/Gatepasses/LocalFlexible/LocalFlexible";
+import Outstation from "./Components/studentComponent/Gatepasses/Outstation/Outstation";
+import Approve_cancel from "./Components/wardenComponent/Approve_cancel";
 
 function App() {
   return (
@@ -44,9 +47,14 @@ function App() {
 
             <Route element={<PrivateRoute role="1" />}>
               <Route exact path="/student" element={<Student />} />
-              <Route path="/student/localfixed" element={<LocalFixed />} />
               <Route path="/student/info" element={<Info />} />
               <Route path="/student/profile" element={<StudentProfile />} />
+              <Route path="/student/localfixed" element={<LocalFixed />} />
+              <Route
+                path="/student/localflexible"
+                element={<LocalFlexible />}
+              />
+              <Route path="/student/outstation" element={<Outstation />} />
             </Route>
 
             <Route element={<PrivateRoute role="4" />}>
@@ -76,6 +84,11 @@ function App() {
             <Route element={<PrivateRoute role="2" />}>
               <Route exact path="/warden" element={<Warden />} />
               <Route exact path="/warden/other" element={<OtherWarden />} />
+              <Route
+                exact
+                path="/warden/appcancelled"
+                element={<Approve_cancel />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
