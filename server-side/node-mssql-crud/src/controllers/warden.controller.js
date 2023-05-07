@@ -92,14 +92,14 @@ export const rejectGatepass = async (req, res) => {
   }
 };
 
-export const gatepassCancelAndReject = async (req, res) => {
-  const approval_to = req.user.data.user_id;
+export const getAllGatepasses = async (req, res) => {
+  const approved_or_rejected_by = req.user.data.user_id;
   try {
     const pool = await getConnection();
     const result = await pool
       .request()
-      .input("approval_to", sql.VarChar, approval_to)
-      .query(queries.getRejectedAndCancelledGatepass);
+      .input("approved_or_rejected_by", sql.VarChar, approved_or_rejected_by)
+      .query(queries.getAllGatepasses);
 
     return res.json(result.recordset);
   } catch (error) {
@@ -108,20 +108,6 @@ export const gatepassCancelAndReject = async (req, res) => {
   }
 };
 
-export const getApprovedGatepass = async (req, res) => {
-  try {
-    const user_id = req.user.data.user_id;
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("user_id", sql.VarChar, user_id)
-      .query(queries.getApprovedGatepass);
-    return res.send(result.recordset);
-  } catch (error) {
-    res.status(500);
-    res.send(error.message);
-  }
-};
 export const getDashboardMy = async (req, res) => {
   try {
     const user_id = req.user.data.user_id;

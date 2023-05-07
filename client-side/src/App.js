@@ -26,7 +26,7 @@ import StudentProfile from "./Components/studentComponent/MyProfile";
 import { OtherWarden } from "./Components/wardenComponent/OtherDashboard";
 import LocalFlexible from "./Components/studentComponent/Gatepasses/LocalFlexible/LocalFlexible";
 import Outstation from "./Components/studentComponent/Gatepasses/Outstation/Outstation";
-import Approve_cancel from "./Components/wardenComponent/Approve_cancel";
+import ApproveCancel from "./Components/wardenComponent/ApprovedCancelled/ApproveCancel";
 
 function App() {
   return (
@@ -87,7 +87,7 @@ function App() {
               <Route
                 exact
                 path="/warden/appcancelled"
-                element={<Approve_cancel />}
+                element={<ApproveCancel />}
               />
             </Route>
           </Routes>
