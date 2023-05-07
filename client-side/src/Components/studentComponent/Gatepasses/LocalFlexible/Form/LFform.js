@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
@@ -12,18 +12,26 @@ const LFform = (props) => {
   const [departureTime, setDepartureTime] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [arrivalTime, setArrivalTime] = useState("");
+  const [pageReloadTime, setPageRelaodTime] = useState("");
   const [sendTo, setSendTo] = useState("");
+  // const [parameterSettings, setParameterSettings] = useState([]);
+  const test_ArrivalTime = props.arrivalTime;
 
-  const handlePurposeChange = (event) => {
-    setPurpose(event.target.value);
-  };
+  useEffect(() => {
+    fetch("http://localhost:4000/gatepass/v2/student/get_dates", {
+      headers: { Authorization: accessToken },
+    })
+      .then((Response) => Response.json())
+      .then((response) => {
+        setDepartureDate(response.currentDate);
+        setArrivalDate(response.currentDate);
+        setPageRelaodTime(response.currentTime);
+      });
+  }, []);
 
-  const handleDepartureDateChange = (event) => {
-    setDepartureDate(event.target.value);
-  };
-
-  const handleDepartureTimeChange = (event) => {
-    setDepartureTime(event.target.value);
+  const formatTime = (time) => {
+    const timeArr = time.split(":");
+    return `${timeArr[0]}:${timeArr[1]}:00`;
   };
 
   const handleArrivalDateChange = (event) => {
@@ -41,6 +49,11 @@ const LFform = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Submit form data here
+    console.log(purpose);
+    console.log(departureDate);
+    console.log(departureTime);
+    console.log(props.arrivalTime);
+    console.log(formatTime(pageReloadTime));
   };
 
   return (
@@ -55,7 +68,12 @@ const LFform = (props) => {
             id="purpose"
             name="purpose"
             value={purpose}
-            onChange={handlePurposeChange}
+            required={true}
+            rows="3"
+            cols="20"
+            onChange={(event) => {
+              setPurpose(event.target.value);
+            }}
             className="block w-full border-gray-300 rounded-md shadow-sm resize-none"
           />
         </div>
@@ -68,7 +86,7 @@ const LFform = (props) => {
             id="departureDate"
             name="departureDate"
             value={departureDate}
-            onChange={handleDepartureDateChange}
+            disabled={true}
             className="block w-full border-gray-300 rounded-md shadow-sm"
           />
         </div>
@@ -78,10 +96,14 @@ const LFform = (props) => {
           </label>
           <input
             type="time"
-            id="departureTime"
-            name="departureTime"
-            value={departureTime}
-            onChange={handleDepartureTimeChange}
+            id="arrivalTime"
+            name="arrivalTime"
+            defaultValue={formatTime(pageReloadTime)}
+            min={formatTime(pageReloadTime)}
+            required={true}
+            onChange={(event) => {
+              setDepartureTime(event.target.value);
+            }}
             className="block w-full border-gray-300 rounded-md shadow-sm"
           />
         </div>
@@ -94,7 +116,7 @@ const LFform = (props) => {
             id="arrivalDate"
             name="arrivalDate"
             value={arrivalDate}
-            onChange={handleArrivalDateChange}
+            disabled={true}
             className="block w-full border-gray-300 rounded-md shadow-sm"
           />
         </div>
@@ -106,7 +128,10 @@ const LFform = (props) => {
             type="time"
             id="arrivalTime"
             name="arrivalTime"
-            value={arrivalTime}
+            required={true}
+            min={formatTime(pageReloadTime)}
+            max={props.arrivalTime}
+            defaultValue={props.arrivalTime}
             onChange={handleArrivalTimeChange}
             className="block w-full border-gray-300 rounded-md shadow-sm"
           />
