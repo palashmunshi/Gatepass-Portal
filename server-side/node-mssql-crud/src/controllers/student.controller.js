@@ -261,9 +261,11 @@ export const getDates = async (req, res) => {
   );
 
   const time = current.toTimeString().split(" ")[0];
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
+  const date = new Date(
+    current.getFullYear(),
+    current.getMonth(),
+    current.getDate()
+  );
 
   function formatDate(date) {
     const year = date.getFullYear();
@@ -274,7 +276,7 @@ export const getDates = async (req, res) => {
   res.json({
     lastMonday: formatDate(lastMonday),
     nextMonday: formatDate(nextMonday),
-    currentDate: date,
+    currentDate: formatDate(date),
     currentTime: time,
   });
 };
