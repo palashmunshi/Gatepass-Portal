@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
@@ -12,35 +12,143 @@ const LFform = (props) => {
   const [departureTime, setDepartureTime] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [arrivalTime, setArrivalTime] = useState("");
+  const [pageReloadTime, setPageRelaodTime] = useState("");
   const [sendTo, setSendTo] = useState("");
+  const [wardenDetails, setWardenDetails] = useState({});
+  const [message, setMessage] = useState("");
+  // const [parameterSettings, setParameterSettings] = useState([]);
+  const test_ArrivalTime = props.arrivalTime;
 
-  const handlePurposeChange = (event) => {
-    setPurpose(event.target.value);
+  useEffect(() => {
+    fetch("http://localhost:4000/gatepass/v2/student/get_warden_details", {
+      headers: { Authorization: accessToken },
+    })
+      .then((Response) => Response.json())
+      .then((response) => setWardenDetails(response));
+    fetch("http://localhost:4000/gatepass/v2/student/get_dates", {
+      headers: { Authorization: accessToken },
+    })
+      .then((Response) => Response.json())
+      .then((response) => {
+        setDepartureDate(response.currentDate);
+        setArrivalDate(response.currentDate);
+        setPageRelaodTime(response.currentTime);
+      });
+  }, []);
+
+  const formatDepartureTime = (time) => {
+    const timeArr = time.split(":");
+    return `${(Number(timeArr[0]) + 2).toString().padStart(2, "0")}:${
+      timeArr[1]
+    }:00`;
   };
 
-  const handleDepartureDateChange = (event) => {
-    setDepartureDate(event.target.value);
+  const checkBlacklist = async () => {
+    let res = {};
+    const fetchData = await fetch(
+      "http://127.0.0.1:4000/gatepass/v2/student/blacklisted/",
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => {
+        res = response;
+        return response.blacklisted;
+      })
+      .catch((err) => console.log("error:", err));
+    return fetchData;
   };
 
-  const handleDepartureTimeChange = (event) => {
-    setDepartureTime(event.target.value);
+  const checkApprovedOrCheckedout = async () => {
+    const fetchData = await fetch(
+      "http://127.0.0.1:4000/gatepass/v2/student/get_gatepass_status_for_localflexible",
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => {
+        return response;
+      })
+      .catch((err) => console.log("error: ", err));
+    // console.log(fetchData);
+    return fetchData;
   };
 
-  const handleArrivalDateChange = (event) => {
-    setArrivalDate(event.target.value);
+  const checkLocalflexible = async () => {
+    const res1 = await checkBlacklist();
+    const res2 = await checkApprovedOrCheckedout();
+
+    if (res1 == true) {
+      setMessage("Message: You have been blacklisted.");
+      return false;
+    } else if (res2.rowsAffected[0] === 0) {
+      return true;
+    } else if (
+      res2.recordset[0].count > 0 &&
+      res2.recordset[0].status === "Approved"
+    ) {
+      setMessage("Message: Your local flexible gatepass has been approved.");
+      return false;
+    } else if (
+      res2.recordset[0].count > 0 &&
+      res2.recordset[0].status === "CHECKEDOUT"
+    ) {
+      setMessage("Message: You have been checked out.");
+      return false;
+    } else if (
+      res2.recordset[0].count > 0 &&
+      res2.recordset[0].status === "Pending"
+    ) {
+      setMessage(
+        "Message: You have already applied for local flexible gatepass."
+      );
+      return false;
+    } else {
+      return true;
+    }
   };
 
-  const handleArrivalTimeChange = (event) => {
-    setArrivalTime(event.target.value);
+  const applyLocalFlexibleGatepass = async () => {
+    let fetchData = fetch(
+      "http://127.0.0.1:4000/gatepass/v2/student/apply_local_flexible",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+        body: JSON.stringify({
+          from_date: departureDate,
+          from_time: departureTime,
+          to_date: departureDate,
+          to_time: arrivalTime,
+          purpose: purpose,
+          approval_to: wardenDetails.alloted_warden,
+        }),
+      }
+    )
+      .then((Response) => Response.json())
+      .then((response) => response)
+      .catch((error) => console.log("error: " + error));
+
+    return fetchData;
   };
 
-  const handleSendToChange = (event) => {
-    setSendTo(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Submit form data here
+    const check = await checkLocalflexible();
+    if (check == true) {
+      await applyLocalFlexibleGatepass();
+      setMessage(
+        "Message: You have successfuly applied for Local Flexible Gatepass!"
+      );
+    }
   };
 
   return (
@@ -55,8 +163,13 @@ const LFform = (props) => {
             id="purpose"
             name="purpose"
             value={purpose}
-            onChange={handlePurposeChange}
-            className="block w-full border-gray-300 rounded-md shadow-sm resize-none"
+            required={true}
+            rows="3"
+            cols="20"
+            onChange={(event) => {
+              setPurpose(event.target.value);
+            }}
+            className="block w-full border-gray-300 rounded-md shadow-sm resize-y"
           />
         </div>
         <div>
@@ -68,7 +181,7 @@ const LFform = (props) => {
             id="departureDate"
             name="departureDate"
             value={departureDate}
-            onChange={handleDepartureDateChange}
+            disabled={true}
             className="block w-full border-gray-300 rounded-md shadow-sm"
           />
         </div>
@@ -78,10 +191,15 @@ const LFform = (props) => {
           </label>
           <input
             type="time"
-            id="departureTime"
-            name="departureTime"
-            value={departureTime}
-            onChange={handleDepartureTimeChange}
+            id="arrivalTime"
+            name="arrivalTime"
+            defaultValue={formatDepartureTime(pageReloadTime)}
+            min={formatDepartureTime(pageReloadTime)}
+            max={props.arrivalTime}
+            required={true}
+            onChange={(event) => {
+              setDepartureTime(event.target.value);
+            }}
             className="block w-full border-gray-300 rounded-md shadow-sm"
           />
         </div>
@@ -94,7 +212,7 @@ const LFform = (props) => {
             id="arrivalDate"
             name="arrivalDate"
             value={arrivalDate}
-            onChange={handleArrivalDateChange}
+            disabled={true}
             className="block w-full border-gray-300 rounded-md shadow-sm"
           />
         </div>
@@ -106,8 +224,13 @@ const LFform = (props) => {
             type="time"
             id="arrivalTime"
             name="arrivalTime"
-            value={arrivalTime}
-            onChange={handleArrivalTimeChange}
+            required={true}
+            min={formatDepartureTime(pageReloadTime)}
+            max={props.arrivalTime}
+            defaultValue={props.arrivalTime}
+            onChange={(event) => {
+              setArrivalTime(event.target.value);
+            }}
             className="block w-full border-gray-300 rounded-md shadow-sm"
           />
         </div>
@@ -115,16 +238,15 @@ const LFform = (props) => {
           <label htmlFor="approval" className="block font-medium">
             <b>Send approval to person:</b>
           </label>
-          <select
-            id="approval"
-            name="approval"
+          <input
+            disabled={true}
+            value={
+              wardenDetails.warden_name + " - " + wardenDetails.contact_number
+            }
             className="block w-full border-gray-300 rounded-md shadow-sm"
-          >
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-          </select>
+          />
         </div>
+        <div className="text-red-500 font-bold">{message}</div>
         <button className="bg-green-500 px-4 py-2 rounded-lg text-white">
           Send Approval
         </button>

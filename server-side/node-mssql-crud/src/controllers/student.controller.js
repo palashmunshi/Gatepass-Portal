@@ -261,9 +261,11 @@ export const getDates = async (req, res) => {
   );
 
   const time = current.toTimeString().split(" ")[0];
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
+  const date = new Date(
+    current.getFullYear(),
+    current.getMonth(),
+    current.getDate()
+  );
 
   function formatDate(date) {
     const year = date.getFullYear();
@@ -274,7 +276,35 @@ export const getDates = async (req, res) => {
   res.json({
     lastMonday: formatDate(lastMonday),
     nextMonday: formatDate(nextMonday),
-    currentDate: date,
+    currentDate: formatDate(date),
     currentTime: time,
   });
+};
+
+export const getWardenDetails = async (req, res) => {
+  const user_id = req.user.data.user_id;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.getWardenDetails);
+    return res.json(result.recordset[0]);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+export const getGatepassStatusForLocalFlexible = async (req, res) => {
+  const user_id = req.user.data.user_id;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.checkGatepassStatus);
+    return res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
