@@ -7,7 +7,7 @@ import Gatepasses from "./GatepassesTable/Gatepasses";
 export const AllGatepasses = () => {
     return (
         <div>
-          <div className="flex flex-col mt-20 mx-12">
+          <div className="flex flex-col mt-20 mx-5">
             <div className="relative py-3">
             All Gatepasses
             <Gatepasses />
