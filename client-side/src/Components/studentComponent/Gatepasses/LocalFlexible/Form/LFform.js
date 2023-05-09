@@ -11,7 +11,7 @@ const LFform = (props) => {
   const [departureDate, setDepartureDate] = useState("");
   const [departureTime, setDepartureTime] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
-  const [arrivalTime, setArrivalTime] = useState("");
+  const [arrivalTime, setArrivalTime] = useState(`${props.arrivalTime}`);
   const [pageReloadTime, setPageRelaodTime] = useState("");
   const [sendTo, setSendTo] = useState("");
   const [wardenDetails, setWardenDetails] = useState({});
@@ -38,9 +38,39 @@ const LFform = (props) => {
 
   const formatDepartureTime = (time) => {
     const timeArr = time.split(":");
-    return `${(Number(timeArr[0]) + 2).toString().padStart(2, "0")}:${
-      timeArr[1]
-    }:00`;
+    let hour = timeArr[0];
+    if (Number(hour) === 22) {
+      hour = "00";
+    } else if (Number(hour) === 23) {
+      hour = "01";
+    } else {
+      hour = (Number(hour) + 2).toString();
+    }
+    return `${hour.padStart(2, "0")}:${timeArr[1]}:00`;
+  };
+
+  const checkTime = async () => {
+    let curTime = "";
+    await fetch("http://localhost:4000/gatepass/v2/student/get_dates", {
+      headers: { Authorization: accessToken },
+    })
+      .then((Response) => Response.json())
+      .then((response) => {
+        curTime = response.currentTime;
+      });
+    const startTime = "06:00:00";
+    // const lastTime = props.arrivalTime;
+    const lastTime = props.arrivalTime;
+
+    const startTimeObject = new Date(`1970-01-01T${startTime}Z`);
+    const lastTimeObject = new Date(`1970-01-01T${lastTime}Z`);
+    const curTimeObject = new Date(`1970-01-01T${curTime}Z`);
+
+    if (startTimeObject <= curTimeObject && curTimeObject <= lastTimeObject) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const checkBlacklist = async () => {
@@ -81,12 +111,15 @@ const LFform = (props) => {
   };
 
   const checkLocalflexible = async () => {
+    const res0 = await checkTime();
     const res1 = await checkBlacklist();
     const res2 = await checkApprovedOrCheckedout();
 
     if (res1 == true) {
       setMessage("Message: You have been blacklisted.");
       return false;
+    } else if (res0 == false) {
+      setMessage("Message: You cannot apply a gatepass in the outside hours");
     } else if (res2.rowsAffected[0] === 0) {
       return true;
     } else if (
