@@ -86,6 +86,7 @@ export const queries = {
   expireGatepass: "UPDATE [gps_db].[gps_db].[gps_gatepassmaster] SET status='Expire' WHERE request_id=@id;",
   recentGatepass: "SELECT TOP 3 status , GP.comments , GP.applied_date , GP.applied_time , GT.gatepass_name , GP.from_date , GP.from_time FROM [gps_db].[gps_db].[gps_gatepassmaster] AS GP INNER JOIN [gps_db].[gps_db].[gps_gatepass_type] AS GT ON GP.gatepass_type = GT.gatepass_type  WHERE user_id=@id ORDER BY applied_date DESC , applied_time DESC;",
   getDashboardDetails: "SELECT * FROM [gps_db].[gps_db].[gps_usersmaster] WHERE email_id = @email",
+  getAllStudentGatepasses: "SELECT * FROM [gps_db].[gps_db].[gps_gatepassmaster] WHERE user_id=@user_id",
   
   /* __________________________________________________LocalFlexible QUERIES__________________________________________________ */
   getWardenDetails: "SELECT HG.alloted_warden, UM2.contact_number, UM2.name AS warden_name FROM [gps_db].[gps_db].[gps_hostalgroups] AS HG INNER JOIN [gps_db].[gps_db].[gps_usersmaster] AS UM1 ON (HG.masterhostal_name = UM1.hostel AND REPLACE(REPLACE(HG.mastertowername,char(10),''),char(13),'') = UM1.hostel_tower) INNER JOIN gps_db.gps_usersmaster AS UM2 ON (HG.alloted_warden = UM2.user_id) WHERE UM1.user_id=@user_id;",
