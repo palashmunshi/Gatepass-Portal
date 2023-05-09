@@ -49,16 +49,24 @@ const LFform = (props) => {
     return `${hour.padStart(2, "0")}:${timeArr[1]}:00`;
   };
 
-  const checkTime = () => {
-    let time = "";
-    fetch("http://localhost:4000/gatepass/v2/student/get_dates", {
+  const checkTime = async () => {
+    let curTime = "";
+    await fetch("http://localhost:4000/gatepass/v2/student/get_dates", {
       headers: { Authorization: accessToken },
     })
       .then((Response) => Response.json())
       .then((response) => {
-        time = response.currentTime;
+        curTime = response.currentTime;
       });
-    if ("06:00:00" <= time && time <= props.arrivalTime) {
+    const startTime = "06:00:00";
+    // const lastTime = props.arrivalTime;
+    const lastTime = props.arrivalTime;
+
+    const startTimeObject = new Date(`1970-01-01T${startTime}Z`);
+    const lastTimeObject = new Date(`1970-01-01T${lastTime}Z`);
+    const curTimeObject = new Date(`1970-01-01T${curTime}Z`);
+
+    if (startTimeObject <= curTimeObject && curTimeObject <= lastTimeObject) {
       return true;
     } else {
       return false;
@@ -174,9 +182,6 @@ const LFform = (props) => {
         "Message: You have successfuly applied for Local Flexible Gatepass!"
       );
     }
-    console.log(arrivalTime);
-    console.log(departureTime);
-    console.log(formatDepartureTime(pageReloadTime));
   };
 
   return (
