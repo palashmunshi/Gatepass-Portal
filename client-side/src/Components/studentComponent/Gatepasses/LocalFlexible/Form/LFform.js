@@ -202,7 +202,7 @@ const LFform = (props) => {
             onChange={(event) => {
               setPurpose(event.target.value);
             }}
-            className="block w-full border-gray-300 rounded-md shadow-sm resize-y"
+            className="block w-full border-gray-300 rounded-md shadow-sm resize-y px-1 py-1"
           />
         </div>
         <div>
