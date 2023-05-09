@@ -11,7 +11,7 @@ const LFform = (props) => {
   const [departureDate, setDepartureDate] = useState("");
   const [departureTime, setDepartureTime] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
-  const [arrivalTime, setArrivalTime] = useState("");
+  const [arrivalTime, setArrivalTime] = useState(`${props.arrivalTime}`);
   const [pageReloadTime, setPageRelaodTime] = useState("");
   const [sendTo, setSendTo] = useState("");
   const [wardenDetails, setWardenDetails] = useState({});
@@ -38,9 +38,31 @@ const LFform = (props) => {
 
   const formatDepartureTime = (time) => {
     const timeArr = time.split(":");
-    return `${(Number(timeArr[0]) + 2).toString().padStart(2, "0")}:${
-      timeArr[1]
-    }:00`;
+    let hour = timeArr[0];
+    if (Number(hour) === 22) {
+      hour = "00";
+    } else if (Number(hour) === 23) {
+      hour = "01";
+    } else {
+      hour = (Number(hour) + 2).toString();
+    }
+    return `${hour.padStart(2, "0")}:${timeArr[1]}:00`;
+  };
+
+  const checkTime = () => {
+    let time = "";
+    fetch("http://localhost:4000/gatepass/v2/student/get_dates", {
+      headers: { Authorization: accessToken },
+    })
+      .then((Response) => Response.json())
+      .then((response) => {
+        time = response.currentTime;
+      });
+    if ("06:00:00" <= time && time <= props.arrivalTime) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const checkBlacklist = async () => {
@@ -81,12 +103,15 @@ const LFform = (props) => {
   };
 
   const checkLocalflexible = async () => {
+    const res0 = await checkTime();
     const res1 = await checkBlacklist();
     const res2 = await checkApprovedOrCheckedout();
 
     if (res1 == true) {
       setMessage("Message: You have been blacklisted.");
       return false;
+    } else if (res0 == false) {
+      setMessage("Message: You cannot apply a gatepass in the outside hours");
     } else if (res2.rowsAffected[0] === 0) {
       return true;
     } else if (
@@ -149,6 +174,9 @@ const LFform = (props) => {
         "Message: You have successfuly applied for Local Flexible Gatepass!"
       );
     }
+    console.log(arrivalTime);
+    console.log(departureTime);
+    console.log(formatDepartureTime(pageReloadTime));
   };
 
   return (
