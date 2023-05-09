@@ -27,6 +27,7 @@ import { OtherWarden } from "./Components/wardenComponent/OtherDashboard";
 import LocalFlexible from "./Components/studentComponent/Gatepasses/LocalFlexible/LocalFlexible";
 import Outstation from "./Components/studentComponent/Gatepasses/Outstation/Outstation";
 import ApproveCancel from "./Components/wardenComponent/ApprovedCancelled/ApproveCancel";
+import { AllGatepasses } from "./Components/studentComponent/AllGatepasses/AllGatepasses";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
                 element={<LocalFlexible />}
               />
               <Route path="/student/outstation" element={<Outstation />} />
+              <Route path="/student/gatepasses" element={<AllGatepasses />} />
             </Route>
 
             <Route element={<PrivateRoute role="4" />}>

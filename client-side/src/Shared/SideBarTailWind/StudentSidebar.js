@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import logo from "../../assets/NU-logo.png";
 import { IonIcon } from '@ionic/react';
-import { homeOutline, personOutline, carOutline, busOutline, airplaneOutline, alertOutline, banOutline, peopleOutline, addOutline, informationOutline, logOutOutline } from 'ionicons/icons';
+import { homeOutline, personOutline, carOutline, busOutline, airplaneOutline, alertOutline, banOutline, peopleOutline, addOutline, informationOutline, logOutOutline, pawSharp, playForwardCircleSharp } from 'ionicons/icons';
 import Cookies from "js-cookie";
+import { Paper } from "@mui/material";
 
 const StudentSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +34,7 @@ const StudentSidebar = () => {
     { name: "Non-Returnable", link: "/student/nonreturnable", icon: banOutline },
     { name: "Visitor-Gatepass", link: "/student/vgatepass", icon: peopleOutline },
     { name: "Visitor-Request", link: "/student/vrequest", icon: addOutline },
+    { name: "All Gatepasses", link: "/student/gatepasses", icon: playForwardCircleSharp },
     { name: "Info", link: "/student/info", icon: informationOutline },
     { name: "Logout", link: "/", icon: logOutOutline, onClick: logout },
   ];
