@@ -308,3 +308,17 @@ export const getGatepassStatusForLocalFlexible = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const getAllStudentGatepasses = async (req, res) => {
+  const user_id = req.user.data.user_id;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.getAllStudentGatepasses);
+    return res.json(result.recordset);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
