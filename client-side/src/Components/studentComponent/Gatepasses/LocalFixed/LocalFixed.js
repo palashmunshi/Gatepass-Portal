@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../../../Shared/Navbar/navbar";
 import StudentSidebar from "../../../../Shared/SideBarTailWind/StudentSidebar";
-
 import LFform from "./Form/LFform";
 import "./localfixed.scss";
 import Cookies from "js-cookie";

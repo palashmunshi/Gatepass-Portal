@@ -2,7 +2,6 @@ import { DateTime } from "mssql";
 import { getConnection, sql, queries } from "../database";
 const date = require("date-and-time");
 
-
 export const gatepassCancel = async (req, res) => {
   try {
     const id = req.user.data.user_id;
@@ -192,7 +191,8 @@ export const getStudentCheckedoutOrApproved = async (req, res) => {
 };
 
 export const applyLocalFlexibleGatepass = async (req, res) => {
-  const { from_date, from_time, to_date, to_time, purpose, approval_to} = req.body;
+  const { from_date, from_time, to_date, to_time, purpose, approval_to } =
+    req.body;
   const user_id = req.user.data.user_id;
   const punch_id = req.user.data.punch_id;
   const currentDate = new Date();
@@ -243,5 +243,82 @@ export const applyLocalFlexibleGatepass = async (req, res) => {
   } catch (error) {
     res.status(500);
     res.send(error.message);
+  }
+};
+
+//Function to get current datetime, last monday and next monday
+export const getDates = async (req, res) => {
+  const current = new Date();
+  const lastMonday = new Date(
+    current.getFullYear(),
+    current.getMonth(),
+    current.getDate() - ((current.getDay() + 6) % 7)
+  );
+  const nextMonday = new Date(
+    current.getFullYear(),
+    current.getMonth(),
+    current.getDate() + (7 - ((current.getDay() + 6) % 7))
+  );
+
+  const time = current.toTimeString().split(" ")[0];
+  const date = new Date(
+    current.getFullYear(),
+    current.getMonth(),
+    current.getDate()
+  );
+
+  function formatDate(date) {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+  res.json({
+    lastMonday: formatDate(lastMonday),
+    nextMonday: formatDate(nextMonday),
+    currentDate: formatDate(date),
+    currentTime: time,
+  });
+};
+
+export const getWardenDetails = async (req, res) => {
+  const user_id = req.user.data.user_id;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.getWardenDetails);
+    return res.json(result.recordset[0]);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+export const getGatepassStatusForLocalFlexible = async (req, res) => {
+  const user_id = req.user.data.user_id;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.checkGatepassStatus);
+    return res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+export const getAllStudentGatepasses = async (req, res) => {
+  const user_id = req.user.data.user_id;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.getAllStudentGatepasses);
+    return res.json(result.recordset);
+  } catch (error) {
+    res.status(500).send(error.message);
   }
 };

@@ -64,6 +64,7 @@ export const approveGatepass = async (req, res) => {
     res.send(error.message);
   }
 };
+
 export const rejectGatepass = async (req, res) => {
   try {
     const currentDate = new Date();
@@ -75,8 +76,6 @@ export const rejectGatepass = async (req, res) => {
       String(currentDate.getDate() + 1).padStart(2, "0");
     const id = req.user.data.user_id;
     const { request_id, comments } = req.body;
-    console.log(request_id);
-    console.log(comments);
     const pool = await getConnection();
     const result = await pool
       .request()
@@ -85,7 +84,7 @@ export const rejectGatepass = async (req, res) => {
       .input("comments", sql.VarChar, comments)
       .input("date", sql.VarChar, applied_date)
       .input("time", sql.Time, currentDate)
-      .query(queries.cancelApprovedGatepass);
+      .query(queries.rejectGatepass);
     return res.send("Gatepass rejected!");
   } catch (error) {
     res.status(500);
@@ -93,32 +92,61 @@ export const rejectGatepass = async (req, res) => {
   }
 };
 
-export const gatepassCancelAndReject = async (req, res) => {
-  const approval_to = req.user.data.user_id;
+export const getAllGatepasses = async (req, res) => {
+  const approved_or_rejected_by = req.user.data.user_id;
   try {
     const pool = await getConnection();
     const result = await pool
       .request()
-      .input("approval_to", sql.VarChar, approval_to)
-      .query(queries.getRejectedAndCancelledGatepass);
+      .input("approved_or_rejected_by", sql.VarChar, approved_or_rejected_by)
+      .query(queries.getAllGatepasses);
 
     return res.json(result.recordset);
   } catch (error) {
+    res.status(500);
     res.send(error.message);
   }
 };
 
-export const getApprovedGatepass = async (req, res) => {
+export const getDashboardMy = async (req, res) => {
   try {
     const user_id = req.user.data.user_id;
     const pool = await getConnection();
     const result = await pool
       .request()
-      .input("user_id", sql.VarChar, user_id)
-      .query(queries.getApprovedGatepass);
+      .input("approval_to", sql.VarChar, user_id)
+      .query(queries.getPendingGatepass);
+    return res.send(result.recordset);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+
+}
+
+export const getAutoApprovedBatches = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAutoApprovedBatches);
     return res.send(result.recordset);
   } catch (error) {
     res.status(500);
     res.send(error.message);
   }
 };
+
+export const getDashboardOthers = async(req,res) =>{
+  try{
+    const approval_to = req.user.data.user_id;
+    const pool = await getConnection();
+    const result= await pool
+    .request()
+    .input("approval_to",sql.VarChar,approval_to)
+    .query(queries.getDashboardOthers)
+
+    return res.send(result.recordset)
+  }catch(error){
+    res.status(500)
+    res.send(error.message)
+  }
+}

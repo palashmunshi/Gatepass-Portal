@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from "../../assets/NU-logo.png";
 import { IonIcon } from '@ionic/react';
-import { homeOutline, personOutline, checkmarkOutline, busOutline, airplaneOutline, alertOutline, banOutline, peopleOutline,informationOutline, logOutOutline } from 'ionicons/icons';
+import { homeOutline, personOutline, checkmarkOutline, airplaneOutline, alertOutline, banOutline, peopleOutline,informationOutline, logOutOutline } from 'ionicons/icons';
 
 const WardenSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,8 +9,7 @@ const WardenSidebar = () => {
   let Links = [
     { name: "My Dashboard", link: "/warden", icon: homeOutline },
     { name: "Others Dashboard", link: "/warden/other", icon: personOutline },
-    { name: "Approved", link: "/warden/approved", icon: checkmarkOutline },
-    { name: "Cancelled", link: "/warden/cancelled", icon: busOutline },
+    { name: "Approved/Cancelled", link: "/warden/appcancelled", icon: checkmarkOutline },
     { name: "Visitor", link: "/warden/visitor", icon: airplaneOutline },
     { name: "Emergency", link: "/warden/emergency", icon: alertOutline },
     { name: "Auto Approved", link: "/warden/autoapproved", icon: banOutline },

@@ -8,7 +8,7 @@ import StudentSidebar from "../../../Shared/SideBarTailWind/StudentSidebar";
 export const Checkin = () => {
   return (
     <div className="guard">
-      <StudentSidebar />
+      <GuardSidebar />
       <div className="guardContainer">
         <Navbar />
         <CheckinDetails />

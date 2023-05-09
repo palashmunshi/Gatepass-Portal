@@ -4,86 +4,56 @@ import "./style.scss";
 import Cookies from "js-cookie";
 
 const LFform = (props) => {
-  const [localFixedUsed, setLocalFixedUsed] = useState(0);
   const accessToken = Cookies.get("ACCESS_TOKEN");
-
-  useEffect(() => {
-    fetch(
-      "http://127.0.0.1:4000/gatepass/v2/student/get_number_of_local_fixed_student/" +
-        `${formatDate(lastMonday)}/` +
-        `${formatDate(nextMonday)}`,
-      {
-        headers: {
-          Authorization: accessToken,
-        },
-      }
-    )
-      .then((Response) => Response.json())
-      .then((response) => {
-        setLocalFixedUsed(response);
-      })
-      .catch((err) => console.log("error:", err));
-  });
-
-  const current = new Date();
-  const time = current.toTimeString().split(" ")[0];
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
-
-  function formatDate(date) {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
-
-  const lastMonday = new Date(
-    current.getFullYear(),
-    current.getMonth(),
-    current.getDate() - ((current.getDay() + 6) % 7)
-  );
-  const nextMonday = new Date(
-    current.getFullYear(),
-    current.getMonth(),
-    current.getDate() + (7 - ((current.getDay() + 6) % 7))
-  );
-
-  const warden = ["Kamla Rawat", "Dhirendra Rathore", "Narendra Bisht"];
-  const [formInput, setFormInput] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    {
-      from_date: date,
-      from_time: "1970-01-01T00:00:00.000Z",
-      to_date: date,
-      to_time: "1970-01-01T00:00:00.000Z",
-      // purpose: "",
-      // destination: "",
-      // destination_contact: "",
-      // visit_to: "",
-      // send_approval_to: "70100296A",
-
-      // "from_date":"2022-11-30",
-      // "from_time":"1970-01-01T00:00:00.000Z",
-      // "to_date":"2022-12-01",
-      // "to_time":"1970-01-01T00:00:00.000Z",
-      // "purpose":"home visit",
-      // "destination":"ynr",
-      // "destination_contact":"8935241978",
-      // "visit_to":"ynr",
-      // "send_approval_to":"00000087"
-    }
-  );
-
+  const [localFixedUsed, setLocalFixedUsed] = useState(0);
   const [lastMondayDate, setLastMondayDate] = useState("0000-00-00");
   const [nextMondayDate, setNextMondayDate] = useState("0000-00-00");
+  const [currentDate, setCurrentDate] = useState("");
 
-  const [isDisabled, setIsDisabled] = useState(false);
-  const handleInput = async (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    console.log(name, value);
-    setFormInput({ [name]: value });
+  useEffect(() => {
+    let currentDate = "";
+    let lastMonday = "";
+    let nextMonday = "";
+
+    const fetchData = async () => {
+      await fetch("http://127.0.0.1:4000/gatepass/v2/student/get_dates", {
+        headers: { Authorization: accessToken },
+      })
+        .then((Response) => Response.json())
+        .then((response) => {
+          currentDate = response.currentDate;
+          lastMonday = response.lastMonday;
+          nextMonday = response.nextMonday;
+          setCurrentDate(response.currentDate);
+          setLastMondayDate(response.lastMonday);
+          setNextMondayDate(response.nextMonday);
+        });
+      await fetch(
+        "http://127.0.0.1:4000/gatepass/v2/student/get_number_of_local_fixed_student/" +
+          `${lastMonday}/` +
+          `${nextMonday}`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      )
+        .then((Response) => Response.text())
+        .then((response) => {
+          setLocalFixedUsed(response);
+        })
+        .catch((err) => console.log("error:", err));
+    };
+    fetchData();
+  }, []);
+
+  const getDates = () => {
+    fetch("http://localhost:4000/gatepass/v2/student/get_dates")
+      .then((Response) => Response.json())
+      .then((response) => {
+        setLastMondayDate(response.lastMonday);
+        setNextMondayDate(response.nextMonday);
+      });
   };
 
   const checkBlacklist = async () => {
@@ -102,38 +72,22 @@ const LFform = (props) => {
         return response.blacklisted;
       })
       .catch((err) => console.log("error:", err));
-    // if (res.length != 0) {
-    //   if (res[0].blacklisted === true) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // }
-    // console.log(res);
-    return fetchData;
-  };
-  const checkGatepassAvailability = async () => {
-    const fetchData = await fetch(
-      "http://127.0.0.1:4000/gatepass/v2/student/get_number_of_local_fixed_student/" +
-        `${formatDate(lastMonday)}/` +
-        `${formatDate(nextMonday)}`,
-      {
-        headers: {
-          Authorization: accessToken,
-        },
-      }
-    )
-      .then((Response) => Response.json())
-      .then((response) => {
-        return response;
-      })
-      .catch((err) => console.log("error:", err));
-
     return fetchData;
   };
 
   const checkTime = () => {
-    if (props.departureTime <= time && time <= props.arrivalTime) {
+    let currentTime = "";
+    fetch("http://127.0.0.1:4000/gatepass/v2/student/get_dates", {
+      headers: { Authorization: accessToken },
+    })
+      .then((Response) => Response.json())
+      .then((response) => {
+        currentTime = response.currentTime;
+      });
+    if (
+      props.departureTime <= currentTime &&
+      currentTime <= props.arrivalTime
+    ) {
       return true;
     } else {
       return false;
@@ -159,14 +113,13 @@ const LFform = (props) => {
 
   const checkLocalFixed = async () => {
     const res1 = checkTime();
-    const res2 = await checkGatepassAvailability();
     const res3 = await checkBlacklist();
     const res4 = await checkApprovedOrCheckedout();
 
     if (res3 == true) {
       alert("Cannot Apply: You are blacklisted, you cannot apply for Gatepass");
       return false;
-    } else if (res2 >= props.weekLimit) {
+    } else if (localFixedUsed >= props.weekLimit) {
       alert(
         "Cannot Apply: You have exhausted all your weekly Local Fixed Gatepass "
       );
@@ -185,7 +138,6 @@ const LFform = (props) => {
   };
 
   const applyLocalFixedGatepass = async () => {
-    let data = { ...formInput };
     let fetchData = fetch(
       "http://127.0.0.1:4000/gatepass/v2/student/apply_local_fixed",
       {
@@ -196,9 +148,9 @@ const LFform = (props) => {
         },
         body: JSON.stringify({
           punch_id: null,
-          from_date: data["from_date"],
+          from_date: currentDate,
           from_time: props.departureTime,
-          to_date: data["to_date"],
+          to_date: currentDate,
           to_time: props.arrivalTime,
         }),
       }
@@ -232,82 +184,29 @@ const LFform = (props) => {
           <input
             type="text"
             name="from_date"
-            placeholder={date}
+            placeholder={currentDate}
             disabled={true}
-            onChange={handleInput}
           />
         </div>
         <div className="common">
           <label className="label">Departure Time</label>
 
-          <input
-            // type="time"
-            // name="from_time"
-            disabled={true}
-            placeholder={props.departureTime}
-            // onChange={handleInput}
-          />
+          <input disabled={true} placeholder={props.departureTime} />
         </div>
         <div className="common">
           <label className="label">Arrival Date</label>
           <input
             type="text"
             name="to_date"
-            placeholder={date}
+            placeholder={currentDate}
             disabled={true}
-            onChange={handleInput}
           />
         </div>
 
         <div className="common">
           <label className="label">Arrival Time</label>
-          <input
-            // type="time"
-            // name="to_time"
-            disabled={true}
-            placeholder={props.arrivalTime}
-            // onChange={handleInput}
-          />
+          <input disabled={true} placeholder={props.arrivalTime} />
         </div>
-
-        {/* <div className="common">
-          <label className="label">Purpose</label>
-          <input
-            type="text"
-            name="purpose"
-            placeholder="Type a valid reason"
-            onChange={handleInput}
-          />
-        </div> */}
-
-        {/* <div className="common">
-          <label className="label">Destination</label>
-          <input
-            type="text"
-            name="destination"
-            placeholder="Enter your destination"
-            disabled={false}
-            onChange={handleInput}
-          />
-        </div> */}
-
-        {/* <div className="common">
-          <label className="label">Destination Contact</label>
-          <input
-            type="text"
-            name="destination_contact"
-            disabled={false}
-            onChange={handleInput}
-          />
-        </div> */}
-
-        {/* <div className="common" style={{ marginBottom: "60px" }}>
-          <label className="label">Send Approval To</label>
-          <div className="dropdown">
-            <ReactDropdown options={warden} placeholder="Select a warden" />
-          </div>
-        </div> */}
-
         <div className="common">
           <button
             className="button"
