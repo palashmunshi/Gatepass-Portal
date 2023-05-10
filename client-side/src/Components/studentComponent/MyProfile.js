@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import StudentSidebar from "../../Shared/SideBarTailWind/StudentSidebar";
 import StudentNavbar from "../../Shared/NavbarTailWind/StudentNavbar";
-import { IonIcon } from "@ionic/react";
-import { personCircle } from "ionicons/icons";
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 
@@ -16,21 +14,37 @@ const StudentProfile = () => {
   const student_contact = decoded.data.contact_number;
   const Enrollment = decoded.data.user_id;
   const parent_contact = decoded.data.p_number;
+  const [imageUrl, setImageUrl] = useState("");
 
+  useEffect(() => {
+    async function fetchImage() {
+      const response = await fetch(
+        "http://127.0.0.1:4000/gatepass/v2/student/get_profile_image",
+        { headers: { Authorization: accessToken } }
+      );
+      const blob = await response.blob();
+      if (blob.type != "application/json") {
+        setImageUrl(URL.createObjectURL(blob));
+      }
+    }
+
+    fetchImage();
+  }, []);
 
   return (
     <div>
-      <div></div>
       <div className="mt-20 -z-1">
         <div className="flex flex-wrap">
           {/* Left Side */}
           <div className="flex-auto w-70 bg-white drop-shadow-2xl rounded-lg mx-24 my-10">
             <div className="p-10 flex flex-col justify-start items-center">
               {/* Profile Photo */}
-              <div className=" bg-white rounded-full flex items-center justify-center mb-5">
-                <IonIcon
-                  icon={personCircle}
-                  className="w-60 h-60 text-gray-500"
+              <div className="">
+                <img
+                  src={imageUrl}
+                  alt="student profile"
+                  height="250"
+                  width="288"
                 />
               </div>
               {/* Upload Button */}
@@ -62,7 +76,8 @@ const StudentProfile = () => {
                     <b>Email: </b> {email}
                   </p>
                   <p className="mt-5">
-                    <b>Enrollment Number: </b>{Enrollment}
+                    <b>Enrollment Number: </b>
+                    {Enrollment}
                   </p>
                   <p className="mt-5">
                     <b>Parent's Phone Number: </b> {parent_contact}
