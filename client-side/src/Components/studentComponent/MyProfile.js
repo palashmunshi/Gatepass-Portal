@@ -15,6 +15,7 @@ const StudentProfile = () => {
   const building = decoded.data.hostel_tower;
   const student_contact = decoded.data.contact_number;
   const Enrollment = decoded.data.user_id;
+  const parent_contact = decoded.data.p_number;
 
 
   return (
@@ -64,7 +65,7 @@ const StudentProfile = () => {
                     <b>Enrollment Number: </b>{Enrollment}
                   </p>
                   <p className="mt-5">
-                    <b>Parent's Phone Number: </b> 
+                    <b>Parent's Phone Number: </b> {parent_contact}
                   </p>
                   <p className="mt-5">
                     <b>Student's Phone Number: </b> {student_contact}
