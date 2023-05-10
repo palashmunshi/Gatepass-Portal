@@ -3,8 +3,20 @@ import StudentSidebar from "../../Shared/SideBarTailWind/StudentSidebar";
 import StudentNavbar from "../../Shared/NavbarTailWind/StudentNavbar";
 import { IonIcon } from "@ionic/react";
 import { personCircle } from "ionicons/icons";
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 
 const StudentProfile = () => {
+  const accessToken = Cookies.get("ACCESS_TOKEN");
+  const decoded = jwt_decode(accessToken);
+
+  const email = decoded.data.email_id;
+  const hostel = decoded.data.hostel;
+  const building = decoded.data.hostel_tower;
+  const student_contact = decoded.data.contact_number;
+  const Enrollment = decoded.data.user_id;
+
+
   return (
     <div>
       <div></div>
@@ -41,21 +53,21 @@ const StudentProfile = () => {
               <div>
                 <h1 className="text-2xl font-bold">Perosonal Infromation</h1>
                 <p className="text-gray-500 text-xl mt-6">
-                  <b>Building:</b> UG-2 Phase-2,
+                  <b>Building:</b> {building}
                   <p className="mt-5">
-                    <b>Hostel: </b> 1234
+                    <b>Hostel: </b> {hostel}
                   </p>
                   <p className="mt-5">
-                    <b>Email: </b> Kahitoz@gmail.com
+                    <b>Email: </b> {email}
                   </p>
                   <p className="mt-5">
-                    <b>Enrollment Number: </b>BT20HCS189
+                    <b>Enrollment Number: </b>{Enrollment}
                   </p>
                   <p className="mt-5">
-                    <b>Parent's Phone Number: </b> 123456789
+                    <b>Parent's Phone Number: </b> 
                   </p>
                   <p className="mt-5">
-                    <b>Student's Phone Number: </b> 123456789
+                    <b>Student's Phone Number: </b> {student_contact}
                   </p>
                 </p>
               </div>
