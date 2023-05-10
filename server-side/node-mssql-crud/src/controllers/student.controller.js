@@ -332,6 +332,9 @@ export const getProfileImgae = async (req, res) => {
       .input("user_id", sql.VarChar, user_id)
       .query(queries.getProfileImgaeURL);
     const imageURL = result.recordset[0].photo;
+    if (imageURL == "") {
+      return res.send({ message: "image not found" });
+    }
     res.set("Content-Type", "image/png");
     res.sendFile(imageURL);
   } catch (error) {
