@@ -322,3 +322,19 @@ export const getAllStudentGatepasses = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const getProfileImgae = async (req, res) => {
+  const user_id = req.user.data.user_id;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("user_id", sql.VarChar, user_id)
+      .query(queries.getProfileImgaeURL);
+    const imageURL = result.recordset[0].photo;
+    res.set("Content-Type", "image/png");
+    res.sendFile(imageURL);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};

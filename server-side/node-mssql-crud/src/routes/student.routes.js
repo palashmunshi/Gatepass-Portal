@@ -18,6 +18,7 @@ import {
   getWardenDetails,
   getGatepassStatusForLocalFlexible,
   getAllStudentGatepasses,
+  getProfileImgae,
 } from "../controllers/student.controller";
 
 const router = Router();
@@ -40,6 +41,7 @@ router.get("/student/get_dates", getDates)
 router.get("/student/get_warden_details", getWardenDetails)
 router.get("/student/get_gatepass_status_for_localflexible", getGatepassStatusForLocalFlexible)
 router.get("/student/get_all_student_gatepasses", getAllStudentGatepasses)
+router.get("/student/get_profile_image", getProfileImgae);
 
 router.post("/student/apply_local_fixed/", applyLocalFixedGatepass);
 router.post("/student/apply_local_flexible", applyLocalFlexibleGatepass);
