@@ -1,7 +1,19 @@
 import React, { useState } from "react";
 import logo from "../../assets/NU-logo.png";
-import { IonIcon } from '@ionic/react';
-import { homeOutline, personOutline, carOutline, busOutline, airplaneOutline, alertOutline, banOutline, peopleOutline, addOutline, informationOutline, logOutOutline } from 'ionicons/icons';
+import { IonIcon } from "@ionic/react";
+import {
+  homeOutline,
+  personOutline,
+  carOutline,
+  busOutline,
+  airplaneOutline,
+  alertOutline,
+  banOutline,
+  peopleOutline,
+  addOutline,
+  informationOutline,
+  logOutOutline,
+} from "ionicons/icons";
 import Cookies from "js-cookie";
 
 const StudentSidebar = () => {
@@ -26,12 +38,28 @@ const StudentSidebar = () => {
   let Links = [
     { name: "Dashboard", link: "/student", icon: homeOutline },
     { name: "My Profile", link: "/student/profile", icon: personOutline },
-    { name: "Local Fixed Gatepass", link: "/student/localfixed", icon: carOutline },
-    { name: "Local Flexible Gatepass", link: "/student/localflexible", icon: busOutline },
+    {
+      name: "Local Fixed Gatepass",
+      link: "/student/localfixed",
+      icon: carOutline,
+    },
+    {
+      name: "Local Flexible Gatepass",
+      link: "/student/localflexible",
+      icon: busOutline,
+    },
     { name: "Outstation", link: "/student/outstation", icon: airplaneOutline },
     { name: "Emergency", link: "/student/emergency", icon: alertOutline },
-    { name: "Non-Returnable", link: "/student/nonreturnable", icon: banOutline },
-    { name: "Visitor-Gatepass", link: "/student/vgatepass", icon: peopleOutline },
+    {
+      name: "Non-Returnable",
+      link: "/student/nonreturnable",
+      icon: banOutline,
+    },
+    {
+      name: "Visitor-Gatepass",
+      link: "/student/vgatepass",
+      icon: peopleOutline,
+    },
     { name: "Visitor-Request", link: "/student/vrequest", icon: addOutline },
     { name: "Info", link: "/student/info", icon: informationOutline },
     { name: "Logout", link: "/", icon: logOutOutline, onClick: logout },
@@ -54,9 +82,13 @@ const StudentSidebar = () => {
         >
           <ion-icon name="grid-outline"></ion-icon>
         </div>
-        <div className={`p-2.5 mt-1 flex items-center ${isOpen ? "block" : "hidden"}`}>
-  <img src={logo} height="60"weight="50" alt="logo.png" />
-</div>
+        <div
+          className={`p-2.5 mt-1 flex items-center ${
+            isOpen ? "block" : "hidden"
+          }`}
+        >
+          <img src={logo} height="60" weight="50" alt="logo.png" />
+        </div>
 
         <hr className={`my-4 text-white ${isOpen ? "block" : "hidden"}`}></hr>
       </div>
@@ -64,17 +96,31 @@ const StudentSidebar = () => {
         <ul>
           {Links.map((link) => (
             <li key={link.name} className="md:ml-5 my-3">
-              <a
-                href={link.link}
-                className="text-brown hover:text-brown-100 duration-200"
-                onClick={toggleSidebar}
-              >
-                <IonIcon
-                  icon={link.icon}
-                  className="w-6 h-6 mr-3 inline-block"
-                />
-                {link.name}
-              </a>
+              {link.name === "Logout" ? (
+                <a
+                  href={link.link}
+                  className="text-brown hover:text-brown-100 duration-200"
+                  onClick={link.onClick}
+                >
+                  <IonIcon
+                    icon={link.icon}
+                    className="w-6 h-6 mr-3 inline-block"
+                  />
+                  {link.name}
+                </a>
+              ) : (
+                <a
+                  href={link.link}
+                  className="text-brown hover:text-brown-100 duration-200"
+                  onClick={toggleSidebar}
+                >
+                  <IonIcon
+                    icon={link.icon}
+                    className="w-6 h-6 mr-3 inline-block"
+                  />
+                  {link.name}
+                </a>
+              )}
             </li>
           ))}
         </ul>
