@@ -51,7 +51,7 @@ const StudentProfile = () => {
           <div className="flex-auto w-70 ">
             <div className="p-10 mt-10 ml-20">
               <div>
-                <h1 className="text-2xl font-bold">Perosonal Infromation</h1>
+                <h1 className="text-2xl font-bold">Personal Information</h1>
                 <p className="text-gray-500 text-xl mt-6">
                   <b>Building:</b> {building}
                   <p className="mt-5">
